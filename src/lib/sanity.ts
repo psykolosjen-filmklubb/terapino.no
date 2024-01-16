@@ -6,3 +6,7 @@ const client = createClient({
 	apiVersion: '2024-01-16',
 	useCdn: false
 });
+
+export async function getAuthors() {
+	return client.fetch('*[_type == "author"]');
+}
