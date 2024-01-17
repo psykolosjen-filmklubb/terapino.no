@@ -10,3 +10,7 @@ const client = createClient({
 export async function getAuthors() {
 	return client.fetch('*[_type == "author"]');
 }
+
+export async function getReviews() {
+	return client.fetch('*[_type == "review"]');
+}
