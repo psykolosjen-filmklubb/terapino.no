@@ -1,6 +1,6 @@
 import { createClient } from '@sanity/client';
 
-const client = createClient({
+export const sanityClient = createClient({
 	projectId: '1pfu395i',
 	dataset: 'production',
 	apiVersion: '2024-01-16',
@@ -8,9 +8,9 @@ const client = createClient({
 });
 
 export async function getAuthors() {
-	return client.fetch('*[_type == "author"]');
+	return sanityClient.fetch('*[_type == "author"]');
 }
 
 export async function getReviews() {
-	return client.fetch('*[_type == "review"]');
+	return sanityClient.fetch('*[_type == "review"]');
 }

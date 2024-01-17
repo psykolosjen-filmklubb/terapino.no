@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { urlFor } from '$lib/utils/image';
 	import { PortableText } from '@portabletext/svelte';
 
 	export let data;
@@ -12,6 +13,7 @@
 	<h2>Forfattere:</h2>
 	{#each data.authors as author}
 		{author.name}
+		<img src={urlFor(author.image).width(64).height(64).url()} alt={author.name} />
 	{/each}
 {:else}
 	<p>No authors found</p>
