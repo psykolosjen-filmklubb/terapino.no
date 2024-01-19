@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Button } from '$lib/components/ui/button';
 	import { urlFor } from '$lib/utils/image';
 
 	export let data;
@@ -8,7 +9,7 @@
 	Psykolosjen Filmklubb
 </h1>
 
-<img src={urlFor(data.logo.image).width(384).height(384).url()} alt="Logo" />
+<img src={urlFor(data.logo.image).width(384).height(384).url()} alt="Logo" class="mb-12 mt-4" />
 
 {#if data.reviews}
 	<h2
@@ -17,6 +18,8 @@
 		Filmanmeldelser
 	</h2>
 	{#each data.reviews as review}
-		<h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">{review.review_title}</h3>
+		<Button variant="link" href="/{review.slug.current}" class="scroll-m-20 text-xl tracking-tight">
+			{review.review_title}
+		</Button>
 	{/each}
 {/if}
