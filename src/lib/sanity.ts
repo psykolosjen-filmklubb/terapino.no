@@ -20,3 +20,17 @@ export async function getLogo() {
 	const logo = await sanityClient.fetch(groq`*[_type == "image_assets" && name == "Logo"][0]`);
 	return logo;
 }
+
+export async function getReview(slug: string) {
+	return sanityClient.fetch(
+		groq`*[_type == "review" && slug.current == $slug][0]{
+			review_title,
+			movie_title,
+			review,
+			authors[]->
+	}`,
+		{
+			slug
+		}
+	);
+}

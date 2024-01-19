@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { urlFor } from '$lib/utils/image';
-	import { PortableText } from '@portabletext/svelte';
 
 	export let data;
 </script>
@@ -19,6 +18,5 @@
 	</h2>
 	{#each data.reviews as review}
 		<h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">{review.review_title}</h3>
-		<PortableText value={review.review} />
 	{/each}
 {/if}
