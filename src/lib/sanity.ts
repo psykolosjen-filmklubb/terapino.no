@@ -1,5 +1,6 @@
 import { createClient } from '@sanity/client';
 import groq from 'groq';
+import type { Author, Logo, Review } from './types';
 
 export const sanityClient = createClient({
 	projectId: '1pfu395i',
@@ -9,24 +10,27 @@ export const sanityClient = createClient({
 });
 
 export function getAuthors() {
-	return sanityClient.fetch(groq`*[_type == "author"]`);
+	return sanityClient.fetch<Author[]>(groq`*[_type == "author"]`);
 }
 
 export function getReviews() {
-	return sanityClient.fetch(groq`*[_type == "review"]`);
+	return sanityClient.fetch<Review[]>(groq`*[_type == "review"]`);
 }
 
 export async function getLogo() {
-	const logo = await sanityClient.fetch(groq`*[_type == "image_assets" && name == "Logo"][0]`);
+	const logo = await sanityClient.fetch<Logo>(
+		groq`*[_type == "image_assets" && name == "Logo"][0]`
+	);
 	return logo;
 }
 
 export async function getReview(slug: string) {
-	return sanityClient.fetch(
+	return sanityClient.fetch<Review>(
 		groq`*[_type == "review" && slug.current == $slug][0]{
 			review_title,
 			movie_title,
 			review,
+			slug,
 			authors[]->
 	}`,
 		{

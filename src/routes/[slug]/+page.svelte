@@ -15,12 +15,14 @@
 	<PortableText value={data.review.review} />
 </div>
 <footer class="flex w-full max-w-lg justify-end pt-4">
-	<p class="italic">
-		{#each data.review.authors as author}
-			<Avatar.Root>
-				<Avatar.Image src={urlFor(author.image).width(64).height(64).url()}></Avatar.Image>
-				<Avatar.Fallback>{author.name}</Avatar.Fallback>
-			</Avatar.Root>
-		{/each}
-	</p>
+	{#if data.review.authors}
+		<p class="italic">
+			{#each data.review.authors as author}
+				<Avatar.Root>
+					<Avatar.Image src={urlFor(author.image).width(64).height(64).url()}></Avatar.Image>
+					<Avatar.Fallback>{author.name}</Avatar.Fallback>
+				</Avatar.Root>
+			{/each}
+		</p>
+	{/if}
 </footer>
