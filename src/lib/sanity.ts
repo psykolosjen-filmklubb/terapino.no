@@ -1,4 +1,5 @@
 import { createClient } from '@sanity/client';
+import groq from 'groq';
 
 export const sanityClient = createClient({
 	projectId: '1pfu395i',
@@ -7,15 +8,15 @@ export const sanityClient = createClient({
 	useCdn: false
 });
 
-export async function getAuthors() {
-	return sanityClient.fetch('*[_type == "author"]');
+export function getAuthors() {
+	return sanityClient.fetch(groq`*[_type == "author"]`);
 }
 
-export async function getReviews() {
-	return sanityClient.fetch('*[_type == "review"]');
+export function getReviews() {
+	return sanityClient.fetch(groq`*[_type == "review"]`);
 }
 
 export async function getLogo() {
-	const logo = await sanityClient.fetch('*[_type == "image_assets" && name == "Logo"]');
-	return logo[0];
+	const logo = await sanityClient.fetch(groq`*[_type == "image_assets" && name == "Logo"][0]`);
+	return logo;
 }
