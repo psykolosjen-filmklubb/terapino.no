@@ -14,3 +14,8 @@ export async function getAuthors() {
 export async function getReviews() {
 	return sanityClient.fetch('*[_type == "review"]');
 }
+
+export async function getLogo() {
+	const logo = await sanityClient.fetch('*[_type == "image_assets" && name == "Logo"]');
+	return logo[0];
+}

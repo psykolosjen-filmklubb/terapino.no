@@ -1,14 +1,14 @@
-import { getAuthors, getReviews } from '$lib/sanity';
+import { getLogo, getReviews } from '$lib/sanity';
 import { error } from '@sveltejs/kit';
 
 export async function load() {
-	const authors = await getAuthors();
 	const reviews = await getReviews();
+	const logo = await getLogo();
 
-	if (authors && reviews) {
+	if (reviews && logo) {
 		return {
-			authors,
-			reviews
+			reviews,
+			logo
 		};
 	}
 

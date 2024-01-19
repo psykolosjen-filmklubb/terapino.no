@@ -3,22 +3,22 @@
 	import { PortableText } from '@portabletext/svelte';
 
 	export let data;
-
-	$: review = data.reviews[0].review;
 </script>
 
-<h1>Psykolosjen Filmklubb</h1>
+<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+	Psykolosjen Filmklubb
+</h1>
 
-{#if data.authors && data.authors.length > 0}
-	<h2>Forfattere:</h2>
-	{#each data.authors as author}
-		{author.name}
-		<img src={urlFor(author.image).width(64).height(64).url()} alt={author.name} />
+<img src={urlFor(data.logo.image).width(384).height(384).url()} alt="Logo" />
+
+{#if data.reviews}
+	<h2
+		class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+	>
+		Filmanmeldelser
+	</h2>
+	{#each data.reviews as review}
+		<h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">{review.review_title}</h3>
+		<PortableText value={review.review} />
 	{/each}
-{:else}
-	<p>No authors found</p>
-{/if}
-
-{#if data.reviews && data.reviews.length > 0}
-	<PortableText value={review} />
 {/if}
