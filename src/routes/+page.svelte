@@ -11,7 +11,9 @@
 	Psykolosjen Filmklubb
 </h1>
 
-<img src={urlFor(data.logo.image).width(384).height(384).url()} alt="Logo" class="mb-12 mt-4" />
+<div class="mb-12 mt-4 max-w-80">
+	<img src={urlFor(data.logo.image).width(512).height(512).url()} alt="Logo" />
+</div>
 
 {#if data.reviews}
 	<h2
