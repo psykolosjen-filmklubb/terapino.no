@@ -5,6 +5,8 @@
 	export let data;
 </script>
 
+<div class="m-20" />
+
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
 	Psykolosjen Filmklubb
 </h1>
@@ -18,8 +20,20 @@
 		Filmanmeldelser
 	</h2>
 	{#each data.reviews as review}
-		<Button variant="link" href="/{review.slug.current}" class="scroll-m-20 text-xl tracking-tight">
-			{review.review_title}
-		</Button>
+		<div class="max-w-lg">
+			<a href="/{review.slug.current}">
+				<img src={urlFor(review.thumbnail).width(512).height(256).url()} alt="thumbnail" />
+			</a>
+			<Button
+				variant="link"
+				href="/{review.slug.current}"
+				class="scroll-m-20 p-0 text-2xl tracking-tight"
+			>
+				{review.review_title}
+			</Button>
+			<br />
+			<small class="text-sm leading-none">{review.excerpt}</small>
+		</div>
 	{/each}
 {/if}
+<div class="m-20" />

@@ -31,6 +31,7 @@ export async function getReview(slug: string) {
 			movie_title,
 			review,
 			slug,
+			thumbnail,
 			authors[]->
 	}`,
 		{

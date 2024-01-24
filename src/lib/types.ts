@@ -5,6 +5,8 @@ export type Review = {
 	movie_title: string;
 	review: PortableTextBlock[];
 	slug: Slug;
+	thumbnail: ImageAsset;
+	excerpt: string;
 	authors?: Author[];
 };
 
