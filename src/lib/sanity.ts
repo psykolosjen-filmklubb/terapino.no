@@ -1,6 +1,6 @@
 import { createClient } from '@sanity/client';
 import groq from 'groq';
-import type { Author, Logo, Review } from './types';
+import type { Author, Logo, Review, ReviewExcerpt } from './types';
 
 export const sanityClient = createClient({
 	projectId: '1pfu395i',
@@ -13,8 +13,13 @@ export function getAuthors() {
 	return sanityClient.fetch<Author[]>(groq`*[_type == "author"]`);
 }
 
-export function getReviews() {
-	return sanityClient.fetch<Review[]>(groq`*[_type == "review"]`);
+export function getReviewExcerpts() {
+	return sanityClient.fetch<ReviewExcerpt[]>(groq`*[_type == "review"]{
+		review_title,
+		slug,
+		thumbnail,
+		excerpt
+	}`);
 }
 
 export async function getLogo() {

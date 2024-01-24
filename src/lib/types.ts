@@ -10,6 +10,13 @@ export type Review = {
 	authors?: Author[];
 };
 
+export type ReviewExcerpt = {
+	review_title: string;
+	slug: Slug;
+	thumbnail: ImageAsset;
+	excerpt: string;
+};
+
 export type Author = {
 	name: string;
 	image: ImageAsset;
