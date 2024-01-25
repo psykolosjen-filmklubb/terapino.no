@@ -3,7 +3,7 @@ import groq from 'groq';
 import type { Author, Logo, Review, ReviewExcerpt } from './types';
 
 export const sanityClient = createClient({
-	projectId: '1pfu395i',
+	projectId: '4s9wdr84',
 	dataset: 'production',
 	apiVersion: '2024-01-16',
 	useCdn: false
