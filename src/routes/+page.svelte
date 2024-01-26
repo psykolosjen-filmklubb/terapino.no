@@ -6,9 +6,9 @@
 </script>
 
 <section
-	class="grid w-full place-items-center gap-8 bg-muted px-2 pb-10 pt-16 lg:grid-cols-3 lg:py-20"
+	class="grid w-full place-items-center gap-8 bg-muted px-2 pb-10 pt-16 lg:grid-cols-3 lg:px-28 lg:py-20"
 >
-	<div class="flex w-full flex-col gap-4 lg:col-span-2 lg:px-10">
+	<div class="flex w-full flex-col gap-4 lg:col-span-2">
 		<h1
 			class="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-left lg:text-7xl"
 		>
@@ -19,7 +19,7 @@
 		</p>
 	</div>
 
-	<div class="max-w-56 lg:max-w-80 lg:place-self-start">
+	<div class="max-w-56 lg:max-w-80 lg:place-self-end">
 		<img src={urlFor(data.logo.image).width(512).height(512).url()} alt="Logo" />
 	</div>
 </section>
