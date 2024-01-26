@@ -15,14 +15,14 @@
 	<small>Film: {data.review.movie_title}</small>
 </header>
 
-<div class="grid grid-cols-3 gap-8 px-6">
-	<div class="col-span-2">
+<div class="grid gap-12 px-6 lg:grid-cols-3 lg:gap-8">
+	<div class="lg:col-span-2">
 		<PortableText value={data.review.review} />
 	</div>
 
 	{#if data.review.authors}
-		<div class="px-6">
-			<p class="text-sm font-light tracking-tight">Skrevet av:</p>
+		<div class="lg:px-6">
+			<h3 class="text-sm font-light tracking-tight">Skrevet av:</h3>
 			<div class="grid gap-4">
 				{#each data.review.authors as author}
 					<div class="flex w-full justify-between">
