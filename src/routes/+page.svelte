@@ -8,5 +8,4 @@
 	<div class="max-w-56 lg:max-w-80">
 		<img src={urlFor(data.logo.image).width(512).height(512).url()} alt="Logo" />
 	</div>
-	<p class="text-center">Coming soon...</p>
 </section>
