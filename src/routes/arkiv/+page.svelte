@@ -1,0 +1,11 @@
+<script lang="ts">
+	export let data;
+</script>
+
+<main class="flex w-full flex-col place-items-center">
+	<h1
+		class="scroll-m-20 text-center text-3xl font-extrabold tracking-tight lg:text-left lg:text-5xl"
+	>
+		Arkiv
+	</h1>
+</main>
