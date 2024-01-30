@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Archive from '$lib/components/Archive.svelte';
+
 	export let data;
 </script>
 
@@ -8,4 +10,5 @@
 	>
 		Arkiv
 	</h1>
+	<Archive archive={data.archive} />
 </main>
