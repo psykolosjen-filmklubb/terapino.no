@@ -13,7 +13,7 @@
 	let height = 0;
 	let windowWidth = 0;
 
-	$: isMobile = windowWidth <= 1024;
+	$: isMobile = windowWidth < 1024;
 
 	$: strokeWidth = isMobile ? 2 : 4;
 
@@ -26,7 +26,7 @@
 		semester.movies[0].year.toString().length +
 		semester.movies[0].director.length;
 
-	$: pathX2 = isMobile ? windowWidth * 0.5 : lengthOfFirstMovie * 8;
+	$: pathX2 = isMobile ? windowWidth * 0.5 : lengthOfFirstMovie * 10;
 	$: pathX3 = pathX2 + width / 3;
 	$: pathX4 = isMobile ? windowWidth * 0.8 : pathX3 + 110;
 	$: pathY2 = height / 3;
@@ -89,7 +89,7 @@
 				<p
 					in:fade|global={{ delay: 200 + 200 * (i + 1) }}
 					out:fade|global={{ delay: 100 * (semester.movies.length - i) }}
-					class="text-xs"
+					class="text-xs lg:text-base"
 				>
 					{movie.title} ({movie.year}) - {movie.director}
 				</p>
@@ -99,7 +99,7 @@
 			in:fade={{ delay: 400 }}
 			out:fade
 			class="absolute text-nowrap text-lg font-semibold tracking-tight lg:text-xl"
-			style:top={isMobile ? '0px' : `${0.55}rem`}
+			style:top={isMobile ? '0px' : `${pathY2 - strokeWidth}px`}
 			style:left={direction === 'right'
 				? (pathX3 + width + 4).toString() + 'px'
 				: (-pathX3 - width * 2).toString() + 'px'}
