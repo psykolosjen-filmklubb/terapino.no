@@ -28,7 +28,7 @@
 
 	$: pathX2 = isMobile ? windowWidth * 0.5 : lengthOfFirstMovie * 8;
 	$: pathX3 = pathX2 + width / 3;
-	$: pathX4 = isMobile ? windowWidth * 0.8 : pathX3 + 120;
+	$: pathX4 = isMobile ? windowWidth * 0.8 : pathX3 + 110;
 	$: pathY2 = height / 3;
 
 	$: pathString = `M 0 0 L ${pathX2} 0 L ${pathX3} ${pathY2} L ${pathX4} ${pathY2}`;
@@ -95,5 +95,17 @@
 				</p>
 			{/each}
 		</div>
+		<h2
+			in:fade={{ delay: 400 }}
+			out:fade
+			class="absolute text-nowrap text-lg font-semibold tracking-tight lg:text-xl"
+			style:top={isMobile ? '0px' : `${0.55}rem`}
+			style:left={direction === 'right'
+				? (pathX3 + width + 4).toString() + 'px'
+				: (-pathX3 - width * 2).toString() + 'px'}
+		>
+			{semester.season.toUpperCase()}
+			{semester.year}
+		</h2>
 	{/if}
 </div>
