@@ -21,9 +21,14 @@
 
 	$: button, setSize();
 
-	$: pathX2 = isMobile ? windowWidth * 0.5 : textLength * 9;
+	$: lengthOfFirstMovie =
+		semester.movies[0].title.length +
+		semester.movies[0].year.toString().length +
+		semester.movies[0].director.length;
+
+	$: pathX2 = isMobile ? windowWidth * 0.5 : lengthOfFirstMovie * 8;
 	$: pathX3 = pathX2 + width / 3;
-	$: pathX4 = isMobile ? windowWidth * 0.8 : textLength * 12;
+	$: pathX4 = isMobile ? windowWidth * 0.8 : pathX3 + 120;
 	$: pathY2 = height / 3;
 
 	$: pathString = `M 0 0 L ${pathX2} 0 L ${pathX3} ${pathY2} L ${pathX4} ${pathY2}`;
@@ -74,7 +79,8 @@
 			/>
 		</svg>
 		<div
-			class="absolute"
+			class="absolute w-dvw"
+			style:max-width={isMobile ? pathX4.toString() + 'px' : ''}
 			style:left={direction === 'right' ? `${width * 1.2}px` : ''}
 			style:right={direction === 'left' ? `${width * 1.2}px` : ''}
 			style:top={isMobile ? `${(7 * height) / 8}px` : `${(2 * height) / 3}px`}
@@ -83,7 +89,7 @@
 				<p
 					in:fade|global={{ delay: 200 + 200 * (i + 1) }}
 					out:fade|global={{ delay: 100 * (semester.movies.length - i) }}
-					class="text-nowrap"
+					class="text-xs"
 				>
 					{movie.title} ({movie.year}) - {movie.director}
 				</p>
