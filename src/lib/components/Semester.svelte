@@ -74,14 +74,19 @@
 			/>
 		</svg>
 		<div
-			transition:fade
 			class="absolute"
 			style:left={direction === 'right' ? `${width * 1.2}px` : ''}
 			style:right={direction === 'left' ? `${width * 1.2}px` : ''}
 			style:top={isMobile ? `${(7 * height) / 8}px` : `${(2 * height) / 3}px`}
 		>
-			{#each semester.movies as movie}
-				<p class="text-nowrap">{movie.title} ({movie.year}) - {movie.director}</p>
+			{#each semester.movies as movie, i}
+				<p
+					in:fade|global={{ delay: 200 + 200 * (i + 1) }}
+					out:fade|global={{ delay: 100 * (semester.movies.length - i) }}
+					class="text-nowrap"
+				>
+					{movie.title} ({movie.year}) - {movie.director}
+				</p>
 			{/each}
 		</div>
 	{/if}
