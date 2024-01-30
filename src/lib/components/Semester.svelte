@@ -3,16 +3,31 @@
 	import { draw, fade } from 'svelte/transition';
 
 	export let semester: Semester;
-	export let direction: 'left' | 'right';
+	export let directionParam: 'left' | 'right';
 
 	let button: HTMLButtonElement;
 
 	let open = true;
 
-	const STROKE_WIDTH = 4;
+	let width = 0;
+	let height = 0;
+	let windowWidth = 0;
 
-	$: width = button?.getBoundingClientRect().width;
-	$: height = button?.getBoundingClientRect().height;
+	$: isMobile = windowWidth <= 1024;
+
+	$: strokeWidth = isMobile ? 2 : 4;
+
+	$: direction = isMobile ? 'right' : directionParam;
+
+	$: button, setSize();
+
+	function setSize() {
+		const rect = button?.getBoundingClientRect();
+		if (rect) {
+			width = rect.width;
+			height = rect.height;
+		}
+	}
 
 	let textLength = 0;
 	$: {
@@ -25,9 +40,11 @@
 	}
 </script>
 
+<svelte:window bind:innerWidth={windowWidth} on:resize={() => setSize()} />
+
 <div class="relative">
 	<button
-		class="relative z-10 size-12 rounded-full border-4 border-primary"
+		class="relative z-10 size-8 rounded-full border-2 border-primary lg:size-12 lg:border-4"
 		style:background-color={semester.color}
 		on:click={() => (open = !open)}
 		bind:this={button}
@@ -36,15 +53,15 @@
 		<svg
 			class="pointer-events-none absolute z-0"
 			overflow="visible"
-			style:left={direction === 'right' ? width - STROKE_WIDTH : STROKE_WIDTH}
-			style:top={height / 2 - STROKE_WIDTH / 2}
+			style:left={direction === 'right' ? width - strokeWidth : strokeWidth}
+			style:top={height / 2 - strokeWidth / 2}
 		>
 			<line
 				transition:draw
 				x1={0}
 				x2={textLength * 10}
 				stroke="black"
-				stroke-width={STROKE_WIDTH}
+				stroke-width={strokeWidth}
 				style:transform={direction === 'right' ? '' : 'rotate(180deg)'}
 				class="z-0"
 			/>

@@ -10,5 +10,7 @@
 	>
 		Arkiv
 	</h1>
-	<Archive archive={data.archive} />
+	<div class="place-self-start pl-4 lg:place-self-center lg:p-0">
+		<Archive archive={data.archive} />
+	</div>
 </main>

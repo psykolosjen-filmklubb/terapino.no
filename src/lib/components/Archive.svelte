@@ -5,6 +5,6 @@
 	export let archive: Archive;
 </script>
 
-<Semester semester={archive[0]} direction="right" />
+<Semester semester={archive[0]} directionParam="right" />
 
-<Semester semester={archive[0]} direction="left" />
+<Semester semester={archive[0]} directionParam="left" />
