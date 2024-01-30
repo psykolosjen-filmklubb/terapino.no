@@ -7,4 +7,4 @@
 
 <Semester semester={archive[0]} directionParam="right" />
 
-<Semester semester={archive[0]} directionParam="left" />
+<!-- <Semester semester={archive[0]} directionParam="left" /> -->

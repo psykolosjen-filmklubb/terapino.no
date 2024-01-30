@@ -21,6 +21,13 @@
 
 	$: button, setSize();
 
+	$: pathX2 = isMobile ? windowWidth * 0.5 : textLength * 9;
+	$: pathX3 = pathX2 + width / 3;
+	$: pathX4 = isMobile ? windowWidth * 0.8 : textLength * 12;
+	$: pathY2 = height / 3;
+
+	$: pathString = `M 0 0 L ${pathX2} 0 L ${pathX3} ${pathY2} L ${pathX4} ${pathY2}`;
+
 	function setSize() {
 		const rect = button?.getBoundingClientRect();
 		if (rect) {
@@ -56,14 +63,14 @@
 			style:left={direction === 'right' ? width - strokeWidth : strokeWidth}
 			style:top={height / 2 - strokeWidth / 2}
 		>
-			<line
+			<path
 				transition:draw
-				x1={0}
-				x2={textLength * 10}
+				d={pathString}
 				stroke="black"
 				stroke-width={strokeWidth}
-				style:transform={direction === 'right' ? '' : 'rotate(180deg)'}
+				style:transform={direction === 'right' ? '' : 'scale(-1, 1)'}
 				class="z-0"
+				fill="none"
 			/>
 		</svg>
 		<div
@@ -71,10 +78,10 @@
 			class="absolute"
 			style:left={direction === 'right' ? `${width * 1.2}px` : ''}
 			style:right={direction === 'left' ? `${width * 1.2}px` : ''}
-			style:top={`${(5 * height) / 8}px`}
+			style:top={isMobile ? `${(7 * height) / 8}px` : `${(2 * height) / 3}px`}
 		>
 			{#each semester.movies as movie}
-				<span class="text-nowrap">{movie.title} ({movie.year}) - {movie.director}</span>
+				<p class="text-nowrap">{movie.title} ({movie.year}) - {movie.director}</p>
 			{/each}
 		</div>
 	{/if}
