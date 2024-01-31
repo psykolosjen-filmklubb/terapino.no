@@ -44,6 +44,43 @@ const archive: Archive = [
 				director: 'Ingmar Bergman'
 			}
 		]
+	},
+	{
+		year: 2022,
+		season: 'vår',
+		color: '#00c9dd',
+		movies: [
+			{
+				title: 'Climax',
+				year: 2018,
+				director: 'Gaspar Noe'
+			},
+			{
+				title: 'Taxi Driver',
+				year: 1976,
+				director: 'Martin Scorsese'
+			},
+			{
+				title: 'A Silent Voice',
+				year: 2016,
+				director: 'Naoko Yamada'
+			},
+			{
+				title: 'The Cook, the Thief, His Wife & Her Lover',
+				year: 1989,
+				director: 'Peter Greenway'
+			},
+			{
+				title: 'Barn',
+				year: 2019,
+				director: 'Dag Johan Haugerud'
+			},
+			{
+				title: 'Shrek 2',
+				year: 2014,
+				director: 'Andrew Adamson, Kelly Asbury, Conrad Vernon'
+			}
+		]
 	}
 ];
 

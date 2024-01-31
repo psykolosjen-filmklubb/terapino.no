@@ -9,7 +9,7 @@
 
 	let open = true;
 
-	let circleWidth = 0;
+	export let circleWidth = 0;
 	let circleHeight = 0;
 	let windowWidth = 0;
 	let lengthOfFirstMovie = 0;
