@@ -9,9 +9,11 @@
 
 	let open = true;
 
-	let width = 0;
-	let height = 0;
+	let circleWidth = 0;
+	let circleHeight = 0;
 	let windowWidth = 0;
+	let lengthOfFirstMovie = 0;
+	let lengthOfSemesterTitle = 0;
 
 	$: isMobile = windowWidth < 1024;
 
@@ -21,38 +23,30 @@
 
 	$: button, setSize();
 
-	$: lengthOfFirstMovie =
-		semester.movies[0].title.length +
-		semester.movies[0].year.toString().length +
-		semester.movies[0].director.length;
-
-	$: pathX2 = isMobile ? windowWidth * 0.5 : lengthOfFirstMovie * 10;
-	$: pathX3 = pathX2 + width / 3;
-	$: pathX4 = isMobile ? windowWidth * 0.8 : pathX3 + 110;
-	$: pathY2 = height / 3;
+	$: pathX2 = isMobile ? windowWidth * 0.5 : lengthOfFirstMovie + circleWidth / 3;
+	$: pathX3 = pathX2 + circleWidth / 3;
+	$: pathX4 = isMobile ? windowWidth * 0.8 : pathX3 + lengthOfSemesterTitle + 8;
+	$: pathY2 = circleHeight / 3;
 
 	$: pathString = `M 0 0 L ${pathX2} 0 L ${pathX3} ${pathY2} L ${pathX4} ${pathY2}`;
 
 	function setSize() {
 		const rect = button?.getBoundingClientRect();
 		if (rect) {
-			width = rect.width;
-			height = rect.height;
+			circleWidth = rect.width;
+			circleHeight = rect.height;
 		}
-	}
-
-	let textLength = 0;
-	$: {
-		semester.movies.forEach((movie) => {
-			const length = movie.title.length + movie.year.toString().length + movie.director.length;
-			if (length > textLength) {
-				textLength = length;
-			}
-		});
 	}
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} on:resize={() => setSize()} />
+
+<p
+	class="invisible absolute text-sm font-light lg:text-base lg:font-thin"
+	bind:clientWidth={lengthOfFirstMovie}
+>
+	{semester.movies[0].title} ({semester.movies[0].year}) - {semester.movies[0].director}
+</p>
 
 <div class="relative">
 	<button
@@ -65,8 +59,8 @@
 		<svg
 			class="pointer-events-none absolute z-0"
 			overflow="visible"
-			style:left={direction === 'right' ? width - strokeWidth : strokeWidth}
-			style:top={height / 2 - strokeWidth / 2}
+			style:left={direction === 'right' ? circleWidth - strokeWidth : strokeWidth}
+			style:top={circleHeight / 2 - strokeWidth / 2}
 		>
 			<path
 				transition:draw
@@ -81,15 +75,16 @@
 		<div
 			class="absolute w-dvw"
 			style:max-width={isMobile ? pathX4.toString() + 'px' : ''}
-			style:left={direction === 'right' ? `${width * 1.2}px` : ''}
-			style:right={direction === 'left' ? `${width * 1.2}px` : ''}
-			style:top={isMobile ? `${(7 * height) / 8}px` : `${(2 * height) / 3}px`}
+			style:left={direction === 'right' ? `${circleWidth * 1.2}px` : 'auto'}
+			style:right={direction === 'left' ? `${circleWidth * 1.2}px` : 'auto'}
+			style:top={isMobile ? `${circleHeight}px` : `${(2 * circleHeight) / 3}px`}
+			style:text-align={direction === 'right' ? 'left' : 'right'}
 		>
 			{#each semester.movies as movie, i}
 				<p
 					in:fade|global={{ delay: 200 + 200 * (i + 1) }}
 					out:fade|global={{ delay: 100 * (semester.movies.length - i) }}
-					class="text-xs lg:text-base"
+					class="mb-2 text-sm font-light lg:text-base lg:font-thin"
 				>
 					{movie.title} ({movie.year}) - {movie.director}
 				</p>
@@ -101,8 +96,9 @@
 			class="absolute text-nowrap text-lg font-semibold tracking-tight lg:text-xl"
 			style:top={isMobile ? '0px' : `${pathY2 - strokeWidth}px`}
 			style:left={direction === 'right'
-				? (pathX3 + width + 4).toString() + 'px'
-				: (-pathX3 - width * 2).toString() + 'px'}
+				? (pathX3 + circleWidth + 4).toString() + 'px'
+				: (-pathX3 - lengthOfSemesterTitle - 4).toString() + 'px'}
+			bind:clientWidth={lengthOfSemesterTitle}
 		>
 			{semester.season.toUpperCase()}
 			{semester.year}
