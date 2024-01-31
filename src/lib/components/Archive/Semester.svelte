@@ -1,45 +1,40 @@
 <script lang="ts">
 	import type { Semester } from '$lib/types/archive';
 	import { draw, fade } from 'svelte/transition';
+	import { archiveStore } from './archiveStore';
 
 	export let semester: Semester;
 	export let directionParam: 'left' | 'right';
 
 	let button: HTMLButtonElement;
 
-	let open = true;
-
-	export let circleWidth = 0;
-	let circleHeight = 0;
-	let windowWidth = 0;
 	let lengthOfFirstMovie = 0;
 	let lengthOfSemesterTitle = 0;
 
-	$: isMobile = windowWidth < 1024;
-
-	$: strokeWidth = isMobile ? 2 : 4;
-
-	$: direction = isMobile ? 'right' : directionParam;
-
+	$: open = $archiveStore.semesters[semester.id].open;
+	$: direction = $archiveStore.isMobile ? 'right' : directionParam;
 	$: button, setSize();
 
-	$: pathX2 = isMobile ? windowWidth * 0.5 : lengthOfFirstMovie + circleWidth / 3;
-	$: pathX3 = pathX2 + circleWidth / 3;
-	$: pathX4 = isMobile ? windowWidth * 0.8 : pathX3 + lengthOfSemesterTitle + 8;
-	$: pathY2 = circleHeight / 3;
-
+	$: pathX2 = $archiveStore.isMobile
+		? $archiveStore.windowWidth * 0.5
+		: lengthOfFirstMovie + $archiveStore.circleWidth / 3;
+	$: pathX3 = pathX2 + $archiveStore.circleWidth / 3;
+	$: pathX4 = $archiveStore.isMobile
+		? $archiveStore.windowWidth * 0.8
+		: pathX3 + lengthOfSemesterTitle + 8;
+	$: pathY2 = $archiveStore.circleHeight / 3;
 	$: pathString = `M 0 0 L ${pathX2} 0 L ${pathX3} ${pathY2} L ${pathX4} ${pathY2}`;
 
 	function setSize() {
 		const rect = button?.getBoundingClientRect();
 		if (rect) {
-			circleWidth = rect.width;
-			circleHeight = rect.height;
+			$archiveStore.circleWidth = rect.width;
+			$archiveStore.circleHeight = rect.height;
 		}
 	}
 </script>
 
-<svelte:window bind:innerWidth={windowWidth} on:resize={() => setSize()} />
+<svelte:window on:resize={() => setSize()} />
 
 <p
 	class="invisible absolute text-sm font-light lg:text-base lg:font-thin"
@@ -59,14 +54,16 @@
 		<svg
 			class="pointer-events-none absolute z-0"
 			overflow="visible"
-			style:left={direction === 'right' ? circleWidth - strokeWidth : strokeWidth}
-			style:top={circleHeight / 2 - strokeWidth / 2}
+			style:left={direction === 'right'
+				? $archiveStore.circleWidth - $archiveStore.strokeWidth
+				: $archiveStore.strokeWidth}
+			style:top={$archiveStore.circleHeight / 2 - $archiveStore.strokeWidth / 2}
 		>
 			<path
 				transition:draw
 				d={pathString}
 				stroke="black"
-				stroke-width={strokeWidth}
+				stroke-width={$archiveStore.strokeWidth}
 				style:transform={direction === 'right' ? '' : 'scale(-1, 1)'}
 				class="z-0"
 				fill="none"
@@ -76,9 +73,9 @@
 			in:fade={{ delay: 400 }}
 			out:fade
 			class="absolute text-nowrap text-lg font-semibold tracking-tight lg:text-xl"
-			style:top={isMobile ? '0px' : `${pathY2 - strokeWidth}px`}
+			style:top={$archiveStore.isMobile ? '0px' : `${pathY2 - $archiveStore.strokeWidth}px`}
 			style:left={direction === 'right'
-				? (pathX3 + circleWidth + 4).toString() + 'px'
+				? (pathX3 + $archiveStore.circleWidth + 4).toString() + 'px'
 				: (-pathX3 - lengthOfSemesterTitle - 4).toString() + 'px'}
 			bind:clientWidth={lengthOfSemesterTitle}
 		>
@@ -88,10 +85,12 @@
 	{/if}
 	<div
 		class="absolute w-dvw"
-		style:max-width={isMobile ? pathX4.toString() + 'px' : ''}
-		style:left={direction === 'right' ? `${circleWidth * 1.2}px` : 'auto'}
-		style:right={direction === 'left' ? `${circleWidth * 1.2}px` : 'auto'}
-		style:top={isMobile ? `${circleHeight}px` : `${(2 * circleHeight) / 3}px`}
+		style:max-width={$archiveStore.isMobile ? pathX4.toString() + 'px' : ''}
+		style:left={direction === 'right' ? `${$archiveStore.circleWidth * 1.2}px` : 'auto'}
+		style:right={direction === 'left' ? `${$archiveStore.circleWidth * 1.2}px` : 'auto'}
+		style:top={$archiveStore.isMobile
+			? `${$archiveStore.circleHeight}px`
+			: `${(2 * $archiveStore.circleHeight) / 3}px`}
 		style:text-align={direction === 'right' ? 'left' : 'right'}
 	>
 		{#each semester.movies as movie, i}

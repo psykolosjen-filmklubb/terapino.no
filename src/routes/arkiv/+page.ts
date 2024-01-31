@@ -2,6 +2,7 @@ import type { Archive } from '$lib/types/archive';
 
 const archive: Archive = [
 	{
+		id: 'first',
 		year: 2021,
 		season: 'vår',
 		color: '#00c9dd',
@@ -19,6 +20,7 @@ const archive: Archive = [
 		]
 	},
 	{
+		id: 'second',
 		year: 2021,
 		season: 'høst',
 		color: '#ed220d',
@@ -46,6 +48,7 @@ const archive: Archive = [
 		]
 	},
 	{
+		id: 'third',
 		year: 2022,
 		season: 'vår',
 		color: '#00c9dd',
