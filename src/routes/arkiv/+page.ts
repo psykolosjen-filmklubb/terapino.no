@@ -17,6 +17,33 @@ const archive: Archive = [
 				director: 'Celine Sciamma'
 			}
 		]
+	},
+	{
+		year: 2021,
+		season: 'høst',
+		color: '#ed220d',
+		movies: [
+			{
+				title: 'Promising Young Woman',
+				year: 2020,
+				director: 'Emerald Fennell'
+			},
+			{
+				title: 'Dune',
+				year: 2021,
+				director: 'Denis Villeneuve'
+			},
+			{
+				title: 'Verdens verste menneske',
+				year: 2021,
+				director: 'Joachim Trier'
+			},
+			{
+				title: 'Høstsonaten',
+				year: 1978,
+				director: 'Ingmar Bergman'
+			}
+		]
 	}
 ];
 

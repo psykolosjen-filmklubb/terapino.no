@@ -5,6 +5,6 @@
 	export let archive: Archive;
 </script>
 
-<Semester semester={archive[0]} directionParam="left" />
-
-<Semester semester={archive[0]} directionParam="right" />
+{#each archive as semester, i}
+	<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} />
+{/each}
