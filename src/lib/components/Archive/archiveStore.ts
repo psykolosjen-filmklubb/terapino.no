@@ -18,6 +18,7 @@ type ArchiveStore = {
 	semesters: {
 		[id in string]: {
 			open: boolean;
+			titlesHeight?: number;
 		};
 	};
 };

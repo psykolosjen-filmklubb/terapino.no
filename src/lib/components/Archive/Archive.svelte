@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Archive } from '$lib/types/archive';
+	import { flip } from 'svelte/animate';
 	import Semester from './Semester.svelte';
 	import { archiveStore } from './archiveStore';
 
@@ -26,9 +27,11 @@
 	overflow="visible"
 	style:left={$archiveStore.isMobile ? $archiveStore.circleWidth : windowWidth / 2}
 >
-	<line x="0" y1="0" y2="100" stroke="black" stroke-width={$archiveStore.strokeWidth} />
+	<line x="0" y1="0" y2="1000" stroke="black" stroke-width={$archiveStore.strokeWidth} />
 </svg>
 
-{#each archive as semester, i}
-	<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} />
+{#each archive as semester, i (semester.id)}
+	<div style:margin-bottom={`${$archiveStore.semesters[semester.id].titlesHeight}px`} animate:flip>
+		<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} />
+	</div>
 {/each}

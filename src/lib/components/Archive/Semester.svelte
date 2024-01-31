@@ -11,6 +11,9 @@
 	let lengthOfFirstMovie = 0;
 	let lengthOfSemesterTitle = 0;
 
+	let titlesHeight = 0;
+	$: $archiveStore.semesters[semester.id].titlesHeight = titlesHeight;
+
 	$: open = $archiveStore.semesters[semester.id].open;
 	$: direction = $archiveStore.isMobile ? 'right' : directionParam;
 	$: button, setSize();
@@ -47,10 +50,11 @@
 	<button
 		class="relative z-10 size-8 rounded-full border-2 border-primary lg:size-12 lg:border-4"
 		style:background-color={semester.color}
-		on:click={() => (open = !open)}
+		on:click={() =>
+			($archiveStore.semesters[semester.id].open = !$archiveStore.semesters[semester.id].open)}
 		bind:this={button}
 	/>
-	{#if open && button}
+	{#if $archiveStore.semesters[semester.id].open && button}
 		<svg
 			class="pointer-events-none absolute z-0"
 			overflow="visible"
@@ -92,9 +96,10 @@
 			? `${$archiveStore.circleHeight}px`
 			: `${(2 * $archiveStore.circleHeight) / 3}px`}
 		style:text-align={direction === 'right' ? 'left' : 'right'}
+		bind:clientHeight={titlesHeight}
 	>
 		{#each semester.movies as movie, i}
-			{#if open && button}
+			{#if $archiveStore.semesters[semester.id].open && button}
 				<p
 					in:fade={{ delay: 200 + 200 * (i + 1) }}
 					out:fade={{
