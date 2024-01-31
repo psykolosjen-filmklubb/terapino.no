@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Archive from '$lib/components/Archive.svelte';
+	import Archive from '$lib/components/Archive/Archive.svelte';
 
 	export let data;
 </script>
