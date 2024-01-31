@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ReviewsCarousel from '$lib/components/ReviewsCarousel.svelte';
+	import { Button } from '$lib/components/ui/button';
 	import { urlFor } from '$lib/utils/image';
 
 	export let data;
@@ -25,13 +26,16 @@
 </section>
 
 {#if data.reviews}
-	<section class="w-full px-2 lg:px-6">
+	<section class="flex w-full flex-col px-2 pt-8 lg:px-6 lg:pt-20">
 		<h2
-			class="my-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:mt-20 lg:text-left lg:text-5xl lg:font-bold"
+			class="mb-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
 		>
 			Siste filmanmeldelser
 		</h2>
 		<ReviewsCarousel reviews={data.reviews} />
+		<Button class="mr-2 mt-4 place-self-end lg:mr-8" href="/anmeldelser" variant="link"
+			>Se alle anmeldelser</Button
+		>
 	</section>
 {/if}
 
