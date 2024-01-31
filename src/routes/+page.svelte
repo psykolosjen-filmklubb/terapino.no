@@ -1,32 +1,25 @@
 <script lang="ts">
 	import ReviewsCarousel from '$lib/components/ReviewsCarousel.svelte';
 	import { Button } from '$lib/components/ui/button';
-	import { urlFor } from '$lib/utils/image';
 
 	export let data;
 </script>
 
 <section
-	class="grid w-full place-items-center gap-8 bg-muted px-2 pb-10 pt-16 lg:grid-cols-3 lg:px-28 lg:py-20"
+	class="grid w-full place-items-center gap-8 px-2 pb-10 pt-12 lg:place-items-start lg:px-12 lg:py-20"
 >
-	<div class="flex w-full flex-col gap-4 lg:col-span-2">
-		<h1
-			class="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-left lg:text-7xl"
-		>
-			Psykolosjen Filmklubb
-		</h1>
-		<p class="px-4 text-center lg:px-0 lg:text-left">
-			Velkommen! Her kan du se kommende visninger vi arrangerer og lese våre film-anmeldelser.
-		</p>
-	</div>
-
-	<div class="max-w-56 lg:max-w-80 lg:place-self-end">
-		<img src={urlFor(data.logo.image).width(512).height(512).url()} alt="Logo" />
-	</div>
+	<h1
+		class="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-left lg:text-7xl"
+	>
+		Velkommen
+	</h1>
+	<p class="px-4 text-center lg:px-0 lg:text-left">
+		Her kan du se kommende visninger vi arrangerer og lese våre film-anmeldelser.
+	</p>
 </section>
 
 {#if data.reviews}
-	<section class="flex w-full flex-col px-2 pt-8 lg:px-6 lg:pt-20">
+	<section class="flex w-full flex-col bg-muted px-2 pt-8 lg:px-6 lg:pt-20">
 		<h2
 			class="mb-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
 		>
