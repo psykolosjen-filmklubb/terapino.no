@@ -13,13 +13,18 @@ export function getAuthors() {
 	return sanityClient.fetch<Author[]>(groq`*[_type == "author"]`);
 }
 
-export function getReviewExcerpts() {
-	return sanityClient.fetch<ReviewExcerpt[]>(groq`*[_type == "review"]{
+export function getReviewExcerpts(limit?: number) {
+	return sanityClient.fetch<ReviewExcerpt[]>(
+		groq`*[_type == "review"][0..$limit]{
 		review_title,
 		slug,
 		thumbnail,
 		excerpt
-	}`);
+	}`,
+		{
+			limit: limit ? limit - 1 : -1
+		}
+	);
 }
 
 export async function getLogo() {
