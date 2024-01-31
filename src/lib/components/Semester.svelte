@@ -72,24 +72,6 @@
 				fill="none"
 			/>
 		</svg>
-		<div
-			class="absolute w-dvw"
-			style:max-width={isMobile ? pathX4.toString() + 'px' : ''}
-			style:left={direction === 'right' ? `${circleWidth * 1.2}px` : 'auto'}
-			style:right={direction === 'left' ? `${circleWidth * 1.2}px` : 'auto'}
-			style:top={isMobile ? `${circleHeight}px` : `${(2 * circleHeight) / 3}px`}
-			style:text-align={direction === 'right' ? 'left' : 'right'}
-		>
-			{#each semester.movies as movie, i}
-				<p
-					in:fade|global={{ delay: 200 + 200 * (i + 1) }}
-					out:fade|global={{ delay: 100 * (semester.movies.length - i) }}
-					class="mb-2 text-sm font-light lg:text-base lg:font-thin"
-				>
-					{movie.title} ({movie.year}) - {movie.director}
-				</p>
-			{/each}
-		</div>
 		<h2
 			in:fade={{ delay: 400 }}
 			out:fade
@@ -104,4 +86,26 @@
 			{semester.year}
 		</h2>
 	{/if}
+	<div
+		class="absolute w-dvw"
+		style:max-width={isMobile ? pathX4.toString() + 'px' : ''}
+		style:left={direction === 'right' ? `${circleWidth * 1.2}px` : 'auto'}
+		style:right={direction === 'left' ? `${circleWidth * 1.2}px` : 'auto'}
+		style:top={isMobile ? `${circleHeight}px` : `${(2 * circleHeight) / 3}px`}
+		style:text-align={direction === 'right' ? 'left' : 'right'}
+	>
+		{#each semester.movies as movie, i}
+			{#if open && button}
+				<p
+					in:fade={{ delay: 200 + 200 * (i + 1) }}
+					out:fade={{
+						delay: 100 * (semester.movies.length - i)
+					}}
+					class="mb-2 text-sm font-light lg:text-base lg:font-thin"
+				>
+					{movie.title} ({movie.year}) - {movie.director}
+				</p>
+			{/if}
+		{/each}
+	</div>
 </div>
