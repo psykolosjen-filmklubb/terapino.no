@@ -15,7 +15,7 @@ export function getAuthors() {
 
 export function getReviewExcerpts(limit?: number) {
 	return sanityClient.fetch<ReviewExcerpt[]>(
-		groq`*[_type == "review"][0..$limit]{
+		groq`*[_type == "review"] | order(_createdAt desc) [0..$limit]{
 		review_title,
 		slug,
 		thumbnail,
