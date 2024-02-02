@@ -14,7 +14,6 @@
 	let titlesHeight = 0;
 	$: $archiveStore.semesters[semester.id].titlesHeight = titlesHeight;
 
-	$: open = $archiveStore.semesters[semester.id].open;
 	$: direction = $archiveStore.isMobile ? 'right' : directionParam;
 	$: button, setSize();
 
@@ -40,7 +39,7 @@
 <svelte:window on:resize={() => setSize()} />
 
 <p
-	class="invisible absolute text-sm font-light lg:text-base lg:font-thin"
+	class="invisible absolute text-nowrap text-sm font-light lg:text-base lg:font-thin"
 	bind:clientWidth={lengthOfFirstMovie}
 >
 	{semester.movies[0].title} ({semester.movies[0].year}) - {semester.movies[0].director}
