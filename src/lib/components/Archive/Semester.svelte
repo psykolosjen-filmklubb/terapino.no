@@ -38,13 +38,6 @@
 
 <svelte:window on:resize={() => setSize()} />
 
-<p
-	class="invisible absolute text-nowrap text-sm font-light lg:text-base lg:font-thin"
-	bind:clientWidth={lengthOfFirstMovie}
->
-	{semester.movies[0].title} ({semester.movies[0].year}) - {semester.movies[0].director}
-</p>
-
 <div class="relative">
 	<button
 		class="relative z-10 size-8 rounded-full border-2 border-primary lg:size-12 lg:border-4"
@@ -87,24 +80,37 @@
 		</h2>
 	{/if}
 	<div
-		class="absolute w-dvw"
-		style:max-width={$archiveStore.isMobile ? pathX4.toString() + 'px' : ''}
+		class="absolute grid"
 		style:left={direction === 'right' ? `${$archiveStore.circleWidth * 1.2}px` : 'auto'}
 		style:right={direction === 'left' ? `${$archiveStore.circleWidth * 1.2}px` : 'auto'}
 		style:top={$archiveStore.isMobile
 			? `${$archiveStore.circleHeight}px`
 			: `${(2 * $archiveStore.circleHeight) / 3}px`}
 		style:text-align={direction === 'right' ? 'left' : 'right'}
+		style:place-items={direction === 'right' ? 'start' : 'end'}
 		bind:clientHeight={titlesHeight}
 	>
 		{#each semester.movies as movie, i}
-			{#if $archiveStore.semesters[semester.id].open && button}
+			{#if $archiveStore.semesters[semester.id].open && button && i === 0}
 				<p
 					in:fade={{ delay: 200 + 200 * (i + 1) }}
 					out:fade={{
 						delay: 100 * (semester.movies.length - i)
 					}}
-					class="mb-2 text-sm font-light lg:text-base lg:font-thin"
+					class="mb-2 w-max text-sm font-light lg:text-base lg:font-thin"
+					style:max-width={$archiveStore.isMobile ? pathX4.toString() + 'px' : '33dvw'}
+					bind:clientWidth={lengthOfFirstMovie}
+				>
+					{movie.title} ({movie.year}) - {movie.director}
+				</p>
+			{:else if $archiveStore.semesters[semester.id].open && button}
+				<p
+					in:fade={{ delay: 200 + 200 * (i + 1) }}
+					out:fade={{
+						delay: 100 * (semester.movies.length - i)
+					}}
+					class="mb-2 w-max text-sm font-light lg:text-base lg:font-thin"
+					style:max-width={$archiveStore.isMobile ? pathX4.toString() + 'px' : '33dvw'}
 				>
 					{movie.title} ({movie.year}) - {movie.director}
 				</p>
