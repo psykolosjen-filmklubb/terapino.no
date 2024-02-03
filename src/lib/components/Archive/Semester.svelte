@@ -9,6 +9,7 @@
 	let button: HTMLButtonElement;
 
 	let lengthOfFirstMovie = 0;
+	let lengthOfParentDiv = 0;
 	let lengthOfSemesterTitle = 0;
 
 	let titlesHeight = 0;
@@ -33,6 +34,28 @@
 			$archiveStore.circleWidth = rect.width;
 			$archiveStore.circleHeight = rect.height;
 		}
+	}
+
+	function getLength(element: HTMLDivElement, _lengthOfParentDiv: number) {
+		function calculate() {
+			let width = 0;
+			for (let i = 0; i < element.children.length - 1; i++) {
+				const newWidth = width + element.children[i].getBoundingClientRect().width;
+
+				if (newWidth > element.getBoundingClientRect().width) {
+					break;
+				}
+
+				width = newWidth;
+			}
+			lengthOfFirstMovie = width;
+		}
+
+		return {
+			update() {
+				calculate();
+			}
+		};
 	}
 </script>
 
@@ -80,7 +103,7 @@
 		</h2>
 	{/if}
 	<div
-		class="absolute grid"
+		class="absolute grid gap-2"
 		style:left={direction === 'right' ? `${$archiveStore.circleWidth * 1.2}px` : 'auto'}
 		style:right={direction === 'left' ? `${$archiveStore.circleWidth * 1.2}px` : 'auto'}
 		style:top={$archiveStore.isMobile
@@ -92,24 +115,27 @@
 	>
 		{#each semester.movies as movie, i}
 			{#if $archiveStore.semesters[semester.id].open && button && i === 0}
-				<p
+				<div
 					in:fade={{ delay: 200 + 200 * (i + 1) }}
 					out:fade={{
 						delay: 100 * (semester.movies.length - i)
 					}}
-					class="mb-2 w-max text-sm font-light lg:text-base lg:font-thin"
+					class="w-max"
 					style:max-width={$archiveStore.isMobile ? pathX4.toString() + 'px' : '33dvw'}
-					bind:clientWidth={lengthOfFirstMovie}
+					use:getLength={lengthOfParentDiv}
+					bind:clientWidth={lengthOfParentDiv}
 				>
-					{movie.title} ({movie.year}) - {movie.director}
-				</p>
+					{#each `${movie.title} (${movie.year}) - ${movie.director}`.split(' ') as word}
+						<p class="inline-block text-sm font-light lg:text-base lg:font-thin">{word}&nbsp;</p>
+					{/each}
+				</div>
 			{:else if $archiveStore.semesters[semester.id].open && button}
 				<p
 					in:fade={{ delay: 200 + 200 * (i + 1) }}
 					out:fade={{
 						delay: 100 * (semester.movies.length - i)
 					}}
-					class="mb-2 w-max text-sm font-light lg:text-base lg:font-thin"
+					class="w-max text-sm font-light lg:text-base lg:font-thin"
 					style:max-width={$archiveStore.isMobile ? pathX4.toString() + 'px' : '33dvw'}
 				>
 					{movie.title} ({movie.year}) - {movie.director}
