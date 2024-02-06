@@ -1,13 +1,14 @@
 import { writable } from 'svelte/store';
 
-export const archiveStore = writable<ArchiveStore>({
+export const archiveOptions = writable<ArchiveStore>({
 	isMobile: true,
 	strokeWidth: 0,
 	windowWidth: 0,
 	circleWidth: 0,
-	circleHeight: 0,
-	semesters: {}
+	circleHeight: 0
 });
+
+export const semesterOptions = writable<Record<string, SemesterOptions>>({});
 
 type ArchiveStore = {
 	isMobile: boolean;
@@ -15,10 +16,9 @@ type ArchiveStore = {
 	windowWidth: number;
 	circleWidth: number;
 	circleHeight: number;
-	semesters: {
-		[id in string]: {
-			open: boolean;
-			titlesHeight?: number;
-		};
-	};
+};
+
+export type SemesterOptions = {
+	open: boolean;
+	titlesHeight: number;
 };
