@@ -2,7 +2,14 @@
 	import type { Archive } from '$lib/types/archive';
 	import { flip } from 'svelte/animate';
 	import Semester from './Semester.svelte';
-	import { archiveOptions, semesterOptions, type SemesterOptions } from './archiveStore';
+	import {
+		archiveOptions,
+		semesterOptions,
+		type SemesterOptions,
+		semesterMarginsTop,
+		semesterMarginsBottom
+	} from './archiveStore';
+	import SemesterMargin from './SemesterMargin.svelte';
 
 	export let archive: Archive;
 
@@ -15,6 +22,22 @@
 			}
 		}),
 		{} as Record<string, SemesterOptions>
+	);
+
+	$: $semesterMarginsTop = archive.reduce(
+		(acc, semester) => ({
+			...acc,
+			[semester.id]: 0
+		}),
+		{} as Record<string, number>
+	);
+
+	$: $semesterMarginsBottom = archive.reduce(
+		(acc, semester) => ({
+			...acc,
+			[semester.id]: 0
+		}),
+		{} as Record<string, number>
 	);
 
 	let windowWidth = 0;
@@ -33,8 +56,14 @@
 	<line x="0" y1="0" y2="1000" stroke="black" stroke-width={$archiveOptions.strokeWidth} />
 </svg>
 
-{#each archive as semester, i (semester.id)}
-	<div style:margin-bottom={`${$semesterOptions[semester.id].titlesHeight}px`} animate:flip>
-		<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} />
-	</div>
-{/each}
+<div class="grid">
+	{#each archive as semester, i (semester.id)}
+		{@const marginBottom = $semesterMarginsBottom[semester.id]}
+		{@const marginTop = $semesterMarginsTop[semester.id]}
+		<div animate:flip style:margin-bottom={`${marginBottom}px`} style:margin-top={`${marginTop}px`}>
+			<SemesterMargin {archive} index={i}>
+				<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} />
+			</SemesterMargin>
+		</div>
+	{/each}
+</div>

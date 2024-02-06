@@ -9,6 +9,8 @@ export const archiveOptions = writable<ArchiveStore>({
 });
 
 export const semesterOptions = writable<Record<string, SemesterOptions>>({});
+export const semesterMarginsTop = writable<Record<string, number>>({});
+export const semesterMarginsBottom = writable<Record<string, number>>({});
 
 type ArchiveStore = {
 	isMobile: boolean;
