@@ -13,7 +13,8 @@
 	let lengthOfSemesterTitle = 0;
 
 	let titlesHeight = 0;
-	$: $semesterOptions[semester.id].titlesHeight = titlesHeight;
+	let isClosing = false;
+	$: $semesterOptions[semester.id].titlesHeight = isClosing ? 0 : titlesHeight;
 
 	$: direction = $archiveOptions.isMobile ? 'right' : directionParam;
 	$: button, setSize();
@@ -119,6 +120,9 @@
 					out:fade={{
 						delay: 100 * (semester.movies.length - i)
 					}}
+					on:outrostart={() => (isClosing = true)}
+					on:outroend={() => (isClosing = false)}
+					on:introstart={() => (isClosing = false)}
 					class="w-max"
 					style:max-width={$archiveOptions.isMobile ? pathX4.toString() + 'px' : '33dvw'}
 					use:getLength={lengthOfParentDiv}
