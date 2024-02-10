@@ -10,6 +10,8 @@
 		semesterMarginsBottom
 	} from './archiveStore';
 	import SemesterMargin from './SemesterMargin.svelte';
+	import { tweened } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
 
 	export let archive: Archive;
 
@@ -44,6 +46,8 @@
 	$: $archiveOptions.windowWidth = windowWidth;
 	$: $archiveOptions.isMobile = windowWidth < 1024;
 	$: $archiveOptions.strokeWidth = $archiveOptions.isMobile ? 2 : 4;
+
+	let archiveHeight = tweened(0, { duration: 500, easing: cubicOut });
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -53,10 +57,24 @@
 	overflow="visible"
 	style:left={$archiveOptions.isMobile ? $archiveOptions.circleWidth : windowWidth / 2}
 >
-	<line x="0" y1="0" y2="1000" stroke="black" stroke-width={$archiveOptions.strokeWidth} />
+	<line
+		x="0"
+		y1="0"
+		y2={$archiveHeight}
+		stroke="black"
+		stroke-width={$archiveOptions.strokeWidth}
+	/>
+	<line
+		x="0"
+		y1={$archiveHeight}
+		y2={$archiveHeight + ($archiveOptions.isMobile ? 96 : 196)}
+		stroke="black"
+		stroke-width={$archiveOptions.strokeWidth}
+		stroke-dasharray="20"
+	/>
 </svg>
 
-<div class="grid">
+<div class="mb-24 grid lg:mb-48" bind:clientHeight={$archiveHeight}>
 	{#each archive as semester, i (semester.id)}
 		{@const marginBottom = $semesterMarginsBottom[semester.id]}
 		{@const marginTop = $semesterMarginsTop[semester.id]}
