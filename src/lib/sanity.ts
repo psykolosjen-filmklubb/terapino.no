@@ -1,6 +1,6 @@
 import { createClient } from '@sanity/client';
 import groq from 'groq';
-import type { Author, Logo, Review, ReviewExcerpt } from './types';
+import type { Author, Logo, Review, ReviewExcerpt, Screening } from './types';
 
 export const sanityClient = createClient({
 	projectId: '4s9wdr84',
@@ -23,6 +23,21 @@ export function getReviewExcerpts(limit?: number) {
 	}`,
 		{
 			limit: limit ? limit - 1 : -1
+		}
+	);
+}
+
+export function getNextScreening() {
+	return sanityClient.fetch<Screening>(
+		groq`*[_type == "screening" && date > $today] | order(release_year desc)[0]{
+		movie_title,
+		release_year,
+		date,
+		poster,
+		director
+	}`,
+		{
+			today: new Date().toISOString().split('T')[0]
 		}
 	);
 }

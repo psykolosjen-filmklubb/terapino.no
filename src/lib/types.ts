@@ -10,11 +10,14 @@ export type Review = {
 	authors?: Author[];
 };
 
-export type ReviewExcerpt = {
-	review_title: string;
-	slug: Slug;
-	thumbnail: ImageAsset;
-	excerpt: string;
+export type ReviewExcerpt = Pick<Review, 'review_title' | 'slug' | 'thumbnail' | 'excerpt'>;
+
+export type Screening = {
+	movie_title: string;
+	release_year: number;
+	director: string;
+	date: string;
+	poster?: ImageAsset;
 };
 
 export type Author = {
