@@ -218,6 +218,19 @@ const archive: Archive = [
 				director: 'Krzysztof Kieślowski'
 			}
 		]
+	},
+	{
+		id: 'seventh',
+		year: 2024,
+		season: 'vår',
+		color: '#c0db00',
+		movies: [
+			{
+				title: 'Menn som hater kvinner',
+				year: 2009,
+				director: 'Niels Arden Oplev'
+			}
+		]
 	}
 ];
 
