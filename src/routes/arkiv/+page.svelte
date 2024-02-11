@@ -4,8 +4,6 @@
 	export let data;
 </script>
 
-<main class="mt-4 flex w-full flex-col place-items-center">
-	<div class="place-self-start pl-4 lg:place-self-center lg:p-0">
-		<Archive archive={data.archive} />
-	</div>
-</main>
+<div class="mt-4 w-full">
+	<Archive archive={data.archive} />
+</div>

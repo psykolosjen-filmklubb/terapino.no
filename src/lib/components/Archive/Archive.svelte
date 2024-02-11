@@ -48,6 +48,7 @@
 	$: $archiveOptions.strokeWidth = $archiveOptions.isMobile ? 2 : 4;
 
 	let archiveHeight = tweened(0, { duration: 500, easing: cubicOut });
+	let archiveWidth = 0;
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -55,7 +56,7 @@
 <svg
 	class="absolute"
 	overflow="visible"
-	style:left={$archiveOptions.isMobile ? $archiveOptions.circleWidth : windowWidth / 2}
+	style:left={$archiveOptions.isMobile ? $archiveOptions.circleWidth : archiveWidth / 2}
 >
 	<line
 		x="0"
@@ -74,14 +75,20 @@
 	/>
 </svg>
 
-<div class="mb-24 grid lg:mb-48" bind:clientHeight={$archiveHeight}>
-	{#each archive as semester, i (semester.id)}
-		{@const marginBottom = $semesterMarginsBottom[semester.id]}
-		{@const marginTop = $semesterMarginsTop[semester.id]}
-		<div animate:flip style:margin-bottom={`${marginBottom}px`} style:margin-top={`${marginTop}px`}>
-			<SemesterMargin {archive} index={i}>
-				<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} />
-			</SemesterMargin>
-		</div>
-	{/each}
+<div class="grid w-full lg:place-content-center" bind:clientWidth={archiveWidth}>
+	<div class="mb-24 grid pl-4 lg:mb-48 lg:p-0" bind:clientHeight={$archiveHeight}>
+		{#each archive as semester, i (semester.id)}
+			{@const marginBottom = $semesterMarginsBottom[semester.id]}
+			{@const marginTop = $semesterMarginsTop[semester.id]}
+			<div
+				animate:flip
+				style:margin-bottom={`${marginBottom}px`}
+				style:margin-top={`${marginTop}px`}
+			>
+				<SemesterMargin {archive} index={i}>
+					<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} />
+				</SemesterMargin>
+			</div>
+		{/each}
+	</div>
 </div>
