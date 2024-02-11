@@ -43,7 +43,10 @@
 			for (let i = 0; i < element.children.length - 1; i++) {
 				const newWidth = width + element.children[i].getBoundingClientRect().width;
 
-				if (newWidth > element.getBoundingClientRect().width) {
+				// floor() and ceil() to get around edge case where newWidth would be bigger by
+				// a margin of ~0.0001 px.
+				if (Math.floor(newWidth) > Math.ceil(element.getBoundingClientRect().width)) {
+					console.log(newWidth, 'is longer than', element.getBoundingClientRect().width);
 					break;
 				}
 
