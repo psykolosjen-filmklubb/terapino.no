@@ -3,6 +3,7 @@
 	import { blur, draw, fade } from 'svelte/transition';
 	import { archiveOptions, semesterOptions } from './archiveStore';
 	import { onMount, tick } from 'svelte';
+	import { derived } from 'svelte/store';
 
 	export let semester: Semester;
 	export let directionParam: 'left' | 'right';
@@ -17,9 +18,10 @@
 	let lengthOfParentDiv = 0;
 	let lengthOfSemesterTitle = 0;
 
+	let isOpen = derived(semesterOptions, ($semesterOptions) => $semesterOptions[semester.id].open);
+
 	let titlesHeight = 0;
-	let isClosing = false;
-	$: $semesterOptions[semester.id].titlesHeight = isClosing ? 0 : titlesHeight;
+	$: $semesterOptions[semester.id].titlesHeight = $isOpen ? titlesHeight : 0;
 
 	$: direction = $archiveOptions.isMobile ? 'right' : directionParam;
 	$: button, setSize();
@@ -82,7 +84,7 @@
 		bind:this={button}
 		in:blur|global={{ delay, duration: 1000 }}
 	/>
-	{#if $semesterOptions[semester.id].open && button}
+	{#if $isOpen && button}
 		<svg
 			class="pointer-events-none absolute z-0"
 			overflow="visible"
@@ -128,7 +130,7 @@
 		bind:clientHeight={titlesHeight}
 	>
 		{#each semester.movies as movie, i}
-			{#if $semesterOptions[semester.id].open && button && i === 0}
+			{#if $isOpen && button && i === 0}
 				<div
 					in:fade={{
 						delay: firstRenderDelay + 400,
@@ -138,9 +140,6 @@
 						delay: 50 * (semester.movies.length - i),
 						duration: 200
 					}}
-					on:outrostart={() => (isClosing = true)}
-					on:outroend={() => (isClosing = false)}
-					on:introstart={() => (isClosing = false)}
 					on:introend={() => {
 						if (i === semester.movies.length - 1) firstRender = false;
 					}}
@@ -153,7 +152,7 @@
 						<p class="inline-block text-sm font-light lg:text-base lg:font-thin">{word}&nbsp;</p>
 					{/each}
 				</div>
-			{:else if $semesterOptions[semester.id].open && button}
+			{:else if $isOpen && button}
 				<p
 					in:fade={{
 						delay: firstRenderDelay + 400 + 50 * i,

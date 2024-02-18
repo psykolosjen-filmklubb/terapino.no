@@ -78,12 +78,10 @@
 <div class="grid w-full lg:place-content-center" bind:clientWidth={archiveWidth}>
 	<div class="mb-24 grid pl-4 lg:mb-48 lg:p-0" bind:clientHeight={$archiveHeight}>
 		{#each archive as semester, i (semester.id)}
-			{@const marginBottom = $semesterMarginsBottom[semester.id]}
-			{@const marginTop = $semesterMarginsTop[semester.id]}
 			<div
 				animate:flip
-				style:margin-bottom={`${marginBottom}px`}
-				style:margin-top={`${marginTop}px`}
+				style:margin-bottom={`${$semesterMarginsBottom[semester.id]}px`}
+				style:margin-top={`${$semesterMarginsTop[semester.id]}px`}
 			>
 				<SemesterMargin {archive} index={i}>
 					<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} delay={i * 150} />
