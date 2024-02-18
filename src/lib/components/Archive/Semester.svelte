@@ -1,10 +1,15 @@
 <script lang="ts">
 	import type { Semester } from '$lib/types/archive';
-	import { draw, fade } from 'svelte/transition';
+	import { blur, draw, fade } from 'svelte/transition';
 	import { archiveOptions, semesterOptions } from './archiveStore';
+	import { onMount, tick } from 'svelte';
 
 	export let semester: Semester;
 	export let directionParam: 'left' | 'right';
+	export let delay = 0;
+
+	let firstRender = true;
+	$: firstRenderDelay = firstRender ? delay + 500 : 0;
 
 	let button: HTMLButtonElement;
 
@@ -29,6 +34,11 @@
 	$: pathY2 = $archiveOptions.circleHeight / 3;
 	$: pathString = `M 0 0 L ${pathX2} 0 L ${pathX3} ${pathY2} L ${pathX4} ${pathY2}`;
 
+	onMount(async () => {
+		await tick();
+		$semesterOptions[semester.id].open = true;
+	});
+
 	function setSize() {
 		const rect = button?.getBoundingClientRect();
 		if (rect) {
@@ -46,7 +56,6 @@
 				// floor() and ceil() to get around edge case where newWidth would be bigger by
 				// a margin of ~0.0001 px.
 				if (Math.floor(newWidth) > Math.ceil(element.getBoundingClientRect().width)) {
-					console.log(newWidth, 'is longer than', element.getBoundingClientRect().width);
 					break;
 				}
 
@@ -71,6 +80,7 @@
 		style:background-color={semester.color}
 		on:click={() => ($semesterOptions[semester.id].open = !$semesterOptions[semester.id].open)}
 		bind:this={button}
+		in:blur|global={{ delay, duration: 1000 }}
 	/>
 	{#if $semesterOptions[semester.id].open && button}
 		<svg
@@ -82,7 +92,8 @@
 			style:top={$archiveOptions.circleHeight / 2 - $archiveOptions.strokeWidth / 2}
 		>
 			<path
-				transition:draw
+				in:draw={{ delay: firstRenderDelay }}
+				out:draw
 				d={pathString}
 				stroke="black"
 				stroke-width={$archiveOptions.strokeWidth}
@@ -92,7 +103,7 @@
 			/>
 		</svg>
 		<h2
-			in:fade={{ delay: 400 }}
+			in:fade={{ delay: firstRenderDelay + 400 }}
 			out:fade
 			class="absolute text-nowrap text-lg font-semibold tracking-tight lg:text-xl"
 			style:top={$archiveOptions.isMobile ? '0px' : `${pathY2 - $archiveOptions.strokeWidth}px`}
@@ -119,13 +130,20 @@
 		{#each semester.movies as movie, i}
 			{#if $semesterOptions[semester.id].open && button && i === 0}
 				<div
-					in:fade={{ delay: 200 + 200 * (i + 1) }}
+					in:fade={{
+						delay: firstRenderDelay + 400,
+						duration: 250
+					}}
 					out:fade={{
-						delay: 100 * (semester.movies.length - i)
+						delay: 50 * (semester.movies.length - i),
+						duration: 200
 					}}
 					on:outrostart={() => (isClosing = true)}
 					on:outroend={() => (isClosing = false)}
 					on:introstart={() => (isClosing = false)}
+					on:introend={() => {
+						if (i === semester.movies.length - 1) firstRender = false;
+					}}
 					class="w-max"
 					style:max-width={$archiveOptions.isMobile ? pathX4.toString() + 'px' : '33dvw'}
 					use:getLength={lengthOfParentDiv}
@@ -137,9 +155,16 @@
 				</div>
 			{:else if $semesterOptions[semester.id].open && button}
 				<p
-					in:fade={{ delay: 200 + 200 * (i + 1) }}
+					in:fade={{
+						delay: firstRenderDelay + 400 + 50 * i,
+						duration: 250
+					}}
 					out:fade={{
-						delay: 100 * (semester.movies.length - i)
+						delay: 50 * (semester.movies.length - i),
+						duration: 200
+					}}
+					on:introend={() => {
+						if (i === semester.movies.length - 1) firstRender = false;
 					}}
 					class="w-max text-sm font-light lg:text-base lg:font-thin"
 					style:max-width={$archiveOptions.isMobile ? pathX4.toString() + 'px' : '33dvw'}

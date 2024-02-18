@@ -19,7 +19,7 @@
 		(acc, semester) => ({
 			...acc,
 			[semester.id]: {
-				open: true,
+				open: false,
 				titlesHeight: 0
 			}
 		}),
@@ -47,7 +47,7 @@
 	$: $archiveOptions.isMobile = windowWidth < 1024;
 	$: $archiveOptions.strokeWidth = $archiveOptions.isMobile ? 2 : 4;
 
-	let archiveHeight = tweened(0, { duration: 500, easing: cubicOut });
+	let archiveHeight = tweened(0, { duration: 1500, easing: cubicOut });
 	let archiveWidth = 0;
 </script>
 
@@ -86,7 +86,7 @@
 				style:margin-top={`${marginTop}px`}
 			>
 				<SemesterMargin {archive} index={i}>
-					<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} />
+					<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} delay={i * 150} />
 				</SemesterMargin>
 			</div>
 		{/each}
