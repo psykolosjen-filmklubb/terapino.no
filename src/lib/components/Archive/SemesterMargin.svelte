@@ -6,7 +6,9 @@
 		semesterOptions
 	} from './archiveStore';
 	import type { Archive } from '$lib/types/archive';
-	import { get } from 'svelte/store';
+	import { derived, get } from 'svelte/store';
+	import { tweened } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
 
 	export let archive: Archive;
 	export let index: number;
@@ -51,6 +53,23 @@
 			$semesterMarginsTop[archive[index].id] = 0;
 		}
 	}
+
+	const derivedBottomMargin = derived(
+		semesterMarginsBottom,
+		(semesterMarginsBotto) => semesterMarginsBotto[archive[index].id]
+	);
+	const derivedTopMargin = derived(
+		semesterMarginsTop,
+		(semesterMarginsTo) => semesterMarginsTo[archive[index].id]
+	);
+
+	const tweenedBottomMargin = tweened($derivedBottomMargin, { duration: 750, easing: cubicOut });
+	const tweenedTopMargin = tweened($derivedTopMargin, { duration: 750, easing: cubicOut });
+
+	$: tweenedBottomMargin.set($derivedBottomMargin);
+	$: tweenedTopMargin.set($derivedTopMargin);
 </script>
 
-<slot />
+<div style:margin-bottom={`${$tweenedBottomMargin}px`} style:margin-top={`${$tweenedTopMargin}px`}>
+	<slot />
+</div>

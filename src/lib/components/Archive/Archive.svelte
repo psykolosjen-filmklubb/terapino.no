@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Archive } from '$lib/types/archive';
-	import { flip } from 'svelte/animate';
 	import Semester from './Semester.svelte';
 	import {
 		archiveOptions,
@@ -47,7 +46,7 @@
 	$: $archiveOptions.isMobile = windowWidth < 1024;
 	$: $archiveOptions.strokeWidth = $archiveOptions.isMobile ? 2 : 4;
 
-	let archiveHeight = tweened(0, { duration: 1500, easing: cubicOut });
+	let archiveHeight = tweened(0, { duration: 1000, easing: cubicOut });
 	let archiveWidth = 0;
 </script>
 
@@ -78,15 +77,9 @@
 <div class="grid w-full lg:place-content-center" bind:clientWidth={archiveWidth}>
 	<div class="mb-24 grid pl-4 lg:mb-48 lg:p-0" bind:clientHeight={$archiveHeight}>
 		{#each archive as semester, i (semester.id)}
-			<div
-				animate:flip
-				style:margin-bottom={`${$semesterMarginsBottom[semester.id]}px`}
-				style:margin-top={`${$semesterMarginsTop[semester.id]}px`}
-			>
-				<SemesterMargin {archive} index={i}>
-					<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} delay={i * 150} />
-				</SemesterMargin>
-			</div>
+			<SemesterMargin {archive} index={i}>
+				<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} delay={i * 150} />
+			</SemesterMargin>
 		{/each}
 	</div>
 </div>
