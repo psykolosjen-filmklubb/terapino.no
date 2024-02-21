@@ -1,7 +1,9 @@
 <script lang="ts">
 	import * as Avatar from '$lib/components/ui/avatar';
+	import { Button } from '$lib/components/ui/button';
 	import { urlFor } from '$lib/utils/image';
 	import { PortableText } from '@portabletext/svelte';
+	import { siImdb, siLetterboxd } from 'simple-icons';
 
 	export let data;
 
@@ -22,17 +24,17 @@
 </header>
 
 <div class="mb-8 grid gap-12 px-6 lg:grid-cols-3 lg:gap-8">
-	<div class="lg:col-span-2">
-		<PortableText value={data.review.review} />
-	</div>
+	<div class="flex flex-col gap-6 lg:col-span-2 lg:gap-8">
+		<div>
+			<PortableText value={data.review.review} />
+		</div>
 
-	<div class="flex flex-col gap-8 lg:px-6">
 		{#if data.review.authors}
 			<div>
 				<h3 class="text-sm font-light tracking-tight">Skrevet av:</h3>
 				<div class="grid gap-4">
 					{#each data.review.authors as author}
-						<div class="flex w-full justify-between">
+						<div class="flex w-full justify-between lg:justify-start lg:gap-12">
 							<p class="text-xl font-light tracking-tight">{author.name}</p>
 							<Avatar.Root class="size-16">
 								<Avatar.Image src={urlFor(author.image).width(128).height(128).url()}
@@ -44,7 +46,9 @@
 				</div>
 			</div>
 		{/if}
+	</div>
 
+	<div class="flex flex-col gap-8 lg:px-4">
 		{#if data.movieDetails}
 			<div>
 				<img
@@ -66,6 +70,24 @@
 					Reggisør{data.movieDetails.directors.length > 1 ? 'er' : ''}:
 					<span class="font-medium">{data.movieDetails.directors.join(', ')}</span>
 				</p>
+				<div class="mt-4 flex justify-evenly">
+					<Button
+						href="https://www.imdb.com/title/{data.movieDetails.imdb_id}"
+						class="bg-[#f5c518] hover:bg-[#f5c518d0]"
+					>
+						<svg class="h-6 w-6 fill-primary">
+							{@html siImdb.svg}
+						</svg>
+					</Button>
+					<Button
+						href="https://letterboxd.com/imdb/{data.movieDetails.imdb_id}"
+						class="bg-[#2C343F] hover:bg-[#2C343Fd0]"
+					>
+						<svg class="h-6 w-6 fill-primary-foreground">
+							{@html siLetterboxd.svg}
+						</svg>
+					</Button>
+				</div>
 			</div>
 		{/if}
 	</div>
