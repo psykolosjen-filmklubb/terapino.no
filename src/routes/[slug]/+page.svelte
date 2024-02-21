@@ -26,33 +26,41 @@
 		<PortableText value={data.review.review} />
 	</div>
 
-	{#if data.review.authors}
-		<div class="lg:px-6">
-			<h3 class="text-sm font-light tracking-tight">Skrevet av:</h3>
-			<div class="grid gap-4">
-				{#each data.review.authors as author}
-					<div class="flex w-full justify-between">
-						<p class="text-xl font-light tracking-tight">{author.name}</p>
-						<Avatar.Root class="size-16">
-							<Avatar.Image src={urlFor(author.image).width(128).height(128).url()}></Avatar.Image>
-							<Avatar.Fallback>{author.name}</Avatar.Fallback>
-						</Avatar.Root>
-					</div>
-				{/each}
+	<div class="flex flex-col gap-8 lg:px-6">
+		{#if data.review.authors}
+			<div>
+				<h3 class="text-sm font-light tracking-tight">Skrevet av:</h3>
+				<div class="grid gap-4">
+					{#each data.review.authors as author}
+						<div class="flex w-full justify-between">
+							<p class="text-xl font-light tracking-tight">{author.name}</p>
+							<Avatar.Root class="size-16">
+								<Avatar.Image src={urlFor(author.image).width(128).height(128).url()}
+								></Avatar.Image>
+								<Avatar.Fallback>{author.name}</Avatar.Fallback>
+							</Avatar.Root>
+						</div>
+					{/each}
+				</div>
 			</div>
-		</div>
-	{/if}
+		{/if}
 
-	{#if data.movieDetails}
-		<div>
-			<h3 class="text-sm font-light tracking-tight">Om filmen</h3>
-			<p>Originaltittel: {data.movieDetails.original_title}</p>
-			<p>Slippdato: {dateFormatter.format(new Date(data.movieDetails.release_date))}</p>
-			<p>
-				Reggisør{data.movieDetails.directors.length > 1 ? 'er' : ''}: {data.movieDetails.directors.join(
-					', '
-				)}
-			</p>
-		</div>
-	{/if}
+		{#if data.movieDetails}
+			<div>
+				<h3 class="text-sm font-light tracking-tight">Om filmen:</h3>
+				<p class="text-lg font-light">
+					Originaltittel: <span class="font-medium">{data.movieDetails.original_title}</span>
+				</p>
+				<p class="text-lg font-light">
+					Slippdato: <span class="font-medium"
+						>{dateFormatter.format(new Date(data.movieDetails.release_date))}</span
+					>
+				</p>
+				<p class="text-lg font-light">
+					Reggisør{data.movieDetails.directors.length > 1 ? 'er' : ''}:
+					<span class="font-medium">{data.movieDetails.directors.join(', ')}</span>
+				</p>
+			</div>
+		{/if}
+	</div>
 </div>
