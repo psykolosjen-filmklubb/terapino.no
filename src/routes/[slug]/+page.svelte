@@ -47,7 +47,10 @@
 
 		{#if data.movieDetails}
 			<div>
-				<h3 class="text-sm font-light tracking-tight">Om filmen:</h3>
+				<img
+					src="http://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
+					alt="Movie Poster"
+				/>
 				<p class="text-lg font-light">
 					Originaltittel: <span class="font-medium">{data.movieDetails.original_title}</span>
 				</p>
