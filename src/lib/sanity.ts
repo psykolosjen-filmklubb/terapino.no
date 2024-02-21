@@ -57,7 +57,8 @@ export async function getReview(slug: string) {
 			review,
 			slug,
 			thumbnail,
-			authors[]->
+			authors[]->,
+			tmdb_id,
 	}`,
 		{
 			slug
