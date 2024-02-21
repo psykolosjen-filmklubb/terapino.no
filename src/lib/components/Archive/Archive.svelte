@@ -74,7 +74,7 @@
 	/>
 </svg>
 
-<div class="grid w-full lg:place-content-center" bind:clientWidth={archiveWidth}>
+<div class="grid w-full content-start lg:justify-center" bind:clientWidth={archiveWidth}>
 	<div class="mb-24 grid pl-4 lg:mb-48 lg:p-0" bind:clientHeight={$archiveHeight}>
 		{#each archive as semester, i (semester.id)}
 			<SemesterMargin {archive} index={i}>
