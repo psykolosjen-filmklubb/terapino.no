@@ -50,14 +50,17 @@
 				<img
 					src="http://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
 					alt="Movie Poster"
+					class="mb-2"
 				/>
 				<p class="text-lg font-light">
 					Originaltittel: <span class="font-medium">{data.movieDetails.original_title}</span>
 				</p>
 				<p class="text-lg font-light">
-					Slippdato: <span class="font-medium"
-						>{dateFormatter.format(new Date(data.movieDetails.release_date))}</span
-					>
+					På kino i Norge: <span class="font-medium">
+						{dateFormatter.format(
+							new Date(data.movieDetails.release_date_no ?? data.movieDetails.release_date)
+						)}
+					</span>
 				</p>
 				<p class="text-lg font-light">
 					Reggisør{data.movieDetails.directors.length > 1 ? 'er' : ''}:
