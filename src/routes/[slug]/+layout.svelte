@@ -7,4 +7,3 @@
 	>
 	<slot />
 </div>
-<footer class="m-20" />

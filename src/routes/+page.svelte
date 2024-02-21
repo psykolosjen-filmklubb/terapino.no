@@ -78,5 +78,3 @@
 		>
 	</section>
 {/if}
-
-<div class="m-20" />

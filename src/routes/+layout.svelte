@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button';
 	import { urlFor } from '$lib/utils/image';
+	import { siFacebook, siInstagram } from 'simple-icons';
 	import '../app.pcss';
 
 	export let data;
@@ -45,3 +46,30 @@
 <main class="flex flex-col items-center justify-center">
 	<slot />
 </main>
+
+<footer class="bg-primary py-6 lg:py-10">
+	<div class="mb-4 flex justify-center gap-10 lg:mb-8">
+		<Button
+			href="https://www.instagram.com/quentin_terapino"
+			class="bg-[#d62976] text-primary-foreground hover:bg-[#d62977d0]"
+		>
+			<svg class="mr-2 h-4 w-4 fill-primary-foreground">
+				{@html siInstagram.svg}
+			</svg>
+			Instagram
+		</Button>
+		<Button
+			href="https://www.facebook.com/quentin.terapino"
+			class="bg-[#3b5998] text-primary-foreground hover:bg-[#3b5898c7]"
+		>
+			<svg class="mr-2 h-4 w-4 fill-primary-foreground">
+				{@html siFacebook.svg}
+			</svg>
+			Facebook
+		</Button>
+	</div>
+	<p class="text-center text-primary-foreground">Psykolosjen Filmklubb</p>
+	<p class="text-center text-primary-foreground">
+		© {new Date().getFullYear()}
+	</p>
+</footer>
