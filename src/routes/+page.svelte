@@ -9,64 +9,62 @@
 </script>
 
 <section
-	class="grid w-full place-items-center gap-8 px-2 pb-10 pt-12 lg:place-items-start lg:px-12 lg:py-20"
+	class="flex w-full flex-col items-center px-2 py-8 lg:flex-row lg:justify-evenly lg:px-6 lg:py-16"
 >
-	<h1
-		class="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-left lg:text-7xl"
-	>
-		Velkommen
-	</h1>
-	<p class="px-4 text-center lg:px-0 lg:text-left">
-		Her kan du se kommende visninger vi arrangerer og lese våre film-anmeldelser.
-	</p>
-</section>
-
-<section
-	class="flex w-full flex-col items-center bg-muted px-2 py-8 lg:flex-row lg:justify-evenly lg:px-6 lg:py-16"
->
-	{#if data.nextScreening}
-		<h2
-			class="mb-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
+	<div class="lg:flex lg:flex-col">
+		<h1
+			class="scroll-m-20 text-center text-2xl font-extrabold tracking-tight lg:text-left lg:text-4xl"
 		>
-			Neste visning:
-		</h2>
-		{#if data.nextScreening.poster}
-			<img
-				class="max-w-xs lg:max-w-sm"
-				src={urlFor(data.nextScreening.poster).width(768).url()}
-				alt="screening poster"
-			/>
+			Velkommen
+		</h1>
+		<p class="px-4 text-center lg:px-0 lg:text-left">
+			Her kan du se kommende visninger vi arrangerer og lese våre film-anmeldelser.
+		</p>
+		{#if data.nextScreening}
+			<h2
+				class="my-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
+			>
+				Neste visning:
+			</h2>
 		{:else}
-			<div>
-				<p class="text-center text-xl text-muted-foreground">
-					{dateFormatter.format(new Date(data.nextScreening.date))}:
+			<div class="my-8 flex flex-col">
+				<p class="px-4 text-center text-muted-foreground">
+					Ingen nye visninger planlagt for øyeblikket, men følg med for oppdateringer!
 				</p>
-				<h3 class="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
-					{data.nextScreening.movie_title} ({data.nextScreening.release_year})
-				</h3>
-				<p class="text-center text-xl">
-					Av {data.nextScreening.director}
-				</p>
-				<small class="mt-4 text-center text-sm font-medium leading-none text-muted-foreground">
-					Hold av datoen, mer informasjon kommer snart
-				</small>
+				<p class="px-4 text-center text-muted-foreground">Vil du se hva vi har vist tidligere?</p>
+				<Button href="/arkiv" variant="link" class="w-fit place-self-center font-medium">
+					Visningsarkiv
+				</Button>
 			</div>
 		{/if}
+	</div>
+
+	{#if data.nextScreening.poster}
+		<img
+			class="max-w-xs lg:max-w-sm"
+			src={urlFor(data.nextScreening.poster).width(768).url()}
+			alt="screening poster"
+		/>
 	{:else}
-		<div class="place-self-start">
-			<p class="px-4 text-center text-muted-foreground">
-				Ingen nye visninger planlagt for øyeblikket, men følg med for oppdateringer!
+		<div>
+			<p class="text-center text-xl text-muted-foreground">
+				{dateFormatter.format(new Date(data.nextScreening.date))}:
 			</p>
-			<p class="px-4 text-center text-muted-foreground">Vil du se hva vi har vist tidligere?</p>
-			<Button href="/arkiv" variant="link" class="w-fit place-self-center font-medium"
-				>Visningsarkiv</Button
-			>
+			<h3 class="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
+				{data.nextScreening.movie_title} ({data.nextScreening.release_year})
+			</h3>
+			<p class="text-center text-xl">
+				Av {data.nextScreening.director}
+			</p>
+			<small class="mt-4 text-center text-sm font-medium leading-none text-muted-foreground">
+				Hold av datoen, mer informasjon kommer snart
+			</small>
 		</div>
 	{/if}
 </section>
 
 {#if data.reviews}
-	<section class="flex w-full flex-col px-2 py-8 lg:px-6 lg:pt-20">
+	<section class="flex w-full flex-col bg-muted px-2 py-8 lg:px-6 lg:pt-20">
 		<h2
 			class="mb-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
 		>
