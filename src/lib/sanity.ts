@@ -29,7 +29,7 @@ export function getReviewExcerpts(limit?: number) {
 
 export function getNextScreening() {
 	return sanityClient.fetch<Screening>(
-		groq`*[_type == "screening" && date > $today] | order(release_year desc)[0]{
+		groq`*[_type == "screening" && date >= $today] | order(release_year desc)[0]{
 		movie_title,
 		release_year,
 		date,
