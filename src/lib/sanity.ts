@@ -57,6 +57,7 @@ export async function getReview(slug: string) {
 			review,
 			slug,
 			thumbnail,
+			"thumbnailBlurhash": thumbnail.asset->metadata.blurHash,
 			authors[]->,
 			tmdb_id,
 	}`,

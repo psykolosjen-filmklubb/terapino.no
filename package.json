@@ -40,6 +40,7 @@
 	"dependencies": {
 		"@sanity/client": "^6.11.1",
 		"@sanity/image-url": "^1.0.2",
+		"@unpic/placeholder": "^0.1.2",
 		"bits-ui": "^0.14.0",
 		"clsx": "^2.1.0",
 		"embla-carousel-svelte": "^8.0.0-rc22",

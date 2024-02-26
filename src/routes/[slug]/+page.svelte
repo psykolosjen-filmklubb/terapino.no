@@ -4,6 +4,7 @@
 	import { urlFor } from '$lib/utils/image';
 	import { PortableText } from '@portabletext/svelte';
 	import { siImdb, siLetterboxd } from 'simple-icons';
+	import HeroImage from '$lib/components/HeroImage.svelte';
 
 	export let data;
 
@@ -14,7 +15,7 @@
 	});
 </script>
 
-<img src={urlFor(data.review.thumbnail).width(2048).height(1024).url()} alt="Logo" class="w-full" />
+<HeroImage thumbnailBlurhash={data.review.thumbnailBlurhash} thumbnail={data.review.thumbnail} />
 
 <header class="mt-8 px-6 pb-8">
 	<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">

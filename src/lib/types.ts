@@ -9,6 +9,7 @@ export type Review = {
 	excerpt: string;
 	authors?: Author[];
 	tmdb_id?: number;
+	thumbnailBlurhash: string;
 };
 
 export type ReviewExcerpt = Pick<Review, 'review_title' | 'slug' | 'thumbnail' | 'excerpt'>;
