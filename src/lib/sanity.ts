@@ -19,6 +19,7 @@ export function getReviewExcerpts(limit?: number) {
 		review_title,
 		slug,
 		thumbnail,
+		"thumbnailBlurhash": thumbnail.asset->metadata.blurHash,
 		excerpt
 	}`,
 		{

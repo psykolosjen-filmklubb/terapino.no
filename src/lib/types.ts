@@ -12,7 +12,10 @@ export type Review = {
 	thumbnailBlurhash: string;
 };
 
-export type ReviewExcerpt = Pick<Review, 'review_title' | 'slug' | 'thumbnail' | 'excerpt'>;
+export type ReviewExcerpt = Pick<
+	Review,
+	'review_title' | 'slug' | 'thumbnail' | 'thumbnailBlurhash' | 'excerpt'
+>;
 
 export type Screening = {
 	movie_title: string;
