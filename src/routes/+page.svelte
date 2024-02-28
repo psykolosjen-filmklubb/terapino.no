@@ -1,7 +1,7 @@
 <script lang="ts">
+	import PosterImage from '$lib/components/PosterImage.svelte';
 	import ReviewsCarousel from '$lib/components/ReviewsCarousel.svelte';
 	import { Button } from '$lib/components/ui/button';
-	import { urlFor } from '$lib/utils/image';
 
 	export let data;
 
@@ -40,10 +40,9 @@
 	</div>
 
 	{#if data.nextScreening.poster}
-		<img
-			class="max-w-xs lg:max-w-sm"
-			src={urlFor(data.nextScreening.poster).width(768).url()}
-			alt="screening poster"
+		<PosterImage
+			poster={data.nextScreening.poster}
+			posterBlurhash={data.nextScreening.posterBlurhash}
 		/>
 	{:else}
 		<div>

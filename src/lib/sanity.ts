@@ -34,6 +34,7 @@ export function getNextScreening() {
 		release_year,
 		date,
 		poster,
+		"posterBlurhash": poster.asset->metadata.blurHash,
 		director
 	}`,
 		{

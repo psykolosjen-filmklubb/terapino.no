@@ -20,6 +20,7 @@ export type Screening = {
 	director: string;
 	date: string;
 	poster?: ImageAsset;
+	posterBlurhash?: string;
 };
 
 export type Author = {
