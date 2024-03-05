@@ -5,9 +5,8 @@ export type Movie = {
 };
 
 export type Semester = {
-	id: string;
-	year: number;
-	season: 'vår' | 'høst';
+	name: string;
+	startDate: string;
 	color: string;
 	movies: Movie[];
 };

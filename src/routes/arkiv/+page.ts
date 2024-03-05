@@ -2,9 +2,8 @@ import type { Archive } from '$lib/types/archive';
 
 const archive: Archive = [
 	{
-		id: 'first',
-		year: 2021,
-		season: 'vår',
+		name: 'vår 2021',
+		startDate: '2021-01-01',
 		color: '#00c9dd',
 		movies: [
 			{
@@ -20,9 +19,8 @@ const archive: Archive = [
 		]
 	},
 	{
-		id: 'second',
-		year: 2021,
-		season: 'høst',
+		name: 'høst 2021',
+		startDate: '2021-08-01',
 		color: '#ed220d',
 		movies: [
 			{
@@ -48,9 +46,8 @@ const archive: Archive = [
 		]
 	},
 	{
-		id: 'third',
-		year: 2022,
-		season: 'vår',
+		name: 'vår 2022',
+		startDate: '2022-01-01',
 		color: '#00de8f',
 		movies: [
 			{
@@ -86,9 +83,8 @@ const archive: Archive = [
 		]
 	},
 	{
-		id: 'fourth',
-		year: 2022,
-		season: 'høst',
+		name: 'høst 2022',
+		startDate: '2022-08-01',
 		color: '#006fea',
 		movies: [
 			{
@@ -134,9 +130,8 @@ const archive: Archive = [
 		]
 	},
 	{
-		id: 'fifth',
-		year: 2023,
-		season: 'vår',
+		name: 'vår 2023',
+		startDate: '2023-01-01',
 		color: '#ff00d1',
 		movies: [
 			{
@@ -187,9 +182,8 @@ const archive: Archive = [
 		]
 	},
 	{
-		id: 'sixth',
-		year: 2023,
-		season: 'høst',
+		name: 'høst 2023',
+		startDate: '2023-08-01',
 		color: '#f48c00',
 		movies: [
 			{
@@ -220,20 +214,33 @@ const archive: Archive = [
 		]
 	},
 	{
-		id: 'seventh',
-		year: 2024,
-		season: 'vår',
+		name: 'vår 2024',
+		startDate: '2024-01-01',
 		color: '#c0db00',
 		movies: [
 			{
 				title: 'Menn som hater kvinner',
 				year: 2009,
 				director: 'Niels Arden Oplev'
+			},
+			{
+				title: 'Fallen Angels',
+				year: 1995,
+				director: 'Wong Kar-wai'
+			},
+			{
+				title: 'Dune: Part Two',
+				year: 2024,
+				director: 'Denis Villeneuve'
 			}
 		]
 	}
 ];
 
 export function load() {
-	return { archive };
+	return {
+		archive: archive.sort(
+			(a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+		)
+	};
 }

@@ -18,10 +18,10 @@
 	let lengthOfParentDiv = 0;
 	let lengthOfSemesterTitle = 0;
 
-	let isOpen = derived(semesterOptions, ($semesterOptions) => $semesterOptions[semester.id].open);
+	let isOpen = derived(semesterOptions, ($semesterOptions) => $semesterOptions[semester.name].open);
 
 	let titlesHeight = 0;
-	$: $semesterOptions[semester.id].titlesHeight = $isOpen ? titlesHeight : 0;
+	$: $semesterOptions[semester.name].titlesHeight = $isOpen ? titlesHeight : 0;
 
 	$: direction = $archiveOptions.isMobile ? 'right' : directionParam;
 	$: button, setSize();
@@ -38,7 +38,7 @@
 
 	onMount(async () => {
 		await tick();
-		$semesterOptions[semester.id].open = true;
+		$semesterOptions[semester.name].open = true;
 	});
 
 	function setSize() {
@@ -80,7 +80,7 @@
 	<button
 		class="relative z-10 size-8 rounded-full border-2 border-primary lg:size-12 lg:border-4"
 		style:background-color={semester.color}
-		on:click={() => ($semesterOptions[semester.id].open = !$semesterOptions[semester.id].open)}
+		on:click={() => ($semesterOptions[semester.name].open = !$semesterOptions[semester.name].open)}
 		bind:this={button}
 		in:blur|global={{ delay, duration: 1000 }}
 	/>
@@ -114,8 +114,7 @@
 				: (-pathX3 - lengthOfSemesterTitle - 4).toString() + 'px'}
 			bind:clientWidth={lengthOfSemesterTitle}
 		>
-			{semester.season.toUpperCase()}
-			{semester.year}
+			{semester.name.toUpperCase()}
 		</h2>
 	{/if}
 	<div

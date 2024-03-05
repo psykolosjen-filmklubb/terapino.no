@@ -17,7 +17,7 @@
 	$: $semesterOptions = archive.reduce(
 		(acc, semester) => ({
 			...acc,
-			[semester.id]: {
+			[semester.name]: {
 				open: false,
 				titlesHeight: 0
 			}
@@ -28,7 +28,7 @@
 	$: $semesterMarginsTop = archive.reduce(
 		(acc, semester) => ({
 			...acc,
-			[semester.id]: 0
+			[semester.name]: 0
 		}),
 		{} as Record<string, number>
 	);
@@ -36,7 +36,7 @@
 	$: $semesterMarginsBottom = archive.reduce(
 		(acc, semester) => ({
 			...acc,
-			[semester.id]: 0
+			[semester.name]: 0
 		}),
 		{} as Record<string, number>
 	);
@@ -76,7 +76,7 @@
 
 <div class="grid w-full content-start lg:justify-center" bind:clientWidth={archiveWidth}>
 	<div class="mb-24 grid pl-4 lg:mb-48 lg:p-0" bind:clientHeight={$archiveHeight}>
-		{#each archive as semester, i (semester.id)}
+		{#each archive as semester, i (semester.name)}
 			<SemesterMargin {archive} index={i}>
 				<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} delay={i * 150} />
 			</SemesterMargin>
