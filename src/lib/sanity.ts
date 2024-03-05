@@ -1,6 +1,7 @@
 import { createClient } from '@sanity/client';
 import groq from 'groq';
 import type { Author, Logo, Review, ReviewExcerpt, Screening } from './types';
+import type { Semester } from './types/archive';
 
 export const sanityClient = createClient({
 	projectId: '4s9wdr84',
@@ -66,5 +67,20 @@ export async function getReview(slug: string) {
 		{
 			slug
 		}
+	);
+}
+
+export async function getArchive() {
+	return sanityClient.fetch<Semester[]>(
+		groq`*[_type == "semester"] | order(start_date desc) {
+		"name": semester_name,
+		"startDate": start_date,
+		"color": color.hex,
+		"movies": screenings[]->{
+			"title": movie_title,
+			"year": release_year,
+			director,
+		}
+	}`
 	);
 }
