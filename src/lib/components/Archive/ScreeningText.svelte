@@ -15,7 +15,7 @@
 
 	let lengthOfParentDiv = 0;
 
-	function getLength(element: HTMLLIElement, _lengthOfParentDiv: number) {
+	function getLength(element: HTMLAnchorElement, _lengthOfParentDiv: number) {
 		function calculate() {
 			let width = 0;
 			for (let i = 0; i < element.children.length - 1; i++) {
@@ -43,7 +43,8 @@
 </script>
 
 {#if open && index === 0}
-	<li
+	<a
+		href="/arkiv/{screening.slug.current}"
 		in:fade={{
 			delay: firstRenderDelay + 400,
 			duration: 250
@@ -55,17 +56,20 @@
 		on:introend={() => {
 			if (index === semesterLength - 1) firstRender = false;
 		}}
-		class="w-max"
+		class="group w-max"
 		style:max-width={$archiveOptions.isMobile ? maxWidth.toString() + 'px' : '33dvw'}
 		use:getLength={lengthOfParentDiv}
 		bind:clientWidth={lengthOfParentDiv}
 	>
 		{#each `${screening.title} (${screening.year}) - ${screening.director}`.split(' ') as word}
-			<span class="inline-block text-sm font-light lg:text-base lg:font-thin">{word}&nbsp;</span>
+			<span class="inline-block text-sm font-light group-hover:underline lg:text-base lg:font-thin"
+				>{word}&nbsp;</span
+			>
 		{/each}
-	</li>
+	</a>
 {:else if open}
-	<li
+	<a
+		href="/arkiv/{screening.slug.current}"
 		in:fade={{
 			delay: firstRenderDelay + 400 + 50 * index,
 			duration: 250
@@ -77,9 +81,9 @@
 		on:introend={() => {
 			if (index === semesterLength - 1) firstRender = false;
 		}}
-		class="w-max text-sm font-light lg:text-base lg:font-thin"
+		class="w-max text-sm font-light hover:underline lg:text-base lg:font-thin"
 		style:max-width={$archiveOptions.isMobile ? maxWidth.toString() + 'px' : '33dvw'}
 	>
 		{screening.title} ({screening.year}) - {screening.director}
-	</li>
+	</a>
 {/if}

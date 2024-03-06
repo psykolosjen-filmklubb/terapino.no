@@ -80,6 +80,7 @@ export async function getArchive() {
 			"title": movie_title,
 			"year": release_year,
 			director,
+			slug,
 		}
 	}`
 	);

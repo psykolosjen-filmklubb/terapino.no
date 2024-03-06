@@ -1,7 +1,10 @@
+import type { Slug } from '@sanity/types';
+
 export type Movie = {
 	title: string;
 	year: number;
 	director: string;
+	slug: Slug;
 };
 
 export type Semester = {

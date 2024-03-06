@@ -93,7 +93,7 @@
 			{semester.name.toUpperCase()}
 		</h2>
 	{/if}
-	<ul
+	<div
 		class="absolute grid gap-2"
 		style:left={direction === 'right' ? `${$archiveOptions.circleWidth * 1.2}px` : 'auto'}
 		style:right={direction === 'left' ? `${$archiveOptions.circleWidth * 1.2}px` : 'auto'}
@@ -116,5 +116,5 @@
 				bind:lengthOfFirstMovie
 			/>
 		{/each}
-	</ul>
+	</div>
 </div>
