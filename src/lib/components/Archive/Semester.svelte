@@ -4,18 +4,18 @@
 	import { archiveOptions, semesterOptions } from './archiveStore';
 	import { onMount, tick } from 'svelte';
 	import { derived } from 'svelte/store';
+	import ScreeningText from './ScreeningText.svelte';
 
 	export let semester: Semester;
 	export let directionParam: 'left' | 'right';
 	export let delay = 0;
 
-	let firstRender = true;
+	let firstRender: boolean;
 	$: firstRenderDelay = firstRender ? delay + 500 : 0;
 
 	let button: HTMLButtonElement;
 
-	let lengthOfFirstMovie = 0;
-	let lengthOfParentDiv = 0;
+	let lengthOfFirstMovie: number;
 	let lengthOfSemesterTitle = 0;
 
 	let isOpen = derived(semesterOptions, ($semesterOptions) => $semesterOptions[semester.name].open);
@@ -47,30 +47,6 @@
 			$archiveOptions.circleWidth = rect.width;
 			$archiveOptions.circleHeight = rect.height;
 		}
-	}
-
-	function getLength(element: HTMLDivElement, _lengthOfParentDiv: number) {
-		function calculate() {
-			let width = 0;
-			for (let i = 0; i < element.children.length - 1; i++) {
-				const newWidth = width + element.children[i].getBoundingClientRect().width;
-
-				// floor() and ceil() to get around edge case where newWidth would be bigger by
-				// a margin of ~0.0001 px.
-				if (Math.floor(newWidth) > Math.ceil(element.getBoundingClientRect().width)) {
-					break;
-				}
-
-				width = newWidth;
-			}
-			lengthOfFirstMovie = width;
-		}
-
-		return {
-			update() {
-				calculate();
-			}
-		};
 	}
 </script>
 
@@ -117,7 +93,7 @@
 			{semester.name.toUpperCase()}
 		</h2>
 	{/if}
-	<div
+	<ul
 		class="absolute grid gap-2"
 		style:left={direction === 'right' ? `${$archiveOptions.circleWidth * 1.2}px` : 'auto'}
 		style:right={direction === 'left' ? `${$archiveOptions.circleWidth * 1.2}px` : 'auto'}
@@ -128,48 +104,17 @@
 		style:place-items={direction === 'right' ? 'start' : 'end'}
 		bind:clientHeight={titlesHeight}
 	>
-		{#each semester.movies as movie, i}
-			{#if $isOpen && button && i === 0}
-				<div
-					in:fade={{
-						delay: firstRenderDelay + 400,
-						duration: 250
-					}}
-					out:fade={{
-						delay: 50 * (semester.movies.length - i),
-						duration: 200
-					}}
-					on:introend={() => {
-						if (i === semester.movies.length - 1) firstRender = false;
-					}}
-					class="w-max"
-					style:max-width={$archiveOptions.isMobile ? pathX4.toString() + 'px' : '33dvw'}
-					use:getLength={lengthOfParentDiv}
-					bind:clientWidth={lengthOfParentDiv}
-				>
-					{#each `${movie.title} (${movie.year}) - ${movie.director}`.split(' ') as word}
-						<p class="inline-block text-sm font-light lg:text-base lg:font-thin">{word}&nbsp;</p>
-					{/each}
-				</div>
-			{:else if $isOpen && button}
-				<p
-					in:fade={{
-						delay: firstRenderDelay + 400 + 50 * i,
-						duration: 250
-					}}
-					out:fade={{
-						delay: 50 * (semester.movies.length - i),
-						duration: 200
-					}}
-					on:introend={() => {
-						if (i === semester.movies.length - 1) firstRender = false;
-					}}
-					class="w-max text-sm font-light lg:text-base lg:font-thin"
-					style:max-width={$archiveOptions.isMobile ? pathX4.toString() + 'px' : '33dvw'}
-				>
-					{movie.title} ({movie.year}) - {movie.director}
-				</p>
-			{/if}
+		{#each semester.movies as movie, index}
+			<ScreeningText
+				screening={movie}
+				{index}
+				open={!!($isOpen && button)}
+				{firstRenderDelay}
+				maxWidth={pathX4}
+				semesterLength={semester.movies.length}
+				bind:firstRender
+				bind:lengthOfFirstMovie
+			/>
 		{/each}
-	</div>
+	</ul>
 </div>
