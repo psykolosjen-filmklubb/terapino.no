@@ -1,1 +1,5 @@
-<h1>To be implemented</h1>
+<script lang="ts">
+	export let data;
+</script>
+
+<h1>{data.screening.movie_title}</h1>

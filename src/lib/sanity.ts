@@ -45,6 +45,22 @@ export function getNextScreening() {
 	);
 }
 
+export function getScreening(slug: string) {
+	return sanityClient.fetch<Screening>(
+		groq`*[_type == "screening" && slug.current == $slug][0]{
+		movie_title,
+		release_year,
+		date,
+		poster,
+		"posterBlurhash": poster.asset->metadata.blurHash,
+		director
+	}`,
+		{
+			slug
+		}
+	);
+}
+
 export async function getLogo() {
 	const logo = await sanityClient.fetch<Logo>(
 		groq`*[_type == "image_assets" && name == "Logo"][0]`
