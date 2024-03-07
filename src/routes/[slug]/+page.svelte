@@ -32,7 +32,9 @@
 		</div>
 
 		{#if data.review.authors}
-			<AuthorList authors={data.review.authors} heading="Skrevet av:" />
+			<div class="lg:max-w-80">
+				<AuthorList authors={data.review.authors} heading="Skrevet av:" />
+			</div>
 		{/if}
 	</div>
 

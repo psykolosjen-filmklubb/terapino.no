@@ -13,7 +13,7 @@
 	{/if}
 	<div class="grid gap-4">
 		{#each authors as author}
-			<div class="flex w-full justify-between lg:justify-start lg:gap-12">
+			<div class="flex items-center justify-between">
 				<p class="text-xl font-light tracking-tight">{author.name}</p>
 				<Avatar.Root class="size-16">
 					<Avatar.Image src={urlFor(author.image).width(128).height(128).url()} />
