@@ -53,6 +53,7 @@ export function getScreening(slug: string) {
 		date,
 		poster,
 		"posterBlurhash": poster.asset->metadata.blurHash,
+		"posterArtists": poster_artists[]->,
 		director
 	}`,
 		{

@@ -24,6 +24,7 @@ export type Screening = {
 	date: string;
 	poster?: ImageAsset;
 	posterBlurhash?: string;
+	posterArtists?: Author[];
 };
 
 export type Author = {
