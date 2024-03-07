@@ -28,6 +28,7 @@
 	class={`aspect-2/3 w-80 lg:w-96 ${imageLoaded ? '' : 'animate-pulse'}`}
 	style:background-image={css.backgroundImage}
 	style:background-size={css.backgroundSize}
+	style:display={imageLoaded ? 'contents' : 'block'}
 >
 	<img
 		src={urlFor(poster).width(768).fit('min').auto('format').url()}
