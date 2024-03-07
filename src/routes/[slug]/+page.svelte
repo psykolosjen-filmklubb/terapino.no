@@ -5,6 +5,7 @@
 	import { PortableText } from '@portabletext/svelte';
 	import { siImdb, siLetterboxd } from 'simple-icons';
 	import HeroImage from '$lib/components/HeroImage.svelte';
+	import AuthorList from '$lib/components/AuthorList.svelte';
 
 	export let data;
 
@@ -31,21 +32,7 @@
 		</div>
 
 		{#if data.review.authors}
-			<div>
-				<h3 class="text-sm font-light tracking-tight">Skrevet av:</h3>
-				<div class="grid gap-4">
-					{#each data.review.authors as author}
-						<div class="flex w-full justify-between lg:justify-start lg:gap-12">
-							<p class="text-xl font-light tracking-tight">{author.name}</p>
-							<Avatar.Root class="size-16">
-								<Avatar.Image src={urlFor(author.image).width(128).height(128).url()}
-								></Avatar.Image>
-								<Avatar.Fallback>{author.name}</Avatar.Fallback>
-							</Avatar.Root>
-						</div>
-					{/each}
-				</div>
-			</div>
+			<AuthorList authors={data.review.authors} heading="Skrevet av:" />
 		{/if}
 	</div>
 
