@@ -94,7 +94,7 @@ export async function getArchive() {
 		"name": semester_name,
 		"startDate": start_date,
 		"color": color.hex,
-		"movies": screenings[]->{
+		"movies": screenings[]-> | order(date desc) {
 			"title": movie_title,
 			"year": release_year,
 			director,
