@@ -5,17 +5,16 @@
 	import { siFacebook, siInstagram } from 'simple-icons';
 	import '../app.pcss';
 	import NavLinks from '$lib/components/NavLinks.svelte';
-	import { routes } from './routes';
+	import { routes } from '$lib/routes';
 
 	export let data;
 
-	$: currentRoute = $page.route.id ?? '';
 	let currentTitle = '';
 	$: {
 		let tempTitle = 'Psykolosjen Filmklubb';
-		Object.entries(routes).forEach(([route, title]) => {
-			if (currentRoute.includes(route)) {
-				tempTitle = title;
+		Object.values(routes).forEach((route) => {
+			if ($page.url.pathname.startsWith('/' + route.route)) {
+				tempTitle = route.title;
 			}
 		});
 		currentTitle = tempTitle;

@@ -4,7 +4,7 @@
 	import { Button } from './ui/button';
 	import { page } from '$app/stores';
 	import { focus } from 'focus-svelte';
-	import { routes } from '../../routes/routes';
+	import { routes } from '$lib/routes';
 
 	let isOpen = false;
 
@@ -37,16 +37,16 @@
 				<X />
 			</button>
 			<nav class="mt-8 flex flex-col gap-2">
-				{#each Object.entries(routes) as [route, name]}
+				{#each Object.values(routes) as route}
 					<Button
 						variant="link"
-						href="/{route}"
+						href="/{route.route}"
 						on:click={close}
-						class="p-0 text-xl {$page.url.pathname.startsWith('/' + route)
+						class="p-0 text-xl {$page.url.pathname.startsWith('/' + route.route)
 							? 'font-medium underline'
 							: 'font-light'} text-primary-foreground"
 					>
-						{name}
+						{route.title}
 					</Button>
 				{/each}
 			</nav>
@@ -61,16 +61,16 @@
 </div>
 
 <nav class="hidden gap-8 lg:flex">
-	{#each Object.entries(routes) as [route, name]}
+	{#each Object.values(routes) as route}
 		<Button
 			variant="link"
-			href="/{route}"
+			href="/{route.route}"
 			on:click={close}
-			class="p-0 text-xl {$page.url.pathname.startsWith('/' + route)
+			class="p-0 text-xl {$page.url.pathname.startsWith('/' + route.route)
 				? 'font-medium underline'
 				: 'font-light'} text-primary"
 		>
-			{name}
+			{route.title}
 		</Button>
 	{/each}
 </nav>
