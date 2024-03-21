@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
+	import { routes } from '$lib/routes';
 	import type { ReviewExcerpt } from '$lib/types';
 	import ThumbnailImage from './ThumbnailImage.svelte';
 
@@ -9,7 +10,7 @@
 <div class="max-w-lg">
 	<Button
 		variant="link"
-		href="/{review.slug.current}"
+		href="/{routes.anmeldelser.route}/{review.slug.current}"
 		class="mb-2 h-auto scroll-m-20 flex-col items-baseline whitespace-normal p-0 text-xl font-bold tracking-tight lg:text-2xl"
 	>
 		<ThumbnailImage thumbnail={review.thumbnail} thumbnailBlurhash={review.thumbnailBlurhash} />

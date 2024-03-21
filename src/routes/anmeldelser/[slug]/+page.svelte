@@ -1,7 +1,5 @@
 <script lang="ts">
-	import * as Avatar from '$lib/components/ui/avatar';
 	import { Button } from '$lib/components/ui/button';
-	import { urlFor } from '$lib/utils/image';
 	import { PortableText } from '@portabletext/svelte';
 	import { siImdb, siLetterboxd } from 'simple-icons';
 	import HeroImage from '$lib/components/HeroImage.svelte';
