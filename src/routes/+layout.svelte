@@ -4,10 +4,10 @@
 	import { urlFor } from '$lib/utils/image';
 	import { siFacebook, siInstagram } from 'simple-icons';
 	import '../app.pcss';
+	import NavLinks from '$lib/components/NavLinks.svelte';
+	import { routes } from './routes';
 
 	export let data;
-
-	const routes = { anmeldelser: 'Anmeldelser', arkiv: 'Visningsarkiv' };
 
 	$: currentRoute = $page.route.id ?? '';
 	let currentTitle = '';
@@ -32,15 +32,7 @@
 		</h1>
 	</div>
 
-	<span class="flex gap-2">
-		{#each Object.entries(routes) as [route, name]}
-			<Button
-				href="/{route}"
-				variant="link"
-				class="p-0 {currentRoute?.includes(route) ? 'font-medium' : 'font-light'}">{name}</Button
-			>
-		{/each}
-	</span>
+	<NavLinks />
 </header>
 
 <main class="flex flex-col items-center justify-center">
