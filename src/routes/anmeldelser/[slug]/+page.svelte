@@ -40,7 +40,7 @@
 		{#if data.movieDetails}
 			<div>
 				<img
-					src="http://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
+					src="https://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
 					alt="Movie Poster"
 					class="mb-2"
 				/>
