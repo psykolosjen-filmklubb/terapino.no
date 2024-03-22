@@ -6,6 +6,7 @@
 	import '../app.pcss';
 	import NavLinks from '$lib/components/NavLinks.svelte';
 	import { routes } from '$lib/routes';
+	import { ModeWatcher } from 'mode-watcher';
 
 	export let data;
 
@@ -20,6 +21,8 @@
 		currentTitle = tempTitle;
 	}
 </script>
+
+<ModeWatcher />
 
 <header class="flex h-16 w-full place-content-between items-center bg-muted px-4 lg:h-44 lg:px-8">
 	<div class="flex items-center gap-8">
@@ -38,29 +41,29 @@
 	<slot />
 </main>
 
-<footer class="bg-primary py-6 lg:py-10">
+<footer class="py-6 lg:py-10">
 	<div class="mb-4 flex justify-center gap-10 lg:mb-8">
 		<Button
 			href="https://www.instagram.com/quentin_terapino"
-			class="bg-[#d62976] text-primary-foreground hover:bg-[#d62977d0]"
+			class="bg-[#d62976] text-white hover:bg-[#d62977d0]"
 		>
-			<svg class="mr-2 h-4 w-4 fill-primary-foreground">
+			<svg class="mr-2 h-4 w-4 fill-white">
 				{@html siInstagram.svg}
 			</svg>
 			Instagram
 		</Button>
 		<Button
 			href="https://www.facebook.com/quentin.terapino"
-			class="bg-[#3b5998] text-primary-foreground hover:bg-[#3b5898c7]"
+			class="bg-[#3b5998] text-white hover:bg-[#3b5898c7]"
 		>
-			<svg class="mr-2 h-4 w-4 fill-primary-foreground">
+			<svg class="mr-2 h-4 w-4 fill-white">
 				{@html siFacebook.svg}
 			</svg>
 			Facebook
 		</Button>
 	</div>
-	<p class="text-center text-primary-foreground">Psykolosjen Filmklubb</p>
-	<p class="text-center text-primary-foreground">
+	<p class="text-center">Psykolosjen Filmklubb</p>
+	<p class="text-center">
 		© {new Date().getFullYear()}
 	</p>
 </footer>

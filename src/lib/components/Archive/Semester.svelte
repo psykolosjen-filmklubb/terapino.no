@@ -68,12 +68,12 @@
 				? $archiveOptions.circleWidth - $archiveOptions.strokeWidth
 				: $archiveOptions.strokeWidth}
 			style:top={$archiveOptions.circleHeight / 2 - $archiveOptions.strokeWidth / 2}
+			style:stroke={$archiveOptions.strokeColor}
 		>
 			<path
 				in:draw={{ delay: firstRenderDelay }}
 				out:draw
 				d={pathString}
-				stroke="black"
 				stroke-width={$archiveOptions.strokeWidth}
 				style:transform={direction === 'right' ? '' : 'scale(-1, 1)'}
 				class="z-0"

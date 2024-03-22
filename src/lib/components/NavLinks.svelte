@@ -5,6 +5,7 @@
 	import { page } from '$app/stores';
 	import { focus } from 'focus-svelte';
 	import { routes } from '$lib/routes';
+	import ThemeToggle from './ThemeToggle.svelte';
 
 	let isOpen = false;
 
@@ -30,7 +31,7 @@
 	{#if isOpen}
 		<div
 			transition:fly={{ opacity: 0, x: '100%' }}
-			class="fixed inset-y-0 right-0 z-30 flex w-8/12 flex-col items-end bg-primary px-6 py-5 text-primary-foreground"
+			class="fixed inset-y-0 right-0 z-30 flex w-8/12 flex-col items-end bg-background px-6 py-5"
 			use:focus={{ enabled: true, preventScroll: true }}
 		>
 			<button class="text-5xl" on:click={close}>
@@ -44,12 +45,15 @@
 						on:click={close}
 						class="p-0 text-xl {$page.url.pathname.startsWith('/' + route.route)
 							? 'font-medium underline'
-							: 'font-light'} text-primary-foreground"
+							: 'font-light'}"
 					>
 						{route.title}
 					</Button>
 				{/each}
 			</nav>
+			<span class="mt-8">
+				<ThemeToggle />
+			</span>
 		</div>
 	{/if}
 
@@ -60,17 +64,20 @@
 	{/if}
 </div>
 
-<nav class="hidden gap-8 lg:flex">
-	{#each Object.values(routes) as route}
-		<Button
-			variant="link"
-			href="/{route.route}"
-			on:click={close}
-			class="p-0 text-xl {$page.url.pathname.startsWith('/' + route.route)
-				? 'font-medium underline'
-				: 'font-light'} text-primary"
-		>
-			{route.title}
-		</Button>
-	{/each}
-</nav>
+<div class="hidden gap-4 lg:flex">
+	<nav class="flex gap-8">
+		{#each Object.values(routes) as route}
+			<Button
+				variant="link"
+				href="/{route.route}"
+				on:click={close}
+				class="p-0 text-xl {$page.url.pathname.startsWith('/' + route.route)
+					? 'font-medium underline'
+					: 'font-light'} text-primary"
+			>
+				{route.title}
+			</Button>
+		{/each}
+	</nav>
+	<ThemeToggle />
+</div>

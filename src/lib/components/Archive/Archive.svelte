@@ -11,6 +11,7 @@
 	import SemesterMargin from './SemesterMargin.svelte';
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
+	import { mode } from 'mode-watcher';
 
 	export let archive: Archive;
 
@@ -45,6 +46,7 @@
 	$: $archiveOptions.windowWidth = windowWidth;
 	$: $archiveOptions.isMobile = windowWidth < 1024;
 	$: $archiveOptions.strokeWidth = $archiveOptions.isMobile ? 2 : 4;
+	$: $archiveOptions.strokeColor = $mode === 'dark' ? 'white' : 'black';
 
 	let archiveHeight = tweened(0, { duration: 1000, easing: cubicOut });
 	let archiveWidth = 0;
@@ -56,19 +58,13 @@
 	class="absolute"
 	overflow="visible"
 	style:left={$archiveOptions.isMobile ? $archiveOptions.circleWidth : archiveWidth / 2}
+	style:stroke={$archiveOptions.strokeColor}
 >
-	<line
-		x="0"
-		y1="0"
-		y2={$archiveHeight}
-		stroke="black"
-		stroke-width={$archiveOptions.strokeWidth}
-	/>
+	<line x="0" y1="0" y2={$archiveHeight} stroke-width={$archiveOptions.strokeWidth} />
 	<line
 		x="0"
 		y1={$archiveHeight}
 		y2={$archiveHeight + ($archiveOptions.isMobile ? 96 : 196)}
-		stroke="black"
 		stroke-width={$archiveOptions.strokeWidth}
 		stroke-dasharray="20"
 	/>
