@@ -6,6 +6,7 @@
 	import * as Card from '$lib/components/ui/card';
 	import * as Accordion from '$lib/components/ui/accordion';
 	import { dateFormatterLong, dateFormatterShort } from '$lib/dateFormatters.js';
+	import tmdbLogo from '$lib/images/tmdb-alt-long.svg';
 
 	export let data;
 
@@ -58,14 +59,17 @@
 								)}
 							</span>
 						</p>
-						<div class="flex w-full justify-center">
-							<img
-								src="https://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
-								alt="Movie Poster"
-								class="mb-2 max-w-[50%]"
-							/>
-						</div>
+						<img
+							src="https://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
+							alt="Movie Poster"
+							class="mx-auto mb-2 max-w-[50%]"
+						/>
 					</div>
+
+					<small>Informasjon og poster hentet fra</small>
+					<a href="https://www.themoviedb.org/">
+						<img src={tmdbLogo} alt="The Movie Database Logo" class="inline h-4 w-24" />
+					</a>
 				</Accordion.Content>
 			</Accordion.Item>
 		</Accordion.Root>

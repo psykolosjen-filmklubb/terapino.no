@@ -5,6 +5,7 @@
 	import HeroImage from '$lib/components/HeroImage.svelte';
 	import AuthorList from '$lib/components/AuthorList.svelte';
 	import { dateFormatterShort } from '$lib/dateFormatters.js';
+	import tmdbLogo from '$lib/images/tmdb-alt-long.svg';
 
 	export let data;
 </script>
@@ -71,6 +72,12 @@
 						</svg>
 					</Button>
 				</div>
+			</div>
+			<div>
+				<small>Informasjon og plakat hentet fra</small>
+				<a href="https://www.themoviedb.org/">
+					<img src={tmdbLogo} alt="The Movie Database Logo" class="inline h-4 w-24" />
+				</a>
 			</div>
 		{/if}
 	</div>
