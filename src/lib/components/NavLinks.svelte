@@ -26,17 +26,17 @@
 />
 
 <div class="lg:hidden">
-	<Button variant="ghost" on:click={toggle}><Menu /></Button>
+	<Button variant="ghost" size="icon" on:click={toggle}><Menu /></Button>
 	{#if isOpen}
 		<div
 			transition:fly={{ opacity: 0, x: '100%' }}
-			class="fixed inset-y-0 right-0 z-30 flex w-8/12 flex-col items-end bg-primary px-8 py-5 text-primary-foreground"
+			class="fixed inset-y-0 right-0 z-30 flex w-8/12 flex-col items-end bg-primary px-6 py-5 text-primary-foreground"
 			use:focus={{ enabled: true, preventScroll: true }}
 		>
 			<button class="text-5xl" on:click={close}>
 				<X />
 			</button>
-			<nav class="mt-8 flex flex-col gap-2">
+			<nav class="mt-8 flex flex-col items-end gap-2">
 				{#each Object.values(routes) as route}
 					<Button
 						variant="link"
