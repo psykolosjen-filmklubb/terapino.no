@@ -4,26 +4,21 @@
 	import { Button } from '$lib/components/ui/button';
 	import { siImdb, siLetterboxd } from 'simple-icons';
 	import * as Card from '$lib/components/ui/card';
+	import * as Accordion from '$lib/components/ui/accordion';
+	import { dateFormatterLong, dateFormatterShort } from '$lib/dateFormatters.js';
 
 	export let data;
-
-	let dateFormatter = Intl.DateTimeFormat('no', {
-		weekday: 'long',
-		month: 'long',
-		day: 'numeric',
-		year: 'numeric'
-	});
 
 	$: screening = data.screening;
 </script>
 
-<div class="grid">
+<div class="flex flex-col items-center">
 	<div class="mb-4 flex flex-col items-center text-center lg:mt-10">
 		<p class="text-l text-muted-foreground">Psykolosjen Filmklubb viste</p>
 		<h1 class="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
-			{data.screening.movie_title}
+			{screening.movie_title}
 		</h1>
-		<p class="text-l text-muted-foreground">{dateFormatter.format(new Date(screening.date))}</p>
+		<p class="text-l text-muted-foreground">{dateFormatterLong.format(new Date(screening.date))}</p>
 	</div>
 
 	{#if screening.poster}
@@ -43,8 +38,41 @@
 		</Card.Root>
 	{/if}
 
+	{#if data.movieDetails}
+		<Accordion.Root class="w-72">
+			<Accordion.Item value="movie-details">
+				<Accordion.Trigger>Mer info om {screening.movie_title}</Accordion.Trigger>
+				<Accordion.Content>
+					<div class="flex flex-col gap-2">
+						<p class="font-light">
+							Reggisør{data.movieDetails.directors.length > 1 ? 'er' : ''}:
+							<span class="font-medium">{data.movieDetails.directors.join(', ')}</span>
+						</p>
+						<p class="font-light">
+							Originaltittel: <span class="font-medium">{data.movieDetails.original_title}</span>
+						</p>
+						<p class="font-light">
+							På kino i Norge: <span class="font-medium">
+								{dateFormatterShort.format(
+									new Date(data.movieDetails.release_date_no ?? data.movieDetails.release_date)
+								)}
+							</span>
+						</p>
+						<div class="flex w-full justify-center">
+							<img
+								src="https://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
+								alt="Movie Poster"
+								class="mb-2 max-w-[50%]"
+							/>
+						</div>
+					</div>
+				</Accordion.Content>
+			</Accordion.Item>
+		</Accordion.Root>
+	{/if}
+
 	{#if data.movieDetails?.imdb_id}
-		<div class="mt-4 flex justify-evenly">
+		<div class="mt-6 flex w-full justify-evenly">
 			<Button
 				href="https://www.imdb.com/title/{data.movieDetails.imdb_id}"
 				class="bg-[#f5c518] hover:bg-[#f5c518d0]"
