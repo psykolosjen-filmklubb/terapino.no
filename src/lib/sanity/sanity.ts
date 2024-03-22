@@ -63,11 +63,14 @@ export function getScreening(slug: string) {
 	);
 }
 
-export async function getLogo() {
-	const logo = await sanityClient.fetch<Logo>(
-		groq`*[_type == "image_assets" && name == "Logo"][0]`
+export async function getLogos() {
+	const black = await sanityClient.fetch<Logo>(
+		groq`*[_type == "image_assets" && name == "logo-svart"][0]`
 	);
-	return logo;
+	const white = await sanityClient.fetch<Logo>(
+		groq`*[_type == "image_assets" && name == "logo-hvit"][0]`
+	);
+	return { black, white };
 }
 
 export async function getReview(slug: string) {

@@ -6,7 +6,7 @@
 	import '../app.pcss';
 	import NavLinks from '$lib/components/NavLinks.svelte';
 	import { routes } from '$lib/routes';
-	import { ModeWatcher } from 'mode-watcher';
+	import { ModeWatcher, mode } from 'mode-watcher';
 
 	export let data;
 
@@ -27,7 +27,11 @@
 <header class="flex h-16 w-full place-content-between items-center bg-muted px-4 lg:h-44 lg:px-8">
 	<div class="flex items-center gap-8">
 		<a href="/" class="size-10 lg:size-32">
-			<img src={urlFor(data.logo.image).width(512).height(512).url()} alt="Logo" />
+			{#if $mode === 'light'}
+				<img src={urlFor(data.logos.black.image).width(512).height(512).url()} alt="Logo" />
+			{:else}
+				<img src={urlFor(data.logos.white.image).width(512).height(512).url()} alt="Logo" />
+			{/if}
 		</a>
 		<h1 class="hidden scroll-m-20 text-left text-5xl font-bold tracking-tight lg:block">
 			{currentTitle}

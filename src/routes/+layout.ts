@@ -1,12 +1,12 @@
-import { getLogo } from '$lib/sanity/sanity';
+import { getLogos } from '$lib/sanity/sanity';
 import { error } from '@sveltejs/kit';
 
 export async function load() {
-	const logo = getLogo();
+	const logos = getLogos();
 
 	try {
 		return {
-			logo: await logo
+			logos: await logos
 		};
 	} catch (e) {
 		error(500, 'Internal Server Error');
