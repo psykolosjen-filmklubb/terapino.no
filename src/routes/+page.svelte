@@ -2,10 +2,9 @@
 	import PosterImage from '$lib/components/PosterImage.svelte';
 	import ReviewsCarousel from '$lib/components/ReviewsCarousel.svelte';
 	import { Button } from '$lib/components/ui/button';
+	import { dateFormatterLongNoYear } from '$lib/dateFormatters.js';
 
 	export let data;
-
-	let dateFormatter = Intl.DateTimeFormat('no', { weekday: 'long', month: 'long', day: 'numeric' });
 </script>
 
 <section
@@ -47,7 +46,7 @@
 	{:else}
 		<div>
 			<p class="text-center text-xl text-muted-foreground">
-				{dateFormatter.format(new Date(data.nextScreening.date))}:
+				{dateFormatterLongNoYear.format(new Date(data.nextScreening.date))}:
 			</p>
 			<h3 class="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
 				{data.nextScreening.movie_title} ({data.nextScreening.release_year})

@@ -4,14 +4,9 @@
 	import { siImdb, siLetterboxd } from 'simple-icons';
 	import HeroImage from '$lib/components/HeroImage.svelte';
 	import AuthorList from '$lib/components/AuthorList.svelte';
+	import { dateFormatterShort } from '$lib/dateFormatters.js';
 
 	export let data;
-
-	let dateFormatter = Intl.DateTimeFormat('no', {
-		day: 'numeric',
-		month: '2-digit',
-		year: 'numeric'
-	});
 </script>
 
 <HeroImage thumbnailBlurhash={data.review.thumbnailBlurhash} thumbnail={data.review.thumbnail} />
@@ -49,7 +44,7 @@
 				</p>
 				<p class="text-lg font-light">
 					På kino i Norge: <span class="font-medium">
-						{dateFormatter.format(
+						{dateFormatterShort.format(
 							new Date(data.movieDetails.release_date_no ?? data.movieDetails.release_date)
 						)}
 					</span>
