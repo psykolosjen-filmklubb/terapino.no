@@ -23,7 +23,7 @@ export async function GET({ params }) {
 	const theatrical_releases = norwegian_release_dates?.filter(({ type }) => type === 3);
 	const first_release = theatrical_releases?.sort(
 		(a, b) => new Date(a.release_date).getTime() - new Date(b.release_date).getTime()
-	)[0].release_date;
+	)[0]?.release_date;
 
 	const response: TmdbMovieDetails = {
 		title: movieDetailsJson.title,
@@ -45,7 +45,7 @@ export type TmdbMovieDetails = {
 	release_date: string;
 	imdb_id: string;
 	directors: string[];
-	release_date_no: string | undefined;
+	release_date_no?: string;
 };
 
 type TmdbMovieResponse = {

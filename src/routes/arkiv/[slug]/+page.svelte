@@ -53,7 +53,8 @@
 							Originaltittel: <span class="font-medium">{data.movieDetails.original_title}</span>
 						</p>
 						<p class="font-light">
-							På kino i Norge: <span class="font-medium">
+							{data.movieDetails.release_date_no ? 'På kino i Norge' : 'Utgitt'}:
+							<span class="font-medium">
 								{dateFormatterShort.format(
 									new Date(data.movieDetails.release_date_no ?? data.movieDetails.release_date)
 								)}
@@ -62,7 +63,7 @@
 						<img
 							src="https://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
 							alt="Movie Poster"
-							class="mx-auto mb-2 max-w-[50%]"
+							class="mx-auto mb-2 max-w-[60%]"
 						/>
 					</div>
 
