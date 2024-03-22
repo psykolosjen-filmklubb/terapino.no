@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ReviewExcerpt } from '$lib/types';
+	import type { ReviewExcerpt } from '$lib/sanity/types';
 	import * as Carousel from '$lib/components/ui/carousel';
 	import ReviewExcerptCard from './ReviewExcerptCard.svelte';
 

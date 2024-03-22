@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Avatar from '$lib/components/ui/avatar';
-	import type { Author } from '$lib/types';
+	import type { Author } from '$lib/sanity/types';
 	import { urlFor } from '$lib/utils/image';
 
 	export let authors: Author[];

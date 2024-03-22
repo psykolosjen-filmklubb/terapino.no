@@ -1,4 +1,4 @@
-import { getReviewExcerpts, getNextScreening } from '$lib/sanity';
+import { getReviewExcerpts, getNextScreening } from '$lib/sanity/sanity';
 import { error } from '@sveltejs/kit';
 
 export async function load() {

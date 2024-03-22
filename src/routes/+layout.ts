@@ -1,4 +1,4 @@
-import { getLogo } from '$lib/sanity';
+import { getLogo } from '$lib/sanity/sanity';
 import { error } from '@sveltejs/kit';
 
 export async function load() {
