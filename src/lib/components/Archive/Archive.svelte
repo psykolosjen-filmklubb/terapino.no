@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Archive } from '$lib/types/archive';
+	import type { Archive } from '$lib/components/Archive/types';
 	import Semester from './Semester.svelte';
 	import {
 		archiveOptions,

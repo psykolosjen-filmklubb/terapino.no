@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Semester } from '$lib/types/archive';
+	import type { Semester } from '$lib/components/Archive/types';
 	import { blur, draw, fade } from 'svelte/transition';
 	import { archiveOptions, semesterOptions } from './archiveStore';
 	import { onMount, tick } from 'svelte';

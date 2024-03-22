@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Movie } from '$lib/types/archive';
+	import type { Movie } from '$lib/components/Archive/types';
 	import { fade } from 'svelte/transition';
 	import { archiveOptions } from './archiveStore';
 

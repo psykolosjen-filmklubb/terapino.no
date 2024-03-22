@@ -1,7 +1,7 @@
 import { createClient } from '@sanity/client';
 import groq from 'groq';
 import type { Author, Logo, Review, ReviewExcerpt, Screening } from './types';
-import type { Semester } from '$lib/types/archive';
+import type { Semester } from '$lib/components/Archive/types';
 
 export const sanityClient = createClient({
 	projectId: '4s9wdr84',

@@ -5,7 +5,7 @@
 		semesterMarginsTop,
 		semesterOptions
 	} from './archiveStore';
-	import type { Archive } from '$lib/types/archive';
+	import type { Archive } from '$lib/components/Archive/types';
 	import { derived, get } from 'svelte/store';
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
