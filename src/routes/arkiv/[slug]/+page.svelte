@@ -3,6 +3,7 @@
 	import PosterImage from '$lib/components/PosterImage.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { siImdb, siLetterboxd } from 'simple-icons';
+	import * as Card from '$lib/components/ui/card';
 
 	export let data;
 
@@ -16,7 +17,7 @@
 	$: screening = data.screening;
 </script>
 
-<div class="grid lg:grid-cols-2">
+<div class="grid">
 	<div class="mb-4 flex flex-col items-center text-center lg:mt-10">
 		<p class="text-l text-muted-foreground">Psykolosjen Filmklubb viste</p>
 		<h1 class="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
@@ -25,8 +26,25 @@
 		<p class="text-l text-muted-foreground">{dateFormatter.format(new Date(screening.date))}</p>
 	</div>
 
-	{#if data.movieDetails}
-		<div class="mb-4 flex justify-evenly">
+	{#if screening.poster}
+		<Card.Root>
+			<Card.Content class="p-0">
+				<PosterImage
+					poster={screening.poster}
+					posterBlurhash={screening.posterBlurhash}
+					class="rounded-t-lg {screening.posterArtists ? '' : 'rounded-b-lg'}"
+				/>
+			</Card.Content>
+			{#if screening.posterArtists}
+				<Card.Footer class="p-2">
+					<AuthorList authors={screening.posterArtists} heading="Plakat av:" />
+				</Card.Footer>
+			{/if}
+		</Card.Root>
+	{/if}
+
+	{#if data.movieDetails?.imdb_id}
+		<div class="mt-4 flex justify-evenly">
 			<Button
 				href="https://www.imdb.com/title/{data.movieDetails.imdb_id}"
 				class="bg-[#f5c518] hover:bg-[#f5c518d0]"
@@ -43,17 +61,6 @@
 					{@html siLetterboxd.svg}
 				</svg>
 			</Button>
-		</div>
-	{/if}
-
-	{#if screening.poster}
-		<div class="lg:order-first lg:row-span-4">
-			<PosterImage poster={screening.poster} posterBlurhash={screening.posterBlurhash} />
-		</div>
-	{/if}
-	{#if screening.posterArtists}
-		<div class="p-2 lg:col-start-2 lg:row-start-4 lg:mb-4">
-			<AuthorList authors={screening.posterArtists} heading="Plakat av:" />
 		</div>
 	{/if}
 </div>

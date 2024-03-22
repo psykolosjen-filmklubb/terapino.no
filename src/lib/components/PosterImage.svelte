@@ -3,7 +3,11 @@
 	import type { ImageAsset } from '@sanity/types';
 	import { blurhashToImageCssObject } from '@unpic/placeholder';
 	import { tweened } from 'svelte/motion';
+	import type { HTMLAttributes } from 'svelte/elements';
+	import { cn } from '$lib/utils.js';
 
+	let className: HTMLAttributes<HTMLImageElement>['class'] = undefined;
+	export { className as class };
 	export let posterBlurhash: string | undefined;
 	export let poster: ImageAsset;
 
@@ -33,7 +37,7 @@
 	<img
 		src={urlFor(poster).width(768).fit('min').auto('format').url()}
 		alt="Poster for next screening"
-		class="w-80 lg:w-96"
+		class={cn('w-80 lg:w-96', className)}
 		style:opacity={$imageOpacity}
 		use:setImageLoaded
 	/>

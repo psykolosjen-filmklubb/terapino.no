@@ -7,7 +7,7 @@
 	export let heading: string | undefined;
 </script>
 
-<div>
+<div class="w-full">
 	{#if heading}
 		<h3 class="text-sm font-light tracking-tight">{heading}</h3>
 	{/if}
