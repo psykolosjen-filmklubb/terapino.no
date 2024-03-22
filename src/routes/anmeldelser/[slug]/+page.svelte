@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
 	import { PortableText } from '@portabletext/svelte';
-	import { siImdb, siLetterboxd } from 'simple-icons';
 	import HeroImage from '$lib/components/HeroImage.svelte';
 	import AuthorList from '$lib/components/AuthorList.svelte';
 	import { dateFormatterShort } from '$lib/dateFormatters.js';
 	import tmdbLogo from '$lib/images/tmdb-alt-long.svg';
+	import ImdbButton from '$lib/components/ImdbButton.svelte';
+	import LetterboxdButton from '$lib/components/LetterboxdButton.svelte';
 
 	export let data;
 </script>
@@ -55,22 +55,8 @@
 					<span class="font-medium">{data.movieDetails.directors.join(', ')}</span>
 				</p>
 				<div class="mt-4 flex justify-evenly">
-					<Button
-						href="https://www.imdb.com/title/{data.movieDetails.imdb_id}"
-						class="bg-[#f5c518] hover:bg-[#f5c518d0]"
-					>
-						<svg class="h-6 w-6 fill-primary">
-							{@html siImdb.svg}
-						</svg>
-					</Button>
-					<Button
-						href="https://letterboxd.com/imdb/{data.movieDetails.imdb_id}"
-						class="bg-[#2C343F] hover:bg-[#2C343Fd0]"
-					>
-						<svg class="h-6 w-6 fill-primary-foreground">
-							{@html siLetterboxd.svg}
-						</svg>
-					</Button>
+					<ImdbButton imdbId={data.movieDetails.imdb_id} />
+					<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
 				</div>
 			</div>
 			<div>
