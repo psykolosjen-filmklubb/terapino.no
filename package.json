@@ -44,7 +44,7 @@
 		"@unpic/placeholder": "^0.1.2",
 		"bits-ui": "^0.14.0",
 		"clsx": "^2.1.0",
-		"embla-carousel-svelte": "^8.0.0-rc22",
+		"embla-carousel-svelte": "^8.0.0",
 		"groq": "^3.25.0",
 		"lucide-svelte": "^0.335.0",
 		"mode-watcher": "^0.3.0",
