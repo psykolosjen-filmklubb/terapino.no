@@ -5,9 +5,12 @@
 	import type { PromoImage } from '$lib/sanity/types';
 	import { urlFor } from '$lib/sanity/image';
 	import * as Carousel from '$lib/components/ui/carousel';
+	import type { CarouselAPI } from './ui/carousel/context';
 
 	export let galleryID: string;
 	export let images: PromoImage[];
+
+	let carouselApi: CarouselAPI;
 
 	onMount(() => {
 		let lightbox = new PhotoSwipeLightbox({
@@ -16,11 +19,16 @@
 			pswpModule: () => import('photoswipe')
 		});
 		lightbox.init();
+		lightbox.on('contentActivate', (event) => {
+			if (carouselApi) {
+				carouselApi.scrollTo(event.content.index);
+			}
+		});
 	});
 </script>
 
 <div class="pswp-gallery" id={galleryID}>
-	<Carousel.Root class="max-w-64">
+	<Carousel.Root bind:api={carouselApi} class="max-w-64">
 		<Carousel.Content>
 			{#each images as image}
 				<Carousel.Item>
