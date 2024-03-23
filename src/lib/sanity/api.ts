@@ -51,7 +51,8 @@ export function getScreening(slug: string) {
 		tmdb_id,
 		promo_material[] {
 			asset,
-			alt
+			alt,
+			"dimensions": asset->metadata.dimensions
 		}
 	}`,
 		{

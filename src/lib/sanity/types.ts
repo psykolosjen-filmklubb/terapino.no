@@ -1,4 +1,4 @@
-import type { ImageAsset, PortableTextBlock, Slug } from '@sanity/types';
+import type { ImageAsset, ImageDimensions, PortableTextBlock, Slug } from '@sanity/types';
 
 export type Review = {
 	review_title: string;
@@ -26,7 +26,13 @@ export type Screening = {
 	posterBlurhash?: string;
 	posterArtists?: Author[];
 	tmdb_id?: number;
-	promo_material?: { asset: ImageAsset; alt: string }[];
+	promo_material?: PromoImage[];
+};
+
+export type PromoImage = {
+	asset: ImageAsset;
+	alt: string;
+	dimensions: ImageDimensions;
 };
 
 export type Author = {

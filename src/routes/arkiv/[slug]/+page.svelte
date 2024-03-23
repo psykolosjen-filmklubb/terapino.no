@@ -7,6 +7,7 @@
 	import tmdbLogo from '$lib/images/tmdb-alt-long.svg';
 	import ImdbButton from '$lib/components/ImdbButton.svelte';
 	import LetterboxdButton from '$lib/components/LetterboxdButton.svelte';
+	import PromoGallery from '$lib/components/PromoGallery.svelte';
 
 	export let data;
 
@@ -76,15 +77,13 @@
 {/if}
 
 {#if data.movieDetails?.imdb_id}
-	<div class="mt-6 flex w-full max-w-96 justify-evenly">
+	<div class="my-6 flex w-full max-w-96 justify-evenly">
 		<ImdbButton imdbId={data.movieDetails.imdb_id} />
 		<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
 	</div>
 {/if}
 
 {#if screening.promo_material}
-	<h1 class="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">Promo</h1>
-	{#each screening.promo_material as material}
-		{material.alt}
-	{/each}
+	<h1 class="my-2 scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">Promo</h1>
+	<PromoGallery galleryID="promo-gallery" images={screening.promo_material} />
 {/if}
