@@ -48,7 +48,11 @@ export function getScreening(slug: string) {
 		"posterBlurhash": poster.asset->metadata.blurHash,
 		"posterArtists": poster_artists[]->,
 		director,
-		tmdb_id
+		tmdb_id,
+		promo_material[] {
+			asset,
+			alt
+		}
 	}`,
 		{
 			slug

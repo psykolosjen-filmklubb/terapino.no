@@ -26,6 +26,7 @@ export type Screening = {
 	posterBlurhash?: string;
 	posterArtists?: Author[];
 	tmdb_id?: number;
+	promo_material?: { asset: ImageAsset; alt: string }[];
 };
 
 export type Author = {
