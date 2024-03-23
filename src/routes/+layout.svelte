@@ -45,7 +45,7 @@
 	<slot />
 </main>
 
-<footer class="py-6 lg:py-10">
+<footer class="bg-muted py-6 text-muted-foreground lg:py-10">
 	<div class="mb-4 flex justify-center gap-10 lg:mb-8">
 		<Button
 			href="https://www.instagram.com/quentin_terapino"

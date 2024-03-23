@@ -62,15 +62,15 @@
 </section>
 
 {#if data.reviews}
-	<section class="flex w-full flex-col bg-muted px-2 py-8 lg:px-6 lg:pt-20">
+	<section class="flex w-full flex-col px-2 py-8 lg:px-6 lg:pt-20">
 		<h2
 			class="mb-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
 		>
 			Siste filmanmeldelser
 		</h2>
 		<ReviewsCarousel reviews={data.reviews} />
-		<Button class="mr-2 mt-4 place-self-end lg:mr-8" href="/anmeldelser" variant="link"
-			>Se alle anmeldelser</Button
-		>
+		<Button class="mr-2 mt-4 place-self-end lg:mr-8" href="/anmeldelser" variant="link">
+			Se alle anmeldelser
+		</Button>
 	</section>
 {/if}
