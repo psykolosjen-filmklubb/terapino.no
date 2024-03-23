@@ -1,4 +1,4 @@
-import { getScreening } from '$lib/sanity/sanity';
+import { getScreening } from '$lib/sanity/api';
 import { error } from '@sveltejs/kit';
 import type { TmdbMovieDetails } from '../../api/movie/[tmdb_id]/+server';
 
