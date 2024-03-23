@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { urlFor } from '$lib/utils/image';
+	import { urlFor } from '$lib/sanity/image';
 	import type { ImageAsset } from '@sanity/types';
 	import { blurhashToImageCssObject } from '@unpic/placeholder';
 	import { tweened } from 'svelte/motion';

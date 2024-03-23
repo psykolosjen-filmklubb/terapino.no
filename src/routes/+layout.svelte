@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button';
-	import { urlFor } from '$lib/utils/image';
+	import { urlFor } from '$lib/sanity/image';
 	import { siFacebook, siInstagram } from 'simple-icons';
 	import '../app.pcss';
 	import NavLinks from '$lib/components/NavLinks.svelte';

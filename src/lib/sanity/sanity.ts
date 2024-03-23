@@ -1,14 +1,7 @@
-import { createClient } from '@sanity/client';
 import groq from 'groq';
 import type { Author, Logo, Review, ReviewExcerpt, Screening } from './types';
 import type { Semester } from '$lib/components/Archive/types';
-
-export const sanityClient = createClient({
-	projectId: '4s9wdr84',
-	dataset: 'production',
-	apiVersion: '2024-01-16',
-	useCdn: false
-});
+import { sanityClient } from './client';
 
 export function getAuthors() {
 	return sanityClient.fetch<Author[]>(groq`*[_type == "author"]`);
