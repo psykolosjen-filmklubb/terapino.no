@@ -14,7 +14,7 @@
 	$: screening = data.screening;
 </script>
 
-<div class="mb-4 flex flex-col items-center text-center lg:mt-4">
+<div class="flex flex-col items-center text-center lg:mt-4">
 	<p class="text-l text-muted-foreground">Psykolosjen Filmklubb viste</p>
 	<h1 class="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
 		{screening.movie_title}
@@ -40,7 +40,7 @@
 {/if}
 
 {#if data.movieDetails}
-	<Accordion.Root class="w-72">
+	<Accordion.Root class="-mt-4 w-72">
 		<Accordion.Item value="movie-details">
 			<Accordion.Trigger>Mer info om {screening.movie_title}</Accordion.Trigger>
 			<Accordion.Content>
@@ -77,20 +77,24 @@
 {/if}
 
 {#if data.movieDetails?.imdb_id}
-	<div class="my-6 flex w-full max-w-96 justify-evenly">
+	<div class="flex w-full max-w-96 justify-evenly">
 		<ImdbButton imdbId={data.movieDetails.imdb_id} />
 		<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
 	</div>
 {/if}
 
 {#if screening.promo_material}
-	<h1 class="my-2 scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">Promo</h1>
-	<GalleryCarousel galleryID="promo-gallery" images={screening.promo_material} />
+	<div>
+		<h1 class="mb-2 scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">Promo</h1>
+		<GalleryCarousel galleryID="promo-gallery" images={screening.promo_material} />
+	</div>
 {/if}
 
 {#if screening.event_media}
-	<h1 class="my-2 scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">
-		Bilder fra visningen
-	</h1>
-	<GalleryCarousel galleryID="event-gallery" images={screening.event_media} />
+	<div>
+		<h1 class="mb-2 scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">
+			Bilder fra visningen
+		</h1>
+		<GalleryCarousel galleryID="event-gallery" images={screening.event_media} />
+	</div>
 {/if}
