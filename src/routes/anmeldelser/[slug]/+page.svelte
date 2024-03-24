@@ -21,9 +21,9 @@
 
 <div class="mb-8 grid gap-12 px-6 lg:grid-cols-3 lg:gap-8">
 	<div class="flex flex-col gap-6 lg:col-span-2 lg:gap-8">
-		<div>
+		<article class="prose dark:prose-invert lg:prose-lg">
 			<PortableText value={data.review.review} />
-		</div>
+		</article>
 
 		{#if data.review.authors}
 			<div class="lg:max-w-80">

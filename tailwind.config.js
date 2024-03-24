@@ -62,7 +62,8 @@ const config = {
 				'2/3': '2 / 3'
 			}
 		}
-	}
+	},
+	plugins: [require('@tailwindcss/typography')]
 };
 
 export default config;
