@@ -16,8 +16,15 @@
 
 	let isGalleryOpen = false;
 
+	// Icon copied from lucide X icon to be able to use it with PhotoSwipe
+	const closeSvgString =
+		'<svg aria-hidden="true" class="pswp__icn" viewBox="0 0 50 30" width="50" height="30"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--foreground))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></svg>';
+
 	onMount(() => {
 		let lightbox = new PhotoSwipeLightbox({
+			zoom: false,
+			closeSVG: closeSvgString,
+
 			gallery: '#' + galleryID,
 			children: 'a',
 			pswpModule: () => import('photoswipe')
