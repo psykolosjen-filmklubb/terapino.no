@@ -7,11 +7,14 @@
 	import * as Carousel from '$lib/components/ui/carousel';
 	import type { CarouselAPI } from './ui/carousel/context';
 	import { Fullscreen } from 'lucide-svelte';
+	import { fade } from 'svelte/transition';
 
 	export let galleryID: string;
 	export let images: GalleryImage[];
 
 	let carouselApi: CarouselAPI;
+
+	let isGalleryOpen = false;
 
 	onMount(() => {
 		let lightbox = new PhotoSwipeLightbox({
@@ -25,6 +28,16 @@
 				carouselApi.scrollTo(event.content.index);
 			}
 		});
+		lightbox.on('beforeOpen', () => {
+			isGalleryOpen = true;
+		});
+		lightbox.on('destroy', () => {
+			isGalleryOpen = false;
+		});
+
+		return () => {
+			lightbox.destroy();
+		};
 	});
 </script>
 
@@ -47,7 +60,11 @@
 							class="size-64 object-cover"
 						/>
 					</a>
-					<Fullscreen class="pointer-events-none absolute bottom-2 right-2 opacity-50" />
+					{#if !isGalleryOpen}
+						<span transition:fade={{ duration: 100 }}>
+							<Fullscreen class="pointer-events-none absolute bottom-2 right-2 opacity-50" />
+						</span>
+					{/if}
 				</Carousel.Item>
 			{/each}
 		</Carousel.Content>
