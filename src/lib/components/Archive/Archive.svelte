@@ -46,7 +46,6 @@
 	$: $archiveOptions.windowWidth = windowWidth;
 	$: $archiveOptions.isMobile = windowWidth < 1024;
 	$: $archiveOptions.strokeWidth = $archiveOptions.isMobile ? 2 : 4;
-	$: $archiveOptions.strokeColor = $mode === 'dark' ? 'white' : 'black';
 
 	let archiveHeight = tweened(0, { duration: 1000, easing: cubicOut });
 	let archiveWidth = 0;
@@ -55,10 +54,9 @@
 <svelte:window bind:innerWidth={windowWidth} />
 
 <svg
-	class="absolute"
+	class="absolute stroke-foreground"
 	overflow="visible"
 	style:left={$archiveOptions.isMobile ? $archiveOptions.circleWidth : archiveWidth / 2}
-	style:stroke={$archiveOptions.strokeColor}
 >
 	<line x="0" y1="0" y2={$archiveHeight} stroke-width={$archiveOptions.strokeWidth} />
 	<line

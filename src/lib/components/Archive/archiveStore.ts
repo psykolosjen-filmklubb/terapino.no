@@ -3,7 +3,6 @@ import { writable } from 'svelte/store';
 export const archiveOptions = writable<ArchiveStore>({
 	isMobile: true,
 	strokeWidth: 0,
-	strokeColor: 'black',
 	windowWidth: 0,
 	circleWidth: 0,
 	circleHeight: 0
@@ -16,7 +15,6 @@ export const semesterMarginsBottom = writable<Record<string, number>>({});
 type ArchiveStore = {
 	isMobile: boolean;
 	strokeWidth: number;
-	strokeColor: 'black' | 'white';
 	windowWidth: number;
 	circleWidth: number;
 	circleHeight: number;

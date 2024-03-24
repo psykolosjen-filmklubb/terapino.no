@@ -54,7 +54,7 @@
 
 <div class="relative">
 	<button
-		class="relative z-10 size-8 rounded-full border-2 border-primary lg:size-12 lg:border-4"
+		class="relative z-10 size-8 rounded-full border-2 border-foreground lg:size-12 lg:border-4"
 		style:background-color={semester.color}
 		on:click={() => ($semesterOptions[semester.name].open = !$semesterOptions[semester.name].open)}
 		bind:this={button}
@@ -62,13 +62,12 @@
 	/>
 	{#if $isOpen && button}
 		<svg
-			class="pointer-events-none absolute z-0"
+			class="pointer-events-none absolute z-0 stroke-foreground"
 			overflow="visible"
 			style:left={direction === 'right'
 				? $archiveOptions.circleWidth - $archiveOptions.strokeWidth
 				: $archiveOptions.strokeWidth}
 			style:top={$archiveOptions.circleHeight / 2 - $archiveOptions.strokeWidth / 2}
-			style:stroke={$archiveOptions.strokeColor}
 		>
 			<path
 				in:draw={{ delay: firstRenderDelay }}
