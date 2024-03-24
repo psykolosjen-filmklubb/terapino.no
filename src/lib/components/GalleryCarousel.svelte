@@ -2,13 +2,13 @@
 	import { onMount } from 'svelte';
 	import PhotoSwipeLightbox from 'photoswipe/lightbox';
 	import 'photoswipe/style.css';
-	import type { PromoImage } from '$lib/sanity/types';
+	import type { GalleryImage } from '$lib/sanity/types';
 	import { urlFor } from '$lib/sanity/image';
 	import * as Carousel from '$lib/components/ui/carousel';
 	import type { CarouselAPI } from './ui/carousel/context';
 
 	export let galleryID: string;
-	export let images: PromoImage[];
+	export let images: GalleryImage[];
 
 	let carouselApi: CarouselAPI;
 

@@ -7,7 +7,7 @@
 	import tmdbLogo from '$lib/images/tmdb-alt-long.svg';
 	import ImdbButton from '$lib/components/ImdbButton.svelte';
 	import LetterboxdButton from '$lib/components/LetterboxdButton.svelte';
-	import PromoGallery from '$lib/components/PromoGallery.svelte';
+	import GalleryCarousel from '$lib/components/GalleryCarousel.svelte';
 
 	export let data;
 
@@ -85,12 +85,12 @@
 
 {#if screening.promo_material}
 	<h1 class="my-2 scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">Promo</h1>
-	<PromoGallery galleryID="promo-gallery" images={screening.promo_material} />
+	<GalleryCarousel galleryID="promo-gallery" images={screening.promo_material} />
 {/if}
 
 {#if screening.event_media}
 	<h1 class="my-2 scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">
 		Bilder fra visningen
 	</h1>
-	<PromoGallery galleryID="event-gallery" images={screening.event_media} />
+	<GalleryCarousel galleryID="event-gallery" images={screening.event_media} />
 {/if}

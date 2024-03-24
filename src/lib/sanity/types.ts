@@ -27,11 +27,11 @@ export type Screening = {
 	posterBlurhash?: string;
 	posterArtists?: Author[];
 	tmdb_id?: number;
-	promo_material?: PromoImage[];
-	event_media?: PromoImage[];
+	promo_material?: GalleryImage[];
+	event_media?: GalleryImage[];
 };
 
-export type PromoImage = {
+export type GalleryImage = {
 	asset: ImageAsset;
 	alt: string;
 	dimensions: ImageDimensions;
