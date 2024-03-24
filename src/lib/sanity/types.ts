@@ -28,6 +28,7 @@ export type Screening = {
 	posterArtists?: Author[];
 	tmdb_id?: number;
 	promo_material?: PromoImage[];
+	event_media?: PromoImage[];
 };
 
 export type PromoImage = {

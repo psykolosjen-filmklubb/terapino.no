@@ -53,6 +53,11 @@ export function getScreening(slug: string) {
 			asset,
 			alt,
 			"dimensions": asset->metadata.dimensions
+		},
+		event_media[] {
+			asset,
+			alt,
+			"dimensions": asset->metadata.dimensions
 		}
 	}`,
 		{

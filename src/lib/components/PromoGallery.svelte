@@ -28,21 +28,24 @@
 </script>
 
 <div class="pswp-gallery" id={galleryID}>
-	<Carousel.Root bind:api={carouselApi} class="max-w-64">
-		<Carousel.Content>
+	<Carousel.Root bind:api={carouselApi}>
+		<Carousel.Content class="max-w-64">
 			{#each images as image}
-				<Carousel.Item>
-					<div class="flex justify-center">
-						<a
-							href={urlFor(image.asset).auto('format').url()}
-							data-pswp-width={image.dimensions.width}
-							data-pswp-height={image.dimensions.height}
-							target="_blank"
-							rel="noreferrer"
-						>
-							<img src={urlFor(image.asset).width(200).auto('format').url()} alt={image.alt} />
-						</a>
-					</div>
+				<Carousel.Item class="flex justify-center">
+					<a
+						href={urlFor(image.asset).auto('format').url()}
+						data-pswp-width={image.dimensions.width}
+						data-pswp-height={image.dimensions.height}
+						data-cropped="true"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<img
+							src={urlFor(image.asset).width(512).auto('format').url()}
+							alt={image.alt}
+							class="h-64 w-64 object-cover"
+						/>
+					</a>
 				</Carousel.Item>
 			{/each}
 		</Carousel.Content>
