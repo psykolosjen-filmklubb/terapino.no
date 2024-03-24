@@ -76,7 +76,7 @@ export async function getReview(slug: string) {
 		groq`*[_type == "review" && slug.current == $slug][0]{
 			review_title,
 			movie_title,
-			review,
+			review[],
 			slug,
 			thumbnail,
 			"thumbnailBlurhash": thumbnail.asset->metadata.blurHash,

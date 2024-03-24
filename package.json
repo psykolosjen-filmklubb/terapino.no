@@ -12,7 +12,8 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@portabletext/svelte": "^2.1.5",
+		"@portabletext/svelte": "^2.1.7",
+		"@portabletext/types": "^2.0.11",
 		"@sanity/types": "^3.25.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",

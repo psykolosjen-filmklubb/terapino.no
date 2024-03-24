@@ -1,4 +1,5 @@
-import type { ImageAsset, ImageDimensions, PortableTextBlock, Slug } from '@sanity/types';
+import type { PortableTextBlock } from '@portabletext/types';
+import type { ImageAsset, ImageDimensions, Slug } from '@sanity/types';
 
 export type Review = {
 	review_title: string;
