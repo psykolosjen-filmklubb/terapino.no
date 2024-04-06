@@ -48,11 +48,11 @@
 	});
 </script>
 
-<div class="pswp-gallery" id={galleryID}>
+<div class="pswp-gallery lg:max-w-sm" id={galleryID}>
 	<Carousel.Root bind:api={carouselApi}>
-		<Carousel.Content class="max-w-64">
+		<Carousel.Content>
 			{#each images as image}
-				<Carousel.Item class="relative flex justify-center">
+				<Carousel.Item class="relative">
 					<a
 						href={urlFor(image.asset).auto('format').url()}
 						data-pswp-width={image.dimensions.width}
@@ -64,7 +64,7 @@
 						<img
 							src={urlFor(image.asset).width(512).auto('format').url()}
 							alt={image.alt}
-							class="size-64 object-cover"
+							class="aspect-square w-full object-cover"
 						/>
 					</a>
 					{#if !isGalleryOpen}
@@ -75,7 +75,7 @@
 				</Carousel.Item>
 			{/each}
 		</Carousel.Content>
-		<Carousel.Previous />
-		<Carousel.Next />
+		<Carousel.Previous class="left-2" />
+		<Carousel.Next class="right-2" />
 	</Carousel.Root>
 </div>
