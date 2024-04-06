@@ -24,7 +24,9 @@
 
 <ModeWatcher />
 
-<header class="flex h-16 w-full place-content-between items-center bg-muted px-4 lg:h-44 lg:px-8">
+<header
+	class="flex h-16 w-full place-content-between items-center border-b bg-muted px-4 lg:h-44 lg:px-8"
+>
 	<div class="flex items-center gap-8">
 		<a href="/" class="size-10 lg:size-32">
 			{#if $mode === 'light'}
@@ -45,7 +47,7 @@
 	<slot />
 </main>
 
-<footer class="bg-muted py-6 text-muted-foreground lg:py-10">
+<footer class="border-t bg-muted py-6 text-muted-foreground lg:py-10">
 	<div class="mb-4 flex justify-center gap-10 lg:mb-8">
 		<Button
 			href="https://www.instagram.com/quentin_terapino"
