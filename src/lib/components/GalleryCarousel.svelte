@@ -8,6 +8,7 @@
 	import type { CarouselAPI } from './ui/carousel/context';
 	import { Fullscreen } from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
+	import { Button } from './ui/button';
 
 	export let galleryID: string;
 	export let images: GalleryImage[];
@@ -69,13 +70,20 @@
 					</a>
 					{#if !isGalleryOpen}
 						<span transition:fade={{ duration: 100 }}>
-							<Fullscreen class="pointer-events-none absolute bottom-2 right-2 opacity-50" />
+							<Button
+								variant="outline"
+								size="icon"
+								class="pointer-events-none absolute bottom-2 right-2 size-8 rounded-full border-0 bg-opacity-50"
+							>
+								<Fullscreen class="size-4" />
+								<span class="sr-only">Åpne fullskjerm</span>
+							</Button>
 						</span>
 					{/if}
 				</Carousel.Item>
 			{/each}
 		</Carousel.Content>
-		<Carousel.Previous class="left-2" />
-		<Carousel.Next class="right-2" />
+		<Carousel.Previous class="left-2 border-0 bg-opacity-50 disabled:hidden" />
+		<Carousel.Next class="right-2 border-0 bg-opacity-50 disabled:hidden" />
 	</Carousel.Root>
 </div>
