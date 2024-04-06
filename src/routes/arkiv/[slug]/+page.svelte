@@ -23,17 +23,16 @@
 </div>
 
 {#if screening.poster}
-	<Card.Root>
+	<Card.Root class="w-full overflow-hidden lg:max-w-sm">
 		<Card.Content class="p-0">
 			<PosterImage
 				poster={screening.poster}
-				posterBlurhash={screening.posterBlurhash}
-				class="rounded-t-lg {screening.posterArtists ? '' : 'rounded-b-lg'}"
+				class="rounded-t-lg {screening.poster.artists ? '' : 'rounded-b-lg'}"
 			/>
 		</Card.Content>
-		{#if screening.posterArtists}
+		{#if screening.poster.artists}
 			<Card.Footer class="p-2">
-				<AuthorList authors={screening.posterArtists} heading="Plakat av:" />
+				<AuthorList authors={screening.poster.artists} heading="Plakat av:" />
 			</Card.Footer>
 		{/if}
 	</Card.Root>

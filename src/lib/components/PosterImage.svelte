@@ -1,17 +1,16 @@
 <script lang="ts">
 	import { urlFor } from '$lib/sanity/image';
-	import type { ImageAsset } from '@sanity/types';
 	import { blurhashToImageCssObject } from '@unpic/placeholder';
 	import { tweened } from 'svelte/motion';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { cn } from '$lib/utils.js';
+	import type { PosterImage } from '$lib/sanity/types';
 
 	let className: HTMLAttributes<HTMLImageElement>['class'] = undefined;
 	export { className as class };
-	export let posterBlurhash: string | undefined;
-	export let poster: ImageAsset;
+	export let poster: PosterImage;
 
-	const css = blurhashToImageCssObject(posterBlurhash || '', 32, 64);
+	const css = blurhashToImageCssObject(poster.blurhash || '', 32, 64);
 
 	let imageLoaded = false;
 	const imageOpacity = tweened(0, { duration: 300 });
@@ -29,15 +28,15 @@
 </script>
 
 <div
-	class={`aspect-2/3 w-80 lg:w-96 ${imageLoaded ? '' : 'animate-pulse'}`}
+	class={`w-full ${imageLoaded ? '' : 'animate-pulse'}`}
 	style:background-image={css.backgroundImage}
 	style:background-size={css.backgroundSize}
-	style:display={imageLoaded ? 'contents' : 'block'}
+	style:aspect-ratio={poster.dimensions.aspectRatio}
 >
 	<img
-		src={urlFor(poster).width(768).fit('min').auto('format').url()}
+		src={urlFor(poster.asset).width(768).fit('min').auto('format').url()}
 		alt="Poster for next screening"
-		class={cn('w-80 lg:w-96', className)}
+		class={cn('w-full', className)}
 		style:opacity={$imageOpacity}
 		use:setImageLoaded
 	/>

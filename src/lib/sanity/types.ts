@@ -23,9 +23,7 @@ export type Screening = {
 	release_year: number;
 	director: string;
 	date: string;
-	poster?: ImageAsset;
-	posterBlurhash?: string;
-	posterArtists?: Author[];
+	poster?: PosterImage;
 	tmdb_id?: number;
 	promo_material?: GalleryImage[];
 	event_media?: GalleryImage[];
@@ -35,6 +33,13 @@ export type GalleryImage = {
 	asset: ImageAsset;
 	alt: string;
 	dimensions: ImageDimensions;
+};
+
+export type PosterImage = {
+	asset: ImageAsset;
+	blurhash: string;
+	dimensions: ImageDimensions;
+	artists?: Author[];
 };
 
 export type Author = {

@@ -39,10 +39,9 @@
 	</div>
 
 	{#if data.nextScreening.poster}
-		<PosterImage
-			poster={data.nextScreening.poster}
-			posterBlurhash={data.nextScreening.posterBlurhash}
-		/>
+		<div class="max-w-96">
+			<PosterImage poster={data.nextScreening.poster} />
+		</div>
 	{:else}
 		<div>
 			<p class="text-center text-xl text-muted-foreground">

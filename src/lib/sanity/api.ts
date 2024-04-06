@@ -28,8 +28,11 @@ export function getNextScreening() {
 		movie_title,
 		release_year,
 		date,
-		poster,
-		"posterBlurhash": poster.asset->metadata.blurHash,
+		"poster": {
+			"asset": poster.asset,
+			"dimensions": poster.asset->metadata.dimensions,
+			"blurhash": poster.asset->metadata.blurHash,
+		},
 		director
 	}`,
 		{
@@ -44,9 +47,12 @@ export function getScreening(slug: string) {
 		movie_title,
 		release_year,
 		date,
-		poster,
-		"posterBlurhash": poster.asset->metadata.blurHash,
-		"posterArtists": poster_artists[]->,
+		"poster": {
+			"asset": poster.asset,
+			"dimensions": poster.asset->metadata.dimensions,
+			"blurhash": poster.asset->metadata.blurHash,
+			"artists": poster_artists[]->,
+		},
 		director,
 		tmdb_id,
 		promo_material[] {
