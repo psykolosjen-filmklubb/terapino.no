@@ -29,10 +29,18 @@ export type Screening = {
 	event_media?: GalleryImage[];
 };
 
-export type GalleryImage = {
+export type GalleryItem = GalleryImage | GalleryVideo;
+
+type GalleryImage = {
+	_type: 'image';
 	asset: ImageAsset;
 	alt: string;
 	dimensions: ImageDimensions;
+};
+
+type GalleryVideo = {
+	_type: 'video';
+	youtube_id: string;
 };
 
 export type PosterImage = {
