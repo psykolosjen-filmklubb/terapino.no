@@ -56,9 +56,16 @@ export function getScreening(slug: string) {
 		director,
 		tmdb_id,
 		promo_material[] {
-			asset,
-			alt,
-			"dimensions": asset->metadata.dimensions
+			_type == "image" => {
+				asset,
+				alt,
+				"dimensions": asset->metadata.dimensions,
+				_type,
+			},
+			_type == "video" => {
+				youtube_id,
+				_type,
+			}
 		},
 		event_media[] {
 			asset,

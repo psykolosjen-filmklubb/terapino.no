@@ -25,7 +25,7 @@ export type Screening = {
 	date: string;
 	poster?: PosterImage;
 	tmdb_id?: number;
-	promo_material?: GalleryImage[];
+	promo_material?: GalleryItem[];
 	event_media?: GalleryImage[];
 };
 
