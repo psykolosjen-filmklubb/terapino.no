@@ -6,7 +6,7 @@
 		semesterOptions
 	} from './archiveStore';
 	import type { Archive } from '$lib/components/Archive/types';
-	import { derived, get } from 'svelte/store';
+	import { derived, type Readable } from 'svelte/store';
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
 
@@ -27,25 +27,49 @@
 		? mobileMarginBottom
 		: desktopMarginBottom;
 
-	$: {
-		if (index < 2 || $archiveOptions.isMobile || !open) {
+	let derivedLastSemesterMarginBottom: Readable<number> | undefined;
+	let derivedSecondLastSemesterMarginBottom: Readable<number> | undefined;
+	let derivedSecondLastTitlesHeight: Readable<number> | undefined;
+
+	if (index >= 2) {
+		derivedLastSemesterMarginBottom = derived(
+			semesterMarginsBottom,
+			($semesterMarginsBottom) => $semesterMarginsBottom[archive[index - 1].name]
+		);
+		derivedSecondLastSemesterMarginBottom = derived(
+			semesterMarginsBottom,
+			($semesterMarginsBottom) => $semesterMarginsBottom[archive[index - 2].name]
+		);
+		derivedSecondLastTitlesHeight = derived(
+			semesterOptions,
+			($semesterOptions) => $semesterOptions[archive[index - 2].name].titlesHeight
+		);
+	}
+
+	function setTopMargin(
+		index: number,
+		isMobile: boolean,
+		open: boolean,
+		lastMarginBottom: number | undefined,
+		secondLastMarginBottom: number | undefined,
+		secondLastTitlesHeight: number | undefined
+	) {
+		if (index < 2 || isMobile || !open) {
 			$semesterMarginsTop[archive[index].name] = 0;
-			break $;
+			return;
 		}
 
-		const lastElementBottomMargin = $semesterMarginsBottom[archive[index - 1].name];
-		const secondLastElementBottomMargin = $semesterMarginsBottom[archive[index - 2].name];
-		// If I subscribe the top-margin store it causes cyclic dependency,
-		// therefore I read it with get(), to get value without subscribing.
-		const lastElementTopMargin = get(semesterMarginsTop)[archive[index - 1].name];
+		if (!lastMarginBottom || !secondLastMarginBottom || !secondLastTitlesHeight) {
+			return;
+		}
 
-		const { titlesHeight: secondLastTitlesHeight } = $semesterOptions[archive[index - 2].name];
+		const lastElementTopMargin = $semesterMarginsTop[archive[index - 1].name];
 
 		const spaceToSecondLast =
-			secondLastElementBottomMargin +
+			secondLastMarginBottom +
 			lastElementTopMargin +
 			$archiveOptions.circleHeight +
-			lastElementBottomMargin;
+			lastMarginBottom;
 
 		if (spaceToSecondLast < secondLastTitlesHeight) {
 			$semesterMarginsTop[archive[index].name] = secondLastTitlesHeight - spaceToSecondLast;
@@ -53,6 +77,15 @@
 			$semesterMarginsTop[archive[index].name] = 0;
 		}
 	}
+
+	$: setTopMargin(
+		index,
+		$archiveOptions.isMobile,
+		open,
+		$derivedLastSemesterMarginBottom,
+		$derivedSecondLastSemesterMarginBottom,
+		$derivedSecondLastTitlesHeight
+	);
 
 	const derivedBottomMargin = derived(
 		semesterMarginsBottom,
