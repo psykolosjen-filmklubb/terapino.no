@@ -135,3 +135,12 @@ export async function getOmOss() {
 		}`
 	);
 }
+
+export async function getStyret() {
+	return sanityClient.fetch<Member[]>(
+		groq`*[_type == "member" && active == true] {
+			name,
+			image,
+		}`
+	);
+}

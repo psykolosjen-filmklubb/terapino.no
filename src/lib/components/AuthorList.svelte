@@ -4,11 +4,11 @@
 	import { urlFor } from '$lib/sanity/image';
 
 	export let authors: Member[];
-	export let heading: string | undefined;
+	export let heading = '';
 </script>
 
 <div class="w-full">
-	{#if heading}
+	{#if heading !== ''}
 		<h3 class="text-sm font-light tracking-tight">{heading}</h3>
 	{/if}
 	<div class="grid gap-4">
