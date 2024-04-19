@@ -66,4 +66,5 @@ export type OmOss = {
 		blurhash: string;
 		alt: string;
 	};
+	main_text: PortableTextBlock[];
 };

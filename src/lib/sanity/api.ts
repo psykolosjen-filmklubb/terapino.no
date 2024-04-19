@@ -131,6 +131,7 @@ export async function getOmOss() {
 				"blurhash": header_image.image.asset->metadata.blurHash,
 				"alt": header_image.alt,
 			},
+			main_text
 		}`
 	);
 }
