@@ -1,10 +1,10 @@
 import groq from 'groq';
-import type { Author, Logo, OmOss, Review, ReviewExcerpt, Screening } from './types';
+import type { Member, Logo, OmOss, Review, ReviewExcerpt, Screening } from './types';
 import type { Semester } from '$lib/components/Archive/types';
 import { sanityClient } from './client';
 
 export function getAuthors() {
-	return sanityClient.fetch<Author[]>(groq`*[_type == "author"]`);
+	return sanityClient.fetch<Member[]>(groq`*[_type == "author"]`);
 }
 
 export function getReviewExcerpts(limit?: number) {

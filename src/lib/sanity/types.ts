@@ -8,7 +8,7 @@ export type Review = {
 	slug: Slug;
 	thumbnail: ImageAsset;
 	excerpt: string;
-	authors?: Author[];
+	authors?: Member[];
 	tmdb_id?: number;
 	thumbnailBlurhash: string;
 };
@@ -47,10 +47,10 @@ export type PosterImage = {
 	asset: ImageAsset;
 	blurhash: string;
 	dimensions: ImageDimensions;
-	artists?: Author[];
+	artists?: Member[];
 };
 
-export type Author = {
+export type Member = {
 	name: string;
 	image: ImageAsset;
 };

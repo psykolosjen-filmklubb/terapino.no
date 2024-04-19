@@ -1,9 +1,9 @@
 <script lang="ts">
 	import * as Avatar from '$lib/components/ui/avatar';
-	import type { Author } from '$lib/sanity/types';
+	import type { Member } from '$lib/sanity/types';
 	import { urlFor } from '$lib/sanity/image';
 
-	export let authors: Author[];
+	export let authors: Member[];
 	export let heading: string | undefined;
 </script>
 
