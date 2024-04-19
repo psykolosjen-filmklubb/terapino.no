@@ -1,5 +1,5 @@
 import groq from 'groq';
-import type { Author, Logo, Review, ReviewExcerpt, Screening } from './types';
+import type { Author, Logo, OmOss, Review, ReviewExcerpt, Screening } from './types';
 import type { Semester } from '$lib/components/Archive/types';
 import { sanityClient } from './client';
 
@@ -120,5 +120,17 @@ export async function getArchive() {
 			slug,
 		}
 	}`
+	);
+}
+
+export async function getOmOss() {
+	return sanityClient.fetch<OmOss>(
+		groq`*[_type == "page_om_oss"] | order(_updatedAt desc) [0] {
+			"header_image": {
+				"asset": header_image.image,
+				"blurhash": header_image.image.asset->metadata.blurHash,
+				"alt": header_image.alt,
+			},
+		}`
 	);
 }
