@@ -35,7 +35,7 @@
 				<img src={urlFor(data.logos.white.image).width(512).height(512).url()} alt="Logo" />
 			{/if}
 		</a>
-		<h1 class="hidden scroll-m-20 text-left text-5xl font-bold tracking-tight lg:block">
+		<h1 class="scroll-m-20 text-left text-xl font-bold tracking-tight lg:text-5xl">
 			{currentTitle}
 		</h1>
 	</div>
