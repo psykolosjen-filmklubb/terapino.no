@@ -1,6 +1,7 @@
 <script>
-	import AuthorList from '$lib/components/AuthorList.svelte';
 	import HeroImage from '$lib/components/HeroImage.svelte';
+	import MemberTag from '$lib/components/MemberTag.svelte';
+	import { Separator } from '$lib/components/ui/separator';
 	import { PortableText } from '@portabletext/svelte';
 
 	export let data;
@@ -21,11 +22,27 @@
 
 {#if data.rolesWithMembers}
 	<article class="my-8 px-8 lg:mx-auto lg:max-w-screen-sm">
-		<h2 class="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-			Styret:
+		<h2
+			class="mb-2 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+		>
+			Medlemmer
 		</h2>
-		{#each data.rolesWithMembers as role}
-			<AuthorList authors={role.members} heading={role.role} />
-		{/each}
+		<div class="grid gap-4">
+			{#each data.rolesWithMembers as roleWithMembers, i}
+				<div>
+					<h3 class="text-lg font-thin tracking-tight">
+						{roleWithMembers.role.toUpperCase()}
+					</h3>
+					<div class="grid gap-2">
+						{#each roleWithMembers.members as member}
+							<MemberTag {member} />
+						{/each}
+					</div>
+					{#if i !== data.rolesWithMembers.length - 1}
+						<Separator class="mt-4" />
+					{/if}
+				</div>
+			{/each}
+		</div>
 	</article>
 {/if}
