@@ -186,3 +186,24 @@ export async function getRolesWithMembers() {
 
 	return rolesWithMembers.filter((role) => role.members.length > 0);
 }
+
+export async function getMember(name: string) {
+	return sanityClient.fetch<Member>(
+		groq`*[_type == "member" && name match $name][0]{
+			name,
+			image,
+			memberships[] | order(from_date asc) {
+				from_date,
+				to_date
+			},
+			verv[] | order(from_date asc) {
+				"role": role->name,
+				from_date,
+				to_date
+			}
+		}`,
+		{
+			name
+		}
+	);
+}
