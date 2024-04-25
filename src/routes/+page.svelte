@@ -38,11 +38,11 @@
 		{/if}
 	</div>
 
-	{#if data.nextScreening.poster}
+	{#if data.nextScreening && data.nextScreening.poster}
 		<div class="max-w-96">
 			<PosterImage poster={data.nextScreening.poster} />
 		</div>
-	{:else}
+	{:else if data.nextScreening}
 		<div>
 			<p class="text-center text-xl text-muted-foreground">
 				{dateFormatterLongNoYear.format(new Date(data.nextScreening.date))}:
