@@ -71,7 +71,7 @@ export type OmOss = {
 	main_text: PortableTextBlock[];
 };
 
-type Membership = {
+export type Membership = {
 	from_date: string;
 	to_date?: string;
 };

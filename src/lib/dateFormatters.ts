@@ -16,3 +16,8 @@ export const dateFormatterLong = Intl.DateTimeFormat('no', {
 	day: 'numeric',
 	year: 'numeric'
 });
+
+export const dateFormatterMonthYear = Intl.DateTimeFormat('no', {
+	month: 'long',
+	year: 'numeric'
+});
