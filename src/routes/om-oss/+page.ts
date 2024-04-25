@@ -1,14 +1,14 @@
-import { getOmOss, getStyret } from '$lib/sanity/api';
+import { getOmOss, getRolesWithMembers } from '$lib/sanity/api';
 import { error } from '@sveltejs/kit';
 
 export async function load() {
 	const content = getOmOss();
-	const styret = getStyret();
+	const rolesWithMembers = getRolesWithMembers();
 
 	try {
 		return {
 			content: await content,
-			styret: await styret
+			rolesWithMembers: await rolesWithMembers
 		};
 	} catch (e) {
 		error(500, 'Internal Server Error');

@@ -53,6 +53,8 @@ export type PosterImage = {
 export type Member = {
 	name: string;
 	image: ImageAsset;
+	memberships: Membership[];
+	verv?: Verv[];
 };
 
 export type Logo = {
@@ -67,4 +69,15 @@ export type OmOss = {
 		alt: string;
 	};
 	main_text: PortableTextBlock[];
+};
+
+type Membership = {
+	from_date: string;
+	to_date?: string;
+};
+
+type Verv = {
+	role: string;
+	from_date: string;
+	to_date?: string;
 };
