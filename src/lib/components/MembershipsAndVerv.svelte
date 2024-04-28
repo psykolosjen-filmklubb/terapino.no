@@ -2,6 +2,7 @@
 	import { dateFormatterMonthYear } from '$lib/dateFormatters';
 	import * as Accordion from '$lib/components/ui/accordion';
 	import type { Membership, Verv } from '$lib/sanity/types';
+	import { Badge } from '$lib/components/ui/badge';
 
 	export let memberships: Membership[];
 	export let verv: Verv[] = [];
@@ -19,10 +20,11 @@
 	<Accordion.Item value="item-1">
 		<Accordion.Trigger>
 			{#if activeVervs.length > 0}
-				{#each activeVervs as verv, i}
-					{verv.role +
-						(i < activeVervs.length - 2 ? ', ' : i < activeVervs.length - 1 ? ' og ' : '')}
-				{/each}
+				<span class="flex gap-2">
+					{#each activeVervs as verv, i}
+						<Badge>{verv.role}</Badge>
+					{/each}
+				</span>
 			{:else if activeMembership}
 				Medlem siden {dateFormatterMonthYear.format(new Date(activeMembership.from_date))}
 			{:else}
@@ -32,17 +34,19 @@
 		<Accordion.Content>
 			<ul>
 				{#each sortedMembershipsAndVervs as membershipOrVerv}
-					<li class="pl-4">
+					<li class="my-2 pl-4">
 						{#if 'role' in membershipOrVerv}
 							<p class="pl-4">
 								{#if membershipOrVerv.to_date}
-									{membershipOrVerv.role}
+									<Badge>{membershipOrVerv.role}</Badge>
 									fra
 									{dateFormatterMonthYear.format(new Date(membershipOrVerv.from_date))}
 									til
 									{dateFormatterMonthYear.format(new Date(membershipOrVerv.to_date))}
 								{:else}
-									{membershipOrVerv.role}
+									<Badge class="bg-background text-foreground hover:bg-background hover:ring-1">
+										{membershipOrVerv.role}
+									</Badge>
 									siden
 									{dateFormatterMonthYear.format(new Date(membershipOrVerv.from_date))}
 								{/if}
