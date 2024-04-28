@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Memberships from '$lib/components/Memberships.svelte';
+	import MembershipsAndVerv from '$lib/components/MembershipsAndVerv.svelte';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import { urlFor } from '$lib/sanity/image';
 
@@ -24,6 +24,6 @@
 
 {#if data.member.memberships}
 	<article class="my-4 w-full px-4">
-		<Memberships memberships={data.member.memberships} verv={data.member.verv ?? []} />
+		<MembershipsAndVerv memberships={data.member.memberships} verv={data.member.verv ?? []} />
 	</article>
 {/if}
