@@ -76,7 +76,7 @@ export type Membership = {
 	to_date?: string;
 };
 
-type Verv = {
+export type Verv = {
 	role: string;
 	from_date: string;
 	to_date?: string;

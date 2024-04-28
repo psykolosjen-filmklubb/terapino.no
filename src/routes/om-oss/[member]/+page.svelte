@@ -24,6 +24,6 @@
 
 {#if data.member.memberships}
 	<article class="my-4 w-full px-4">
-		<Memberships memberships={data.member.memberships} />
+		<Memberships memberships={data.member.memberships} verv={data.member.verv ?? []} />
 	</article>
 {/if}
