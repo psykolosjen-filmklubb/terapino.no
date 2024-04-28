@@ -12,7 +12,7 @@
 
 	let sortedMembershipsAndVervs: (Membership | Verv)[] = [];
 	$: sortedMembershipsAndVervs = [...memberships, ...verv].sort(
-		(a, b) => new Date(b.from_date).getTime() - new Date(a.from_date).getTime()
+		(a, b) => new Date(a.from_date).getTime() - new Date(b.from_date).getTime()
 	);
 </script>
 
