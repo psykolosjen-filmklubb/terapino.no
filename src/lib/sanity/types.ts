@@ -48,9 +48,11 @@ export type PosterImage = {
 	blurhash: string;
 	dimensions: ImageDimensions;
 	artists?: Member[];
+	alt?: string;
 };
 
 export type Member = {
+	_id?: string;
 	name: string;
 	image: ImageAsset;
 	memberships: Membership[];

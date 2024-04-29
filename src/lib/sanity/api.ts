@@ -1,5 +1,5 @@
 import groq from 'groq';
-import type { Member, Logo, OmOss, Review, ReviewExcerpt, Screening } from './types';
+import type { Member, Logo, OmOss, Review, ReviewExcerpt, Screening, PosterImage } from './types';
 import type { Semester } from '$lib/components/Archive/types';
 import { sanityClient } from './client';
 
@@ -190,6 +190,7 @@ export async function getRolesWithMembers() {
 export async function getMember(name: string) {
 	return sanityClient.fetch<Member>(
 		groq`*[_type == "member" && name match $name][0]{
+			_id,
 			name,
 			image,
 			memberships[] | order(from_date asc) {
@@ -204,6 +205,20 @@ export async function getMember(name: string) {
 		}`,
 		{
 			name
+		}
+	);
+}
+
+export async function getPostersByMember(id: string) {
+	return sanityClient.fetch<PosterImage[]>(
+		groq`*[_type == "screening" && references($id)] | order(date desc) {
+			"asset": poster.asset,
+			"dimensions": poster.asset->metadata.dimensions,
+			"blurhash": poster.asset->metadata.blurHash,
+			"alt": movie_title,
+		}`,
+		{
+			id
 		}
 	);
 }
