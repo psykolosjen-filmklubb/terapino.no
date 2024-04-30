@@ -29,7 +29,7 @@
 	});
 </script>
 
-<div class="pswp-gallery grid grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-4" id={galleryID}>
+<div class="pswp-gallery grid grid-cols-2 gap-4 lg:grid-cols-3" id={galleryID}>
 	{#each posters as poster}
 		<a
 			href={urlFor(poster.asset).auto('format').url()}
