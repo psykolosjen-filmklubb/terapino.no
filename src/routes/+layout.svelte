@@ -11,11 +11,13 @@
 	export let data;
 
 	let currentTitle = '';
+	let currentRoute = '';
 	$: {
 		let tempTitle = 'Psykolosjen Filmklubb';
 		Object.values(routes).forEach((route) => {
 			if ($page.url.pathname.startsWith('/' + route.route)) {
 				tempTitle = route.title;
+				currentRoute = route.route;
 			}
 		});
 		currentTitle = tempTitle;
@@ -35,9 +37,18 @@
 				<img src={urlFor(data.logos.white.image).width(512).height(512).url()} alt="Logo" />
 			{/if}
 		</a>
-		<h1 class="scroll-m-20 text-left text-xl font-bold tracking-tight lg:text-5xl">
-			{currentTitle}
-		</h1>
+		{#if currentTitle != 'Psykolosjen Filmklubb'}
+			<a
+				href="/{currentRoute}"
+				class="scroll-m-20 text-left text-xl font-bold tracking-tight lg:text-5xl"
+			>
+				{currentTitle}
+			</a>
+		{:else}
+			<h1 class="scroll-m-20 text-left text-xl font-bold tracking-tight lg:text-5xl">
+				{currentTitle}
+			</h1>
+		{/if}
 	</div>
 
 	<NavLinks />
