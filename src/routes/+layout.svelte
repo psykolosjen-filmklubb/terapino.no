@@ -47,7 +47,7 @@
 	<slot />
 </main>
 
-<footer class="border-t bg-muted py-6 text-muted-foreground lg:py-10">
+<footer class="sticky top-[100vh] border-t bg-muted py-6 text-muted-foreground lg:py-10">
 	<div class="mb-4 flex justify-center gap-10 lg:mb-8">
 		<Button
 			href="https://www.instagram.com/quentin_terapino"
@@ -73,3 +73,9 @@
 		© {new Date().getFullYear()}
 	</p>
 </footer>
+
+<style>
+	:global(body) {
+		min-height: 100vh;
+	}
+</style>
