@@ -61,7 +61,7 @@
 </section>
 
 {#if data.reviews}
-	<section class="flex w-full flex-col px-2 py-8 lg:px-6 lg:pt-20">
+	<section class="flex w-full flex-col px-2 py-8 lg:px-6">
 		<h2
 			class="mb-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
 		>
