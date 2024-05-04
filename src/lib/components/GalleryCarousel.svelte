@@ -153,7 +153,7 @@
 				</Carousel.Item>
 			{/each}
 		</Carousel.Content>
-		<Carousel.Previous class="left-2 border-0 bg-opacity-50 disabled:hidden" />
-		<Carousel.Next class="right-2 border-0 bg-opacity-50 disabled:hidden" />
+		<Carousel.Previous class="left-2 border-0 bg-opacity-50 disabled:hidden lg:left-2" />
+		<Carousel.Next class="right-2 border-0 bg-opacity-50 disabled:hidden lg:right-2" />
 	</Carousel.Root>
 </div>
