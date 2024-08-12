@@ -1,4 +1,8 @@
 export const routes: Record<string, route> = {
+	bli_med: {
+		route: 'bli-med',
+		title: 'Søk filmklubben'
+	},
 	anmeldelser: {
 		route: 'anmeldelser',
 		title: 'Anmeldelser'
