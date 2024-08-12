@@ -19,6 +19,10 @@
 		<p class="px-4 text-center lg:px-0 lg:text-left">
 			Her kan du se kommende visninger vi arrangerer og lese våre film-anmeldelser.
 		</p>
+		<p class="mt-12 text-center text-xl lg:mt-16">Vil du være med i filmklubben?</p>
+		<div class="mb-12 mt-2 flex justify-center">
+			<Button href="/bli-med" size="lg" class="">Søk nå!</Button>
+		</div>
 		{#if data.nextScreening}
 			<h2
 				class="my-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
