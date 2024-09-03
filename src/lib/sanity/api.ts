@@ -1,5 +1,14 @@
 import groq from 'groq';
-import type { Member, Logo, OmOss, Review, ReviewExcerpt, Screening, PosterImage } from './types';
+import type {
+	Member,
+	Logo,
+	OmOss,
+	Review,
+	ReviewExcerpt,
+	Screening,
+	PosterImage,
+	Instillinger
+} from './types';
 import type { Semester } from '$lib/components/Archive/types';
 import { sanityClient } from './client';
 
@@ -233,5 +242,13 @@ export async function getReviewsByMember(id: string) {
 		{
 			id
 		}
+	);
+}
+
+export async function getSettings() {
+	return sanityClient.fetch<Instillinger>(
+		groq`*[_type == "settings" && title == "Instillinger"][0] {
+			recruiting
+		}`
 	);
 }

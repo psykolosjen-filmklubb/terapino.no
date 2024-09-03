@@ -16,6 +16,13 @@
 	function close() {
 		return (isOpen = false);
 	}
+
+	$: filteredRoutes = Object.values(routes).filter((route) => {
+		if (route.route === 'bli-med') {
+			return $page.data.settings.recruiting.recruiting_active;
+		}
+		return true;
+	});
 </script>
 
 <svelte:window
@@ -38,7 +45,7 @@
 				<X />
 			</button>
 			<nav class="mt-8 flex flex-col items-end gap-2">
-				{#each Object.values(routes) as route}
+				{#each filteredRoutes as route}
 					<Button
 						variant="link"
 						href="/{route.route}"
@@ -66,7 +73,7 @@
 
 <div class="hidden gap-4 lg:flex">
 	<nav class="flex gap-8">
-		{#each Object.values(routes) as route}
+		{#each filteredRoutes as route}
 			<Button
 				variant="link"
 				href="/{route.route}"

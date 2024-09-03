@@ -1,7 +1,13 @@
+<script lang="ts">
+	import { page } from '$app/stores';
+
+	$: src = $page.data.settings.recruiting.recruiting_form;
+</script>
+
 <iframe
 	title="Skjema for å søke filmklubben"
-	src="https://docs.google.com/forms/d/e/1FAIpQLSf2NI7pOwOD7ipmNvUVhRWMk0IvDGvCNm739t8ju_2WcaCNVw/viewform?embedded=true"
-	class="h-[190rem] w-full border-0 lg:h-[160rem] lg:max-w-2xl"
+	{src}
+	class="h-[200rem] w-full border-0 lg:h-[170rem] lg:max-w-2xl"
 >
 	Laster inn…
 </iframe>

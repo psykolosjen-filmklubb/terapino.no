@@ -83,3 +83,10 @@ export type Verv = {
 	from_date: string;
 	to_date?: string;
 };
+
+export type Instillinger = {
+	recruiting: {
+		recruiting_active: boolean;
+		recruiting_form: string;
+	};
+};
