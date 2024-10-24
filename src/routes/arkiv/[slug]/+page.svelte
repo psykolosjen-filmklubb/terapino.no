@@ -12,17 +12,28 @@
 	export let data;
 
 	$: screening = data.screening;
+
+	let isFuture = false;
+	$: {
+		const today = new Date();
+		const screeningDate = new Date(screening.date);
+
+		today.setHours(0, 0, 0, 0);
+		screeningDate.setHours(0, 0, 0, 0);
+
+		isFuture = screeningDate >= today;
+	}
 </script>
 
 <div class="flex flex-col items-center text-center lg:mt-4">
-	<p class="text-l text-muted-foreground">Psykolosjen Filmklubb viste</p>
+	<p class="text-l text-muted-foreground">Psykolosjen Filmklubb {isFuture ? 'viser' : 'viste'}</p>
 	<h1 class="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
 		{screening.movie_title}
 	</h1>
 	<p class="text-l text-muted-foreground">{dateFormatterLong.format(new Date(screening.date))}</p>
 </div>
 
-{#if screening.poster}
+{#if screening.poster?.asset}
 	<Card.Root class="w-full overflow-hidden lg:max-w-sm">
 		<Card.Content class="p-0">
 			<PosterImage
