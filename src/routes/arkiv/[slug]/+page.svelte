@@ -8,6 +8,7 @@
 	import ImdbButton from '$lib/components/ImdbButton.svelte';
 	import LetterboxdButton from '$lib/components/LetterboxdButton.svelte';
 	import GalleryCarousel from '$lib/components/GalleryCarousel.svelte';
+	import { Button } from '$lib/components/ui/button';
 
 	export let data;
 
@@ -47,6 +48,18 @@
 			</Card.Footer>
 		{/if}
 	</Card.Root>
+{/if}
+
+{#if isFuture && screening.tickets_url}
+	<Button size="lg" class="my-4">
+		<a
+			href={screening.tickets_url}
+			target="_blank"
+			class="text-center text-lg font-semibold text-primary-foreground"
+		>
+			Kjøp billetter
+		</a>
+	</Button>
 {/if}
 
 {#if data.movieDetails}

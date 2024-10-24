@@ -28,6 +28,7 @@ export type Screening = {
 	promo_material?: GalleryItem[];
 	event_media?: GalleryImage[];
 	slug: Slug;
+	tickets_url?: string;
 };
 
 export type GalleryItem = GalleryImage | GalleryVideo;

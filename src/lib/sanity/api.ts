@@ -81,7 +81,8 @@ export function getScreening(slug: string) {
 			asset,
 			alt,
 			"dimensions": asset->metadata.dimensions
-		}
+		},
+		tickets_url
 	}`,
 		{
 			slug
