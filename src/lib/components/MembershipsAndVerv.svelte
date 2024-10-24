@@ -38,13 +38,15 @@
 						{#if 'role' in membershipOrVerv}
 							<p class="pl-4">
 								{#if membershipOrVerv.to_date}
-									<Badge>{membershipOrVerv.role}</Badge>
+									<Badge class="bg-background text-foreground hover:bg-background hover:ring-1">
+										{membershipOrVerv.role}
+									</Badge>
 									fra
 									{dateFormatterMonthYear.format(new Date(membershipOrVerv.from_date))}
 									til
 									{dateFormatterMonthYear.format(new Date(membershipOrVerv.to_date))}
 								{:else}
-									<Badge class="bg-background text-foreground hover:bg-background hover:ring-1">
+									<Badge>
 										{membershipOrVerv.role}
 									</Badge>
 									siden
