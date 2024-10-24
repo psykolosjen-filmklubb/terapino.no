@@ -42,7 +42,8 @@ export function getNextScreening() {
 			"dimensions": poster.asset->metadata.dimensions,
 			"blurhash": poster.asset->metadata.blurHash,
 		},
-		director
+		director,
+		slug
 	}`,
 		{
 			today: new Date().toISOString().split('T')[0]

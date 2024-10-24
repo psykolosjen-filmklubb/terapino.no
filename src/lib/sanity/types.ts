@@ -27,6 +27,7 @@ export type Screening = {
 	tmdb_id?: number;
 	promo_material?: GalleryItem[];
 	event_media?: GalleryImage[];
+	slug: Slug;
 };
 
 export type GalleryItem = GalleryImage | GalleryVideo;

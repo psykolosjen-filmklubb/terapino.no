@@ -46,24 +46,25 @@
 		{/if}
 	</div>
 
-	{#if data.nextScreening && data.nextScreening.poster}
+	{#if data.nextScreening && data.nextScreening.poster?.asset}
 		<div class="max-w-96">
-			<PosterImage poster={data.nextScreening.poster} />
+			<a href="arkiv/{data.nextScreening.slug.current}">
+				<PosterImage poster={data.nextScreening.poster} />
+			</a>
 		</div>
 	{:else if data.nextScreening}
 		<div>
-			<p class="text-center text-xl text-muted-foreground">
-				{dateFormatterLongNoYear.format(new Date(data.nextScreening.date))}:
-			</p>
-			<h3 class="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
-				{data.nextScreening.movie_title} ({data.nextScreening.release_year})
-			</h3>
-			<p class="text-center text-xl">
-				Av {data.nextScreening.director}
-			</p>
-			<small class="mt-4 text-center text-sm font-medium leading-none text-muted-foreground">
-				Hold av datoen, mer informasjon kommer snart
-			</small>
+			<a href="arkiv/{data.nextScreening.slug.current}">
+				<p class="text-center text-xl text-muted-foreground">
+					{dateFormatterLongNoYear.format(new Date(data.nextScreening.date))}:
+				</p>
+				<h3 class="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
+					{data.nextScreening.movie_title} ({data.nextScreening.release_year})
+				</h3>
+				<p class="text-center text-xl">
+					Av {data.nextScreening.director}
+				</p>
+			</a>
 		</div>
 	{/if}
 </section>
