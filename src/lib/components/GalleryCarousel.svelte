@@ -17,7 +17,7 @@
 
 	let { galleryID, images }: Props = $props();
 
-	let carouselApi: CarouselAPI = $state();
+	let carouselApi = $state<CarouselAPI>();
 
 	let isGalleryOpen = $state(false);
 
@@ -98,7 +98,7 @@
 </script>
 
 <div class="pswp-gallery lg:max-w-sm" id={galleryID}>
-	<Carousel.Root bind:api={carouselApi}>
+	<Carousel.Root setApi={(emblaApi) => (carouselApi = emblaApi)}>
 		<Carousel.Content>
 			{#each images as image}
 				<Carousel.Item class="relative content-center">
@@ -120,7 +120,6 @@
 								variant="outline"
 								size="icon"
 								class="absolute left-1/2 top-1/2 size-12 -translate-x-1/2 -translate-y-1/2 rounded-full border-0 bg-opacity-50"
-								on:click
 							>
 								<Play class="ml-1 size-8" />
 								<span class="sr-only">Åpne video</span>

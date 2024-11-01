@@ -24,7 +24,7 @@
 	});
 </script>
 
-<Accordion.Root>
+<Accordion.Root type="single">
 	<Accordion.Item value="item-1">
 		<Accordion.Trigger>
 			{#if activeVervs.length > 0}

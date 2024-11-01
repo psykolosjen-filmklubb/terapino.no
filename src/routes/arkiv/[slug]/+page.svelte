@@ -65,7 +65,7 @@
 {/if}
 
 {#if data.movieDetails}
-	<Accordion.Root class="-mt-4 w-72">
+	<Accordion.Root type="single" class="-mt-4 w-full lg:max-w-sm">
 		<Accordion.Item value="movie-details">
 			<Accordion.Trigger>Mer info om {screening.movie_title}</Accordion.Trigger>
 			<Accordion.Content>

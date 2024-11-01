@@ -52,14 +52,14 @@
 			{#each data.reviews as review}
 				<a href={`/anmeldelser/${review.slug.current}`} class="group">
 					<Card.Root>
-						<Card.Header>
+						<Card.Content>
 							<Card.Title class="group-hover:underline">
 								{review.review_title}
 							</Card.Title>
 							<Card.Description class="group-hover:underline">
 								{review.movie_title}
 							</Card.Description>
-						</Card.Header>
+						</Card.Content>
 					</Card.Root>
 				</a>
 			{/each}
