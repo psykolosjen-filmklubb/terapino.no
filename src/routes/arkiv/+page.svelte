@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Archive from '$lib/components/Archive/Archive.svelte';
 
-	export let data;
+	let { data } = $props();
 </script>
 
 <div class="mt-4 w-full">

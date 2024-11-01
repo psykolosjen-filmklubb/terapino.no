@@ -1,17 +1,25 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { urlFor } from '$lib/sanity/image';
 	import type { ImageAsset } from '@sanity/types';
 	import { blurhashToImageCssObject } from '@unpic/placeholder';
 	import { tweened } from 'svelte/motion';
 
-	export let thumbnailBlurhash: string;
-	export let thumbnail: ImageAsset;
+	interface Props {
+		thumbnailBlurhash: string;
+		thumbnail: ImageAsset;
+	}
+
+	let { thumbnailBlurhash, thumbnail }: Props = $props();
 
 	const css = blurhashToImageCssObject(thumbnailBlurhash, 64, 32);
 
-	let imageLoaded = false;
+	let imageLoaded = $state(false);
 	const imageOpacity = tweened(0, { duration: 300 });
-	$: imageOpacity.set(imageLoaded ? 1 : 0);
+	run(() => {
+		imageOpacity.set(imageLoaded ? 1 : 0);
+	});
 
 	function setImageLoaded(img: HTMLImageElement) {
 		if (img.complete) {

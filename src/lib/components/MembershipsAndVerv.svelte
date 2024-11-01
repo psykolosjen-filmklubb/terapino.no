@@ -1,19 +1,27 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { dateFormatterMonthYear } from '$lib/dateFormatters';
 	import * as Accordion from '$lib/components/ui/accordion';
 	import type { Membership, Verv } from '$lib/sanity/types';
 	import { Badge } from '$lib/components/ui/badge';
 
-	export let memberships: Membership[];
-	export let verv: Verv[] = [];
+	interface Props {
+		memberships: Membership[];
+		verv?: Verv[];
+	}
 
-	$: activeVervs = verv.filter((verv) => verv.to_date === null);
-	$: activeMembership = memberships.find((membership) => membership.to_date === null);
+	let { memberships, verv = [] }: Props = $props();
 
-	let sortedMembershipsAndVervs: (Membership | Verv)[] = [];
-	$: sortedMembershipsAndVervs = [...memberships, ...verv].sort(
-		(a, b) => new Date(a.from_date).getTime() - new Date(b.from_date).getTime()
-	);
+	let activeVervs = $derived(verv.filter((verv) => verv.to_date === null));
+	let activeMembership = $derived(memberships.find((membership) => membership.to_date === null));
+
+	let sortedMembershipsAndVervs: (Membership | Verv)[] = $state([]);
+	run(() => {
+		sortedMembershipsAndVervs = [...memberships, ...verv].sort(
+			(a, b) => new Date(a.from_date).getTime() - new Date(b.from_date).getTime()
+		);
+	});
 </script>
 
 <Accordion.Root>

@@ -3,7 +3,11 @@
 	import * as Carousel from '$lib/components/ui/carousel';
 	import ReviewExcerptCard from './ReviewExcerptCard.svelte';
 
-	export let reviews: ReviewExcerpt[];
+	interface Props {
+		reviews: ReviewExcerpt[];
+	}
+
+	let { reviews }: Props = $props();
 </script>
 
 <Carousel.Root>

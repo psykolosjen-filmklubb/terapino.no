@@ -4,7 +4,11 @@
 	import type { ReviewExcerpt } from '$lib/sanity/types';
 	import ThumbnailImage from './ThumbnailImage.svelte';
 
-	export let review: ReviewExcerpt;
+	interface Props {
+		review: ReviewExcerpt;
+	}
+
+	let { review }: Props = $props();
 </script>
 
 <div class="max-w-lg">

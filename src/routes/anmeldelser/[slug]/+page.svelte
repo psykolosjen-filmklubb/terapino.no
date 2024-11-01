@@ -7,7 +7,7 @@
 	import ImdbButton from '$lib/components/ImdbButton.svelte';
 	import LetterboxdButton from '$lib/components/LetterboxdButton.svelte';
 
-	export let data;
+	let { data } = $props();
 </script>
 
 <HeroImage thumbnailBlurhash={data.review.thumbnailBlurhash} thumbnail={data.review.thumbnail} />

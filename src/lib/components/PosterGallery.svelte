@@ -5,8 +5,12 @@
 	import { urlFor } from '$lib/sanity/image';
 	import type { PosterImage } from '$lib/sanity/types';
 
-	export let galleryID: string;
-	export let posters: PosterImage[];
+	interface Props {
+		galleryID: string;
+		posters: PosterImage[];
+	}
+
+	let { galleryID, posters }: Props = $props();
 
 	// Icon copied from lucide X icon to be able to use it with PhotoSwipe
 	const closeSvgString =

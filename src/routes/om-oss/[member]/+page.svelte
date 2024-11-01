@@ -5,10 +5,10 @@
 	import { urlFor } from '$lib/sanity/image';
 	import * as Card from '$lib/components/ui/card';
 
-	export let data;
+	let { data } = $props();
 
-	$: nameList = data.member.name.split(' ');
-	$: fallback = nameList[0].substring(0, 1) + nameList.slice(-1)[0].substring(0, 1);
+	let nameList = $derived(data.member.name.split(' '));
+	let fallback = $derived(nameList[0].substring(0, 1) + nameList.slice(-1)[0].substring(0, 1));
 </script>
 
 <h1 class="my-2 scroll-m-20 text-center text-3xl font-extrabold tracking-tight lg:text-4xl">

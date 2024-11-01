@@ -10,12 +10,16 @@
 	import { fade } from 'svelte/transition';
 	import { Button } from './ui/button';
 
-	export let galleryID: string;
-	export let images: GalleryItem[];
+	interface Props {
+		galleryID: string;
+		images: GalleryItem[];
+	}
 
-	let carouselApi: CarouselAPI;
+	let { galleryID, images }: Props = $props();
 
-	let isGalleryOpen = false;
+	let carouselApi: CarouselAPI = $state();
+
+	let isGalleryOpen = $state(false);
 
 	// Icon copied from lucide X icon to be able to use it with PhotoSwipe
 	const closeSvgString =

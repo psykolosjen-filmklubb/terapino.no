@@ -4,7 +4,7 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import { PortableText } from '@portabletext/svelte';
 
-	export let data;
+	let { data } = $props();
 </script>
 
 {#if data.content.header_image.asset}

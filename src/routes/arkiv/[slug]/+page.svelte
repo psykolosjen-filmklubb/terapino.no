@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import AuthorList from '$lib/components/AuthorList.svelte';
 	import PosterImage from '$lib/components/PosterImage.svelte';
 	import * as Card from '$lib/components/ui/card';
@@ -10,12 +12,12 @@
 	import GalleryCarousel from '$lib/components/GalleryCarousel.svelte';
 	import { Button } from '$lib/components/ui/button';
 
-	export let data;
+	let { data } = $props();
 
-	$: screening = data.screening;
+	let screening = $derived(data.screening);
 
-	let isFuture = false;
-	$: {
+	let isFuture = $state(false);
+	run(() => {
 		const today = new Date();
 		const screeningDate = new Date(screening.date);
 
@@ -23,7 +25,7 @@
 		screeningDate.setHours(0, 0, 0, 0);
 
 		isFuture = screeningDate >= today;
-	}
+	});
 </script>
 
 <div class="flex flex-col items-center text-center lg:mt-4">

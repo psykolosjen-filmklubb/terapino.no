@@ -2,8 +2,12 @@
 	import type { Member } from '$lib/sanity/types';
 	import MemberTag from './MemberTag.svelte';
 
-	export let authors: Member[];
-	export let heading = '';
+	interface Props {
+		authors: Member[];
+		heading?: string;
+	}
+
+	let { authors, heading = '' }: Props = $props();
 </script>
 
 <div class="w-full">

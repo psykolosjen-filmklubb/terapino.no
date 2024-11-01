@@ -2,7 +2,11 @@
 	import { siImdb } from 'simple-icons';
 	import { Button } from './ui/button';
 
-	export let imdbId: string;
+	interface Props {
+		imdbId: string;
+	}
+
+	let { imdbId }: Props = $props();
 </script>
 
 <Button

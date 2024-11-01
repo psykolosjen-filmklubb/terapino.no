@@ -3,10 +3,14 @@
 	import { urlFor } from '$lib/sanity/image';
 	import type { Member } from '$lib/sanity/types';
 
-	export let member: Member;
+	interface Props {
+		member: Member;
+	}
 
-	$: nameList = member.name.split(' ');
-	$: fallback = nameList[0].substring(0, 1) + nameList.slice(-1)[0].substring(0, 1);
+	let { member }: Props = $props();
+
+	let nameList = $derived(member.name.split(' '));
+	let fallback = $derived(nameList[0].substring(0, 1) + nameList.slice(-1)[0].substring(0, 1));
 </script>
 
 <a

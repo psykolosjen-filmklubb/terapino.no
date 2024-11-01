@@ -7,7 +7,7 @@
 	import { routes } from '$lib/routes';
 	import ThemeToggle from './ThemeToggle.svelte';
 
-	let isOpen = false;
+	let isOpen = $state(false);
 
 	function toggle() {
 		return (isOpen = !isOpen);
@@ -17,16 +17,16 @@
 		return (isOpen = false);
 	}
 
-	$: filteredRoutes = Object.values(routes).filter((route) => {
+	let filteredRoutes = $derived(Object.values(routes).filter((route) => {
 		if (route.route === 'bli-med') {
 			return $page.data.settings.recruiting.recruiting_active;
 		}
 		return true;
-	});
+	}));
 </script>
 
 <svelte:window
-	on:keydown={(e) => {
+	onkeydown={(e) => {
 		if (isOpen && e.key === 'Escape') {
 			close();
 		}
@@ -41,7 +41,7 @@
 			class="fixed inset-y-0 right-0 z-30 flex w-8/12 flex-col items-end bg-background px-6 py-5"
 			use:focus={{ enabled: true, preventScroll: true }}
 		>
-			<button class="text-5xl" on:click={close}>
+			<button class="text-5xl" onclick={close}>
 				<X />
 			</button>
 			<nav class="mt-8 flex flex-col items-end gap-2">
@@ -65,9 +65,9 @@
 	{/if}
 
 	{#if isOpen}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div class="fixed inset-0 z-20 bg-black opacity-50" on:click={close} />
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<div class="fixed inset-0 z-20 bg-black opacity-50" onclick={close}></div>
 	{/if}
 </div>
 

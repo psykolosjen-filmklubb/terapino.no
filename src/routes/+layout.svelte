@@ -1,4 +1,6 @@
 <script>
+	import { run } from 'svelte/legacy';
+
 	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button';
 	import { urlFor } from '$lib/sanity/image';
@@ -8,11 +10,11 @@
 	import { routes } from '$lib/routes';
 	import { ModeWatcher, mode } from 'mode-watcher';
 
-	export let data;
+	let { data, children } = $props();
 
-	let currentTitle = '';
-	let currentRoute = '';
-	$: {
+	let currentTitle = $state('');
+	let currentRoute = $state('');
+	run(() => {
 		let tempTitle = 'Psykolosjen Filmklubb';
 		Object.values(routes).forEach((route) => {
 			if ($page.url.pathname.startsWith('/' + route.route)) {
@@ -21,7 +23,7 @@
 			}
 		});
 		currentTitle = tempTitle;
-	}
+	});
 </script>
 
 <ModeWatcher />
@@ -55,7 +57,7 @@
 </header>
 
 <main class="flex flex-col items-center justify-center">
-	<slot />
+	{@render children?.()}
 </main>
 
 <footer class="sticky top-[100vh] border-t bg-muted py-6 text-muted-foreground lg:py-10">
