@@ -17,12 +17,12 @@
 		return (isOpen = false);
 	}
 
-	let filteredRoutes = $derived(Object.values(routes).filter((route) => {
+	const filteredRoutes = Object.values(routes).filter((route) => {
 		if (route.route === 'bli-med') {
 			return $page.data.settings.recruiting.recruiting_active;
 		}
 		return true;
-	}));
+	});
 </script>
 
 <svelte:window
@@ -34,7 +34,7 @@
 />
 
 <div class="lg:hidden">
-	<Button variant="ghost" size="icon" on:click={toggle}><Menu /></Button>
+	<Button variant="ghost" size="icon" onclick={toggle}><Menu /></Button>
 	{#if isOpen}
 		<div
 			transition:fly={{ opacity: 0, x: '100%' }}
@@ -49,7 +49,7 @@
 					<Button
 						variant="link"
 						href="/{route.route}"
-						on:click={close}
+						onclick={close}
 						class="p-0 text-xl {$page.url.pathname.startsWith('/' + route.route)
 							? 'font-medium underline'
 							: 'font-light'}"
@@ -77,7 +77,7 @@
 			<Button
 				variant="link"
 				href="/{route.route}"
-				on:click={close}
+				onclick={close}
 				class="p-0 text-xl {$page.url.pathname.startsWith('/' + route.route)
 					? 'font-medium underline'
 					: 'font-light'} text-primary"
