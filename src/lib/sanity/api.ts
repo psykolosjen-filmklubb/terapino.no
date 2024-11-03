@@ -9,8 +9,8 @@ import type {
 	PosterImage,
 	Instillinger
 } from './types';
-import type { Semester } from '$lib/components/Archive/types';
 import { sanityClient } from './client';
+import type { Semester } from '$lib/components/Archive/SemesterState.svelte';
 
 export function getAuthors() {
 	return sanityClient.fetch<Member[]>(groq`*[_type == "author"]`);

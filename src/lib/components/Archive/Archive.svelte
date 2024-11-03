@@ -1,79 +1,19 @@
 <script lang="ts">
-	import type { Archive } from '$lib/components/Archive/types';
+	import ArchiveLine from './ArchiveLine.svelte';
+	import type { ArchiveState } from './ArchiveState.svelte';
 	import Semester from './Semester.svelte';
-	import {
-		archiveOptions,
-		semesterOptions,
-		type SemesterOptions,
-		semesterMarginsTop,
-		semesterMarginsBottom
-	} from './archiveStore';
-	import SemesterMargin from './SemesterMargin.svelte';
-	import { tweened } from 'svelte/motion';
-	import { cubicOut } from 'svelte/easing';
-	import { mode } from 'mode-watcher';
 
-	export let archive: Archive;
-
-	$: $semesterOptions = archive.reduce(
-		(acc, semester) => ({
-			...acc,
-			[semester.name]: {
-				open: false,
-				titlesHeight: 0
-			}
-		}),
-		{} as Record<string, SemesterOptions>
-	);
-
-	$: $semesterMarginsTop = archive.reduce(
-		(acc, semester) => ({
-			...acc,
-			[semester.name]: 0
-		}),
-		{} as Record<string, number>
-	);
-
-	$: $semesterMarginsBottom = archive.reduce(
-		(acc, semester) => ({
-			...acc,
-			[semester.name]: 0
-		}),
-		{} as Record<string, number>
-	);
-
-	let windowWidth = 0;
-	$: $archiveOptions.windowWidth = windowWidth;
-	$: $archiveOptions.isMobile = windowWidth < 1024;
-	$: $archiveOptions.strokeWidth = $archiveOptions.isMobile ? 2 : 4;
-
-	let archiveHeight = tweened(0, { duration: 1000, easing: cubicOut });
-	let archiveWidth = 0;
+	let { archive }: { archive: ArchiveState } = $props();
 </script>
 
-<svelte:window bind:innerWidth={windowWidth} />
-
-<svg
-	class="absolute stroke-foreground"
-	overflow="visible"
-	style:left={$archiveOptions.isMobile ? $archiveOptions.circleWidth : archiveWidth / 2}
+<article
+	bind:clientWidth={archive.containerWidth}
+	bind:clientHeight={archive.containerHeight}
+	class="relative grid @container"
 >
-	<line x="0" y1="0" y2={$archiveHeight} stroke-width={$archiveOptions.strokeWidth} />
-	<line
-		x="0"
-		y1={$archiveHeight}
-		y2={$archiveHeight + ($archiveOptions.isMobile ? 96 : 196)}
-		stroke-width={$archiveOptions.strokeWidth}
-		stroke-dasharray="20"
-	/>
-</svg>
+	<ArchiveLine {archive} />
 
-<div class="grid w-full content-start lg:justify-center" bind:clientWidth={archiveWidth}>
-	<div class="mb-24 grid pl-4 lg:mb-48 lg:p-0" bind:clientHeight={$archiveHeight}>
-		{#each archive as semester, i (semester.name)}
-			<SemesterMargin {archive} index={i}>
-				<Semester {semester} directionParam={i % 2 === 0 ? 'left' : 'right'} delay={i * 150} />
-			</SemesterMargin>
-		{/each}
-	</div>
-</div>
+	{#each archive.semesters as semester, index}
+		<Semester {semester} {index} />
+	{/each}
+</article>
