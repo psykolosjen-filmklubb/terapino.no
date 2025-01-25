@@ -58,12 +58,17 @@
 				<p class="text-center text-xl text-muted-foreground">
 					{dateFormatterLongNoYear.format(new Date(data.nextScreening.date))}:
 				</p>
-				<h3 class="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
-					{data.nextScreening.movie_title} ({data.nextScreening.release_year})
-				</h3>
-				<p class="text-center text-xl">
-					Av {data.nextScreening.director}
-				</p>
+				{#each data.nextScreening.movies as movie, i}
+					<h3 class="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
+						{movie.title} ({movie.release_year})
+					</h3>
+					<p class="text-center text-xl">
+						Av {movie.directors}
+					</p>
+					{#if i < data.nextScreening.movies.length - 1}
+						<p class="text-center text-xl">&</p>
+					{/if}
+				{/each}
 			</a>
 		</div>
 	{/if}

@@ -5,21 +5,19 @@ import type { TmdbMovieDetails } from '../../api/movie/[tmdb_id]/+server';
 export async function load({ params, fetch }) {
 	const screening = await getScreening(params.slug);
 
-	if (screening) {
-		if (!screening.tmdb_id) {
-			return {
-				screening,
-				movieDetails: null
-			};
-		}
+	const movieDetailsPromises: Promise<TmdbMovieDetails>[] = [];
 
-		const movieDetails: TmdbMovieDetails = await fetch(`/api/movie/${screening.tmdb_id}`).then(
-			(res) => res.json()
-		);
+	if (screening) {
+		screening.movies.forEach(async (movie) => {
+			if (movie.tmdb_id) {
+				const movieDetailsPromise = fetch(`/api/movie/${movie.tmdb_id}`).then((res) => res.json());
+				movieDetailsPromises.push(movieDetailsPromise);
+			}
+		});
 
 		return {
 			screening,
-			movieDetails
+			movieDetails: await Promise.all(movieDetailsPromises)
 		};
 	}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import type { SemesterState } from './SemesterState.svelte';
+	import type { Screening, SemesterState } from './SemesterState.svelte';
 
 	type ScreeningTitlesProps = {
 		semester: SemesterState;
@@ -48,6 +48,14 @@
 			}
 		};
 	}
+
+	function getScreeningTitlesString(screening: Screening) {
+		if (!screening.movies) return 'null';
+		const titles = screening.movies.map((movie) => `${movie.title} (${movie.year})`).join(' / ');
+		const directors = screening.movies.map((movie) => movie.directors).join(' / ');
+
+		return `${titles} - ${directors}`;
+	}
 </script>
 
 <div
@@ -59,7 +67,7 @@
 	style:place-items={direction === 'right' ? 'start' : 'end'}
 	bind:clientHeight={semester.titlesHeight}
 >
-	{#each semester.movies as screening, index}
+	{#each semester.screenings as screening, index}
 		{#if semester.open && index === 0}
 			<a
 				href="/arkiv/{screening.slug.current}"
@@ -70,7 +78,7 @@
 				in:fade={{ delay: 100, duration: 200 }}
 				out:fade={{ duration: 200 }}
 			>
-				{#each `${screening.title} (${screening.year}) - ${screening.director}`.split(' ') as word}
+				{#each getScreeningTitlesString(screening).split(' ') as word}
 					<span
 						class="inline-block text-sm font-light group-hover:underline @5xl:text-base @5xl:font-thin"
 					>
@@ -86,7 +94,7 @@
 				in:fade={{ delay: 100 + 40 * index, duration: 200 }}
 				out:fade={{ duration: 200 }}
 			>
-				{screening.title} ({screening.year}) - {screening.director}
+				{getScreeningTitlesString(screening)}
 			</a>
 		{/if}
 	{/each}

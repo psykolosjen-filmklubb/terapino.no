@@ -5,9 +5,9 @@ import type {
 	OmOss,
 	Review,
 	ReviewExcerpt,
-	Screening,
 	PosterImage,
-	Instillinger
+	Instillinger,
+	Screening
 } from './types';
 import { sanityClient } from './client';
 import type { Semester } from '$lib/components/Archive/SemesterState.svelte';
@@ -34,15 +34,17 @@ export function getReviewExcerpts(limit?: number) {
 export function getNextScreening() {
 	return sanityClient.fetch<Screening>(
 		groq`*[_type == "screening" && date >= $today] | order(date asc)[0]{
-		movie_title,
-		release_year,
+		movies[] {
+			directors,
+    	title,
+    	release_year
+		},
 		date,
 		"poster": {
 			"asset": poster.asset,
 			"dimensions": poster.asset->metadata.dimensions,
 			"blurhash": poster.asset->metadata.blurHash,
 		},
-		director,
 		slug
 	}`,
 		{
@@ -54,8 +56,12 @@ export function getNextScreening() {
 export function getScreening(slug: string) {
 	return sanityClient.fetch<Screening>(
 		groq`*[_type == "screening" && slug.current == $slug][0]{
-		movie_title,
-		release_year,
+		movies[] {
+			directors,
+			title,
+			release_year,
+			tmdb_id
+		},
 		date,
 		"poster": {
 			"asset": poster.asset,
@@ -63,8 +69,6 @@ export function getScreening(slug: string) {
 			"blurhash": poster.asset->metadata.blurHash,
 			"artists": poster_artists[]->,
 		},
-		director,
-		tmdb_id,
 		promo_material[] {
 			_type == "image" => {
 				asset,
@@ -124,10 +128,12 @@ export async function getArchive() {
 		"name": semester_name,
 		"startDate": start_date,
 		"color": color.hex,
-		"movies": screenings[]-> | order(date desc) {
-			"title": movie_title,
-			"year": release_year,
-			director,
+		"screenings": screenings[]-> | order(date desc) {
+			movies[] {
+				title,
+				"year": release_year,
+				directors,
+			},
 			slug,
 		}
 	}`

@@ -19,16 +19,20 @@ export type ReviewExcerpt = Pick<
 >;
 
 export type Screening = {
-	movie_title: string;
-	release_year: number;
-	director: string;
+	movies: Movie[];
 	date: string;
 	poster?: PosterImage;
-	tmdb_id?: number;
 	promo_material?: GalleryItem[];
 	event_media?: GalleryImage[];
 	slug: Slug;
 	tickets_url?: string;
+};
+
+export type Movie = {
+	title: string;
+	release_year: number;
+	directors: string;
+	tmdb_id?: number;
 };
 
 export type GalleryItem = GalleryImage | GalleryVideo;

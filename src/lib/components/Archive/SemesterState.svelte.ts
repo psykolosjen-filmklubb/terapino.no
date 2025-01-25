@@ -4,7 +4,11 @@ import { ArchiveState } from './ArchiveState.svelte';
 type Movie = {
 	title: string;
 	year: number;
-	director: string;
+	directors: string;
+};
+
+export type Screening = {
+	movies: Movie[];
 	slug: Slug;
 };
 
@@ -12,14 +16,14 @@ export type Semester = {
 	name: string;
 	startDate: string;
 	color: string;
-	movies: Movie[];
+	screenings: Screening[];
 };
 
 export class SemesterState {
 	name: string;
 	startDate: string;
 	color: string;
-	movies: Movie[];
+	screenings: Screening[];
 
 	index = 0;
 	open = $state(false);
@@ -30,7 +34,7 @@ export class SemesterState {
 		this.name = semester.name;
 		this.startDate = semester.startDate;
 		this.color = semester.color;
-		this.movies = semester.movies;
+		this.screenings = semester.screenings;
 
 		this.index = index;
 		this.open = this.index < 2;
