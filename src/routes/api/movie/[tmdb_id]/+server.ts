@@ -3,7 +3,7 @@ import { json } from '@sveltejs/kit';
 
 export async function GET({ params }) {
 	const tmdbResponse = await fetch(
-		`https://api.themoviedb.org/3/movie/${params.tmdb_id}?append_to_response=credits,release_dates&language=no`,
+		`https://api.themoviedb.org/3/movie/${params.tmdb_id}?append_to_response=credits,release_dates`,
 		{
 			headers: {
 				Authorization: `Bearer ${TMDB_BEARER}`
@@ -15,7 +15,13 @@ export async function GET({ params }) {
 
 	const directors = movieDetailsJson.credits.crew
 		.filter(({ job }) => job === 'Director')
-		.map(({ name }) => name);
+		.map(({ name, original_name }) => {
+			if (original_name !== name) {
+				return `${name} (${original_name})`;
+			} else {
+				return name;
+			}
+		});
 
 	const norwegian_release_dates = movieDetailsJson.release_dates.results.find(
 		({ iso_3166_1 }) => iso_3166_1 === 'NO'
@@ -54,7 +60,7 @@ type TmdbMovieResponse = {
 	release_date: string;
 	title: string;
 	original_title: string;
-	credits: { crew: { job: string; name: string }[] };
+	credits: { crew: { job: string; name: string; original_name: string }[] };
 	release_dates: {
 		results: {
 			iso_3166_1: string;
