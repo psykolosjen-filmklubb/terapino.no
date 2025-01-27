@@ -7,7 +7,8 @@ import type {
 	ReviewExcerpt,
 	PosterImage,
 	Instillinger,
-	Screening
+	Screening,
+	PosterByMember
 } from './types';
 import { sanityClient } from './client';
 import type { Semester } from '$lib/components/Archive/SemesterState.svelte';
@@ -226,18 +227,29 @@ export async function getMember(name: string) {
 	);
 }
 
-export async function getPostersByMember(id: string) {
-	return sanityClient.fetch<PosterImage[]>(
-		groq`*[_type == "screening" && references($id)] | order(date desc) {
+export async function getPostersByMember(id: string): Promise<PosterImage[]> {
+	return sanityClient
+		.fetch<PosterByMember[]>(
+			groq`*[_type == "screening" && references($id)] | order(date desc) {
 			"asset": poster.asset,
 			"dimensions": poster.asset->metadata.dimensions,
 			"blurhash": poster.asset->metadata.blurHash,
-			"alt": movie_title,
+			movies[] {
+				title
+			},
 		}`,
-		{
-			id
-		}
-	);
+			{
+				id
+			}
+		)
+		.then((posters) => {
+			return posters.map((poster) => {
+				return {
+					...poster,
+					alt: 'Poster for ' + poster.movies.map((movie) => movie.title).join(' & ')
+				};
+			});
+		});
 }
 
 export async function getReviewsByMember(id: string) {
