@@ -1,14 +1,12 @@
 <script lang="ts">
+	import MovieDetails from './MovieDetails.svelte';
+
 	import { run } from 'svelte/legacy';
 
 	import AuthorList from '$lib/components/AuthorList.svelte';
 	import PosterImage from '$lib/components/PosterImage.svelte';
 	import * as Card from '$lib/components/ui/card';
-	import * as Accordion from '$lib/components/ui/accordion';
-	import { dateFormatterLong, dateFormatterShort } from '$lib/dateFormatters.js';
-	import tmdbLogo from '$lib/images/tmdb-alt-long.svg';
-	import ImdbButton from '$lib/components/ImdbButton.svelte';
-	import LetterboxdButton from '$lib/components/LetterboxdButton.svelte';
+	import { dateFormatterLong } from '$lib/dateFormatters.js';
 	import GalleryCarousel from '$lib/components/GalleryCarousel.svelte';
 	import { Button } from '$lib/components/ui/button';
 
@@ -66,47 +64,15 @@
 
 {#if data.movieDetails}
 	{#each data.movieDetails as movieDetails}
-		<Accordion.Root type="single" class="-mt-4 w-full lg:max-w-sm">
-			<Accordion.Item value="movie-details">
-				<Accordion.Trigger>
-					Mer info om {movieDetails.title}
-				</Accordion.Trigger>
-				<Accordion.Content>
-					<div class="flex flex-col gap-2">
-						<p class="font-light">
-							Reggisør{movieDetails.directors.length > 1 ? 'er' : ''}:
-							<span class="font-medium">{movieDetails.directors.join(', ')}</span>
-						</p>
-						<p class="font-light">
-							Originaltittel: <span class="font-medium">{movieDetails.original_title}</span>
-						</p>
-						<p class="font-light">
-							{movieDetails.release_date_no ? 'På kino i Norge' : 'Utgitt'}:
-							<span class="font-medium">
-								{dateFormatterShort.format(
-									new Date(movieDetails.release_date_no ?? movieDetails.release_date)
-								)}
-							</span>
-						</p>
-						<img
-							src="https://image.tmdb.org/t/p/w500{movieDetails.poster_path}"
-							alt="Movie Poster"
-							class="mx-auto mb-2 max-w-[60%]"
-						/>
-					</div>
-
-					<div class="my-2 flex w-full max-w-96 justify-evenly">
-						<ImdbButton imdbId={movieDetails.imdb_id} />
-						<LetterboxdButton imdbId={movieDetails.imdb_id} />
-					</div>
-
-					<small>Informasjon og poster hentet fra</small>
-					<a href="https://www.themoviedb.org/">
-						<img src={tmdbLogo} alt="The Movie Database Logo" class="inline h-4 w-24" />
-					</a>
-				</Accordion.Content>
-			</Accordion.Item>
-		</Accordion.Root>
+		<MovieDetails
+			title={movieDetails.title}
+			originalTitle={movieDetails.original_title}
+			directors={movieDetails.directors}
+			norwegianReleaseDate={movieDetails.release_date_no}
+			originalReleaseDate={movieDetails.release_date}
+			imdbId={movieDetails.imdb_id}
+			posterPath={movieDetails.poster_path}
+		></MovieDetails>
 	{/each}
 {/if}
 
