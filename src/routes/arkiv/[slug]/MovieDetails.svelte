@@ -31,21 +31,25 @@
 		<Accordion.Trigger>
 			Mer info om {title}
 		</Accordion.Trigger>
+
 		<Accordion.Content>
 			<div class="flex flex-col gap-2">
 				<p class="font-light">
-					Reggisør{directors.length > 1 ? 'er' : ''}:
+					Regissør{directors.length > 1 ? 'er' : ''}:
 					<span class="font-medium">{directors.join(', ')}</span>
 				</p>
+
 				<p class="font-light">
 					Originaltittel: <span class="font-medium">{originalTitle}</span>
 				</p>
+
 				<p class="font-light">
 					{norwegianReleaseDate ? 'På kino i Norge' : 'Utgitt'}:
 					<span class="font-medium">
 						{dateFormatterShort.format(new Date(norwegianReleaseDate ?? originalReleaseDate))}
 					</span>
 				</p>
+
 				<img
 					src="https://image.tmdb.org/t/p/w500{posterPath}"
 					alt="Movie Poster"
