@@ -49,7 +49,11 @@
 	{#if data.nextScreening && data.nextScreening.poster?.asset}
 		<div class="max-w-96">
 			<a href="arkiv/{data.nextScreening.slug.current}">
-				<PosterImage poster={data.nextScreening.poster} />
+				<PosterImage
+					blurhash={data.nextScreening.poster.blurhash}
+					aspectRatio={data.nextScreening.poster.dimensions.aspectRatio}
+					imageAsset={data.nextScreening.poster.asset}
+				/>
 			</a>
 		</div>
 	{:else if data.nextScreening}

@@ -38,7 +38,9 @@
 	<Card.Root class="w-full overflow-hidden lg:max-w-sm">
 		<Card.Content class="p-0">
 			<PosterImage
-				poster={screening.poster}
+				blurhash={screening.poster.blurhash}
+				aspectRatio={screening.poster.dimensions.aspectRatio}
+				imageAsset={screening.poster.asset}
 				class="rounded-t-lg {screening.poster.artists ? '' : 'rounded-b-lg'}"
 			/>
 		</Card.Content>

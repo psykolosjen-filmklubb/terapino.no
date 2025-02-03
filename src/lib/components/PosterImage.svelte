@@ -1,51 +1,47 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { urlFor } from '$lib/sanity/image';
 	import { blurhashToImageCssObject } from '@unpic/placeholder';
 	import { tweened } from 'svelte/motion';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { cn } from '$lib/utils.js';
-	import type { PosterImage } from '$lib/sanity/types';
+	import type { ImageAsset } from '@sanity/types';
 
-	
-	interface Props {
+	interface PosterImageProps {
 		class?: HTMLAttributes<HTMLImageElement>['class'];
-		poster: PosterImage;
+		blurhash: string;
+		aspectRatio: number;
+		imageAsset: ImageAsset;
 	}
 
-	let { class: className = undefined, poster }: Props = $props();
+	let { class: className, blurhash, aspectRatio, imageAsset }: PosterImageProps = $props();
 
-	const css = blurhashToImageCssObject(poster.blurhash || '', 32, 64);
+	const css = blurhashToImageCssObject(blurhash);
 
-	let imageLoaded = $state(false);
-	const imageOpacity = tweened(0, { duration: 300 });
-	run(() => {
-		imageOpacity.set(imageLoaded ? 1 : 0);
-	});
+	let img: HTMLImageElement;
+	let imageLoaded = $state(true);
+	const imageOpacity = tweened(1);
 
-	function setImageLoaded(img: HTMLImageElement) {
-		if (img.complete) {
-			imageLoaded = true;
-		} else {
+	$effect(() => {
+		if (!img.complete) {
+			imageOpacity.set(0, { duration: 0 });
 			img.onload = () => {
-				imageLoaded = true;
+				imageOpacity.set(1, { duration: 200 });
 			};
 		}
-	}
+	});
 </script>
 
 <div
 	class={`w-full ${imageLoaded ? '' : 'animate-pulse'}`}
 	style:background-image={css.backgroundImage}
 	style:background-size={css.backgroundSize}
-	style:aspect-ratio={poster.dimensions.aspectRatio}
+	style:aspect-ratio={aspectRatio}
 >
 	<img
-		src={urlFor(poster.asset).width(768).fit('min').auto('format').url()}
+		src={urlFor(imageAsset).width(768).fit('min').auto('format').url()}
 		alt="Poster for next screening"
 		class={cn('w-full', className)}
 		style:opacity={$imageOpacity}
-		use:setImageLoaded
+		bind:this={img}
 	/>
 </div>
