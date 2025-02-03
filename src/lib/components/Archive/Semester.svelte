@@ -28,6 +28,12 @@
 	$effect(() => {
 		tweenedMarginTop.set(semester.marginTop);
 	});
+
+	$effect(() => {
+		if (index < 2) {
+			semester.open = true;
+		}
+	});
 </script>
 
 <div

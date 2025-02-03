@@ -37,7 +37,7 @@ export class SemesterState {
 		this.screenings = semester.screenings;
 
 		this.index = index;
-		this.open = this.index < 2;
+		this.open = false;
 
 		this.archive = archive;
 	}
