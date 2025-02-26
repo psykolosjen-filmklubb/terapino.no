@@ -9,8 +9,8 @@ import type {
 	Instillinger,
 	Screening,
 	PosterByMember
-} from './types';
-import { sanityClient } from './client';
+} from '../types';
+import { sanityClient } from '../client';
 import type { Semester } from '$lib/components/Archive/SemesterState.svelte';
 
 export function getAuthors() {

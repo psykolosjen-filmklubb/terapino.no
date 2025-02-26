@@ -1,4 +1,4 @@
-import { getReview } from '$lib/sanity/api.js';
+import { getReview } from '$lib/sanity/api/api.js';
 import { error } from '@sveltejs/kit';
 import type { TmdbMovieDetails } from '../../api/movie/[tmdb_id]/+server.js';
 
