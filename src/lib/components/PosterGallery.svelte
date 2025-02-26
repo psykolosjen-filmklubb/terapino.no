@@ -3,11 +3,17 @@
 	import 'photoswipe/style.css';
 	import { onMount } from 'svelte';
 	import { urlFor } from '$lib/sanity/image';
-	import type { PosterImage } from '$lib/sanity/types';
+	import type { ImageAsset, ImageDimensions } from '@sanity/types';
+
+	type Image = {
+		asset: ImageAsset;
+		dimensions: ImageDimensions;
+		alt?: string;
+	};
 
 	interface Props {
 		galleryID: string;
-		posters: PosterImage[];
+		posters: Image[];
 	}
 
 	let { galleryID, posters }: Props = $props();
