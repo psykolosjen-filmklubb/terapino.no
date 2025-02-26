@@ -37,7 +37,7 @@ export type Movie = {
 
 export type GalleryItem = GalleryImage | GalleryVideo;
 
-type GalleryImage = {
+export type GalleryImage = {
 	_type: 'image';
 	asset: ImageAsset;
 	alt: string;
