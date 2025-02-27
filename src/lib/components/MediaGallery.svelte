@@ -12,8 +12,8 @@
 	};
 
 	type Event = {
-		title?: string;
-		date?: Date;
+		title: string;
+		date: Date;
 		media: Image[];
 	};
 

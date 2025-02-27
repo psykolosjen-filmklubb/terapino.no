@@ -3,8 +3,8 @@ import { sanityClient } from '../client';
 import type { GalleryImage, Movie } from '../types';
 
 type ScreeningMedia = {
-	movies?: Pick<Movie, 'title' | 'release_year'>[];
-	date?: string;
+	movies: Pick<Movie, 'title' | 'release_year'>[];
+	date: string;
 	promo_material?: GalleryImage[];
 	event_media?: GalleryImage[];
 };
@@ -44,8 +44,8 @@ export async function getScreeningMedia() {
 		const eventMedia = screening.event_media || [];
 
 		return {
-			title: screening.movies?.map((movie) => movie.title).join(' / '),
-			date: screening.date ? new Date(screening.date) : undefined,
+			title: screening.movies.map((movie) => movie.title).join(' / '),
+			date: new Date(screening.date),
 			media: [...promo, ...eventMedia]
 		};
 	});
