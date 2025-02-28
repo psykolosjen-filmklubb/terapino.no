@@ -14,5 +14,5 @@
 </p>
 
 <div class="m-4">
-	<MediaGallery events={data.screeningMedia} />
+	<MediaGallery events={data.mediaEvents} />
 </div>
