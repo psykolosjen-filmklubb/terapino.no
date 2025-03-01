@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import 'photoswipe/style.css';
+	import { onMount } from 'svelte';
 	import type { GalleryItem } from '$lib/sanity/types';
-	import { urlFor } from '$lib/sanity/image';
 	import * as Carousel from '$lib/components/ui/carousel';
 	import type { CarouselAPI } from './ui/carousel/context';
-	import { Fullscreen, Play } from 'lucide-svelte';
-	import { fade } from 'svelte/transition';
-	import { Button } from './ui/button';
 	import { setUpLightboxWithYouTube } from './Gallery/setUpLightboxWithYouTube';
+	import GalleryItemVideo from './Gallery/GalleryItemVideo.svelte';
+	import GalleryItemImage from './Gallery/GalleryItemImage.svelte';
 
 	interface Props {
 		galleryID: string;
@@ -37,55 +35,14 @@
 			{#each images as image}
 				<Carousel.Item class="relative content-center">
 					{#if image._type === 'video'}
-						<a
-							data-pswp-type="youtube"
-							data-youtube-url="https://www.youtube-nocookie.com/embed/{image.youtube_id}"
-							href="https://youtu.be/{image.youtube_id}"
-							target="_blank"
-							class="relative"
-						>
-							<img
-								src="https://i.ytimg.com/vi/{image.youtube_id}/maxresdefault.jpg"
-								alt="Youtube video thumbnail"
-								referrerpolicy="no-referrer"
-								class="aspect-video w-full"
-							/>
-							<Button
-								variant="outline"
-								size="icon"
-								class="absolute left-1/2 top-1/2 size-12 -translate-x-1/2 -translate-y-1/2 rounded-full border-0 bg-opacity-50"
-							>
-								<Play class="ml-1 size-8" />
-								<span class="sr-only">Åpne video</span>
-							</Button>
-						</a>
+						<GalleryItemVideo youtubeId={image.youtube_id}></GalleryItemVideo>
 					{:else}
-						<a
-							href={urlFor(image.asset).auto('format').url()}
-							data-pswp-width={image.dimensions.width}
-							data-pswp-height={image.dimensions.height}
-							data-cropped="true"
-							target="_blank"
-							rel="noreferrer"
-						>
-							<img
-								src={urlFor(image.asset).width(512).auto('format').url()}
-								alt={image.alt}
-								class="aspect-square w-full object-cover"
-							/>
-						</a>
-						{#if !isGalleryOpen}
-							<span transition:fade={{ duration: 100 }}>
-								<Button
-									variant="outline"
-									size="icon"
-									class="pointer-events-none absolute bottom-2 right-2 size-8 rounded-full border-0 bg-opacity-50"
-								>
-									<Fullscreen class="size-4" />
-									<span class="sr-only">Åpne fullskjerm</span>
-								</Button>
-							</span>
-						{/if}
+						<GalleryItemImage
+							imageAsset={image.asset}
+							imageDimentions={image.dimensions}
+							alt={image.alt}
+							showFullscreenButton={!isGalleryOpen}
+						/>
 					{/if}
 				</Carousel.Item>
 			{/each}
