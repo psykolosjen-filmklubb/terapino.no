@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import PhotoSwipeLightbox from 'photoswipe/lightbox';
 	import 'photoswipe/style.css';
 	import type { GalleryItem } from '$lib/sanity/types';
 	import { urlFor } from '$lib/sanity/image';
@@ -9,6 +8,7 @@
 	import { Fullscreen, Play } from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
 	import { Button } from './ui/button';
+	import { setUpLightboxWithYouTube } from './Gallery/setUpLightboxWithYouTube';
 
 	interface Props {
 		galleryID: string;
@@ -21,80 +21,14 @@
 
 	let isGalleryOpen = $state(false);
 
-	// Icon copied from lucide X icon to be able to use it with PhotoSwipe
-	const closeSvgString =
-		'<svg aria-hidden="true" class="pswp__icn" viewBox="0 0 50 30" width="50" height="30"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--pswp-icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></svg>';
-
-	onMount(() => {
-		let lightbox = new PhotoSwipeLightbox({
-			zoom: false,
-			closeSVG: closeSvgString,
-
-			gallery: '#' + galleryID,
-			children: 'a',
-			pswpModule: () => import('photoswipe')
-		});
-		lightbox.init();
-		lightbox.on('contentActivate', (event) => {
-			if (carouselApi) {
-				carouselApi.scrollTo(event.content.index);
-			}
-		});
-		lightbox.on('beforeOpen', () => {
-			isGalleryOpen = true;
-		});
-		lightbox.on('destroy', () => {
-			isGalleryOpen = false;
-		});
-
-		lightbox.addFilter('itemData', (itemData) => {
-			const youtubeUrl = itemData.element?.dataset.youtubeUrl;
-			if (youtubeUrl) {
-				itemData.youtubeUrl = youtubeUrl;
-				console.log(itemData);
-			}
-			return itemData;
-		});
-
-		lightbox.on('contentLoad', (e) => {
-			const { content } = e;
-			if (content.type === 'youtube') {
-				e.preventDefault();
-
-				content.element = document.createElement('div');
-				content.element.className = 'pswp__youtube-container';
-
-				content.element.style.position = 'relative';
-				content.element.style.width = '100%';
-				content.element.style.height = '100%';
-				content.element.style.pointerEvents = 'none';
-
-				const iframe = document.createElement('iframe');
-				iframe.src = content.data.youtubeUrl;
-				iframe.setAttribute('allowfullscreen', '');
-				iframe.setAttribute('frameborder', '0');
-				iframe.setAttribute(
-					'allow',
-					'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-				);
-				iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-
-				iframe.style.width = '100%';
-				iframe.style.aspectRatio = '1/1';
-				iframe.style.pointerEvents = 'auto';
-				iframe.style.position = 'absolute';
-				iframe.style.top = '50%';
-				iframe.style.left = '50%';
-				iframe.style.transform = 'translate(-50%, -50%)';
-
-				content.element.appendChild(iframe);
-			}
-		});
-
-		return () => {
-			lightbox.destroy();
-		};
-	});
+	onMount(() =>
+		setUpLightboxWithYouTube(
+			galleryID,
+			() => (isGalleryOpen = true),
+			() => (isGalleryOpen = false),
+			carouselApi
+		)
+	);
 </script>
 
 <div class="pswp-gallery lg:max-w-sm" id={galleryID}>
