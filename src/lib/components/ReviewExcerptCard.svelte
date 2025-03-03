@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import { routes } from '$lib/routes';
-	import type { ReviewExcerpt } from '$lib/sanity/types';
+	import type { ReviewExcerpt } from '$lib/sanity/api/getReviewExcerpts';
 	import ThumbnailImage from './ThumbnailImage.svelte';
 
 	interface Props {

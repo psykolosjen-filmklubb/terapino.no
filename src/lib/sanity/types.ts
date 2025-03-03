@@ -13,11 +13,6 @@ export type Review = {
 	thumbnailBlurhash: string;
 };
 
-export type ReviewExcerpt = Pick<
-	Review,
-	'review_title' | 'slug' | 'thumbnail' | 'thumbnailBlurhash' | 'excerpt'
->;
-
 export type NextScreening = {
 	movies: Movie[];
 	date: string;

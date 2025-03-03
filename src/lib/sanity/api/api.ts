@@ -4,28 +4,12 @@ import type {
 	Logo,
 	OmOss,
 	Review,
-	ReviewExcerpt,
 	PosterImage,
 	Instillinger,
 	PosterByMember
 } from '../types';
 import { sanityClient } from '../client';
 import type { Semester } from '$lib/components/Archive/SemesterState.svelte';
-
-export function getReviewExcerpts(limit?: number) {
-	return sanityClient.fetch<ReviewExcerpt[]>(
-		groq`*[_type == "review"] | order(_createdAt desc) [0..$limit]{
-		review_title,
-		slug,
-		thumbnail,
-		"thumbnailBlurhash": thumbnail.asset->metadata.blurHash,
-		excerpt
-	}`,
-		{
-			limit: limit ? limit - 1 : -1
-		}
-	);
-}
 
 export async function getLogos() {
 	const black = await sanityClient.fetch<Logo>(

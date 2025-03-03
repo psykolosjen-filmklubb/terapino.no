@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ReviewExcerpt } from '$lib/sanity/types';
 	import * as Carousel from '$lib/components/ui/carousel';
+	import type { ReviewExcerpt } from '$lib/sanity/api/getReviewExcerpts';
 	import ReviewExcerptCard from './ReviewExcerptCard.svelte';
 
 	interface Props {
