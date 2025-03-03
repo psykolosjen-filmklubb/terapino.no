@@ -7,8 +7,8 @@ const closeSvgString =
 
 export function setUpLightboxWithYouTube(
 	galleryId: string,
-	onBeforeOpen: () => void,
-	onDestroy: () => void,
+	onBeforeOpen?: () => void,
+	onDestroy?: () => void,
 	emblaApi?: CarouselAPI
 ) {
 	const lightbox = new PhotoSwipeLightbox({
@@ -22,11 +22,19 @@ export function setUpLightboxWithYouTube(
 
 	lightbox.init();
 
-	lightbox.on('contentActivate', (event) => {
-		emblaApi?.scrollTo(event.content.index);
-	});
-	lightbox.on('beforeOpen', onBeforeOpen);
-	lightbox.on('destroy', onDestroy);
+	if (emblaApi) {
+		lightbox.on('contentActivate', (event) => {
+			emblaApi.scrollTo(event.content.index);
+		});
+	}
+
+	if (onBeforeOpen) {
+		lightbox.on('beforeOpen', onBeforeOpen);
+	}
+
+	if (onDestroy) {
+		lightbox.on('destroy', onDestroy);
+	}
 
 	lightbox.addFilter('itemData', (itemData) => {
 		const youtubeUrl = itemData.element?.dataset.youtubeUrl;

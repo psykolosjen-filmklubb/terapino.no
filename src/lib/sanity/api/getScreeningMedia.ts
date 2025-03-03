@@ -1,11 +1,11 @@
 import groq from 'groq';
 import { sanityClient } from '../client';
-import type { GalleryImage, Movie } from '../types';
+import type { GalleryImage, GalleryItem, Movie } from '../types';
 
 type ScreeningMedia = {
 	movies: Pick<Movie, 'title' | 'release_year'>[];
 	date: string;
-	promo_material?: GalleryImage[];
+	promo_material?: GalleryItem[];
 	event_media?: GalleryImage[];
 };
 
@@ -23,6 +23,10 @@ export async function getScreeningMedia() {
           "dimensions": asset->metadata.dimensions,
           _type,
         },
+        _type == "video" => {
+          youtube_id,
+          _type,
+        }
       },
       event_media[] {
         asset,
