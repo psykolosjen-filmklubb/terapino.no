@@ -7,7 +7,6 @@ import type {
 	ReviewExcerpt,
 	PosterImage,
 	Instillinger,
-	NextScreening,
 	PosterByMember
 } from '../types';
 import { sanityClient } from '../client';
@@ -28,28 +27,6 @@ export function getReviewExcerpts(limit?: number) {
 	}`,
 		{
 			limit: limit ? limit - 1 : -1
-		}
-	);
-}
-
-export function getNextScreening() {
-	return sanityClient.fetch<NextScreening>(
-		groq`*[_type == "screening" && date >= $today] | order(date asc)[0]{
-		movies[] {
-			directors,
-    	title,
-    	release_year
-		},
-		date,
-		"poster": {
-			"asset": poster.asset,
-			"dimensions": poster.asset->metadata.dimensions,
-			"blurhash": poster.asset->metadata.blurHash,
-		},
-		slug
-	}`,
-		{
-			today: new Date().toISOString().split('T')[0]
 		}
 	);
 }
