@@ -18,14 +18,11 @@ export type ReviewExcerpt = Pick<
 	'review_title' | 'slug' | 'thumbnail' | 'thumbnailBlurhash' | 'excerpt'
 >;
 
-export type Screening = {
+export type NextScreening = {
 	movies: Movie[];
 	date: string;
 	poster?: PosterImage;
-	promo_material?: GalleryItem[];
-	event_media?: GalleryImage[];
 	slug: Slug;
-	tickets_url?: string;
 };
 
 export type Movie = {

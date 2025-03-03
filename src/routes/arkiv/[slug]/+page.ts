@@ -1,6 +1,6 @@
-import { getScreening } from '$lib/sanity/api/api';
 import { error } from '@sveltejs/kit';
 import type { TmdbMovieDetails } from '../../api/movie/[tmdb_id]/+server';
+import { getScreening } from '$lib/sanity/api/getScreening';
 
 export async function load({ params, fetch }) {
 	const screening = await getScreening(params.slug);

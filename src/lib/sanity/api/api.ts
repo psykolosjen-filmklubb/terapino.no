@@ -7,7 +7,7 @@ import type {
 	ReviewExcerpt,
 	PosterImage,
 	Instillinger,
-	Screening,
+	NextScreening,
 	PosterByMember
 } from '../types';
 import { sanityClient } from '../client';
@@ -33,7 +33,7 @@ export function getReviewExcerpts(limit?: number) {
 }
 
 export function getNextScreening() {
-	return sanityClient.fetch<Screening>(
+	return sanityClient.fetch<NextScreening>(
 		groq`*[_type == "screening" && date >= $today] | order(date asc)[0]{
 		movies[] {
 			directors,
@@ -50,47 +50,6 @@ export function getNextScreening() {
 	}`,
 		{
 			today: new Date().toISOString().split('T')[0]
-		}
-	);
-}
-
-export function getScreening(slug: string) {
-	return sanityClient.fetch<Screening>(
-		groq`*[_type == "screening" && slug.current == $slug][0]{
-		movies[] {
-			directors,
-			title,
-			release_year,
-			tmdb_id
-		},
-		date,
-		"poster": {
-			"asset": poster.asset,
-			"dimensions": poster.asset->metadata.dimensions,
-			"blurhash": poster.asset->metadata.blurHash,
-			"artists": poster_artists[]->,
-		},
-		promo_material[] {
-			_type == "image" => {
-				asset,
-				alt,
-				"dimensions": asset->metadata.dimensions,
-				_type,
-			},
-			_type == "video" => {
-				youtube_id,
-				_type,
-			}
-		},
-		event_media[] {
-			asset,
-			alt,
-			"dimensions": asset->metadata.dimensions
-		},
-		tickets_url
-	}`,
-		{
-			slug
 		}
 	);
 }
