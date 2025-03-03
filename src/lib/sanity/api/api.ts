@@ -12,10 +12,6 @@ import type {
 import { sanityClient } from '../client';
 import type { Semester } from '$lib/components/Archive/SemesterState.svelte';
 
-export function getAuthors() {
-	return sanityClient.fetch<Member[]>(groq`*[_type == "author"]`);
-}
-
 export function getReviewExcerpts(limit?: number) {
 	return sanityClient.fetch<ReviewExcerpt[]>(
 		groq`*[_type == "review"] | order(_createdAt desc) [0..$limit]{
