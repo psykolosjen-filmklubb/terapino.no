@@ -64,11 +64,6 @@ export type Member = {
 	verv?: Verv[];
 };
 
-export type Logo = {
-	name: string;
-	image: ImageAsset;
-};
-
 export type OmOss = {
 	header_image: {
 		asset: ImageAsset;

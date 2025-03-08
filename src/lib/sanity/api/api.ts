@@ -1,25 +1,7 @@
 import groq from 'groq';
-import type {
-	Member,
-	Logo,
-	OmOss,
-	Review,
-	PosterImage,
-	Instillinger,
-	PosterByMember
-} from '../types';
+import type { Member, OmOss, Review, PosterImage, Instillinger, PosterByMember } from '../types';
 import { sanityClient } from '../client';
 import type { Semester } from '$lib/components/Archive/SemesterState.svelte';
-
-export async function getLogos() {
-	const black = await sanityClient.fetch<Logo>(
-		groq`*[_type == "image_assets" && name == "logo-svart"][0]`
-	);
-	const white = await sanityClient.fetch<Logo>(
-		groq`*[_type == "image_assets" && name == "logo-hvit"][0]`
-	);
-	return { black, white };
-}
 
 export async function getReview(slug: string) {
 	return sanityClient.fetch<Review>(
