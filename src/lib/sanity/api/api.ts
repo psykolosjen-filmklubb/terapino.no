@@ -1,31 +1,6 @@
 import groq from 'groq';
-import type { Review, PosterImage, Instillinger, PosterByMember } from '../types';
+import type { Review, Instillinger } from '../types';
 import { sanityClient } from '../client';
-
-export async function getPostersByMember(id: string): Promise<PosterImage[]> {
-	return sanityClient
-		.fetch<PosterByMember[]>(
-			groq`*[_type == "screening" && references($id)] | order(date desc) {
-			"asset": poster.asset,
-			"dimensions": poster.asset->metadata.dimensions,
-			"blurhash": poster.asset->metadata.blurHash,
-			movies[] {
-				title
-			},
-		}`,
-			{
-				id
-			}
-		)
-		.then((posters) => {
-			return posters.map((poster) => {
-				return {
-					...poster,
-					alt: 'Poster for ' + poster.movies.map((movie) => movie.title).join(' & ')
-				};
-			});
-		});
-}
 
 export async function getReviewsByMember(id: string) {
 	return sanityClient.fetch<Pick<Review, 'movie_title' | 'review_title' | 'slug'>[]>(

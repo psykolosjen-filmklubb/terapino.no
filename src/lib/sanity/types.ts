@@ -49,13 +49,6 @@ export type PosterImage = {
 	alt?: string;
 };
 
-export type PosterByMember = {
-	asset: ImageAsset;
-	blurhash: string;
-	dimensions: ImageDimensions;
-	movies: Movie[];
-};
-
 export type Member = {
 	_id?: string;
 	name: string;
