@@ -1,6 +1,5 @@
-import type { Slug } from '@sanity/types';
+import type { ImageAsset, ImageDimensions, Slug } from '@sanity/types';
 import { sanityClient } from '../client';
-import type { Movie, PosterImage } from '../types';
 import groq from 'groq';
 
 type NextScreening = {
@@ -8,6 +7,18 @@ type NextScreening = {
 	date: string;
 	poster?: PosterImage;
 	slug: Slug;
+};
+
+type Movie = {
+	title: string;
+	release_year: number;
+	directors: string;
+};
+
+type PosterImage = {
+	asset: ImageAsset;
+	blurhash: string;
+	dimensions: ImageDimensions;
 };
 
 export function getNextScreening() {

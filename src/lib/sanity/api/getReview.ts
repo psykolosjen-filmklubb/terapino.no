@@ -1,7 +1,6 @@
 import groq from 'groq';
 import { sanityClient } from '../client';
 import type { ImageAsset, PortableTextBlock, Slug } from '@sanity/types';
-import type { Member } from '../types';
 
 type Review = {
 	review_title: string;
@@ -13,6 +12,12 @@ type Review = {
 	authors?: Member[];
 	tmdb_id?: number;
 	thumbnailBlurhash?: string;
+};
+
+type Member = {
+	_id?: string;
+	name: string;
+	image: ImageAsset;
 };
 
 export async function getReview(slug: string) {

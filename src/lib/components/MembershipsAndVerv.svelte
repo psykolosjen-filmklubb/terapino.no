@@ -3,13 +3,23 @@
 
 	import { dateFormatterMonthYear } from '$lib/dateFormatters';
 	import * as Accordion from '$lib/components/ui/accordion';
-	import type { Membership, Verv } from '$lib/sanity/types';
 	import { Badge } from '$lib/components/ui/badge';
 
 	interface Props {
 		memberships: Membership[];
 		verv?: Verv[];
 	}
+
+	type Membership = {
+		from_date: string;
+		to_date?: string;
+	};
+
+	type Verv = {
+		role: string;
+		from_date: string;
+		to_date?: string;
+	};
 
 	let { memberships, verv = [] }: Props = $props();
 

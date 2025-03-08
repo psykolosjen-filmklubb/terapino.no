@@ -1,7 +1,7 @@
 <script lang="ts">
 	import * as Avatar from '$lib/components/ui/avatar';
 	import { urlFor } from '$lib/sanity/image';
-	import type { Member } from '$lib/sanity/types';
+	import type { Member } from './AuthorList.svelte';
 
 	interface Props {
 		member: Member;

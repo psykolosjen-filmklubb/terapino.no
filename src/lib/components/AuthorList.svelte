@@ -1,11 +1,16 @@
 <script lang="ts">
-	import type { Member } from '$lib/sanity/types';
+	import type { ImageAsset } from '@sanity/types';
 	import MemberTag from './MemberTag.svelte';
 
 	interface Props {
 		authors: Member[];
 		heading?: string;
 	}
+
+	export type Member = {
+		name: string;
+		image: ImageAsset;
+	};
 
 	let { authors, heading = '' }: Props = $props();
 </script>

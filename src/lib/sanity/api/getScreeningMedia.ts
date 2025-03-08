@@ -1,12 +1,16 @@
 import groq from 'groq';
 import { sanityClient } from '../client';
-import type { GalleryImage, GalleryItem, Movie } from '../types';
+import type { GalleryImage, GalleryItem } from '../types';
 
 type ScreeningMedia = {
-	movies: Pick<Movie, 'title' | 'release_year'>[];
+	movies: Movie[];
 	date: string;
 	promo_material?: GalleryItem[];
 	event_media?: GalleryImage[];
+};
+
+type Movie = {
+	title: string;
 };
 
 export async function getScreeningMedia() {

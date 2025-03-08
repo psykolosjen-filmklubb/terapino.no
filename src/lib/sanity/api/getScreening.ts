@@ -1,7 +1,7 @@
 import groq from 'groq';
 import { sanityClient } from '../client';
-import type { GalleryImage, GalleryItem, Movie, PosterImage } from '../types';
-import type { Slug } from '@sanity/types';
+import type { GalleryImage, GalleryItem } from '../types';
+import type { ImageAsset, ImageDimensions, Slug } from '@sanity/types';
 
 type Screening = {
 	movies: Movie[];
@@ -11,6 +11,25 @@ type Screening = {
 	promo_material?: GalleryItem[];
 	event_media?: GalleryImage[];
 	tickets_url?: string;
+};
+
+type Movie = {
+	title: string;
+	release_year: number;
+	directors: string;
+	tmdb_id?: number;
+};
+
+type PosterImage = {
+	asset: ImageAsset;
+	blurhash: string;
+	dimensions: ImageDimensions;
+	artists?: Member[];
+};
+
+type Member = {
+	name: string;
+	image: ImageAsset;
 };
 
 export function getScreening(slug: string) {

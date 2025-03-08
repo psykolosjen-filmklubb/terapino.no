@@ -1,12 +1,5 @@
 import type { ImageAsset, ImageDimensions } from '@sanity/types';
 
-export type Movie = {
-	title: string;
-	release_year: number;
-	directors: string;
-	tmdb_id?: number;
-};
-
 export type GalleryItem = GalleryImage | GalleryVideo;
 
 export type GalleryImage = {
@@ -19,31 +12,4 @@ export type GalleryImage = {
 type GalleryVideo = {
 	_type: 'video';
 	youtube_id: string;
-};
-
-export type PosterImage = {
-	asset: ImageAsset;
-	blurhash: string;
-	dimensions: ImageDimensions;
-	artists?: Member[];
-	alt?: string;
-};
-
-export type Member = {
-	_id?: string;
-	name: string;
-	image: ImageAsset;
-	memberships: Membership[];
-	verv?: Verv[];
-};
-
-export type Membership = {
-	from_date: string;
-	to_date?: string;
-};
-
-export type Verv = {
-	role: string;
-	from_date: string;
-	to_date?: string;
 };
