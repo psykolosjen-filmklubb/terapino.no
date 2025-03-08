@@ -1,11 +1,4 @@
-import type { ImageAsset, ImageDimensions, Slug } from '@sanity/types';
-
-export type NextScreening = {
-	movies: Movie[];
-	date: string;
-	poster?: PosterImage;
-	slug: Slug;
-};
+import type { ImageAsset, ImageDimensions } from '@sanity/types';
 
 export type Movie = {
 	title: string;
