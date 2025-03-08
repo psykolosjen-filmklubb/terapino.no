@@ -1,7 +1,15 @@
 <script lang="ts">
 	import * as Carousel from '$lib/components/ui/carousel';
-	import type { ReviewExcerpt } from '$lib/sanity/api/getReviewExcerpts';
+	import type { ImageAsset, Slug } from '@sanity/types';
 	import ReviewExcerptCard from './ReviewExcerptCard.svelte';
+
+	export type ReviewExcerpt = {
+		review_title: string;
+		slug: Slug;
+		thumbnail: ImageAsset;
+		excerpt: string;
+		thumbnailBlurhash: string;
+	};
 
 	interface Props {
 		reviews: ReviewExcerpt[];
@@ -14,7 +22,7 @@
 	<Carousel.Content>
 		{#each reviews as review}
 			<Carousel.Item class="lg:basis-1/3">
-				<ReviewExcerptCard {review} />
+				<ReviewExcerptCard {...review} />
 			</Carousel.Item>
 		{/each}
 	</Carousel.Content>

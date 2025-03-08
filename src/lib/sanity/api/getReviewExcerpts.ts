@@ -1,11 +1,14 @@
 import groq from 'groq';
 import { sanityClient } from '../client';
-import type { Review } from '../types';
+import type { Slug, ImageAsset } from '@sanity/types';
 
-export type ReviewExcerpt = Pick<
-	Review,
-	'review_title' | 'slug' | 'thumbnail' | 'thumbnailBlurhash' | 'excerpt'
->;
+type ReviewExcerpt = {
+	review_title: string;
+	slug: Slug;
+	thumbnail: ImageAsset;
+	excerpt: string;
+	thumbnailBlurhash: string;
+};
 
 export function getReviewExcerpts(limit?: number) {
 	return sanityClient.fetch<ReviewExcerpt[]>(

@@ -1,17 +1,4 @@
-import type { PortableTextBlock } from '@portabletext/types';
 import type { ImageAsset, ImageDimensions, Slug } from '@sanity/types';
-
-export type Review = {
-	review_title: string;
-	movie_title: string;
-	review: PortableTextBlock[];
-	slug: Slug;
-	thumbnail: ImageAsset;
-	excerpt: string;
-	authors?: Member[];
-	tmdb_id?: number;
-	thumbnailBlurhash: string;
-};
 
 export type NextScreening = {
 	movies: Movie[];
