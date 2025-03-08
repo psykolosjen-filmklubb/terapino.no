@@ -1,25 +1,6 @@
 import groq from 'groq';
 import type { Member, OmOss, Review, PosterImage, Instillinger, PosterByMember } from '../types';
 import { sanityClient } from '../client';
-import type { Semester } from '$lib/components/Archive/SemesterState.svelte';
-
-export async function getArchive() {
-	return sanityClient.fetch<Semester[]>(
-		groq`*[_type == "semester"] | order(start_date desc) {
-		"name": semester_name,
-		"startDate": start_date,
-		"color": color.hex,
-		"screenings": screenings[]-> | order(date desc) {
-			movies[] {
-				title,
-				"year": release_year,
-				directors,
-			},
-			slug,
-		}
-	}`
-	);
-}
 
 export async function getOmOss() {
 	return sanityClient.fetch<OmOss>(
