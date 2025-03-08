@@ -1,28 +1,6 @@
 import groq from 'groq';
-import type { Member, Review, PosterImage, Instillinger, PosterByMember } from '../types';
+import type { Review, PosterImage, Instillinger, PosterByMember } from '../types';
 import { sanityClient } from '../client';
-
-export async function getMember(name: string) {
-	return sanityClient.fetch<Member>(
-		groq`*[_type == "member" && name match $name][0]{
-			_id,
-			name,
-			image,
-			memberships[] | order(from_date asc) {
-				from_date,
-				to_date
-			},
-			verv[] | order(from_date asc) {
-				"role": role->name,
-				from_date,
-				to_date
-			}
-		}`,
-		{
-			name
-		}
-	);
-}
 
 export async function getPostersByMember(id: string): Promise<PosterImage[]> {
 	return sanityClient
