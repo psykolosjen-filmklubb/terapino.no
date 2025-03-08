@@ -3,24 +3,6 @@ import type { Member, OmOss, Review, PosterImage, Instillinger, PosterByMember }
 import { sanityClient } from '../client';
 import type { Semester } from '$lib/components/Archive/SemesterState.svelte';
 
-export async function getReview(slug: string) {
-	return sanityClient.fetch<Review>(
-		groq`*[_type == "review" && slug.current == $slug][0]{
-			review_title,
-			movie_title,
-			review[],
-			slug,
-			thumbnail,
-			"thumbnailBlurhash": thumbnail.asset->metadata.blurHash,
-			authors[]->,
-			tmdb_id,
-	}`,
-		{
-			slug
-		}
-	);
-}
-
 export async function getArchive() {
 	return sanityClient.fetch<Semester[]>(
 		groq`*[_type == "semester"] | order(start_date desc) {

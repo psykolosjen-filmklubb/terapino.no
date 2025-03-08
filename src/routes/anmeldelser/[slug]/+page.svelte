@@ -10,7 +10,12 @@
 	let { data } = $props();
 </script>
 
-<HeroImage thumbnailBlurhash={data.review.thumbnailBlurhash} thumbnail={data.review.thumbnail} />
+{#if data.review.thumbnail}
+	<HeroImage
+		thumbnailBlurhash={data.review.thumbnailBlurhash ?? ''}
+		thumbnail={data.review.thumbnail}
+	/>
+{/if}
 
 <header class="mt-8 px-6 pb-8">
 	<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
