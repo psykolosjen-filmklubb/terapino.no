@@ -64,15 +64,6 @@ export type Member = {
 	verv?: Verv[];
 };
 
-export type OmOss = {
-	header_image: {
-		asset: ImageAsset;
-		blurhash: string;
-		alt: string;
-	};
-	main_text: PortableTextBlock[];
-};
-
 export type Membership = {
 	from_date: string;
 	to_date?: string;

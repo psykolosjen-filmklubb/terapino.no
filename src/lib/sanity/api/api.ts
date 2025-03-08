@@ -1,19 +1,6 @@
 import groq from 'groq';
-import type { Member, OmOss, Review, PosterImage, Instillinger, PosterByMember } from '../types';
+import type { Member, Review, PosterImage, Instillinger, PosterByMember } from '../types';
 import { sanityClient } from '../client';
-
-export async function getOmOss() {
-	return sanityClient.fetch<OmOss>(
-		groq`*[_type == "page_om_oss"] | order(_updatedAt desc) [0] {
-			"header_image": {
-				"asset": header_image.image,
-				"blurhash": header_image.image.asset->metadata.blurHash,
-				"alt": header_image.alt,
-			},
-			main_text
-		}`
-	);
-}
 
 export async function getRolesWithMembers() {
 	const membersPromise = sanityClient.fetch<Member[]>(
