@@ -7,14 +7,14 @@ export async function load() {
 		const [screeningMedia, eventMedia] = await Promise.all([getScreeningMedia(), getEventsMedia()]);
 
 		return {
-			mediaEvents: mergeAndSortMediaByDate(screeningMedia, eventMedia)
+			mediaEvents: mergeAndSortEventsByDate(screeningMedia, eventMedia)
 		};
 	} catch (e) {
 		error(500, 'Internal Server Error');
 	}
 }
 
-function mergeAndSortMediaByDate<T extends { date: Date }>(...mediaEvents: T[][]) {
+function mergeAndSortEventsByDate<T extends { date: Date }>(...mediaEvents: T[][]) {
 	return mediaEvents.flat().sort((a, b) => {
 		return b.date!.getTime() - a.date!.getTime();
 	});

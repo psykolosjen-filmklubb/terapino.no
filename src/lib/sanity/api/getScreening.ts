@@ -1,6 +1,6 @@
 import groq from 'groq';
 import { sanityClient } from '../client';
-import type { GalleryImage, GalleryItem } from '../types';
+import type { GalleryItem } from '../types';
 import type { ImageAsset, ImageDimensions, Slug } from '@sanity/types';
 
 type Screening = {
@@ -9,7 +9,7 @@ type Screening = {
 	slug: Slug;
 	poster?: PosterImage;
 	promo_material?: GalleryItem[];
-	event_media?: GalleryImage[];
+	event_media?: GalleryItem[];
 	tickets_url?: string;
 };
 
@@ -61,9 +61,16 @@ export function getScreening(slug: string) {
 			}
 		},
 		event_media[] {
-			asset,
-			alt,
-			"dimensions": asset->metadata.dimensions
+			_type == "image" => {
+				asset,
+				alt,
+				"dimensions": asset->metadata.dimensions,
+				_type,
+			},
+			_type == "video" => {
+				youtube_id,
+				_type,
+			}
 		},
 		tickets_url
 	}`,

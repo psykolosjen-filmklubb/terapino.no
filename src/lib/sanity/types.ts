@@ -2,7 +2,7 @@ import type { ImageAsset, ImageDimensions } from '@sanity/types';
 
 export type GalleryItem = GalleryImage | GalleryVideo;
 
-export type GalleryImage = {
+type GalleryImage = {
 	_type: 'image';
 	asset: ImageAsset;
 	alt: string;

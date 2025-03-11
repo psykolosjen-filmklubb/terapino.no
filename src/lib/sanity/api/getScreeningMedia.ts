@@ -1,12 +1,12 @@
 import groq from 'groq';
 import { sanityClient } from '../client';
-import type { GalleryImage, GalleryItem } from '../types';
+import type { GalleryItem } from '../types';
 
 type ScreeningMedia = {
 	movies: Movie[];
 	date: string;
 	promo_material?: GalleryItem[];
-	event_media?: GalleryImage[];
+	event_media?: GalleryItem[];
 };
 
 type Movie = {
@@ -33,10 +33,16 @@ export async function getScreeningMedia() {
         }
       },
       event_media[] {
-        asset,
-        alt,
-        "dimensions": asset->metadata.dimensions,
-        _type,
+        _type == "image" => {
+          asset,
+          alt,
+          "dimensions": asset->metadata.dimensions,
+          _type,
+        },
+        _type == "video" => {
+          youtube_id,
+          _type,
+        }
       },
     }`
 	);
