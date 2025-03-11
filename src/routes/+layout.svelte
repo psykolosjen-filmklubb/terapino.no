@@ -1,60 +1,16 @@
 <script>
-	import { run } from 'svelte/legacy';
-
-	import { page } from '$app/stores';
+	import Header from '$lib/components/Header/Header.svelte';
 	import { Button } from '$lib/components/ui/button';
-	import { urlFor } from '$lib/sanity/image';
 	import { siFacebook, siInstagram } from 'simple-icons';
+	import { ModeWatcher } from 'mode-watcher';
 	import '../app.pcss';
-	import NavLinks from '$lib/components/NavLinks.svelte';
-	import { routes } from '$lib/routes';
-	import { ModeWatcher, mode } from 'mode-watcher';
 
 	let { data, children } = $props();
-
-	let currentTitle = $state('');
-	let currentRoute = $state('');
-	run(() => {
-		let tempTitle = 'Psykolosjen Filmklubb';
-		Object.values(routes).forEach((route) => {
-			if ($page.url.pathname.startsWith('/' + route.route)) {
-				tempTitle = route.title;
-				currentRoute = route.route;
-			}
-		});
-		currentTitle = tempTitle;
-	});
 </script>
 
 <ModeWatcher />
 
-<header
-	class="flex h-16 w-full place-content-between items-center border-b bg-muted px-4 lg:h-44 lg:px-8"
->
-	<div class="mr-8 flex items-center gap-8">
-		<a href="/" class="size-10 lg:size-32">
-			{#if $mode === 'light'}
-				<img src={urlFor(data.logos.black.image).width(512).height(512).url()} alt="Logo" />
-			{:else}
-				<img src={urlFor(data.logos.white.image).width(512).height(512).url()} alt="Logo" />
-			{/if}
-		</a>
-		{#if currentTitle != 'Psykolosjen Filmklubb'}
-			<a
-				href="/{currentRoute}"
-				class="scroll-m-20 text-left text-xl font-bold tracking-tight lg:text-5xl"
-			>
-				{currentTitle}
-			</a>
-		{:else}
-			<h1 class="scroll-m-20 text-left text-xl font-bold tracking-tight lg:text-5xl">
-				{currentTitle}
-			</h1>
-		{/if}
-	</div>
-
-	<NavLinks />
-</header>
+<Header logoAssetLight={data.logos.white.image} logoAssetDark={data.logos.white.image}></Header>
 
 <main class="flex flex-col items-center justify-center">
 	{@render children?.()}
