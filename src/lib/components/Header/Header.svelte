@@ -30,7 +30,7 @@
 </script>
 
 <header
-	class="flex h-16 w-full place-content-between items-center border-b bg-muted px-4 lg:h-44 lg:px-8"
+	class="sticky top-0 z-50 flex h-16 w-full place-content-between items-center border-b bg-muted px-4 lg:h-44 lg:px-8"
 >
 	<div class="mr-8 flex items-center gap-8">
 		<a href="/" class="size-10 lg:size-32">
