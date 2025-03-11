@@ -11,6 +11,10 @@ export const routes: Record<string, route> = {
 		route: 'arkiv',
 		title: 'Visningsarkiv'
 	},
+	bilder: {
+		route: 'bilder',
+		title: 'Bilder'
+	},
 	om_oss: {
 		route: 'om-oss',
 		title: 'Om oss'

@@ -31,7 +31,7 @@
 <header
 	class="flex h-16 w-full place-content-between items-center border-b bg-muted px-4 lg:h-44 lg:px-8"
 >
-	<div class="flex items-center gap-8">
+	<div class="mr-8 flex items-center gap-8">
 		<a href="/" class="size-10 lg:size-32">
 			{#if $mode === 'light'}
 				<img src={urlFor(data.logos.black.image).width(512).height(512).url()} alt="Logo" />
