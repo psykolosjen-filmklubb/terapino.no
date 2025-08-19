@@ -12,7 +12,7 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@portabletext/svelte": "^2.1.11",
+		"@portabletext/svelte": "^3.0.0",
 		"@portabletext/types": "^2.0.13",
 		"@sanity/types": "^3.40.0",
 		"@sveltejs/adapter-vercel": "^5.4.6",
