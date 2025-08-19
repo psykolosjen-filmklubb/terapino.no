@@ -5,10 +5,11 @@
 	import { ModeWatcher } from 'mode-watcher';
 	import '../app.pcss';
 	import { injectAnalytics } from '@vercel/analytics/sveltekit';
+	import { dev } from '$app/environment';
 
 	let { data, children } = $props();
 
-	injectAnalytics();
+	injectAnalytics({ mode: dev ? 'development' : 'production' });
 </script>
 
 <ModeWatcher />
