@@ -4,8 +4,11 @@
 	import { siFacebook, siInstagram } from 'simple-icons';
 	import { ModeWatcher } from 'mode-watcher';
 	import '../app.pcss';
+	import { injectAnalytics } from '@vercel/analytics/sveltekit';
 
 	let { data, children } = $props();
+
+	injectAnalytics();
 </script>
 
 <ModeWatcher />
