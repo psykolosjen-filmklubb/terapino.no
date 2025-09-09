@@ -53,9 +53,11 @@
 					</div>
 				{/if}
 
-				<p class="font-light">
-					Originaltittel: <span class="font-medium">{originalTitle}</span>
-				</p>
+				{#if originalTitle !== title}
+					<p class="font-light">
+						Originaltittel: <span class="font-medium">{originalTitle}</span>
+					</p>
+				{/if}
 
 				<p class="font-light">
 					{norwegianReleaseDate ? 'På kino i Norge' : 'Utgitt'}:
