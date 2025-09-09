@@ -4,9 +4,11 @@
 	import tmdbLogo from '$lib/images/tmdb-alt-long.svg';
 	import ImdbButton from '$lib/components/ImdbButton.svelte';
 	import LetterboxdButton from '$lib/components/LetterboxdButton.svelte';
+	import { formatCountryCode } from '$lib/countries.js';
 
 	interface MovieDetailsProps {
 		title: string;
+		originCountry: string[];
 		originalTitle: string;
 		directors: string[];
 		norwegianReleaseDate?: string;
@@ -17,6 +19,7 @@
 
 	let {
 		title,
+		originCountry,
 		originalTitle,
 		directors,
 		norwegianReleaseDate,
@@ -38,6 +41,17 @@
 					Regissør{directors.length > 1 ? 'er' : ''}:
 					<span class="font-medium">{directors.join(', ')}</span>
 				</p>
+
+				{#if originCountry.length}
+					<div class="flex gap-2">
+						<span class="font-light">Opprinnelsesland:</span>
+						<ul>
+							{#each originCountry as country}
+								<li class="font-medium">{formatCountryCode(country, { withFlag: true })}</li>
+							{/each}
+						</ul>
+					</div>
+				{/if}
 
 				<p class="font-light">
 					Originaltittel: <span class="font-medium">{originalTitle}</span>

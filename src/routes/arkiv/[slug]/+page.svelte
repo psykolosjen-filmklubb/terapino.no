@@ -68,6 +68,7 @@
 	{#if movie.details}
 		<MovieDetails
 			title={movie.title}
+			originCountry={movie.details.origin_country}
 			originalTitle={movie.details.original_title}
 			directors={movie.details.directors}
 			norwegianReleaseDate={movie.details.release_date_no}
