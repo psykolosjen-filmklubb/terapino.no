@@ -64,19 +64,19 @@
 	</Button>
 {/if}
 
-{#if data.movieDetails}
-	{#each data.movieDetails as movieDetails}
+{#each data.screening.movies as movie}
+	{#if movie.details}
 		<MovieDetails
-			title={movieDetails.title}
-			originalTitle={movieDetails.original_title}
-			directors={movieDetails.directors}
-			norwegianReleaseDate={movieDetails.release_date_no}
-			originalReleaseDate={movieDetails.release_date}
-			imdbId={movieDetails.imdb_id}
-			posterPath={movieDetails.poster_path}
+			title={movie.title}
+			originalTitle={movie.details.original_title}
+			directors={movie.details.directors}
+			norwegianReleaseDate={movie.details.release_date_no}
+			originalReleaseDate={movie.details.release_date}
+			imdbId={movie.details.imdb_id}
+			posterPath={movie.details.poster_path}
 		></MovieDetails>
-	{/each}
-{/if}
+	{/if}
+{/each}
 
 {#if screening.promo_material}
 	<div>

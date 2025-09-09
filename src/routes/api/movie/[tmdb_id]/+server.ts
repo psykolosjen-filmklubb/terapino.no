@@ -32,7 +32,6 @@ export async function GET({ params }) {
 	)[0]?.release_date;
 
 	const response: TmdbMovieDetails = {
-		title: movieDetailsJson.title,
 		original_title: movieDetailsJson.original_title,
 		poster_path: movieDetailsJson.poster_path,
 		release_date: movieDetailsJson.release_date,
@@ -45,7 +44,6 @@ export async function GET({ params }) {
 }
 
 export type TmdbMovieDetails = {
-	title: string;
 	original_title: string;
 	poster_path: string;
 	release_date: string;
@@ -58,7 +56,6 @@ type TmdbMovieResponse = {
 	imdb_id: string;
 	poster_path: string;
 	release_date: string;
-	title: string;
 	original_title: string;
 	credits: { crew: { job: string; name: string; original_name: string }[] };
 	release_dates: {

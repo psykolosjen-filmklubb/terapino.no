@@ -5,19 +5,26 @@ import { getScreening } from '$lib/sanity/api/getScreening';
 export async function load({ params, fetch }) {
 	const screening = await getScreening(params.slug);
 
-	const movieDetailsPromises: Promise<TmdbMovieDetails>[] = [];
-
 	if (screening) {
-		screening.movies.forEach(async (movie) => {
-			if (movie.tmdb_id) {
-				const movieDetailsPromise = fetch(`/api/movie/${movie.tmdb_id}`).then((res) => res.json());
-				movieDetailsPromises.push(movieDetailsPromise);
-			}
-		});
+		const moviesWithDetails = await Promise.all(
+			screening.movies.map(async (movie) => {
+				if (movie.tmdb_id) {
+					return {
+						...movie,
+						details: await fetch(`/api/movie/${movie.tmdb_id}`).then(
+							(res) => res.json() as Promise<TmdbMovieDetails>
+						)
+					};
+				}
+				return { ...movie, details: null };
+			})
+		);
 
 		return {
-			screening,
-			movieDetails: await Promise.all(movieDetailsPromises)
+			screening: {
+				...screening,
+				movies: moviesWithDetails
+			}
 		};
 	}
 
