@@ -17,6 +17,7 @@
 
 	let currentTitle = $state('');
 	let currentRoute = $state('');
+
 	run(() => {
 		let tempTitle = 'Psykolosjen Filmklubb';
 		Object.values(routes).forEach((route) => {
@@ -34,7 +35,7 @@
 >
 	<div class="mr-8 flex items-center gap-8">
 		<a href="/" class="size-10 lg:size-32">
-			{#if $mode === 'light'}
+			{#if mode.current === 'light'}
 				<img src={urlFor(logoAssetLight).width(512).height(512).url()} alt="Logo" />
 			{:else}
 				<img src={urlFor(logoAssetDark).width(512).height(512).url()} alt="Logo" />

@@ -14,7 +14,7 @@
 
 <ModeWatcher />
 
-<Header logoAssetLight={data.logos.white.image} logoAssetDark={data.logos.white.image}></Header>
+<Header logoAssetLight={data.logos.black.image} logoAssetDark={data.logos.white.image}></Header>
 
 <main class="flex flex-col items-center justify-center">
 	{@render children?.()}
