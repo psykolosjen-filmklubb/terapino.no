@@ -1,38 +1,39 @@
 <script lang="ts">
-	import type { WithoutChildren } from 'bits-ui';
-	import { getEmblaContext } from './context.js';
-	import { cn } from '$lib/utils.js';
-	import { Button, type Props } from '$lib/components/ui/button/index.js';
-	import { ArrowRight } from '@lucide/svelte';
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import type { WithoutChildren } from "bits-ui";
+	import { getEmblaContext } from "./context.js";
+	import { cn } from "$lib/utils.js";
+	import { Button, type Props } from "$lib/components/ui/button/index.js";
 
 	let {
 		ref = $bindable(null),
 		class: className,
-		variant = 'outline',
-		size = 'icon',
+		variant = "outline",
+		size = "icon",
 		...restProps
 	}: WithoutChildren<Props> = $props();
 
-	const emblaCtx = getEmblaContext('<Carousel.Next/>');
+	const emblaCtx = getEmblaContext("<Carousel.Next/>");
 </script>
 
 <Button
+	data-slot="carousel-next"
 	{variant}
 	{size}
+	aria-disabled={!emblaCtx.canScrollNext}
 	class={cn(
-		'absolute size-8 touch-manipulation rounded-full border-0 bg-opacity-60',
-		emblaCtx.orientation === 'horizontal'
-			? 'right-1 top-1/2 -translate-y-1/2 lg:-right-2'
-			: '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
-		emblaCtx.canScrollNext ? 'visible' : 'pointer-events-none invisible',
+		"absolute size-8 rounded-full border-0 bg-opacity-60",
+		emblaCtx.orientation === "horizontal"
+			? "right-1 top-1/2 -translate-y-1/2 lg:-right-2"
+			: "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+		emblaCtx.canScrollNext ? "visible" : "pointer-events-none invisible",
 		className
 	)}
-	disabled={!emblaCtx.canScrollNext}
 	onclick={emblaCtx.scrollNext}
 	onkeydown={emblaCtx.handleKeyDown}
 	bind:ref
 	{...restProps}
 >
-	<ArrowRight class="size-4" />
+	<ArrowRightIcon class="size-4" />
 	<span class="sr-only">Next slide</span>
 </Button>
