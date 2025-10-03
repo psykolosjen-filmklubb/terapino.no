@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Fullscreen } from 'lucide-svelte';
 	import { Button } from '../ui/button';
 	import type { ImageAsset, ImageDimensions } from '@sanity/types';
 	import { urlFor } from '$lib/sanity/image';
 	import { fade } from 'svelte/transition';
+	import { Fullscreen } from '@lucide/svelte';
 
 	interface Props {
 		imageAsset: ImageAsset;

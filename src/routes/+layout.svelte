@@ -3,7 +3,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { siFacebook, siInstagram } from 'simple-icons';
 	import { ModeWatcher } from 'mode-watcher';
-	import '../app.pcss';
+	import '../app.css';
 	import { injectAnalytics } from '@vercel/analytics/sveltekit';
 	import { dev } from '$app/environment';
 

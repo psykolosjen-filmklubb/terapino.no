@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Play } from 'lucide-svelte';
+	import { Play } from '@lucide/svelte';
 	import { Button } from '../ui/button';
 
 	interface Props {

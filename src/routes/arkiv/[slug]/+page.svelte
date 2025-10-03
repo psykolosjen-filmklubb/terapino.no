@@ -35,7 +35,7 @@
 </div>
 
 {#if screening.poster?.asset}
-	<Card.Root class="w-full overflow-hidden lg:max-w-sm">
+	<Card.Root class="w-full overflow-hidden lg:max-w-sm p-0">
 		<Card.Content class="p-0">
 			<PosterImage
 				blurhash={screening.poster.blurhash}

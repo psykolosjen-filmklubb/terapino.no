@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Menu, X } from 'lucide-svelte';
 	import { fly } from 'svelte/transition';
 	import { Button } from '../ui/button';
 	import { page } from '$app/stores';
 	import { focus } from 'focus-svelte';
 	import { routes } from '$lib/routes';
 	import ThemeToggle from '../ThemeToggle.svelte';
+	import { Menu, X } from '@lucide/svelte';
 
 	let isOpen = $state(false);
 
