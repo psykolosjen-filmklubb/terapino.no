@@ -18,8 +18,8 @@
 		"@portabletext/svelte": "^3.0.1",
 		"@portabletext/types": "^2.0.15",
 		"@sanity/types": "^4.10.2",
-		"@sveltejs/adapter-vercel": "^5.10.2",
-		"@sveltejs/kit": "^2.43.7",
+		"@sveltejs/adapter-vercel": "^5.10.3",
+		"@sveltejs/kit": "^2.43.8",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.1.14",
@@ -46,7 +46,7 @@
 		"tw-animate-css": "^1.4.0",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.45.0",
-		"vite": "^7.1.8"
+		"vite": "^7.1.9"
 	},
 	"type": "module",
 	"dependencies": {
@@ -58,6 +58,6 @@
 		"groq": "^4.10.2",
 		"mode-watcher": "^1.1.0",
 		"photoswipe": "^5.4.4",
-		"simple-icons": "^11.14.0"
+		"simple-icons": "^15.16.0"
 	}
 }
