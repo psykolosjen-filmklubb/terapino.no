@@ -1,20 +1,20 @@
-import { TMDB_BEARER } from '$env/static/private';
-import { json } from '@sveltejs/kit';
+import { TMDB_BEARER } from "$env/static/private";
+import { json } from "@sveltejs/kit";
 
 export async function GET({ params }) {
 	const tmdbResponse = await fetch(
 		`https://api.themoviedb.org/3/movie/${params.tmdb_id}?append_to_response=credits,release_dates`,
 		{
 			headers: {
-				Authorization: `Bearer ${TMDB_BEARER}`
-			}
-		}
+				Authorization: `Bearer ${TMDB_BEARER}`,
+			},
+		},
 	);
 
 	const movieDetailsJson: TmdbMovieResponse = await tmdbResponse.json();
 
 	const directors = movieDetailsJson.credits.crew
-		.filter(({ job }) => job === 'Director')
+		.filter(({ job }) => job === "Director")
 		.map(({ name, original_name }) => {
 			if (original_name !== name) {
 				return `${name} (${original_name})`;
@@ -24,11 +24,11 @@ export async function GET({ params }) {
 		});
 
 	const norwegian_release_dates = movieDetailsJson.release_dates.results.find(
-		({ iso_3166_1 }) => iso_3166_1 === 'NO'
+		({ iso_3166_1 }) => iso_3166_1 === "NO",
 	)?.release_dates;
 	const theatrical_releases = norwegian_release_dates?.filter(({ type }) => type === 3);
 	const first_release = theatrical_releases?.sort(
-		(a, b) => new Date(a.release_date).getTime() - new Date(b.release_date).getTime()
+		(a, b) => new Date(a.release_date).getTime() - new Date(b.release_date).getTime(),
 	)[0]?.release_date;
 
 	const response: TmdbMovieDetails = {
@@ -38,7 +38,7 @@ export async function GET({ params }) {
 		release_date: movieDetailsJson.release_date,
 		imdb_id: movieDetailsJson.imdb_id,
 		directors,
-		release_date_no: first_release
+		release_date_no: first_release,
 	};
 
 	return json(response);

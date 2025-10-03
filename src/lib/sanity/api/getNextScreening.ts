@@ -1,6 +1,6 @@
-import type { ImageAsset, ImageDimensions, Slug } from '@sanity/types';
-import { sanityClient } from '../client';
-import groq from 'groq';
+import type { ImageAsset, ImageDimensions, Slug } from "@sanity/types";
+import { sanityClient } from "../client";
+import groq from "groq";
 
 type NextScreening = {
 	movies: Movie[];
@@ -38,7 +38,7 @@ export function getNextScreening() {
 		slug
 	}`,
 		{
-			today: new Date().toISOString().split('T')[0]
-		}
+			today: new Date().toISOString().split("T")[0],
+		},
 	);
 }

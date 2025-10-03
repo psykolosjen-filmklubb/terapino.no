@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { ArchiveState } from './ArchiveState.svelte';
+	import type { ArchiveState } from "./ArchiveState.svelte";
 
 	let { archive }: { archive: ArchiveState } = $props();
 
 	let earliestSemester = $derived(
 		[...archive.semesters].sort((a, b) => {
 			return a.startDate < b.startDate ? -1 : 1;
-		})[0]
+		})[0],
 	);
 
 	/**
@@ -18,7 +18,7 @@
 	let lineY2 = $derived(
 		earliestSemester.open
 			? archive.containerHeight - earliestSemester.titlesHeight - archive.circleSize / 2
-			: archive.containerHeight - archive.circleSize
+			: archive.containerHeight - archive.circleSize,
 	);
 </script>
 

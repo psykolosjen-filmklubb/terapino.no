@@ -1,15 +1,15 @@
 <script>
-	import Header from '$lib/components/Header/Header.svelte';
-	import { Button } from '$lib/components/ui/button';
-	import { siFacebook, siInstagram } from 'simple-icons';
-	import { ModeWatcher } from 'mode-watcher';
-	import '../app.css';
-	import { injectAnalytics } from '@vercel/analytics/sveltekit';
-	import { dev } from '$app/environment';
+	import Header from "$lib/components/Header/Header.svelte";
+	import { Button } from "$lib/components/ui/button";
+	import { siFacebook, siInstagram } from "simple-icons";
+	import { ModeWatcher } from "mode-watcher";
+	import "../app.css";
+	import { injectAnalytics } from "@vercel/analytics/sveltekit";
+	import { dev } from "$app/environment";
 
 	let { data, children } = $props();
 
-	injectAnalytics({ mode: dev ? 'development' : 'production' });
+	injectAnalytics({ mode: dev ? "development" : "production" });
 </script>
 
 <ModeWatcher />

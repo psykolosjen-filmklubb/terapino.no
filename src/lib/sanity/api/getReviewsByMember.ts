@@ -1,6 +1,6 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { Slug } from '@sanity/types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { Slug } from "@sanity/types";
 
 export type Review = {
 	review_title: string;
@@ -16,7 +16,7 @@ export async function getReviewsByMember(id: string) {
 			slug,
 		}`,
 		{
-			id
-		}
+			id,
+		},
 	);
 }

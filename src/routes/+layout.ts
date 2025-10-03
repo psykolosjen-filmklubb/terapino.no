@@ -1,6 +1,6 @@
-import { getSettings } from '$lib/sanity/api/getSettings';
-import { getLogos } from '$lib/sanity/api/getLogos';
-import { error } from '@sveltejs/kit';
+import { getSettings } from "$lib/sanity/api/getSettings";
+import { getLogos } from "$lib/sanity/api/getLogos";
+import { error } from "@sveltejs/kit";
 
 export async function load() {
 	const logos = getLogos();
@@ -9,9 +9,9 @@ export async function load() {
 	try {
 		return {
 			logos: await logos,
-			settings: await settings
+			settings: await settings,
 		};
 	} catch (e) {
-		error(500, 'Internal Server Error');
+		error(500, "Internal Server Error");
 	}
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Play } from '@lucide/svelte';
-	import { Button } from '../ui/button';
+	import { Play } from "@lucide/svelte";
+	import { Button } from "../ui/button";
 
 	interface Props {
 		youtubeId: string;
@@ -25,7 +25,7 @@
 	<Button
 		variant="outline"
 		size="icon"
-		class="absolute left-1/2 top-1/2 size-12 -translate-x-1/2 -translate-y-1/2 rounded-full border-0 bg-opacity-50"
+		class="bg-opacity-50 absolute top-1/2 left-1/2 size-12 -translate-x-1/2 -translate-y-1/2 rounded-full border-0"
 	>
 		<Play class="ml-1 size-8" />
 		<span class="sr-only">Åpne video</span>

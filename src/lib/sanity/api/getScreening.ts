@@ -1,7 +1,7 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { GalleryItem } from '../types';
-import type { ImageAsset, ImageDimensions, Slug } from '@sanity/types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { GalleryItem } from "../types";
+import type { ImageAsset, ImageDimensions, Slug } from "@sanity/types";
 
 type Screening = {
 	movies: Movie[];
@@ -75,7 +75,7 @@ export function getScreening(slug: string) {
 		tickets_url
 	}`,
 		{
-			slug
-		}
+			slug,
+		},
 	);
 }

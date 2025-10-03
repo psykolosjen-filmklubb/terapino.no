@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { PortableText } from '@portabletext/svelte';
-	import HeroImage from '$lib/components/HeroImage.svelte';
-	import AuthorList from '$lib/components/AuthorList.svelte';
-	import { dateFormatterShort } from '$lib/dateFormatters.js';
-	import tmdbLogo from '$lib/images/tmdb-alt-long.svg';
-	import ImdbButton from '$lib/components/ImdbButton.svelte';
-	import LetterboxdButton from '$lib/components/LetterboxdButton.svelte';
+	import { PortableText } from "@portabletext/svelte";
+	import HeroImage from "$lib/components/HeroImage.svelte";
+	import AuthorList from "$lib/components/AuthorList.svelte";
+	import { dateFormatterShort } from "$lib/dateFormatters.js";
+	import tmdbLogo from "$lib/images/tmdb-alt-long.svg";
+	import ImdbButton from "$lib/components/ImdbButton.svelte";
+	import LetterboxdButton from "$lib/components/LetterboxdButton.svelte";
 
 	let { data } = $props();
 </script>
 
 {#if data.review.thumbnail}
 	<HeroImage
-		thumbnailBlurhash={data.review.thumbnailBlurhash ?? ''}
+		thumbnailBlurhash={data.review.thumbnailBlurhash ?? ""}
 		thumbnail={data.review.thumbnail}
 	/>
 {/if}
@@ -51,13 +51,13 @@
 				<p class="text-lg font-light">
 					På kino i Norge: <span class="font-medium">
 						{dateFormatterShort.format(
-							new Date(data.movieDetails.release_date_no ?? data.movieDetails.release_date)
+							new Date(data.movieDetails.release_date_no ?? data.movieDetails.release_date),
 						)}
 					</span>
 				</p>
 				<p class="text-lg font-light">
-					Reggisør{data.movieDetails.directors.length > 1 ? 'er' : ''}:
-					<span class="font-medium">{data.movieDetails.directors.join(', ')}</span>
+					Reggisør{data.movieDetails.directors.length > 1 ? "er" : ""}:
+					<span class="font-medium">{data.movieDetails.directors.join(", ")}</span>
 				</p>
 				<div class="mt-4 flex justify-evenly">
 					<ImdbButton imdbId={data.movieDetails.imdb_id} />

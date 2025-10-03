@@ -1,13 +1,13 @@
 <script lang="ts">
-	import MembershipsAndVerv from '$lib/components/MembershipsAndVerv.svelte';
-	import PosterGallery from '$lib/components/PosterGallery.svelte';
-	import * as Avatar from '$lib/components/ui/avatar';
-	import { urlFor } from '$lib/sanity/image';
-	import * as Card from '$lib/components/ui/card';
+	import MembershipsAndVerv from "$lib/components/MembershipsAndVerv.svelte";
+	import PosterGallery from "$lib/components/PosterGallery.svelte";
+	import * as Avatar from "$lib/components/ui/avatar";
+	import { urlFor } from "$lib/sanity/image";
+	import * as Card from "$lib/components/ui/card";
 
 	let { data } = $props();
 
-	let nameList = $derived(data.member.name.split(' '));
+	let nameList = $derived(data.member.name.split(" "));
 	let fallback = $derived(nameList[0].substring(0, 1) + nameList.slice(-1)[0].substring(0, 1));
 </script>
 

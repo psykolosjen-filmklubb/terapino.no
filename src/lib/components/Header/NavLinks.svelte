@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
-	import { Button } from '../ui/button';
-	import { page } from '$app/stores';
-	import { focus } from 'focus-svelte';
-	import { routes } from '$lib/routes';
-	import ThemeToggle from '../ThemeToggle.svelte';
-	import { Menu, X } from '@lucide/svelte';
+	import { fly } from "svelte/transition";
+	import { Button } from "../ui/button";
+	import { page } from "$app/stores";
+	import { focus } from "focus-svelte";
+	import { routes } from "$lib/routes";
+	import ThemeToggle from "../ThemeToggle.svelte";
+	import { Menu, X } from "@lucide/svelte";
 
 	let isOpen = $state(false);
 
@@ -18,7 +18,7 @@
 	}
 
 	const filteredRoutes = Object.values(routes).filter((route) => {
-		if (route.route === 'bli-med') {
+		if (route.route === "bli-med") {
 			return $page.data.settings.recruiting.recruiting_active;
 		}
 		return true;
@@ -27,7 +27,7 @@
 
 <svelte:window
 	onkeydown={(e) => {
-		if (isOpen && e.key === 'Escape') {
+		if (isOpen && e.key === "Escape") {
 			close();
 		}
 	}}
@@ -37,7 +37,7 @@
 	<Button variant="ghost" size="icon" onclick={toggle}><Menu /></Button>
 	{#if isOpen}
 		<div
-			transition:fly={{ opacity: 0, x: '100%' }}
+			transition:fly={{ opacity: 0, x: "100%" }}
 			class="fixed inset-y-0 right-0 z-30 flex w-8/12 flex-col items-end bg-background px-6 py-5"
 			use:focus={{ enabled: true, preventScroll: true }}
 		>

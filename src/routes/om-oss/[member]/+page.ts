@@ -1,10 +1,10 @@
-import { getMember } from '$lib/sanity/api/getMember';
-import { getPostersByMember } from '$lib/sanity/api/getPostersByMember';
-import { getReviewsByMember } from '$lib/sanity/api/getReviewsByMember';
-import { error } from '@sveltejs/kit';
+import { getMember } from "$lib/sanity/api/getMember";
+import { getPostersByMember } from "$lib/sanity/api/getPostersByMember";
+import { getReviewsByMember } from "$lib/sanity/api/getReviewsByMember";
+import { error } from "@sveltejs/kit";
 
 export async function load({ params }) {
-	const name = decodeURIComponent(params.member.replace('-', ' '));
+	const name = decodeURIComponent(params.member.replace("-", " "));
 	const member = await getMember(decodeURIComponent(name));
 	const posters = member._id ? getPostersByMember(member._id) : [];
 	const reviews = member._id ? getReviewsByMember(member._id) : [];
@@ -13,9 +13,9 @@ export async function load({ params }) {
 		return {
 			member,
 			posters: await posters,
-			reviews: await reviews
+			reviews: await reviews,
 		};
 	} catch (e) {
-		error(500, 'Internal Server Error');
+		error(500, "Internal Server Error");
 	}
 }

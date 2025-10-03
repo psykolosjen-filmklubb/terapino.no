@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { siLetterboxd } from 'simple-icons';
-	import { Button } from './ui/button';
+	import { siLetterboxd } from "simple-icons";
+	import { Button } from "./ui/button";
 
 	interface Props {
 		imdbId: string;

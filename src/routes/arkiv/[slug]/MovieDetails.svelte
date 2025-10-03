@@ -1,10 +1,10 @@
 <script lang="ts">
-	import * as Accordion from '$lib/components/ui/accordion';
-	import { dateFormatterShort } from '$lib/dateFormatters.js';
-	import tmdbLogo from '$lib/images/tmdb-alt-long.svg';
-	import ImdbButton from '$lib/components/ImdbButton.svelte';
-	import LetterboxdButton from '$lib/components/LetterboxdButton.svelte';
-	import { formatCountryCode } from '$lib/countries.js';
+	import * as Accordion from "$lib/components/ui/accordion";
+	import { dateFormatterShort } from "$lib/dateFormatters.js";
+	import tmdbLogo from "$lib/images/tmdb-alt-long.svg";
+	import ImdbButton from "$lib/components/ImdbButton.svelte";
+	import LetterboxdButton from "$lib/components/LetterboxdButton.svelte";
+	import { formatCountryCode } from "$lib/countries.js";
 
 	interface MovieDetailsProps {
 		title: string;
@@ -25,7 +25,7 @@
 		norwegianReleaseDate,
 		originalReleaseDate,
 		imdbId,
-		posterPath
+		posterPath,
 	}: MovieDetailsProps = $props();
 </script>
 
@@ -38,8 +38,8 @@
 		<Accordion.Content>
 			<div class="flex flex-col gap-2">
 				<p class="font-light">
-					Regissør{directors.length > 1 ? 'er' : ''}:
-					<span class="font-medium">{directors.join(', ')}</span>
+					Regissør{directors.length > 1 ? "er" : ""}:
+					<span class="font-medium">{directors.join(", ")}</span>
 				</p>
 
 				{#if originCountry.length}
@@ -60,7 +60,7 @@
 				{/if}
 
 				<p class="font-light">
-					{norwegianReleaseDate ? 'På kino i Norge' : 'Utgitt'}:
+					{norwegianReleaseDate ? "På kino i Norge" : "Utgitt"}:
 					<span class="font-medium">
 						{dateFormatterShort.format(new Date(norwegianReleaseDate ?? originalReleaseDate))}
 					</span>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import MediaGallery from '$lib/components/MediaGallery.svelte';
+	import MediaGallery from "$lib/components/MediaGallery.svelte";
 
 	let { data } = $props();
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Carousel from '$lib/components/ui/carousel';
-	import type { ImageAsset, Slug } from '@sanity/types';
-	import ReviewExcerptCard from './ReviewExcerptCard.svelte';
+	import * as Carousel from "$lib/components/ui/carousel";
+	import type { ImageAsset, Slug } from "@sanity/types";
+	import ReviewExcerptCard from "./ReviewExcerptCard.svelte";
 
 	export type ReviewExcerpt = {
 		review_title: string;

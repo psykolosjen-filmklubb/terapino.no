@@ -1,6 +1,6 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { GalleryItem } from '../types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { GalleryItem } from "../types";
 
 type EventMedia = {
 	name: string;
@@ -27,11 +27,11 @@ export async function getEventsMedia() {
 					_type,
 				}
 			}
-		}`
+		}`,
 	);
 
 	const eventsWithMedia = result.filter(
-		(event) => event.event_media && event.event_media.length > 0
+		(event) => event.event_media && event.event_media.length > 0,
 	);
 
 	return eventsWithMedia.map(({ name, date, end_date, event_media }) => {
@@ -39,7 +39,7 @@ export async function getEventsMedia() {
 			title: name,
 			date: new Date(date),
 			end_date: end_date ? new Date(end_date) : undefined,
-			media: event_media ?? []
+			media: event_media ?? [],
 		};
 	});
 }

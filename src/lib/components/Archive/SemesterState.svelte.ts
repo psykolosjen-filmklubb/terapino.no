@@ -1,5 +1,5 @@
-import type { Slug } from '@sanity/types';
-import { ArchiveState } from './ArchiveState.svelte';
+import type { Slug } from "@sanity/types";
+import { ArchiveState } from "./ArchiveState.svelte";
 
 type Movie = {
 	title: string;

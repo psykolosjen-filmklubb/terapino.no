@@ -1,6 +1,6 @@
-import { getNextScreening } from '$lib/sanity/api/getNextScreening';
-import { getReviewExcerpts } from '$lib/sanity/api/getReviewExcerpts';
-import { error } from '@sveltejs/kit';
+import { getNextScreening } from "$lib/sanity/api/getNextScreening";
+import { getReviewExcerpts } from "$lib/sanity/api/getReviewExcerpts";
+import { error } from "@sveltejs/kit";
 
 export async function load() {
 	const reviews = getReviewExcerpts(5);
@@ -9,9 +9,9 @@ export async function load() {
 	try {
 		return {
 			reviews: await reviews,
-			nextScreening: await nextScreening
+			nextScreening: await nextScreening,
 		};
 	} catch (e) {
-		error(500, 'Internal Server Error');
+		error(500, "Internal Server Error");
 	}
 }

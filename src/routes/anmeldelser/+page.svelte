@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ReviewExcerptCard from '$lib/components/ReviewExcerptCard.svelte';
+	import ReviewExcerptCard from "$lib/components/ReviewExcerptCard.svelte";
 
 	let { data } = $props();
 </script>

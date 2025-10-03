@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
+	import { run } from "svelte/legacy";
 
-	import { urlFor } from '$lib/sanity/image';
-	import type { ImageAsset } from '@sanity/types';
-	import { blurhashToImageCssObject } from '@unpic/placeholder';
-	import { tweened } from 'svelte/motion';
+	import { urlFor } from "$lib/sanity/image";
+	import type { ImageAsset } from "@sanity/types";
+	import { blurhashToImageCssObject } from "@unpic/placeholder";
+	import { tweened } from "svelte/motion";
 
 	interface Props {
 		thumbnailBlurhash: string;
@@ -33,12 +33,12 @@
 </script>
 
 <div
-	class={`aspect-2/1 w-full ${imageLoaded ? '' : 'animate-pulse'}`}
+	class={`aspect-2/1 w-full ${imageLoaded ? "" : "animate-pulse"}`}
 	style:background-image={css.backgroundImage}
 	style:background-size={css.backgroundSize}
 >
 	<img
-		src={urlFor(thumbnail).width(512).height(256).fit('min').auto('format').url()}
+		src={urlFor(thumbnail).width(512).height(256).fit("min").auto("format").url()}
 		alt="Review thumbnail"
 		style:opacity={$imageOpacity}
 		use:setImageLoaded

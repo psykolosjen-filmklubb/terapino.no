@@ -1,6 +1,6 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { Slug } from '@sanity/types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { Slug } from "@sanity/types";
 
 type Semester = {
 	name: string;
@@ -34,6 +34,6 @@ export async function getArchive() {
 			},
 			slug,
 		}
-	}`
+	}`,
 	);
 }

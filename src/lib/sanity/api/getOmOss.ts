@@ -1,6 +1,6 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { ImageAsset, PortableTextBlock } from '@sanity/types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { ImageAsset, PortableTextBlock } from "@sanity/types";
 
 export type OmOss = {
 	header_image: {
@@ -20,6 +20,6 @@ export async function getOmOss() {
 				"alt": header_image.alt,
 			},
 			main_text
-		}`
+		}`,
 	);
 }

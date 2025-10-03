@@ -1,6 +1,6 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { ImageAsset } from '@sanity/types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { ImageAsset } from "@sanity/types";
 
 type Member = {
 	_id: string;
@@ -38,7 +38,7 @@ export async function getMember(name: string) {
 			}
 		}`,
 		{
-			name
-		}
+			name,
+		},
 	);
 }

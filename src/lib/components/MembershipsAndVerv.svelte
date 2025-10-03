@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
+	import { run } from "svelte/legacy";
 
-	import { dateFormatterMonthYear } from '$lib/dateFormatters';
-	import * as Accordion from '$lib/components/ui/accordion';
-	import { Badge } from '$lib/components/ui/badge';
+	import { dateFormatterMonthYear } from "$lib/dateFormatters";
+	import * as Accordion from "$lib/components/ui/accordion";
+	import { Badge } from "$lib/components/ui/badge";
 
 	interface Props {
 		memberships: Membership[];
@@ -29,7 +29,7 @@
 	let sortedMembershipsAndVervs: (Membership | Verv)[] = $state([]);
 	run(() => {
 		sortedMembershipsAndVervs = [...memberships, ...verv].sort(
-			(a, b) => new Date(a.from_date).getTime() - new Date(b.from_date).getTime()
+			(a, b) => new Date(a.from_date).getTime() - new Date(b.from_date).getTime(),
 		);
 	});
 </script>
@@ -53,7 +53,7 @@
 			<ul>
 				{#each sortedMembershipsAndVervs as membershipOrVerv}
 					<li class="my-2 pl-4">
-						{#if 'role' in membershipOrVerv}
+						{#if "role" in membershipOrVerv}
 							<p class="pl-4">
 								{#if membershipOrVerv.to_date}
 									<Badge class="bg-background text-foreground hover:bg-background hover:ring-1">

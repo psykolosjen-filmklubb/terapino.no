@@ -9,9 +9,9 @@ try {
 	// Some environments may not support Intl.DisplayNames; guard gracefully.
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const IntlAny = Intl as any;
-	if (typeof IntlAny.DisplayNames === 'function') {
+	if (typeof IntlAny.DisplayNames === "function") {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-		regionNames = new IntlAny.DisplayNames(['nb', 'no', 'nn'], { type: 'region' });
+		regionNames = new IntlAny.DisplayNames(["nb", "no", "nn"], { type: "region" });
 	}
 } catch (_) {
 	// ignore
@@ -19,7 +19,7 @@ try {
 
 /** Return the Norwegian display name for a country code (e.g. "NO" -> "Norge"). */
 export function countryName(code: string): string {
-	if (!code) return '';
+	if (!code) return "";
 	const upper = code.toUpperCase();
 	try {
 		if (regionNames) {
@@ -34,7 +34,7 @@ export function countryName(code: string): string {
 
 /** Convert a 2-letter country code to a flag emoji (e.g. "NO" -> 🇳🇴). */
 export function flagEmoji(code: string): string {
-	if (!code || code.length !== 2) return '';
+	if (!code || code.length !== 2) return "";
 	return code
 		.toUpperCase()
 		.replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)));

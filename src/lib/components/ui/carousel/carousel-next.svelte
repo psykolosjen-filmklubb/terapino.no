@@ -22,12 +22,12 @@
 	{size}
 	aria-disabled={!emblaCtx.canScrollNext}
 	class={cn(
-		"absolute size-8 rounded-full border-0 bg-opacity-60",
+		"bg-opacity-60 absolute size-8 rounded-full border-0",
 		emblaCtx.orientation === "horizontal"
-			? "right-1 top-1/2 -translate-y-1/2 lg:-right-2"
+			? "top-1/2 right-1 -translate-y-1/2 lg:-right-2"
 			: "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
 		emblaCtx.canScrollNext ? "visible" : "pointer-events-none invisible",
-		className
+		className,
 	)}
 	onclick={emblaCtx.scrollNext}
 	onkeydown={emblaCtx.handleKeyDown}

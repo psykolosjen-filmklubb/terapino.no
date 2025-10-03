@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Archive from '$lib/components/Archive/Archive.svelte';
-	import { ArchiveState } from '$lib/components/Archive/ArchiveState.svelte.js';
+	import Archive from "$lib/components/Archive/Archive.svelte";
+	import { ArchiveState } from "$lib/components/Archive/ArchiveState.svelte.js";
 
 	let { data } = $props();
 

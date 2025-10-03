@@ -1,6 +1,6 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { ImageAsset, PortableTextBlock, Slug } from '@sanity/types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { ImageAsset, PortableTextBlock, Slug } from "@sanity/types";
 
 type Review = {
 	review_title: string;
@@ -33,7 +33,7 @@ export async function getReview(slug: string) {
 			tmdb_id,
 	}`,
 		{
-			slug
-		}
+			slug,
+		},
 	);
 }

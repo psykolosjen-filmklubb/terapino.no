@@ -1,4 +1,4 @@
-import { SemesterState, type Semester } from './SemesterState.svelte';
+import { SemesterState, type Semester } from "./SemesterState.svelte";
 
 export class ArchiveState {
 	semesters: SemesterState[] = $state([]);

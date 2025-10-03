@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from "$app/stores";
 
 	let src = $derived($page.data.settings.recruiting.recruiting_form);
 </script>

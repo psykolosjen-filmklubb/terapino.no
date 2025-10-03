@@ -1,5 +1,5 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
+import groq from "groq";
+import { sanityClient } from "../client";
 
 type Instillinger = {
 	recruiting: {
@@ -15,6 +15,6 @@ export async function getSettings() {
 				recruiting_active,
 				recruiting_form
 			}
-		}`
+		}`,
 	);
 }

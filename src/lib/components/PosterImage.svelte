@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { urlFor } from '$lib/sanity/image';
-	import { blurhashToImageCssObject } from '@unpic/placeholder';
-	import { tweened } from 'svelte/motion';
-	import type { HTMLAttributes } from 'svelte/elements';
-	import { cn } from '$lib/utils.js';
-	import type { ImageAsset } from '@sanity/types';
+	import { urlFor } from "$lib/sanity/image";
+	import { blurhashToImageCssObject } from "@unpic/placeholder";
+	import { tweened } from "svelte/motion";
+	import type { HTMLAttributes } from "svelte/elements";
+	import { cn } from "$lib/utils.js";
+	import type { ImageAsset } from "@sanity/types";
 
 	interface PosterImageProps {
-		class?: HTMLAttributes<HTMLImageElement>['class'];
+		class?: HTMLAttributes<HTMLImageElement>["class"];
 		blurhash: string;
 		aspectRatio: number;
 		imageAsset: ImageAsset;
@@ -32,15 +32,15 @@
 </script>
 
 <div
-	class={`w-full ${imageLoaded ? '' : 'animate-pulse'}`}
+	class={`w-full ${imageLoaded ? "" : "animate-pulse"}`}
 	style:background-image={css.backgroundImage}
 	style:background-size={css.backgroundSize}
 	style:aspect-ratio={aspectRatio}
 >
 	<img
-		src={urlFor(imageAsset).width(768).fit('min').auto('format').url()}
+		src={urlFor(imageAsset).width(768).fit("min").auto("format").url()}
 		alt="Poster for next screening"
-		class={cn('w-full', className)}
+		class={cn("w-full", className)}
 		style:opacity={$imageOpacity}
 		bind:this={img}
 	/>

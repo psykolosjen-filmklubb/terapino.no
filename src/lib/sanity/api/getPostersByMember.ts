@@ -1,6 +1,6 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { ImageAsset, ImageDimensions } from '@sanity/types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { ImageAsset, ImageDimensions } from "@sanity/types";
 
 type PosterByMember = {
 	asset: ImageAsset;
@@ -25,14 +25,14 @@ export async function getPostersByMember(memberId: string) {
 			},
 		}`,
 			{
-				memberId
-			}
+				memberId,
+			},
 		)
 		.then((posters) => {
 			return posters.map((poster) => {
 				return {
 					...poster,
-					alt: 'Poster for ' + poster.movies.map((movie) => movie.title).join(' & ')
+					alt: "Poster for " + poster.movies.map((movie) => movie.title).join(" & "),
 				};
 			});
 		});

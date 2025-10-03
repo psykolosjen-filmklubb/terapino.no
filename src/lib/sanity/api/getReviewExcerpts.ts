@@ -1,6 +1,6 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { Slug, ImageAsset } from '@sanity/types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { Slug, ImageAsset } from "@sanity/types";
 
 type ReviewExcerpt = {
 	review_title: string;
@@ -20,7 +20,7 @@ export function getReviewExcerpts(limit?: number) {
 		excerpt
 	}`,
 		{
-			limit: limit ? limit - 1 : -1
-		}
+			limit: limit ? limit - 1 : -1,
+		},
 	);
 }

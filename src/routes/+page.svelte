@@ -1,8 +1,8 @@
 <script lang="ts">
-	import PosterImage from '$lib/components/PosterImage.svelte';
-	import ReviewsCarousel from '$lib/components/ReviewsCarousel.svelte';
-	import { Button } from '$lib/components/ui/button';
-	import { dateFormatterLongNoYear } from '$lib/dateFormatters.js';
+	import PosterImage from "$lib/components/PosterImage.svelte";
+	import ReviewsCarousel from "$lib/components/ReviewsCarousel.svelte";
+	import { Button } from "$lib/components/ui/button";
+	import { dateFormatterLongNoYear } from "$lib/dateFormatters.js";
 
 	let { data } = $props();
 </script>
@@ -22,7 +22,7 @@
 
 		{#if data.settings.recruiting.recruiting_active}
 			<p class="mt-12 text-center text-xl lg:mt-16">Vil du være med i filmklubben?</p>
-			<div class="mb-12 mt-2 flex justify-center">
+			<div class="mt-2 mb-12 flex justify-center">
 				<Button href="/bli-med" size="lg" class="">Søk nå!</Button>
 			</div>
 		{/if}
@@ -86,7 +86,7 @@
 			Siste filmanmeldelser
 		</h2>
 		<ReviewsCarousel reviews={data.reviews} />
-		<Button class="mr-2 mt-4 place-self-end lg:mr-8" href="/anmeldelser" variant="link">
+		<Button class="mt-4 mr-2 place-self-end lg:mr-8" href="/anmeldelser" variant="link">
 			Se alle anmeldelser
 		</Button>
 	</section>

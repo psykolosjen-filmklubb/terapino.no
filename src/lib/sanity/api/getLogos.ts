@@ -1,6 +1,6 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { ImageAsset } from '@sanity/types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { ImageAsset } from "@sanity/types";
 
 type Logo = {
 	name: string;
@@ -9,10 +9,10 @@ type Logo = {
 
 export async function getLogos() {
 	const black = await sanityClient.fetch<Logo>(
-		groq`*[_type == "image_assets" && name == "logo-svart"][0]`
+		groq`*[_type == "image_assets" && name == "logo-svart"][0]`,
 	);
 	const white = await sanityClient.fetch<Logo>(
-		groq`*[_type == "image_assets" && name == "logo-hvit"][0]`
+		groq`*[_type == "image_assets" && name == "logo-hvit"][0]`,
 	);
 	return { black, white };
 }

@@ -1,6 +1,6 @@
-import groq from 'groq';
-import { sanityClient } from '../client';
-import type { ImageAsset } from '@sanity/types';
+import groq from "groq";
+import { sanityClient } from "../client";
+import type { ImageAsset } from "@sanity/types";
 
 type Member = {
 	_id?: string;
@@ -35,13 +35,13 @@ export async function getRolesWithMembers() {
 				from_date,
 				to_date
 			}
-		}`
+		}`,
 	);
 
 	const rolesPromise = sanityClient.fetch<{ name: string }[]>(
 		groq`*[_type == "role"] | order(sort_order asc) {
 			name,
-		}`
+		}`,
 	);
 
 	const activeMembers: Member[] = [];
@@ -59,14 +59,14 @@ export async function getRolesWithMembers() {
 		return {
 			role: role.name,
 			members: activeMembers.filter((member) =>
-				member.verv?.some((verv) => verv.role === role.name && !verv.to_date)
-			)
+				member.verv?.some((verv) => verv.role === role.name && !verv.to_date),
+			),
 		};
 	});
 
 	rolesWithMembers.push({
-		role: 'Uten roller',
-		members: activeMembers.filter((member) => !member.verv?.some((verv) => !verv.to_date))
+		role: "Uten roller",
+		members: activeMembers.filter((member) => !member.verv?.some((verv) => !verv.to_date)),
 	});
 
 	return rolesWithMembers.filter((role) => role.members.length > 0);

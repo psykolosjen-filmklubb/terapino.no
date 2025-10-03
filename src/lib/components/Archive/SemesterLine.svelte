@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { SemesterState } from './SemesterState.svelte';
-	import { tweened } from 'svelte/motion';
-	import { cubicOut } from 'svelte/easing';
+	import type { SemesterState } from "./SemesterState.svelte";
+	import { tweened } from "svelte/motion";
+	import { cubicOut } from "svelte/easing";
 
 	type SemesterLineProps = {
 		semester: SemesterState;
-		direction: 'left' | 'right';
+		direction: "left" | "right";
 	};
 
 	let { semester, direction }: SemesterLineProps = $props();
@@ -23,7 +23,7 @@
 <svg
 	class="pointer-events-none absolute z-0 stroke-foreground"
 	overflow="visible"
-	style:left={direction === 'right'
+	style:left={direction === "right"
 		? semester.archive.circleSize - semester.archive.strokeWidth
 		: semester.archive.strokeWidth}
 	style:top={semester.archive.circleSize / 2 - semester.archive.strokeWidth / 2}
@@ -31,15 +31,15 @@
 	<path
 		d={pathString}
 		stroke-width={semester.archive.strokeWidth}
-		style:transform={direction === 'right' ? '' : 'scale(-1, 1)'}
+		style:transform={direction === "right" ? "" : "scale(-1, 1)"}
 		class="z-0"
 		fill="none"
 	/>
 </svg>
 <h2
-	class="absolute text-nowrap text-lg font-semibold tracking-tight @5xl:text-xl"
+	class="absolute text-lg font-semibold tracking-tight text-nowrap @5xl:text-xl"
 	style:bottom={`${semester.archive.circleSize / 6 + semester.archive.strokeWidth / 2}px`}
-	style:left={direction === 'right'
+	style:left={direction === "right"
 		? `${pathX3 + semester.archive.circleSize - semester.archive.strokeWidth}px`
 		: `${-pathX4 + semester.archive.strokeWidth}px`}
 	bind:clientWidth={semester.lengthOfName}

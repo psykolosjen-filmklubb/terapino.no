@@ -1,9 +1,9 @@
 <script lang="ts">
-	import PhotoSwipeLightbox from 'photoswipe/lightbox';
-	import 'photoswipe/style.css';
-	import { onMount } from 'svelte';
-	import { urlFor } from '$lib/sanity/image';
-	import type { ImageAsset, ImageDimensions } from '@sanity/types';
+	import PhotoSwipeLightbox from "photoswipe/lightbox";
+	import "photoswipe/style.css";
+	import { onMount } from "svelte";
+	import { urlFor } from "$lib/sanity/image";
+	import type { ImageAsset, ImageDimensions } from "@sanity/types";
 
 	type Image = {
 		asset: ImageAsset;
@@ -27,9 +27,9 @@
 			zoom: false,
 			closeSVG: closeSvgString,
 
-			gallery: '#' + galleryID,
-			children: 'a',
-			pswpModule: () => import('photoswipe')
+			gallery: "#" + galleryID,
+			children: "a",
+			pswpModule: () => import("photoswipe"),
 		});
 		lightbox.init();
 
@@ -42,7 +42,7 @@
 <div class="pswp-gallery grid grid-cols-2 gap-4 lg:grid-cols-3" id={galleryID}>
 	{#each posters as poster}
 		<a
-			href={urlFor(poster.asset).auto('format').url()}
+			href={urlFor(poster.asset).auto("format").url()}
 			data-pswp-width={poster.dimensions.width}
 			data-pswp-height={poster.dimensions.height}
 			target="_blank"
@@ -50,8 +50,8 @@
 			class="my-auto"
 		>
 			<img
-				src={urlFor(poster.asset).width(512).auto('format').url()}
-				alt={poster.alt ?? 'Movie poster'}
+				src={urlFor(poster.asset).width(512).auto("format").url()}
+				alt={poster.alt ?? "Movie poster"}
 			/>
 		</a>
 	{/each}

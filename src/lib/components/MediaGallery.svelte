@@ -1,21 +1,21 @@
 <script lang="ts">
-	import 'photoswipe/style.css';
-	import { onMount } from 'svelte';
-	import type { ImageAsset, ImageDimensions } from '@sanity/types';
-	import GalleryItemImage from './Gallery/GalleryItemImage.svelte';
-	import GalleryItemVideo from './Gallery/GalleryItemVideo.svelte';
-	import { setUpLightboxWithYouTube } from './Gallery/setUpLightboxWithYouTube';
+	import "photoswipe/style.css";
+	import { onMount } from "svelte";
+	import type { ImageAsset, ImageDimensions } from "@sanity/types";
+	import GalleryItemImage from "./Gallery/GalleryItemImage.svelte";
+	import GalleryItemVideo from "./Gallery/GalleryItemVideo.svelte";
+	import { setUpLightboxWithYouTube } from "./Gallery/setUpLightboxWithYouTube";
 
 	type Image = {
 		asset: ImageAsset;
 		dimensions: ImageDimensions;
-		_type: 'image';
+		_type: "image";
 		alt?: string;
 	};
 
 	type Video = {
 		youtube_id: string;
-		_type: 'video';
+		_type: "video";
 	};
 
 	type Event = {
@@ -28,7 +28,7 @@
 		events: Event[];
 	}
 
-	const galleryId = 'media_gallery';
+	const galleryId = "media_gallery";
 
 	let { events }: Props = $props();
 
@@ -47,14 +47,14 @@
 
 		<div class="grid grid-cols-2 gap-4 lg:grid-cols-3">
 			{#each event.media as mediaItem}
-				{#if mediaItem._type === 'image'}
+				{#if mediaItem._type === "image"}
 					<GalleryItemImage
 						imageAsset={mediaItem.asset}
 						imageDimentions={mediaItem.dimensions}
-						alt={mediaItem.alt ?? ''}
+						alt={mediaItem.alt ?? ""}
 						showFullscreenButton={false}
 					/>
-				{:else if mediaItem._type === 'video'}
+				{:else if mediaItem._type === "video"}
 					<GalleryItemVideo youtubeId={mediaItem.youtube_id}></GalleryItemVideo>
 				{/if}
 			{/each}

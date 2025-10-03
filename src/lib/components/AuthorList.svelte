@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ImageAsset } from '@sanity/types';
-	import MemberTag from './MemberTag.svelte';
+	import type { ImageAsset } from "@sanity/types";
+	import MemberTag from "./MemberTag.svelte";
 
 	interface Props {
 		authors: Member[];
@@ -12,11 +12,11 @@
 		image: ImageAsset;
 	};
 
-	let { authors, heading = '' }: Props = $props();
+	let { authors, heading = "" }: Props = $props();
 </script>
 
 <div class="w-full">
-	{#if heading !== ''}
+	{#if heading !== ""}
 		<h3 class="text-sm font-light tracking-tight">{heading}</h3>
 	{/if}
 	<div class="grid gap-4">
