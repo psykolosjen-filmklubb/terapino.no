@@ -16,7 +16,7 @@
 
 <Header logoAssetLight={data.logos.black.image} logoAssetDark={data.logos.white.image}></Header>
 
-<main class="flex flex-col items-center justify-center">
+<main class="mx-auto flex flex-col items-center justify-center lg:max-w-screen-2xl">
 	{@render children?.()}
 </main>
 
