@@ -1,6 +1,6 @@
 <script lang="ts">
+	import LatestReviewsSection from "$lib/components/LatestReviewsSection.svelte";
 	import PosterImage from "$lib/components/PosterImage.svelte";
-	import ReviewsCarousel from "$lib/components/ReviewsCarousel.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import { dateFormatterLongNoYear } from "$lib/dateFormatters.js";
 
@@ -79,15 +79,5 @@
 </section>
 
 {#if data.reviews}
-	<section class="flex w-full flex-col px-2 py-8 lg:px-6">
-		<h2
-			class="mb-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
-		>
-			Siste filmanmeldelser
-		</h2>
-		<ReviewsCarousel reviews={data.reviews} />
-		<Button class="mt-4 mr-2 place-self-end lg:mr-8" href="/anmeldelser" variant="link">
-			Se alle anmeldelser
-		</Button>
-	</section>
+	<LatestReviewsSection reviews={data.reviews} />
 {/if}
