@@ -51,4 +51,20 @@
 	:global(body) {
 		min-height: 100vh;
 	}
+
+	:global(.squircle) {
+		--squircle-amount: 25%;
+
+		clip-path: shape(
+			from 0 var(--squircle-amount),
+			curve to var(--squircle-amount) 0 with 0 0 / 0 0,
+			hline to calc(100% - var(--squircle-amount)),
+			curve to 100% var(--squircle-amount) with 100% 0 / 100% 0,
+			vline to calc(100% - var(--squircle-amount)),
+			curve to calc(100% - var(--squircle-amount)) 100% with 100% 100% / 100% 100%,
+			hline to var(--squircle-amount),
+			curve to 0 calc(100% - var(--squircle-amount)) with 0 100% / 0 100%,
+			close
+		);
+	}
 </style>
