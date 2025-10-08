@@ -1,17 +1,13 @@
 import { getNextScreening } from "$lib/sanity/api/getNextScreening";
 import { getReviewExcerpts } from "$lib/sanity/api/getReviewExcerpts";
-import { error } from "@sveltejs/kit";
+import type { PageLoad } from "./$types";
 
-export async function load() {
-	const reviews = getReviewExcerpts(5);
+export const load: PageLoad = async () => {
+	const reviews = getReviewExcerpts(3);
 	const nextScreening = getNextScreening();
 
-	try {
-		return {
-			reviews: await reviews,
-			nextScreening: await nextScreening,
-		};
-	} catch (e) {
-		error(500, "Internal Server Error");
-	}
-}
+	return {
+		reviews: await reviews,
+		nextScreening: await nextScreening,
+	};
+};
