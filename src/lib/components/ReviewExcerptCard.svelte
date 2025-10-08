@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button";
 	import { routes } from "$lib/routes";
+	import type { ReviewExcerpt } from "./LatestReviewsSection.svelte";
 	import ThumbnailImage from "./ThumbnailImage.svelte";
-	import type { ReviewExcerpt } from "./ReviewsCarousel.svelte";
 
 	let { review_title, slug, thumbnail, excerpt, thumbnailBlurhash }: ReviewExcerpt = $props();
 </script>
