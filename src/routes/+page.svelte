@@ -1,8 +1,8 @@
 <script lang="ts">
+	import NextScreeningSection from "../lib/components/NextScreeningSection.svelte";
+
 	import LatestReviewsSection from "$lib/components/LatestReviewsSection.svelte";
-	import PosterImage from "$lib/components/PosterImage.svelte";
 	import { Button } from "$lib/components/ui/button";
-	import { dateFormatterLongNoYear } from "$lib/dateFormatters.js";
 
 	let { data } = $props();
 </script>
@@ -29,60 +29,7 @@
 	</div>
 </section>
 
-<section
-	class="flex w-full flex-col items-center px-2 py-8 lg:flex-row lg:justify-evenly lg:px-6 lg:py-16"
->
-	<div>
-		{#if data.nextScreening}
-			<h2
-				class="my-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
-			>
-				Neste visning:
-			</h2>
-		{:else}
-			<div class="my-8 flex flex-col">
-				<p class="px-4 text-center text-muted-foreground">
-					Ingen nye visninger planlagt for øyeblikket, men følg med for oppdateringer!
-				</p>
-				<p class="px-4 text-center text-muted-foreground">Vil du se hva vi har vist tidligere?</p>
-				<Button href="/arkiv" variant="link" class="w-fit place-self-center font-medium">
-					Visningsarkiv
-				</Button>
-			</div>
-		{/if}
-	</div>
-
-	{#if data.nextScreening && data.nextScreening.poster?.asset}
-		<div class="max-w-96">
-			<a href="arkiv/{data.nextScreening.slug.current}">
-				<PosterImage
-					blurhash={data.nextScreening.poster.blurhash}
-					aspectRatio={data.nextScreening.poster.dimensions.aspectRatio}
-					imageAsset={data.nextScreening.poster.asset}
-				/>
-			</a>
-		</div>
-	{:else if data.nextScreening}
-		<div>
-			<a href="arkiv/{data.nextScreening.slug.current}">
-				<p class="text-center text-xl text-muted-foreground">
-					{dateFormatterLongNoYear.format(new Date(data.nextScreening.date))}:
-				</p>
-				{#each data.nextScreening.movies as movie, i}
-					<h3 class="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
-						{movie.title} ({movie.release_year})
-					</h3>
-					<p class="text-center text-xl">
-						Av {movie.directors}
-					</p>
-					{#if i < data.nextScreening.movies.length - 1}
-						<p class="text-center text-xl">&</p>
-					{/if}
-				{/each}
-			</a>
-		</div>
-	{/if}
-</section>
+<NextScreeningSection nextScreening={data.nextScreening} />
 
 {#if data.reviews}
 	<LatestReviewsSection reviews={data.reviews} />

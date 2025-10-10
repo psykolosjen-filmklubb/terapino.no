@@ -2,7 +2,7 @@ import type { ImageAsset, ImageDimensions, Slug } from "@sanity/types";
 import { sanityClient } from "../client";
 import groq from "groq";
 
-type NextScreening = {
+export type NextScreening = {
 	movies: Movie[];
 	date: string;
 	poster?: PosterImage;
