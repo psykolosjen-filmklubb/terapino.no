@@ -26,7 +26,13 @@
 				<Button href="/bli-med" size="lg" class="">Søk nå!</Button>
 			</div>
 		{/if}
+	</div>
+</section>
 
+<section
+	class="flex w-full flex-col items-center px-2 py-8 lg:flex-row lg:justify-evenly lg:px-6 lg:py-16"
+>
+	<div>
 		{#if data.nextScreening}
 			<h2
 				class="my-8 scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors lg:text-left lg:text-5xl lg:font-bold"
