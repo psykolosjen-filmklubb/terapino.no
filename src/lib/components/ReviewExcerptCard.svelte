@@ -8,7 +8,7 @@
 	let { review_title, slug, thumbnail, excerpt, thumbnailBlurhash }: ReviewExcerpt = $props();
 </script>
 
-<Card.Root class="squircle max-w-lg border-none p-0">
+<Card.Root class="squircle max-w-lg gap-4 border-none p-0">
 	<Card.Header class="gap-0 p-0">
 		<Button
 			variant="ghost"
