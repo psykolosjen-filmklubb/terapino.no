@@ -42,7 +42,7 @@
 	style:margin-top={$tweenedMarginTop + "px"}
 >
 	<button
-		class="z-10 rounded-full border-foreground"
+		class="z-10 cursor-pointer rounded-full border-foreground"
 		style:background-color={semester.color}
 		style:border-width={`${semester.archive.strokeWidth}px`}
 		style:width={`${semester.archive.circleSize}px`}

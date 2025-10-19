@@ -37,12 +37,24 @@
 	/>
 </svg>
 <h2
-	class="absolute text-lg font-semibold tracking-tight text-nowrap @5xl:text-xl"
+	class="absolute cursor-pointer text-lg font-semibold tracking-tight text-nowrap @5xl:text-xl"
 	style:bottom={`${semester.archive.circleSize / 6 + semester.archive.strokeWidth / 2}px`}
 	style:left={direction === "right"
 		? `${pathX3 + semester.archive.circleSize - semester.archive.strokeWidth}px`
 		: `${-pathX4 + semester.archive.strokeWidth}px`}
 	bind:clientWidth={semester.lengthOfName}
 >
-	{semester.name.toUpperCase()}
+	<span
+		onclick={() => semester.toggleOpen()}
+		onkeydown={(e) => {
+			if (e.key === "Enter" || e.key === " ") {
+				semester.toggleOpen();
+			}
+		}}
+		aria-label="Toggle semester open"
+		role="button"
+		tabindex="0"
+	>
+		{semester.name.toUpperCase()}
+	</span>
 </h2>
