@@ -6,10 +6,22 @@
 	import "../app.css";
 	import { injectAnalytics } from "@vercel/analytics/sveltekit";
 	import { dev } from "$app/environment";
+	import { onNavigate } from "$app/navigation";
 
 	let { data, children } = $props();
 
 	injectAnalytics({ mode: dev ? "development" : "production" });
+
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <ModeWatcher />
@@ -52,7 +64,7 @@
 		min-height: 100vh;
 	}
 
-	:global(.squircle) {
+	/* :global(.squircle) {
 		--squircle-amount: 25%;
 
 		clip-path: shape(
@@ -66,5 +78,5 @@
 			curve to 0 calc(100% - var(--squircle-amount)) with 0 100% / 0 100%,
 			close
 		);
-	}
+	} */
 </style>

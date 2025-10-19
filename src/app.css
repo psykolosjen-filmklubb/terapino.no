@@ -119,3 +119,9 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+@media (prefers-reduced-motion: no-preference) {
+	[style*="--vt-tag"] {
+		view-transition-name: var(--vt-tag);
+	}
+}
