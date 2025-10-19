@@ -9,7 +9,7 @@
 	interface Props {
 		thumbnailBlurhash: string;
 		thumbnail: ImageAsset;
-		slug: string;
+		slug?: string;
 	}
 
 	let { thumbnailBlurhash, thumbnail, slug }: Props = $props();

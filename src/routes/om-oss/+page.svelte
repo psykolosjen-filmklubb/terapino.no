@@ -15,7 +15,7 @@
 {/if}
 
 {#if data.content.main_text}
-	<article class="prose dark:prose-invert lg:prose-lg mx-auto mt-8 px-8 lg:px-0">
+	<article class="prose dark:prose-invert lg:prose-lg mx-auto mt-8 px-8 lg:max-w-prose lg:px-0">
 		<PortableText value={data.content.main_text} />
 	</article>
 {/if}
