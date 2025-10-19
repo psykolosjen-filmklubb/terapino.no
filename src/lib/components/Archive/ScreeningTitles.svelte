@@ -73,6 +73,7 @@
 				href="/arkiv/{screening.slug.current}"
 				class="group w-max"
 				style:max-width={firstTitleMaxWidth + "px"}
+				style:--vt-tag="screening-title-{screening.slug.current}"
 				use:getLength={lengthOfParentDiv}
 				bind:clientWidth={lengthOfParentDiv}
 				in:fade={{ delay: 100, duration: 200 }}
@@ -91,6 +92,7 @@
 				href="/arkiv/{screening.slug.current}"
 				class="w-max text-sm font-light hover:underline @5xl:text-base @5xl:font-thin"
 				style:max-width={titleMaxWidth + "px"}
+				style:--vt-tag="screening-title-{screening.slug.current}"
 				in:fade={{ delay: 100 + 40 * index, duration: 200 }}
 				out:fade={{ duration: 200 }}
 			>

@@ -1,34 +1,33 @@
 <script lang="ts">
 	import MovieDetails from "./MovieDetails.svelte";
 
-	import { run } from "svelte/legacy";
-
 	import AuthorList from "$lib/components/AuthorList.svelte";
 	import PosterImage from "$lib/components/PosterImage.svelte";
 	import * as Card from "$lib/components/ui/card";
 	import { dateFormatterLong } from "$lib/dateFormatters.js";
 	import GalleryCarousel from "$lib/components/GalleryCarousel.svelte";
 	import { Button } from "$lib/components/ui/button";
+	import { page } from "$app/state";
 
 	let { data } = $props();
 
 	let screening = $derived(data.screening);
 
-	let isFuture = $state(false);
-	run(() => {
-		const today = new Date();
-		const screeningDate = new Date(screening.date);
+	const today = new Date();
+	const screeningDate = new Date(data.screening.date);
 
-		today.setHours(0, 0, 0, 0);
-		screeningDate.setHours(0, 0, 0, 0);
+	today.setHours(0, 0, 0, 0);
+	screeningDate.setHours(0, 0, 0, 0);
 
-		isFuture = screeningDate >= today;
-	});
+	const isFuture = screeningDate >= today;
 </script>
 
 <div class="flex flex-col items-center text-center lg:mt-4">
 	<p class="text-l text-muted-foreground">Psykolosjen Filmklubb {isFuture ? "viser" : "viste"}</p>
-	<h1 class="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
+	<h1
+		class="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl"
+		style:--vt-tag="screening-title-{page.params.slug}"
+	>
 		{screening.movies.map((movie) => movie.title).join(" & ")}
 	</h1>
 	<p class="text-l text-muted-foreground">{dateFormatterLong.format(new Date(screening.date))}</p>
