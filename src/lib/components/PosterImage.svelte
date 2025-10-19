@@ -11,9 +11,10 @@
 		blurhash: string;
 		aspectRatio: number;
 		imageAsset: ImageAsset;
+		slug?: string;
 	}
 
-	let { class: className, blurhash, aspectRatio, imageAsset }: PosterImageProps = $props();
+	let { class: className, blurhash, aspectRatio, imageAsset, slug }: PosterImageProps = $props();
 
 	const css = blurhashToImageCssObject(blurhash);
 
@@ -42,6 +43,7 @@
 		alt="Poster for next screening"
 		class={cn("w-full", className)}
 		style:opacity={$imageOpacity}
+		style:--vt-tag="screening-image-{slug}"
 		bind:this={img}
 	/>
 </div>

@@ -41,6 +41,7 @@
 				aspectRatio={screening.poster.dimensions.aspectRatio}
 				imageAsset={screening.poster.asset}
 				class="rounded-t-lg {screening.poster.artists ? '' : 'rounded-b-lg'}"
+				slug={page.params.slug}
 			/>
 		</Card.Content>
 		{#if screening.poster.artists}

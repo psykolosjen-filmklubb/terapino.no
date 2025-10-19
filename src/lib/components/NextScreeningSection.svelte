@@ -41,6 +41,7 @@
 					blurhash={nextScreening.poster.blurhash}
 					aspectRatio={nextScreening.poster.dimensions.aspectRatio}
 					imageAsset={nextScreening.poster.asset}
+					slug={nextScreening.slug.current}
 				/>
 			</a>
 		</div>
