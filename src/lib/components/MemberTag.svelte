@@ -17,7 +17,12 @@
 	href="/om-oss/{nameList.join('-').toLowerCase()}"
 	class="flex items-center justify-between hover:underline"
 >
-	<p class="font-extralight">{member.name}</p>
+	<p
+		class="font-extralight"
+		style:--vt-tag="member-name-{member.name.replace(' ', '-').toLowerCase()}"
+	>
+		{member.name}
+	</p>
 	<Avatar.Root class="size-16">
 		{#if member.image}
 			<Avatar.Image src={urlFor(member.image).width(128).height(128).url()} />
