@@ -78,13 +78,37 @@
 				variant="link"
 				href="/{route.route}"
 				onclick={close}
-				class="p-0 text-xl {$page.url.pathname.startsWith('/' + route.route)
-					? 'font-medium underline'
-					: 'font-light'} text-primary"
+				class={[
+					"p-0 text-xl font-light text-primary hover:no-underline",
+					{ "font-medium": $page.url.pathname.startsWith("/" + route.route) },
+				]}
 			>
-				{route.title}
+				<span
+					class={["nav-link-title", { selected: $page.url.pathname.startsWith("/" + route.route) }]}
+				>
+					{route.title}
+				</span>
 			</Button>
 		{/each}
 	</nav>
 	<ThemeToggle />
 </div>
+
+<style>
+	.nav-link-title::after {
+		content: "";
+		display: block;
+		width: 0%;
+		height: 2px;
+		background: currentColor;
+	}
+
+	.nav-link-title.selected::after {
+		width: 100%;
+		view-transition-name: active-nav-link-underline;
+	}
+
+	.nav-link-title {
+		transition: font-weight 0.5s ease;
+	}
+</style>
