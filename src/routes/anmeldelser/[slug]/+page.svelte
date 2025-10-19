@@ -14,11 +14,15 @@
 	<HeroImage
 		thumbnailBlurhash={data.review.thumbnailBlurhash ?? ""}
 		thumbnail={data.review.thumbnail}
+		slug={data.review.slug.current}
 	/>
 {/if}
 
 <header class="mt-8 px-6 pb-8">
-	<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+	<h1
+		class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
+		style:--vt-tag="review-title-{data.review.slug.current}"
+	>
 		{data.review.review_title}
 	</h1>
 	<small>Film: {data.review.movie_title}</small>

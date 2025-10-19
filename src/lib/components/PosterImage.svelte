@@ -2,12 +2,12 @@
 	import { urlFor } from "$lib/sanity/image";
 	import { blurhashToImageCssObject } from "@unpic/placeholder";
 	import { tweened } from "svelte/motion";
-	import type { HTMLAttributes } from "svelte/elements";
+	import type { ClassValue } from "svelte/elements";
 	import { cn } from "$lib/utils.js";
 	import type { ImageAsset } from "@sanity/types";
 
 	interface PosterImageProps {
-		class?: HTMLAttributes<HTMLImageElement>["class"];
+		class?: ClassValue;
 		blurhash: string;
 		aspectRatio: number;
 		imageAsset: ImageAsset;
