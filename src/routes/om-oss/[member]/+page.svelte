@@ -12,7 +12,7 @@
 </script>
 
 <h1
-	class="my-2 scroll-m-20 text-center text-3xl font-extrabold tracking-tight lg:text-4xl"
+	class="mx-auto my-2 w-fit scroll-m-20 text-center text-3xl font-extrabold tracking-tight lg:text-4xl"
 	style:--vt-tag="member-name-{data.member.name.replace(' ', '-').toLowerCase()}"
 >
 	{data.member.name}
