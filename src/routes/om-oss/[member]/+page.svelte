@@ -8,17 +8,18 @@
 	let { data } = $props();
 
 	let nameList = $derived(data.member.name.split(" "));
+	let nameSlug = $derived(nameList.join("-").toLowerCase());
 	let fallback = $derived(nameList[0].substring(0, 1) + nameList.slice(-1)[0].substring(0, 1));
 </script>
 
 <h1
 	class="mx-auto my-2 w-fit scroll-m-20 text-center text-3xl font-extrabold tracking-tight lg:text-4xl"
-	style:--vt-tag="member-name-{data.member.name.replace(' ', '-').toLowerCase()}"
+	style:--vt-tag="member-name-{nameSlug}"
 >
 	{data.member.name}
 </h1>
 
-<Avatar.Root class="mx-auto my-2 size-48">
+<Avatar.Root class="mx-auto my-2 size-48" style="view-transition-name: member-image-{nameSlug}">
 	{#if data.member.image}
 		<Avatar.Image src={urlFor(data.member.image).width(384).height(384).url()} />
 	{/if}
