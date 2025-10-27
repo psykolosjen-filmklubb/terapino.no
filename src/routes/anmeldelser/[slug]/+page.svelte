@@ -20,7 +20,7 @@
 
 <header class="mt-8 px-6 pb-8">
 	<h1
-		class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
+		class="w-fit scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
 		style:--vt-tag="review-title-{data.review.slug.current}"
 	>
 		{data.review.review_title}

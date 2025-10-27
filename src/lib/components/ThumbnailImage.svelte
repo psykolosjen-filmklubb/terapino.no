@@ -10,11 +10,10 @@
 	interface Props {
 		thumbnailBlurhash: string;
 		thumbnail: ImageAsset;
-		slug: string;
 		class?: ClassValue;
 	}
 
-	let { thumbnailBlurhash, thumbnail, slug, class: className }: Props = $props();
+	let { thumbnailBlurhash, thumbnail, class: className }: Props = $props();
 
 	const css = blurhashToImageCssObject(thumbnailBlurhash, 64, 32);
 
@@ -45,7 +44,6 @@
 		alt="Review thumbnail"
 		class={className}
 		style:opacity={$imageOpacity}
-		style:--vt-tag="review-image-{slug}"
 		use:setImageLoaded
 	/>
 </div>

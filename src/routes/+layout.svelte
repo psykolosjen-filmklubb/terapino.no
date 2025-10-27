@@ -64,7 +64,7 @@
 		min-height: 100vh;
 	}
 
-	/* :global(.squircle) {
+	:global(.squircle) {
 		--squircle-amount: 25%;
 
 		clip-path: shape(
@@ -78,5 +78,5 @@
 			curve to 0 calc(100% - var(--squircle-amount)) with 0 100% / 0 100%,
 			close
 		);
-	} */
+	}
 </style>
