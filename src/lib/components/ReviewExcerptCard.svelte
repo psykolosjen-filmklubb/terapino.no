@@ -4,8 +4,12 @@
 	import type { ReviewExcerpt } from "./LatestReviewsSection.svelte";
 	import ThumbnailImage from "./ThumbnailImage.svelte";
 	import * as Card from "$lib/components/ui/card";
+	import * as Avatar from "$lib/components/ui/avatar";
+	import { urlFor } from "$lib/sanity/image";
+	import { dateFormatterShort } from "$lib/dateFormatters";
 
-	let { review_title, slug, thumbnail, excerpt, thumbnailBlurhash }: ReviewExcerpt = $props();
+	let { review_title, slug, thumbnail, excerpt, thumbnailBlurhash, authors, date }: ReviewExcerpt =
+		$props();
 </script>
 
 <Card.Root
@@ -36,4 +40,19 @@
 			<small class="text-sm leading-none lg:font-light">{excerpt}</small>
 		</div>
 	</Card.Content>
+
+	<Card.Footer class="mt-auto mb-3.5 flex items-center justify-between">
+		<span class="flex items-center gap-1.5">
+			<Avatar.Root class="size-13">
+				{#if authors[0].image}
+					<Avatar.Image src={urlFor(authors[0].image).width(128).height(128).url()} />
+				{/if}
+				<Avatar.Fallback>NH</Avatar.Fallback>
+			</Avatar.Root>
+			{authors[0].name}
+		</span>
+		<span>
+			{dateFormatterShort.format(new Date(date))}
+		</span>
+	</Card.Footer>
 </Card.Root>
