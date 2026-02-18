@@ -24,11 +24,11 @@ type Movie = {
 
 export function getMovieOfTheWeek() {
 	return sanityClient.fetch<MovieOfTheWeek>(
-		groq`*[_type == "movieOfTheWeek" && year <= $currentYear && weekNumber <= $currentWeek] | order(year desc, weekNumber asc)[0] {
-              movie {
-                title,
-                release_year,
-                directors,
+		groq`*[_type == "movieOfTheWeek" && (year < $currentYear || (year == $currentYear && weekNumber <= $currentWeek))] | order(year desc, weekNumber desc)[0] {
+	              movie {
+	                title,
+	                release_year,
+	                directors,
                 tmdb_id
               },
               weekNumber,
