@@ -32,7 +32,7 @@
 <div class="pswp-gallery lg:max-w-sm" id={galleryID}>
 	<Carousel.Root setApi={(emblaApi) => (carouselApi = emblaApi)}>
 		<Carousel.Content>
-			{#each images as image}
+			{#each images as image (image._key ?? `${image._type}-${image._type === "video" ? image.youtube_id : image.asset._ref}`)}
 				<Carousel.Item class="relative content-center">
 					{#if image._type === "video"}
 						<GalleryItemVideo youtubeId={image.youtube_id}></GalleryItemVideo>

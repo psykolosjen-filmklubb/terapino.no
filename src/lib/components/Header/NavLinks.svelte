@@ -45,7 +45,7 @@
 				<X />
 			</button>
 			<nav class="mt-8 flex flex-col items-end gap-2">
-				{#each filteredRoutes as route}
+				{#each filteredRoutes as route (route.route)}
 					<Button
 						variant="link"
 						href="/{route.route}"
@@ -73,7 +73,7 @@
 
 <div class="hidden gap-4 lg:flex">
 	<nav class="flex gap-8">
-		{#each filteredRoutes as route}
+		{#each filteredRoutes as route (route.route)}
 			<Button
 				variant="link"
 				href="/{route.route}"

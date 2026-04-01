@@ -53,7 +53,7 @@
 			Anmeldelser
 		</h2>
 		<div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-			{#each data.reviews as review}
+			{#each data.reviews as review (review.slug.current)}
 				<a href={`/anmeldelser/${review.slug.current}`} class="group">
 					<Card.Root>
 						<Card.Content>

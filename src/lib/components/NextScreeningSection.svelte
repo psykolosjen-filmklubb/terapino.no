@@ -51,7 +51,7 @@
 				<p class="text-center text-xl text-muted-foreground">
 					{dateFormatterLongNoYear.format(new Date(nextScreening.date))}:
 				</p>
-				{#each nextScreening.movies as movie, i}
+				{#each nextScreening.movies as movie, i (movie.title + "-" + movie.release_year)}
 					<h3 class="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
 						{movie.title} ({movie.release_year})
 					</h3>

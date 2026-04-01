@@ -40,7 +40,7 @@
 </script>
 
 <div class="pswp-gallery grid grid-cols-2 gap-4 lg:grid-cols-3" id={galleryID}>
-	{#each posters as poster}
+	{#each posters as poster (poster.asset._ref)}
 		<a
 			href={urlFor(poster.asset).auto("format").url()}
 			data-pswp-width={poster.dimensions.width}
