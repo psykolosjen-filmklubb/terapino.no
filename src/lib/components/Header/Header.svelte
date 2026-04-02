@@ -5,7 +5,6 @@
 	import { urlFor } from "$lib/sanity/image";
 	import NavLinks from "$lib/components/Header/NavLinks.svelte";
 	import { routes } from "$lib/routes";
-	import { mode } from "mode-watcher";
 	import type { ImageAsset } from "@sanity/types";
 
 	interface Props {
@@ -34,12 +33,19 @@
 	class="sticky top-0 z-50 flex h-16 w-full place-content-between items-center border-b bg-muted px-4 lg:h-44 lg:px-8"
 >
 	<div class="mr-8 flex items-center gap-8">
-		<a href="/" class="size-10 lg:size-32">
-			{#if mode.current === "light"}
-				<img src={urlFor(logoAssetLight).width(512).height(512).url()} alt="Logo" />
-			{:else}
-				<img src={urlFor(logoAssetDark).width(512).height(512).url()} alt="Logo" />
-			{/if}
+		<a href="/" class="block size-10 lg:size-32" aria-label="Gå til forsiden">
+			<img
+				class="logo logo-light"
+				src={urlFor(logoAssetLight).width(512).height(512).url()}
+				alt=""
+				aria-hidden="true"
+			/>
+			<img
+				class="logo logo-dark"
+				src={urlFor(logoAssetDark).width(512).height(512).url()}
+				alt=""
+				aria-hidden="true"
+			/>
 		</a>
 		{#if currentTitle != "Psykolosjen Filmklubb"}
 			<a
@@ -61,5 +67,21 @@
 <style>
 	header {
 		view-transition-name: header;
+	}
+
+	.logo {
+		display: block;
+	}
+
+	.logo-dark {
+		display: none;
+	}
+
+	:global(.dark) .logo-light {
+		display: none;
+	}
+
+	:global(.dark) .logo-dark {
+		display: block;
 	}
 </style>
