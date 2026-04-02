@@ -14,7 +14,7 @@
 	class="bg-[#f5c518] hover:bg-[#f5c518d0]"
 	size="icon"
 >
-	<svg class="h-7 w-7 fill-black">
-		{@html siImdb.svg}
+	<svg class="h-7 w-7 fill-black" viewBox="0 0 24 24">
+		<path d={siImdb.path}></path>
 	</svg>
 </Button>

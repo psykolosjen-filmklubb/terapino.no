@@ -14,7 +14,7 @@
 	class="bg-[#2C343F] hover:bg-[#2C343Fd0]"
 	size="icon"
 >
-	<svg class="h-7 w-7 fill-white">
-		{@html siLetterboxd.svg}
+	<svg class="h-7 w-7 fill-white" viewBox="0 0 24 24">
+		<path d={siLetterboxd.path}></path>
 	</svg>
 </Button>
