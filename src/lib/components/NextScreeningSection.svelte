@@ -42,6 +42,7 @@
 					aspectRatio={nextScreening.poster.dimensions.aspectRatio}
 					imageAsset={nextScreening.poster.asset}
 					slug={nextScreening.slug.current}
+					alt={`Plakat for ${nextScreening.movies.map((movie) => movie.title).join(" & ")}`}
 				/>
 			</a>
 		</div>

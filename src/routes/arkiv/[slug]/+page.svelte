@@ -42,6 +42,7 @@
 				imageAsset={screening.poster.asset}
 				class="rounded-t-lg {screening.poster.artists ? '' : 'rounded-b-lg'}"
 				slug={page.params.slug}
+				alt={`Plakat for ${screening.movies.map((movie) => movie.title).join(" & ")}`}
 			/>
 		</Card.Content>
 		{#if screening.poster.artists}
