@@ -1,16 +1,14 @@
-import type { ImageAsset, PortableTextBlock, Slug } from "@sanity/types";
+import type { PortableTextBlock, Slug } from "@sanity/types";
 import { sanityClient } from "../client";
 import groq from "groq";
 import { getISOWeekNumber } from "$lib/getCurrentWeek";
+import { toMemberSummary, type SanityMemberSummary } from "$lib/sanity/memberSummary";
+import type { MemberSummary } from "$lib/types/member";
 
-type Member = {
-	name: string;
-	image: ImageAsset;
-};
 type MovieOfTheWeek = {
 	movie: Movie;
 	weekNumber: number;
-	recommender: Member;
+	recommender: MemberSummary;
 	slug: Slug;
 	text?: PortableTextBlock[];
 };
@@ -22,8 +20,12 @@ type Movie = {
 	tmdb_id: number;
 };
 
-export function getMovieOfTheWeek() {
-	return sanityClient.fetch<MovieOfTheWeek>(
+type SanityMovieOfTheWeek = Omit<MovieOfTheWeek, "recommender"> & {
+	recommender: SanityMemberSummary;
+};
+
+export async function getMovieOfTheWeek(): Promise<MovieOfTheWeek> {
+	const movieOfTheWeek = await sanityClient.fetch<SanityMovieOfTheWeek>(
 		groq`*[_type == "movieOfTheWeek" && (year < $currentYear || (year == $currentYear && weekNumber <= $currentWeek))] | order(year desc, weekNumber desc)[0] {
 	              movie {
 	                title,
@@ -44,4 +46,9 @@ export function getMovieOfTheWeek() {
 			currentWeek: getISOWeekNumber(),
 		},
 	);
+
+	return {
+		...movieOfTheWeek,
+		recommender: toMemberSummary(movieOfTheWeek.recommender),
+	};
 }

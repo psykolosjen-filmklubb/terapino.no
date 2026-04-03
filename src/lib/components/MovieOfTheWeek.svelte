@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Member } from "$lib/sanity/api/getReviewExcerpts";
+	import type { MemberSummary } from "$lib/types/member";
 	import type { PortableTextBlock } from "@sanity/types";
 	import MovieOfTheWeekCard from "./MovieOfTheWeekCard.svelte";
 
@@ -8,7 +8,7 @@
 		slug: string;
 		text?: PortableTextBlock[];
 		weekNumber: number;
-		recommender: Member;
+		recommender: MemberSummary;
 		poster: string;
 	}
 

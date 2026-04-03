@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button";
+	import MemberAvatar from "$lib/components/MemberAvatar.svelte";
 	import * as Card from "$lib/components/ui/card";
-	import * as Avatar from "$lib/components/ui/avatar";
-	import type { Member } from "$lib/sanity/api/getReviewExcerpts";
-	import { urlFor } from "$lib/sanity/image";
+	import type { MemberSummary } from "$lib/types/member";
 	import type { PortableTextBlock } from "@sanity/types";
 	import { PortableText } from "@portabletext/svelte";
 
@@ -12,7 +11,7 @@
 		slug: string;
 		text?: PortableTextBlock[];
 		poster: string;
-		recommender: Member;
+		recommender: MemberSummary;
 		weekNumber: number;
 	};
 
@@ -47,12 +46,7 @@
 		</Card.Content>
 		<Card.Footer class="mt-auto mb-3.5 flex w-full items-center justify-between">
 			<span class="flex items-center gap-1.5">
-				<Avatar.Root class="size-13">
-					{#if recommender.image}
-						<Avatar.Image src={urlFor(recommender.image).width(128).height(128).url()} />
-					{/if}
-					<Avatar.Fallback>NH</Avatar.Fallback>
-				</Avatar.Root>
+				<MemberAvatar member={recommender} avatarClass="size-13" />
 				{recommender.name}
 			</span>
 			<span>

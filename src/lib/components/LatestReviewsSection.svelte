@@ -3,7 +3,7 @@
 	import { Button } from "./ui/button";
 	import ReviewExcerptCard from "./ReviewExcerptCard.svelte";
 	import type { ImageAsset, Slug } from "@sanity/types";
-	import type { Member } from "$lib/sanity/api/getReviewExcerpts";
+	import type { MemberSummary } from "$lib/types/member";
 
 	export type ReviewExcerpt = {
 		review_title: string;
@@ -11,7 +11,7 @@
 		thumbnail: ImageAsset;
 		excerpt: string;
 		thumbnailBlurhash: string;
-		authors: Member[];
+		authors: MemberSummary[];
 		date: string;
 	};
 

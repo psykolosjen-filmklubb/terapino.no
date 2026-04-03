@@ -1,11 +1,10 @@
 import groq from "groq";
 import { sanityClient } from "../client";
-import type { ImageAsset } from "@sanity/types";
+import { toMemberSummary, type SanityMemberSummary } from "$lib/sanity/memberSummary";
+import type { MemberSummary } from "$lib/types/member";
 
-type Member = {
+type Member = SanityMemberSummary & {
 	_id?: string;
-	name: string;
-	image: ImageAsset;
 	memberships: Membership[];
 	verv?: Verv[];
 };
@@ -69,5 +68,10 @@ export async function getRolesWithMembers() {
 		members: activeMembers.filter((member) => !member.verv?.some((verv) => !verv.to_date)),
 	});
 
-	return rolesWithMembers.filter((role) => role.members.length > 0);
+	return rolesWithMembers
+		.filter((role) => role.members.length > 0)
+		.map((role) => ({
+			...role,
+			members: role.members.map<MemberSummary>(toMemberSummary),
+		}));
 }

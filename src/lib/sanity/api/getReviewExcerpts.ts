@@ -1,6 +1,8 @@
 import groq from "groq";
 import { sanityClient } from "../client";
 import type { Slug, ImageAsset } from "@sanity/types";
+import { toMemberSummary, type SanityMemberSummary } from "$lib/sanity/memberSummary";
+import type { MemberSummary } from "$lib/types/member";
 
 type ReviewExcerpt = {
 	review_title: string;
@@ -8,18 +10,16 @@ type ReviewExcerpt = {
 	thumbnail: ImageAsset;
 	excerpt: string;
 	thumbnailBlurhash: string;
-	authors: Member[];
+	authors: MemberSummary[];
 	date: string;
 };
 
-export type Member = {
-	_id?: string;
-	name: string;
-	image: ImageAsset;
+type SanityReviewExcerpt = Omit<ReviewExcerpt, "authors"> & {
+	authors: SanityMemberSummary[];
 };
 
-export function getReviewExcerpts(limit?: number) {
-	return sanityClient.fetch<ReviewExcerpt[]>(
+export async function getReviewExcerpts(limit?: number): Promise<ReviewExcerpt[]> {
+	const reviews = await sanityClient.fetch<SanityReviewExcerpt[]>(
 		groq`*[_type == "review"] | order(_createdAt desc) [0..$limit]{
 		review_title,
 		"date": publishing_date,
@@ -33,4 +33,9 @@ export function getReviewExcerpts(limit?: number) {
 			limit: limit ? limit - 1 : -1,
 		},
 	);
+
+	return reviews.map((review) => ({
+		...review,
+		authors: review.authors.map(toMemberSummary),
+	}));
 }

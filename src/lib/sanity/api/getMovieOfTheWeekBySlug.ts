@@ -1,16 +1,13 @@
-import type { ImageAsset, PortableTextBlock, Slug } from "@sanity/types";
+import type { PortableTextBlock, Slug } from "@sanity/types";
 import { sanityClient } from "../client";
 import groq from "groq";
-
-type Member = {
-	name: string;
-	image: ImageAsset;
-};
+import { toMemberSummary, type SanityMemberSummary } from "$lib/sanity/memberSummary";
+import type { MemberSummary } from "$lib/types/member";
 
 type MovieOfTheWeek = {
 	movie: Movie;
 	weekNumber: number;
-	recommender: Member;
+	recommender: MemberSummary;
 	slug: Slug;
 	text?: PortableTextBlock[];
 };
@@ -22,8 +19,12 @@ type Movie = {
 	tmdb_id: number;
 };
 
-export function getMovieOfTheWeekBySlug(slug: string) {
-	return sanityClient.fetch<MovieOfTheWeek>(
+type SanityMovieOfTheWeek = Omit<MovieOfTheWeek, "recommender"> & {
+	recommender: SanityMemberSummary;
+};
+
+export async function getMovieOfTheWeekBySlug(slug: string): Promise<MovieOfTheWeek> {
+	const movieOfTheWeek = await sanityClient.fetch<SanityMovieOfTheWeek>(
 		groq`*[_type == "movieOfTheWeek" && slug.current == $slug][0] {
               movie {
                 title,
@@ -43,4 +44,9 @@ export function getMovieOfTheWeekBySlug(slug: string) {
 			slug: slug,
 		},
 	);
+
+	return {
+		...movieOfTheWeek,
+		recommender: toMemberSummary(movieOfTheWeek.recommender),
+	};
 }

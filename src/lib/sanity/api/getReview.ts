@@ -1,6 +1,8 @@
 import groq from "groq";
 import { sanityClient } from "../client";
 import type { ImageAsset, PortableTextBlock, Slug } from "@sanity/types";
+import { toMemberSummary, type SanityMemberSummary } from "$lib/sanity/memberSummary";
+import type { MemberSummary } from "$lib/types/member";
 
 type Review = {
 	review_title: string;
@@ -9,19 +11,17 @@ type Review = {
 	slug: Slug;
 	thumbnail?: ImageAsset;
 	excerpt?: string;
-	authors?: Member[];
+	authors?: MemberSummary[];
 	tmdb_id?: number;
 	thumbnailBlurhash?: string;
 };
 
-type Member = {
-	_id?: string;
-	name: string;
-	image: ImageAsset;
+type SanityReview = Omit<Review, "authors"> & {
+	authors?: SanityMemberSummary[];
 };
 
-export async function getReview(slug: string) {
-	return sanityClient.fetch<Review>(
+export async function getReview(slug: string): Promise<Review> {
+	const review = await sanityClient.fetch<SanityReview>(
 		groq`*[_type == "review" && slug.current == $slug][0]{
 			review_title,
 			movie_title,
@@ -36,4 +36,9 @@ export async function getReview(slug: string) {
 			slug,
 		},
 	);
+
+	return {
+		...review,
+		authors: review.authors?.map(toMemberSummary),
+	};
 }

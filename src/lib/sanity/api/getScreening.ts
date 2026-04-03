@@ -2,6 +2,8 @@ import groq from "groq";
 import { sanityClient } from "../client";
 import type { GalleryItem } from "../types";
 import type { ImageAsset, ImageDimensions, Slug } from "@sanity/types";
+import { toMemberSummary, type SanityMemberSummary } from "$lib/sanity/memberSummary";
+import type { MemberSummary } from "$lib/types/member";
 
 type Screening = {
 	movies: Movie[];
@@ -24,16 +26,17 @@ type PosterImage = {
 	asset: ImageAsset;
 	blurhash: string;
 	dimensions: ImageDimensions;
-	artists?: Member[];
+	artists?: MemberSummary[];
 };
 
-type Member = {
-	name: string;
-	image: ImageAsset;
+type SanityScreening = Omit<Screening, "poster"> & {
+	poster?: Omit<PosterImage, "artists"> & {
+		artists?: SanityMemberSummary[];
+	};
 };
 
-export function getScreening(slug: string) {
-	return sanityClient.fetch<Screening>(
+export async function getScreening(slug: string): Promise<Screening> {
+	const screening = await sanityClient.fetch<SanityScreening>(
 		groq`*[_type == "screening" && slug.current == $slug][0]{
 		movies[] {
 			directors,
@@ -78,4 +81,14 @@ export function getScreening(slug: string) {
 			slug,
 		},
 	);
+
+	return {
+		...screening,
+		poster: screening.poster
+			? {
+					...screening.poster,
+					artists: screening.poster.artists?.map(toMemberSummary),
+				}
+			: undefined,
+	};
 }

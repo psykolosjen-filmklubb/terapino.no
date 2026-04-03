@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button";
+	import MemberAvatar from "$lib/components/MemberAvatar.svelte";
 	import { routes } from "$lib/routes";
 	import type { ReviewExcerpt } from "./LatestReviewsSection.svelte";
 	import ThumbnailImage from "./ThumbnailImage.svelte";
 	import * as Card from "$lib/components/ui/card";
-	import * as Avatar from "$lib/components/ui/avatar";
-	import { urlFor } from "$lib/sanity/image";
 	import { dateFormatterShort } from "$lib/dateFormatters";
 
 	let { review_title, slug, thumbnail, excerpt, thumbnailBlurhash, authors, date }: ReviewExcerpt =
@@ -43,12 +42,7 @@
 
 	<Card.Footer class="mt-auto mb-3.5 flex items-center justify-between">
 		<span class="flex items-center gap-1.5">
-			<Avatar.Root class="size-13">
-				{#if authors[0].image}
-					<Avatar.Image src={urlFor(authors[0].image).width(128).height(128).url()} />
-				{/if}
-				<Avatar.Fallback>NH</Avatar.Fallback>
-			</Avatar.Root>
+			<MemberAvatar member={authors[0]} avatarClass="size-13" />
 			{authors[0].name}
 		</span>
 		<span>
