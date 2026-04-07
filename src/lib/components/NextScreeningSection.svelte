@@ -36,7 +36,7 @@
 
 	{#if nextScreening && nextScreening.poster?.asset}
 		<div class="max-w-96">
-			<a href="arkiv/{nextScreening.slug.current}">
+			<a href="/arkiv/{nextScreening.slug.current}">
 				<PosterImage
 					blurhash={nextScreening.poster.blurhash}
 					aspectRatio={nextScreening.poster.dimensions.aspectRatio}
@@ -48,7 +48,7 @@
 		</div>
 	{:else if nextScreening}
 		<div>
-			<a href="arkiv/{nextScreening.slug.current}">
+			<a href="/arkiv/{nextScreening.slug.current}">
 				<p class="text-center text-xl text-muted-foreground">
 					{dateFormatterLongNoYear.format(new Date(nextScreening.date))}:
 				</p>
