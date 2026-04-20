@@ -31,7 +31,7 @@
 
 	<!-- Desktop grid -->
 	<div class="hidden lg:grid lg:grid-cols-3 lg:gap-8">
-		{#each reviews as review}
+		{#each reviews as review (review.slug.current)}
 			<ReviewExcerptCard {...review} />
 		{/each}
 	</div>
@@ -39,7 +39,7 @@
 	<!-- Mobile carousel -->
 	<Carousel.Root class="lg:hidden">
 		<Carousel.Content>
-			{#each reviews as review}
+			{#each reviews as review (review.slug.current)}
 				<Carousel.Item class="flex justify-center">
 					<ReviewExcerptCard {...review} />
 				</Carousel.Item>
