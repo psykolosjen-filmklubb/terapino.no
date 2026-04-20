@@ -17,6 +17,8 @@
 		return (isOpen = false);
 	}
 
+	const mobileMenuId = "mobile-nav-links";
+
 	const filteredRoutes = Object.values(routes).filter((route) => {
 		if (route.route === "bli-med") {
 			return $page.data.settings.recruiting.recruiting_active;
@@ -34,14 +36,22 @@
 />
 
 <div class="lg:hidden">
-	<Button variant="ghost" size="icon" onclick={toggle}><Menu /></Button>
+	<Button
+		variant="ghost"
+		size="icon"
+		onclick={toggle}
+		aria-label={isOpen ? "Lukk meny" : "Åpne meny"}
+		aria-expanded={isOpen}
+		aria-controls={mobileMenuId}><Menu /></Button
+	>
 	{#if isOpen}
 		<div
+			id={mobileMenuId}
 			transition:fly={{ opacity: 0, x: "100%" }}
 			class="fixed inset-y-0 right-0 z-30 flex w-8/12 flex-col items-end bg-background px-6 py-5"
 			use:focus={{ enabled: true, preventScroll: true }}
 		>
-			<button class="text-5xl" onclick={close}>
+			<button class="text-5xl" onclick={close} aria-label="Lukk meny">
 				<X />
 			</button>
 			<nav class="mt-8 flex flex-col items-end gap-2">
