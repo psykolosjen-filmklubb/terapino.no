@@ -6,8 +6,13 @@ import { error } from "@sveltejs/kit";
 export async function load({ params }) {
 	const name = decodeURIComponent(params.member.replace("-", " "));
 	const member = await getMember(decodeURIComponent(name));
-	const posters = member._id ? getPostersByMember(member._id) : [];
-	const reviews = member._id ? getReviewsByMember(member._id) : [];
+
+	if (!member) {
+		error(404, "Not Found");
+	}
+
+	const posters = getPostersByMember(member._id);
+	const reviews = getReviewsByMember(member._id);
 
 	try {
 		return {

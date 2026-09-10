@@ -21,8 +21,8 @@ type Verv = {
 	to_date?: string;
 };
 
-export async function getMember(name: string) {
-	return sanityClient.fetch<Member>(
+export async function getMember(name: string): Promise<Member | null> {
+	return sanityClient.fetch<Member | null>(
 		groq`*[_type == "member" && name match $name][0]{
 			_id,
 			name,

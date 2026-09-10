@@ -20,8 +20,8 @@ type SanityReview = Omit<Review, "authors"> & {
 	authors?: SanityMemberSummary[];
 };
 
-export async function getReview(slug: string): Promise<Review> {
-	const review = await sanityClient.fetch<SanityReview>(
+export async function getReview(slug: string): Promise<Review | null> {
+	const review = await sanityClient.fetch<SanityReview | null>(
 		groq`*[_type == "review" && slug.current == $slug][0]{
 			review_title,
 			movie_title,
@@ -36,6 +36,8 @@ export async function getReview(slug: string): Promise<Review> {
 			slug,
 		},
 	);
+
+	if (!review) return null;
 
 	return {
 		...review,

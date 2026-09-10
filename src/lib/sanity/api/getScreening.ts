@@ -35,8 +35,8 @@ type SanityScreening = Omit<Screening, "poster"> & {
 	};
 };
 
-export async function getScreening(slug: string): Promise<Screening> {
-	const screening = await sanityClient.fetch<SanityScreening>(
+export async function getScreening(slug: string): Promise<Screening | null> {
+	const screening = await sanityClient.fetch<SanityScreening | null>(
 		groq`*[_type == "screening" && slug.current == $slug][0]{
 		movies[] {
 			directors,
@@ -81,6 +81,8 @@ export async function getScreening(slug: string): Promise<Screening> {
 			slug,
 		},
 	);
+
+	if (!screening) return null;
 
 	return {
 		...screening,

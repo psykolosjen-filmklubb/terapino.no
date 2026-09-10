@@ -23,8 +23,8 @@ type SanityMovieOfTheWeek = Omit<MovieOfTheWeek, "recommender"> & {
 	recommender: SanityMemberSummary;
 };
 
-export async function getMovieOfTheWeekBySlug(slug: string): Promise<MovieOfTheWeek> {
-	const movieOfTheWeek = await sanityClient.fetch<SanityMovieOfTheWeek>(
+export async function getMovieOfTheWeekBySlug(slug: string): Promise<MovieOfTheWeek | null> {
+	const movieOfTheWeek = await sanityClient.fetch<SanityMovieOfTheWeek | null>(
 		groq`*[_type == "movieOfTheWeek" && slug.current == $slug][0] {
               movie {
                 title,
@@ -44,6 +44,8 @@ export async function getMovieOfTheWeekBySlug(slug: string): Promise<MovieOfTheW
 			slug: slug,
 		},
 	);
+
+	if (!movieOfTheWeek) return null;
 
 	return {
 		...movieOfTheWeek,
