@@ -11,9 +11,7 @@ export async function load({ params, fetch }) {
 				if (movie.tmdb_id) {
 					return {
 						...movie,
-						details: await fetch(`/api/movie/${movie.tmdb_id}`).then(
-							(res) => res.json() as Promise<TmdbMovieDetails>,
-						),
+						details: await fetchMovieDetails(fetch, movie.tmdb_id),
 					};
 				}
 				return { ...movie, details: null };
@@ -29,4 +27,9 @@ export async function load({ params, fetch }) {
 	}
 
 	error(404, "Not Found");
+}
+
+async function fetchMovieDetails(fetch: typeof globalThis.fetch, tmdbId: number) {
+	const response = await fetch(`/api/movie/${tmdbId}`);
+	return response.ok ? (response.json() as Promise<TmdbMovieDetails>) : null;
 }

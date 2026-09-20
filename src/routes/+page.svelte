@@ -13,14 +13,14 @@
 
 <NextScreeningSection nextScreening={data.nextScreening} />
 
-{#if data.movieOfTheWeek && data.movieOfTheWeekDetails}
+{#if data.movieOfTheWeek}
 	<MovieOfTheWeek
 		movieTitle={data.movieOfTheWeek.movie.title}
 		slug={data.movieOfTheWeek.slug.current}
 		text={data.movieOfTheWeek.text}
 		weekNumber={data.movieOfTheWeek.weekNumber}
 		recommender={data.movieOfTheWeek.recommender}
-		poster={data.movieOfTheWeekDetails.poster_path}
+		poster={data.movieOfTheWeekDetails?.poster_path ?? null}
 	/>
 {/if}
 

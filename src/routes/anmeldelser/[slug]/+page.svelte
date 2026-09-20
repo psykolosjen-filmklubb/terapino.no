@@ -8,6 +8,10 @@
 	import LetterboxdButton from "$lib/components/LetterboxdButton.svelte";
 
 	let { data } = $props();
+
+	let releaseDate = $derived(
+		data.movieDetails?.release_date_no ?? data.movieDetails?.release_date ?? null,
+	);
 </script>
 
 {#if data.review.thumbnail}
@@ -44,28 +48,33 @@
 	<div class="flex flex-col gap-8 lg:px-4">
 		{#if data.movieDetails}
 			<div>
-				<img
-					src="https://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
-					alt="Movie Poster"
-					class="mb-2"
-				/>
+				{#if data.movieDetails.poster_path}
+					<img
+						src="https://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
+						alt="Movie Poster"
+						class="mb-2"
+					/>
+				{/if}
 				<p class="text-lg font-light">
 					Originaltittel: <span class="font-medium">{data.movieDetails.original_title}</span>
 				</p>
-				<p class="text-lg font-light">
-					På kino i Norge: <span class="font-medium">
-						{dateFormatterShort.format(
-							new Date(data.movieDetails.release_date_no ?? data.movieDetails.release_date),
-						)}
-					</span>
-				</p>
+				{#if releaseDate}
+					<p class="text-lg font-light">
+						{data.movieDetails.release_date_no ? "På kino i Norge" : "Utgitt"}:
+						<span class="font-medium">
+							{dateFormatterShort.format(new Date(releaseDate))}
+						</span>
+					</p>
+				{/if}
 				<p class="text-lg font-light">
 					Reggisør{data.movieDetails.directors.length > 1 ? "er" : ""}:
 					<span class="font-medium">{data.movieDetails.directors.join(", ")}</span>
 				</p>
 				<div class="mt-4 flex justify-evenly">
-					<ImdbButton imdbId={data.movieDetails.imdb_id} />
-					<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
+					{#if data.movieDetails.imdb_id}
+						<ImdbButton imdbId={data.movieDetails.imdb_id} />
+						<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
+					{/if}
 				</div>
 			</div>
 			<div>

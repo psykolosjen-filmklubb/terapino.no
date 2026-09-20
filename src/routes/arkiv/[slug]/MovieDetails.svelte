@@ -12,9 +12,9 @@
 		originalTitle: string;
 		directors: string[];
 		norwegianReleaseDate?: string;
-		originalReleaseDate: string;
-		imdbId: string;
-		posterPath: string;
+		originalReleaseDate: string | null;
+		imdbId: string | null;
+		posterPath: string | null;
 	}
 
 	let {
@@ -27,6 +27,8 @@
 		imdbId,
 		posterPath,
 	}: MovieDetailsProps = $props();
+
+	let releaseDate = $derived(norwegianReleaseDate ?? originalReleaseDate);
 </script>
 
 <Accordion.Root type="single" class="-mt-4 w-full lg:max-w-sm">
@@ -46,7 +48,7 @@
 					<div class="flex gap-2">
 						<span class="font-light">Opprinnelsesland:</span>
 						<ul>
-							{#each originCountry as country}
+							{#each originCountry as country (country)}
 								<li class="font-medium">{formatCountryCode(country, { withFlag: true })}</li>
 							{/each}
 						</ul>
@@ -59,23 +61,29 @@
 					</p>
 				{/if}
 
-				<p class="font-light">
-					{norwegianReleaseDate ? "På kino i Norge" : "Utgitt"}:
-					<span class="font-medium">
-						{dateFormatterShort.format(new Date(norwegianReleaseDate ?? originalReleaseDate))}
-					</span>
-				</p>
+				{#if releaseDate}
+					<p class="font-light">
+						{norwegianReleaseDate ? "På kino i Norge" : "Utgitt"}:
+						<span class="font-medium">
+							{dateFormatterShort.format(new Date(releaseDate))}
+						</span>
+					</p>
+				{/if}
 
-				<img
-					src="https://image.tmdb.org/t/p/w500{posterPath}"
-					alt="Movie Poster"
-					class="mx-auto mb-2 max-w-[60%]"
-				/>
+				{#if posterPath}
+					<img
+						src="https://image.tmdb.org/t/p/w500{posterPath}"
+						alt="Movie Poster"
+						class="mx-auto mb-2 max-w-[60%]"
+					/>
+				{/if}
 			</div>
 
 			<div class="my-2 flex w-full max-w-96 justify-evenly">
-				<ImdbButton {imdbId} />
-				<LetterboxdButton {imdbId} />
+				{#if imdbId}
+					<ImdbButton {imdbId} />
+					<LetterboxdButton {imdbId} />
+				{/if}
 			</div>
 
 			<small>Informasjon og poster hentet fra</small>

@@ -9,7 +9,7 @@
 		text?: PortableTextBlock[];
 		weekNumber: number;
 		recommender: MemberSummary;
-		poster: string;
+		poster: string | null;
 	}
 
 	let { movieTitle, slug, text, weekNumber, recommender, poster }: Props = $props();

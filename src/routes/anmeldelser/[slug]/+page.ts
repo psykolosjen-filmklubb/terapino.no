@@ -13,9 +13,8 @@ export async function load({ fetch, params }) {
 			};
 		}
 
-		const movieDetails: TmdbMovieDetails = await fetch(`/api/movie/${review.tmdb_id}`).then((res) =>
-			res.json(),
-		);
+		const response = await fetch(`/api/movie/${review.tmdb_id}`);
+		const movieDetails: TmdbMovieDetails | null = response.ok ? await response.json() : null;
 
 		return {
 			review,

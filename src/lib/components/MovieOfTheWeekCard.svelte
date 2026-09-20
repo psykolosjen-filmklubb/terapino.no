@@ -10,7 +10,7 @@
 		movie_title: string;
 		slug: string;
 		text?: PortableTextBlock[];
-		poster: string;
+		poster: string | null;
 		recommender: MemberSummary;
 		weekNumber: number;
 	};
@@ -32,14 +32,16 @@
 				{movie_title}
 			</h3>
 		</Card.Header>
-		<Card.Content class="mb-4 grid grid-cols-2 gap-2.5">
-			<figure>
-				<img
-					src="https://image.tmdb.org/t/p/w500{poster}"
-					alt="poster"
-					style:--vt-tag="MOTW-poster-{slug}"
-				/>
-			</figure>
+		<Card.Content class="mb-4 grid gap-2.5 {poster ? 'grid-cols-2' : 'grid-cols-1'}">
+			{#if poster}
+				<figure>
+					<img
+						src="https://image.tmdb.org/t/p/w500{poster}"
+						alt="poster"
+						style:--vt-tag="MOTW-poster-{slug}"
+					/>
+				</figure>
+			{/if}
 			<article class="prose dark:prose-invert lg:prose-lg text-wrap">
 				<PortableText value={text} />
 			</article>

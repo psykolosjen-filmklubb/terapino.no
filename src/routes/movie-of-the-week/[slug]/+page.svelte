@@ -32,12 +32,14 @@
 	<div class="flex flex-col gap-8">
 		{#if data.movieDetails}
 			<div>
-				<img
-					src="https://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
-					alt="Movie Poster"
-					class="mb-2"
-					style:--vt-tag="MOTW-poster-{data.movieOfTheWeek.slug.current}"
-				/>
+				{#if data.movieDetails.poster_path}
+					<img
+						src="https://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
+						alt="Movie Poster"
+						class="mb-2"
+						style:--vt-tag="MOTW-poster-{data.movieOfTheWeek.slug.current}"
+					/>
+				{/if}
 				<p class="text-lg font-light">
 					Originaltittel: <span class="font-medium">{data.movieDetails.original_title}</span>
 				</p>
@@ -52,8 +54,10 @@
 					</span>
 				</p>
 				<div class="mt-4 flex justify-evenly">
-					<ImdbButton imdbId={data.movieDetails.imdb_id} />
-					<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
+					{#if data.movieDetails.imdb_id}
+						<ImdbButton imdbId={data.movieDetails.imdb_id} />
+						<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
+					{/if}
 				</div>
 			</div>
 			<div>
