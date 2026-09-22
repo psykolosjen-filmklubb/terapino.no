@@ -120,6 +120,26 @@
 	}
 }
 
+.squircle {
+	border-radius: var(--squircle-radius, 4rem);
+	overflow: clip;
+}
+
+.squircle-top {
+	border-radius: var(--squircle-radius, 4rem) var(--squircle-radius, 4rem) 0 0;
+	overflow: clip;
+}
+
+@supports (corner-shape: squircle) {
+	.squircle {
+		corner-shape: squircle;
+	}
+
+	.squircle-top {
+		corner-shape: squircle squircle square square;
+	}
+}
+
 @media (prefers-reduced-motion: no-preference) {
 	[style*="--vt-tag"] {
 		view-transition-name: var(--vt-tag);

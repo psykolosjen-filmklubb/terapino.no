@@ -10,12 +10,13 @@
 	interface Props {
 		thumbnailBlurhash: string;
 		thumbnail: ImageAsset;
+		slug?: string;
 		class?: ClassValue;
 	}
 
-	let { thumbnailBlurhash, thumbnail, class: className }: Props = $props();
+	let { thumbnailBlurhash, thumbnail, slug, class: className }: Props = $props();
 
-	const css = blurhashToImageCssObject(thumbnailBlurhash, 64, 32);
+	let css = $derived(blurhashToImageCssObject(thumbnailBlurhash, 64, 32));
 
 	let imageLoaded = $state(false);
 	const imageOpacity = tweened(0, { duration: 300 });
@@ -23,14 +24,23 @@
 		imageOpacity.set(imageLoaded ? 1 : 0);
 	});
 
-	function setImageLoaded(img: HTMLImageElement) {
-		if (img.complete) {
-			imageLoaded = true;
-		} else {
-			img.onload = () => {
+	function trackImageLoad(source: ImageAsset) {
+		return (image: HTMLImageElement) => {
+			imageLoaded = false;
+
+			if (image.complete) {
+				imageLoaded = true;
+				return;
+			}
+
+			image.onload = () => {
 				imageLoaded = true;
 			};
-		}
+
+			return () => {
+				image.onload = null;
+			};
+		};
 	}
 </script>
 
@@ -42,8 +52,9 @@
 	<img
 		src={urlFor(thumbnail).width(512).height(256).fit("min").auto("format").url()}
 		alt="Review thumbnail"
-		class={className}
+		class={["squircle-top", className]}
 		style:opacity={$imageOpacity}
-		use:setImageLoaded
+		style:--vt-tag="review-image-{slug}"
+		{@attach trackImageLoad(thumbnail)}
 	/>
 </div>

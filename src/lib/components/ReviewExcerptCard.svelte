@@ -11,17 +11,14 @@
 		$props();
 </script>
 
-<Card.Root
-	class="squircle max-w-lg gap-4 p-0"
-	style="view-transition-name: review-image-{slug.current}"
->
+<Card.Root class="squircle max-w-lg gap-4 p-0">
 	<Card.Header class="gap-0 p-0">
 		<Button
 			variant="ghost"
 			href="/{routes.anmeldelser.route}/{slug.current}"
 			class="h-auto flex-col items-baseline p-0"
 		>
-			<ThumbnailImage {thumbnail} {thumbnailBlurhash} class="rounded-t-2xl" />
+			<ThumbnailImage {thumbnail} {thumbnailBlurhash} slug={slug.current} class="rounded-t-2xl" />
 		</Button>
 	</Card.Header>
 
