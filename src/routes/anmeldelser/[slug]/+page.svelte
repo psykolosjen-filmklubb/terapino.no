@@ -16,8 +16,8 @@
 
 {#if data.review.thumbnail}
 	<HeroImage
-		thumbnailBlurhash={data.review.thumbnailBlurhash ?? ""}
 		thumbnail={data.review.thumbnail}
+		thumbnailLqip={data.review.thumbnailLqip}
 		slug={data.review.slug.current}
 	/>
 {/if}

@@ -52,7 +52,6 @@
 		"@lucide/svelte": "1.44.0",
 		"@sanity/client": "8.6.1",
 		"@sanity/image-url": "2.1.1",
-		"@unpic/placeholder": "0.1.2",
 		"@vercel/analytics": "2.0.1",
 		"groq": "6.13.1",
 		"mode-watcher": "1.1.0",

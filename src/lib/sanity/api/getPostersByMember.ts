@@ -4,7 +4,6 @@ import type { ImageAsset, ImageDimensions } from "@sanity/types";
 
 type PosterByMember = {
 	asset: ImageAsset;
-	blurhash: string;
 	dimensions: ImageDimensions;
 	movies: Movie[];
 };
@@ -19,7 +18,6 @@ export async function getPostersByMember(memberId: string) {
 			groq`*[_type == "screening" && references($memberId)] | order(date desc) {
 			"asset": poster.asset,
 			"dimensions": poster.asset->metadata.dimensions,
-			"blurhash": poster.asset->metadata.blurHash,
 			movies[] {
 				title
 			},

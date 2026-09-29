@@ -7,7 +7,7 @@
 	import * as Card from "$lib/components/ui/card";
 	import { dateFormatterShort } from "$lib/dateFormatters";
 
-	let { review_title, slug, thumbnail, excerpt, thumbnailBlurhash, authors, date }: ReviewExcerpt =
+	let { review_title, slug, thumbnail, thumbnailLqip, excerpt, authors, date }: ReviewExcerpt =
 		$props();
 </script>
 
@@ -18,7 +18,7 @@
 			href="/{routes.anmeldelser.route}/{slug.current}"
 			class="h-auto flex-col items-baseline p-0"
 		>
-			<ThumbnailImage {thumbnail} {thumbnailBlurhash} slug={slug.current} class="rounded-t-2xl" />
+			<ThumbnailImage {thumbnail} {thumbnailLqip} slug={slug.current} class="rounded-t-2xl" />
 		</Button>
 	</Card.Header>
 

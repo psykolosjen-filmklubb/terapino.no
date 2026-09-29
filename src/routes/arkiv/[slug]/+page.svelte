@@ -37,9 +37,9 @@
 	<Card.Root class="w-full gap-0 overflow-hidden p-0 lg:max-w-sm">
 		<Card.Content class="p-0">
 			<PosterImage
-				blurhash={screening.poster.blurhash}
 				aspectRatio={screening.poster.dimensions.aspectRatio}
 				imageAsset={screening.poster.asset}
+				lqip={screening.poster.lqip}
 				class="rounded-t-lg {screening.poster.artists ? '' : 'rounded-b-lg'}"
 				slug={page.params.slug}
 				alt={`Plakat for ${screening.movies.map((movie) => movie.title).join(" & ")}`}

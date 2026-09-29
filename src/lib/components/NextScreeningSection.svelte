@@ -35,12 +35,12 @@
 	</div>
 
 	{#if nextScreening && nextScreening.poster?.asset}
-		<div class="max-w-96">
+		<div class="w-full max-w-96">
 			<a href="/arkiv/{nextScreening.slug.current}">
 				<PosterImage
-					blurhash={nextScreening.poster.blurhash}
 					aspectRatio={nextScreening.poster.dimensions.aspectRatio}
 					imageAsset={nextScreening.poster.asset}
+					lqip={nextScreening.poster.lqip}
 					slug={nextScreening.slug.current}
 					alt={`Plakat for ${nextScreening.movies.map((movie) => movie.title).join(" & ")}`}
 				/>

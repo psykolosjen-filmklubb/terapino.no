@@ -9,8 +9,8 @@
 		review_title: string;
 		slug: Slug;
 		thumbnail: ImageAsset;
+		thumbnailLqip?: string;
 		excerpt: string;
-		thumbnailBlurhash: string;
 		authors: MemberSummary[];
 		date: string;
 	};

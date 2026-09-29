@@ -17,7 +17,7 @@ type Movie = {
 
 type PosterImage = {
 	asset: ImageAsset;
-	blurhash: string;
+	lqip?: string;
 	dimensions: ImageDimensions;
 };
 
@@ -33,7 +33,7 @@ export function getNextScreening() {
 		"poster": {
 			"asset": poster.asset,
 			"dimensions": poster.asset->metadata.dimensions,
-			"blurhash": poster.asset->metadata.blurHash,
+			"lqip": poster.asset->metadata.lqip,
 		},
 		slug
 	}`,

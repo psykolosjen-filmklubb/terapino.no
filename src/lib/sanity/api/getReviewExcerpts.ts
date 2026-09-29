@@ -8,8 +8,8 @@ type ReviewExcerpt = {
 	review_title: string;
 	slug: Slug;
 	thumbnail: ImageAsset;
+	thumbnailLqip?: string;
 	excerpt: string;
-	thumbnailBlurhash: string;
 	authors: MemberSummary[];
 	date: string;
 };
@@ -25,7 +25,7 @@ export async function getReviewExcerpts(limit?: number): Promise<ReviewExcerpt[]
 		"date": publishing_date,
 		slug,
 		thumbnail,
-		"thumbnailBlurhash": thumbnail.asset->metadata.blurHash,
+		"thumbnailLqip": thumbnail.asset->metadata.lqip,
 		excerpt,
 		authors[]->,
 	}`,

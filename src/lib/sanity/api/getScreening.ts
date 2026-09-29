@@ -24,7 +24,7 @@ type Movie = {
 
 type PosterImage = {
 	asset: ImageAsset;
-	blurhash: string;
+	lqip?: string;
 	dimensions: ImageDimensions;
 	artists?: MemberSummary[];
 };
@@ -48,7 +48,7 @@ export async function getScreening(slug: string): Promise<Screening | null> {
 		"poster": {
 			"asset": poster.asset,
 			"dimensions": poster.asset->metadata.dimensions,
-			"blurhash": poster.asset->metadata.blurHash,
+			"lqip": poster.asset->metadata.lqip,
 			"artists": poster_artists[]->,
 		},
 		promo_material[] {

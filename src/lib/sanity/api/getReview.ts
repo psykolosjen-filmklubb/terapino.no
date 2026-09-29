@@ -13,7 +13,7 @@ type Review = {
 	excerpt?: string;
 	authors?: MemberSummary[];
 	tmdb_id?: number;
-	thumbnailBlurhash?: string;
+	thumbnailLqip?: string;
 };
 
 type SanityReview = Omit<Review, "authors"> & {
@@ -28,7 +28,7 @@ export async function getReview(slug: string): Promise<Review | null> {
 			review[],
 			slug,
 			thumbnail,
-			"thumbnailBlurhash": thumbnail.asset->metadata.blurHash,
+			"thumbnailLqip": thumbnail.asset->metadata.lqip,
 			authors[]->,
 			tmdb_id,
 	}`,

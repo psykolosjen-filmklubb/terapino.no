@@ -10,7 +10,7 @@
 {#if data.content.header_image.asset}
 	<HeroImage
 		thumbnail={data.content.header_image.asset}
-		thumbnailBlurhash={data.content.header_image.blurhash}
+		thumbnailLqip={data.content.header_image.lqip}
 	/>
 {/if}
 
