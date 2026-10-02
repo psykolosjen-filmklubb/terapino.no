@@ -41,6 +41,7 @@
 
 <div class="pswp-gallery grid grid-cols-2 gap-4 lg:grid-cols-3" id={galleryID}>
 	{#each posters as poster (poster.asset._ref)}
+		<!-- eslint-disable svelte/no-navigation-without-resolve -- links to the full-size image on the Sanity CDN -->
 		<a
 			href={urlFor(poster.asset).auto("format").url()}
 			data-pswp-width={poster.dimensions.width}
@@ -54,5 +55,6 @@
 				alt={poster.alt ?? "Movie poster"}
 			/>
 		</a>
+		<!-- eslint-enable svelte/no-navigation-without-resolve -->
 	{/each}
 </div>

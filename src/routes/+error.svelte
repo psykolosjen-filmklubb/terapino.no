@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import { page } from "$app/state";
 	import { Button } from "$lib/components/ui/button";
 	import { routes } from "$lib/routes";
@@ -6,7 +7,7 @@
 
 	// Seksjonen brukeren var i, slik at vi kan tilby veien tilbake dit.
 	let section = $derived(
-		Object.values(routes).find((route) => page.url.pathname.startsWith("/" + route.route)),
+		Object.values(routes).find((route) => page.url.pathname.startsWith(route.route)),
 	);
 
 	let isNotFound = $derived(page.status === 404);
@@ -42,9 +43,9 @@
 	{/if}
 
 	<div class="mt-8 flex flex-wrap justify-center gap-3">
-		<Button href="/">Tilbake til forsiden</Button>
+		<Button href={resolve("/")}>Tilbake til forsiden</Button>
 		{#if section}
-			<Button variant="outline" href="/{section.route}">{section.title}</Button>
+			<Button variant="outline" href={resolve(section.route)}>{section.title}</Button>
 		{/if}
 	</div>
 </section>

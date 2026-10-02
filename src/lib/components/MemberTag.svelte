@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import MemberAvatar from "$lib/components/MemberAvatar.svelte";
 	import type { MemberSummary } from "$lib/types/member";
 
@@ -12,7 +13,10 @@
 	let nameSlug = $derived(nameList.join("-").toLowerCase());
 </script>
 
-<a href="/om-oss/{nameSlug}" class="flex items-center justify-between gap-2 hover:underline">
+<a
+	href={resolve("/om-oss/[member]", { member: nameSlug })}
+	class="flex items-center justify-between gap-2 hover:underline"
+>
 	<p class="font-extralight" style:--vt-tag="member-name-{nameSlug}">
 		{member.name}
 	</p>

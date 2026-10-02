@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import { fly } from "svelte/transition";
 	import { Button } from "../ui/button";
 	import { page } from "$app/stores";
@@ -20,7 +21,7 @@
 	const mobileMenuId = "mobile-nav-links";
 
 	const filteredRoutes = Object.values(routes).filter((route) => {
-		if (route.route === "bli-med") {
+		if (route.route === routes.bli_med.route) {
 			return $page.data.settings.recruiting.recruiting_active;
 		}
 		return true;
@@ -58,9 +59,9 @@
 				{#each filteredRoutes as route (route.route)}
 					<Button
 						variant="link"
-						href="/{route.route}"
+						href={resolve(route.route)}
 						onclick={close}
-						class="p-0 text-xl {$page.url.pathname.startsWith('/' + route.route)
+						class="p-0 text-xl {$page.url.pathname.startsWith(route.route)
 							? 'font-medium underline'
 							: 'font-light'}"
 					>
@@ -86,16 +87,14 @@
 		{#each filteredRoutes as route (route.route)}
 			<Button
 				variant="link"
-				href="/{route.route}"
+				href={resolve(route.route)}
 				onclick={close}
 				class={[
 					"p-0 text-xl font-light text-primary hover:no-underline",
-					{ "font-medium": $page.url.pathname.startsWith("/" + route.route) },
+					{ "font-medium": $page.url.pathname.startsWith(route.route) },
 				]}
 			>
-				<span
-					class={["nav-link-title", { selected: $page.url.pathname.startsWith("/" + route.route) }]}
-				>
+				<span class={["nav-link-title", { selected: $page.url.pathname.startsWith(route.route) }]}>
 					{route.title}
 				</span>
 			</Button>

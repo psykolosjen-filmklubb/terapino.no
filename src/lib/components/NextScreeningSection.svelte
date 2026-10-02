@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import PosterImage from "$lib/components/PosterImage.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import { dateFormatterLongNoYear } from "$lib/dateFormatters.js";
@@ -27,7 +28,7 @@
 					Ingen nye visninger planlagt for øyeblikket, men følg med for oppdateringer!
 				</p>
 				<p class="px-4 text-center text-muted-foreground">Vil du se hva vi har vist tidligere?</p>
-				<Button href="/arkiv" variant="link" class="w-fit place-self-center font-medium">
+				<Button href={resolve("/arkiv")} variant="link" class="w-fit place-self-center font-medium">
 					Visningsarkiv
 				</Button>
 			</div>
@@ -36,7 +37,7 @@
 
 	{#if nextScreening && nextScreening.poster?.asset}
 		<div class="w-full max-w-96">
-			<a href="/arkiv/{nextScreening.slug.current}">
+			<a href={resolve("/arkiv/[slug]", { slug: nextScreening.slug.current })}>
 				<PosterImage
 					aspectRatio={nextScreening.poster.dimensions.aspectRatio}
 					imageAsset={nextScreening.poster.asset}
@@ -48,7 +49,7 @@
 		</div>
 	{:else if nextScreening}
 		<div>
-			<a href="/arkiv/{nextScreening.slug.current}">
+			<a href={resolve("/arkiv/[slug]", { slug: nextScreening.slug.current })}>
 				<p class="text-center text-xl text-muted-foreground">
 					{dateFormatterLongNoYear.format(new Date(nextScreening.date))}:
 				</p>

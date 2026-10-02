@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import MembershipsAndVerv from "$lib/components/MembershipsAndVerv.svelte";
 	import PosterGallery from "$lib/components/PosterGallery.svelte";
 	import * as Avatar from "$lib/components/ui/avatar";
@@ -54,7 +55,7 @@
 		</h2>
 		<div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
 			{#each data.reviews as review (review.slug.current)}
-				<a href={`/anmeldelser/${review.slug.current}`} class="group">
+				<a href={resolve("/anmeldelser/[slug]", { slug: review.slug.current })} class="group">
 					<Card.Root>
 						<Card.Content>
 							<Card.Title class="group-hover:underline">

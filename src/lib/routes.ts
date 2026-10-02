@@ -1,27 +1,26 @@
-export const routes: Record<string, route> = {
+import type { RouteId } from "$app/types";
+
+export const routes = {
 	bli_med: {
-		route: "bli-med",
+		route: "/bli-med",
 		title: "Søk filmklubben",
 	},
 	anmeldelser: {
-		route: "anmeldelser",
+		route: "/anmeldelser",
 		title: "Anmeldelser",
 	},
 	arkiv: {
-		route: "arkiv",
+		route: "/arkiv",
 		title: "Visningsarkiv",
 	},
 	bilder: {
-		route: "bilder",
+		route: "/bilder",
 		title: "Bilder",
 	},
 	om_oss: {
-		route: "om-oss",
+		route: "/om-oss",
 		title: "Om oss",
 	},
-} as const;
+} as const satisfies Record<string, { route: RouteId; title: string }>;
 
-type route = {
-	route: string;
-	title: string;
-};
+export type SiteRoute = (typeof routes)[keyof typeof routes];

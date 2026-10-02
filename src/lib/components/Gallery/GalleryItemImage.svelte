@@ -15,6 +15,7 @@
 	let { imageAsset, imageDimentions, alt, showFullscreenButton }: Props = $props();
 </script>
 
+<!-- eslint-disable svelte/no-navigation-without-resolve -- links to the full-size image on the Sanity CDN -->
 <a
 	href={urlFor(imageAsset).auto("format").url()}
 	data-pswp-width={imageDimentions.width}
@@ -29,6 +30,7 @@
 		class="aspect-square w-full object-cover"
 	/>
 </a>
+<!-- eslint-enable svelte/no-navigation-without-resolve -->
 {#if showFullscreenButton}
 	<span transition:fade={{ duration: 100 }}>
 		<Button

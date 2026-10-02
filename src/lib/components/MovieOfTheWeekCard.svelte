@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import { Button } from "$lib/components/ui/button";
 	import MemberAvatar from "$lib/components/MemberAvatar.svelte";
 	import * as Card from "$lib/components/ui/card";
@@ -21,7 +22,7 @@
 <Card.Root class="squircle max-w-lg gap-4 p-0">
 	<Button
 		variant="ghost"
-		href="/movie-of-the-week/{slug}"
+		href={resolve("/movie-of-the-week/[slug]", { slug })}
 		class="h-auto flex-col items-baseline p-0"
 	>
 		<Card.Header class="mt-2.5 w-full">

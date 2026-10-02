@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import { fade } from "svelte/transition";
 	import type { Screening, SemesterState } from "./SemesterState.svelte";
 
@@ -67,10 +68,10 @@
 	style:place-items={direction === "right" ? "start" : "end"}
 	bind:clientHeight={semester.titlesHeight}
 >
-	{#each semester.screenings as screening, index}
+	{#each semester.screenings as screening, index (screening.slug.current)}
 		{#if semester.open && index === 0}
 			<a
-				href="/arkiv/{screening.slug.current}"
+				href={resolve("/arkiv/[slug]", { slug: screening.slug.current })}
 				class="group w-max"
 				style:max-width={firstTitleMaxWidth + "px"}
 				style:--vt-tag="screening-title-{screening.slug.current}"
@@ -79,7 +80,7 @@
 				in:fade={{ delay: 100, duration: 200 }}
 				out:fade={{ duration: 200 }}
 			>
-				{#each getScreeningTitlesString(screening).split(" ") as word}
+				{#each getScreeningTitlesString(screening).split(" ") as word, wordIndex (wordIndex)}
 					<span
 						class="inline-block text-sm font-light group-hover:underline @5xl:text-base @5xl:font-thin"
 					>
@@ -89,7 +90,7 @@
 			</a>
 		{:else if semester.open}
 			<a
-				href="/arkiv/{screening.slug.current}"
+				href={resolve("/arkiv/[slug]", { slug: screening.slug.current })}
 				class="w-max text-sm font-light hover:underline @5xl:text-base @5xl:font-thin"
 				style:max-width={titleMaxWidth + "px"}
 				style:--vt-tag="screening-title-{screening.slug.current}"
