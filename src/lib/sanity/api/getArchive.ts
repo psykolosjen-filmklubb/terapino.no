@@ -21,12 +21,17 @@ type Movie = {
 };
 
 export async function getArchive() {
+	// The archive shows screenings once they have happened, in Norwegian time.
+	const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Oslo" }).format(new Date());
+	// Screenings reference their semester; the Studio's publish action keeps
+	// that reference in line with the screening date. "fall" sorts before
+	// "spring", so ascending season puts the later half-year first.
 	return sanityClient.fetch<Semester[]>(
-		groq`*[_type == "semester"] | order(start_date desc) {
+		groq`*[_type == "semester"] | order(semester_year desc, semester_season asc) {
 		"name": semester_name,
-		"startDate": start_date,
+		"startDate": string(semester_year) + select(semester_season == "spring" => "-01-01", "-07-01"),
 		"color": color.hex,
-		"screenings": screenings[]-> | order(date desc) {
+		"screenings": *[_type == "screening" && references(^._id) && date <= $today] | order(date desc) {
 			movies[] {
 				title,
 				"year": release_year,
@@ -34,6 +39,9 @@ export async function getArchive() {
 			},
 			slug,
 		}
-	}`,
+	}[count(screenings) > 0]`,
+		{ today },
+		// Never show unpublished screenings or semesters.
+		{ perspective: "published" },
 	);
 }
