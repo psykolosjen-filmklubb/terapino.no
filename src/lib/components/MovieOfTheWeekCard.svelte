@@ -11,12 +11,12 @@
 		movie_title: string;
 		slug: string;
 		text?: PortableTextBlock[];
-		poster: string | null;
+		posterUrl: string | null;
 		recommender: MemberSummary;
 		weekNumber: number;
 	};
 
-	let { movie_title, slug, text, poster, recommender, weekNumber }: Props = $props();
+	let { movie_title, slug, text, posterUrl, recommender, weekNumber }: Props = $props();
 </script>
 
 <Card.Root class="squircle max-w-lg gap-4 p-0">
@@ -33,14 +33,10 @@
 				{movie_title}
 			</h3>
 		</Card.Header>
-		<Card.Content class="mb-4 grid gap-2.5 {poster ? 'grid-cols-2' : 'grid-cols-1'}">
-			{#if poster}
+		<Card.Content class="mb-4 grid gap-2.5 {posterUrl ? 'grid-cols-2' : 'grid-cols-1'}">
+			{#if posterUrl}
 				<figure>
-					<img
-						src="https://image.tmdb.org/t/p/w500{poster}"
-						alt="poster"
-						style:--vt-tag="MOTW-poster-{slug}"
-					/>
+					<img src={posterUrl} alt="poster" style:--vt-tag="MOTW-poster-{slug}" />
 				</figure>
 			{/if}
 			<article class="prose dark:prose-invert lg:prose-lg text-wrap">

@@ -3,6 +3,7 @@
 	import NextScreeningSection from "../lib/components/NextScreeningSection.svelte";
 	import LatestReviewsSection from "$lib/components/LatestReviewsSection.svelte";
 	import MovieOfTheWeek from "$lib/components/MovieOfTheWeek.svelte";
+	import { getMovieOfTheWeekPosterUrl } from "$lib/movieOfTheWeekPoster";
 
 	let { data } = $props();
 </script>
@@ -20,7 +21,10 @@
 		text={data.movieOfTheWeek.text}
 		weekNumber={data.movieOfTheWeek.weekNumber}
 		recommender={data.movieOfTheWeek.recommender}
-		poster={data.movieOfTheWeekDetails?.poster_path ?? null}
+		posterUrl={getMovieOfTheWeekPosterUrl(
+			data.movieOfTheWeek.movie.poster,
+			data.movieOfTheWeekDetails?.poster_path,
+		)}
 	/>
 {/if}
 

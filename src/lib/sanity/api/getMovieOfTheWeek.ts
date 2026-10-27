@@ -1,4 +1,4 @@
-import type { PortableTextBlock, Slug } from "@sanity/types";
+import type { Image, PortableTextBlock, Slug } from "@sanity/types";
 import { sanityClient } from "../client";
 import groq from "groq";
 import { getISOWeekNumber } from "$lib/getCurrentWeek";
@@ -15,9 +15,10 @@ type MovieOfTheWeek = {
 
 type Movie = {
 	title: string;
-	release_year: number;
-	directors: string;
-	tmdb_id: number;
+	release_year?: number;
+	directors?: string;
+	tmdb_id?: number;
+	poster?: Image;
 };
 
 type SanityMovieOfTheWeek = Omit<MovieOfTheWeek, "recommender"> & {
@@ -31,7 +32,8 @@ export async function getMovieOfTheWeek(): Promise<MovieOfTheWeek> {
 	                title,
 	                release_year,
 	                directors,
-                tmdb_id
+                tmdb_id,
+                poster
               },
               weekNumber,
               recommender->{

@@ -6,8 +6,9 @@ export async function load({ fetch, params }) {
 	const movieOfTheWeek = await getMovieOfTheWeekBySlug(params.slug);
 
 	if (movieOfTheWeek) {
-		const response = await fetch(`/api/movie/${movieOfTheWeek.movie.tmdb_id}`);
-		const movieDetails: TmdbMovieDetails | null = response.ok ? await response.json() : null;
+		const tmdbId = movieOfTheWeek.movie.tmdb_id;
+		const response = tmdbId ? await fetch(`/api/movie/${tmdbId}`) : null;
+		const movieDetails: TmdbMovieDetails | null = response?.ok ? await response.json() : null;
 
 		return {
 			movieOfTheWeek,

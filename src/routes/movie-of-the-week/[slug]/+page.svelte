@@ -4,7 +4,23 @@
 	import ImdbButton from "$lib/components/ImdbButton.svelte";
 	import LetterboxdButton from "$lib/components/LetterboxdButton.svelte";
 
+	import { getMovieOfTheWeekPosterUrl } from "$lib/movieOfTheWeekPoster";
+
 	let { data } = $props();
+
+	let posterUrl = $derived(
+		getMovieOfTheWeekPosterUrl(data.movieOfTheWeek.movie.poster, data.movieDetails?.poster_path),
+	);
+	let usesTmdbPoster = $derived(!data.movieOfTheWeek.movie.poster?.asset && !!posterUrl);
+	// TMDB keeps directors as a list; manual entries are a single comma-separated string.
+	let directors = $derived(
+		data.movieDetails?.directors ??
+			data.movieOfTheWeek.movie.directors
+				?.split(",")
+				.map((director) => director.trim())
+				.filter(Boolean) ??
+			[],
+	);
 </script>
 
 <header class="mt-8 px-6 pb-8">
@@ -30,38 +46,44 @@
 	</div>
 
 	<div class="flex flex-col gap-8">
-		{#if data.movieDetails}
-			<div>
-				{#if data.movieDetails.poster_path}
-					<img
-						src="https://image.tmdb.org/t/p/w500{data.movieDetails.poster_path}"
-						alt="Movie Poster"
-						class="mb-2"
-						style:--vt-tag="MOTW-poster-{data.movieOfTheWeek.slug.current}"
-					/>
-				{/if}
+		<div>
+			{#if posterUrl}
+				<img
+					src={posterUrl}
+					alt="Movie Poster"
+					class="mb-2"
+					style:--vt-tag="MOTW-poster-{data.movieOfTheWeek.slug.current}"
+				/>
+			{/if}
+			{#if data.movieDetails}
 				<p class="text-lg font-light">
 					Originaltittel: <span class="font-medium">{data.movieDetails.original_title}</span>
 				</p>
+			{/if}
+			{#if directors.length > 0}
 				<p class="text-lg font-light">
-					Reggisør{data.movieDetails.directors.length > 1 ? "er" : ""}:
-					<span class="font-medium">{data.movieDetails.directors.join(", ")}</span>
+					Reggisør{directors.length > 1 ? "er" : ""}:
+					<span class="font-medium">{directors.join(", ")}</span>
 				</p>
+			{/if}
+			{#if data.movieOfTheWeek.movie.release_year}
 				<p class="text-lg font-light">
 					År:
 					<span class="font-medium">
 						{data.movieOfTheWeek.movie.release_year}
 					</span>
 				</p>
+			{/if}
+			{#if data.movieDetails?.imdb_id}
 				<div class="mt-4 flex justify-evenly">
-					{#if data.movieDetails.imdb_id}
-						<ImdbButton imdbId={data.movieDetails.imdb_id} />
-						<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
-					{/if}
+					<ImdbButton imdbId={data.movieDetails.imdb_id} />
+					<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
 				</div>
-			</div>
+			{/if}
+		</div>
+		{#if data.movieDetails}
 			<div>
-				<small>Informasjon og plakat hentet fra</small>
+				<small>Informasjon{usesTmdbPoster ? " og plakat" : ""} hentet fra</small>
 				<a href="https://www.themoviedb.org/">
 					<img src={tmdbLogo} alt="The Movie Database Logo" class="inline h-4 w-24" />
 				</a>

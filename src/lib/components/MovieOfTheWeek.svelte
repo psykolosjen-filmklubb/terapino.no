@@ -9,10 +9,10 @@
 		text?: PortableTextBlock[];
 		weekNumber: number;
 		recommender: MemberSummary;
-		poster: string | null;
+		posterUrl: string | null;
 	}
 
-	let { movieTitle, slug, text, weekNumber, recommender, poster }: Props = $props();
+	let { movieTitle, slug, text, weekNumber, recommender, posterUrl }: Props = $props();
 </script>
 
 <section class="flex w-full flex-col px-2 py-8 lg:items-center lg:px-6">
@@ -22,6 +22,6 @@
 		Ukens film
 	</h2>
 
-	<MovieOfTheWeekCard movie_title={movieTitle} {slug} {text} {poster} {weekNumber} {recommender}
+	<MovieOfTheWeekCard movie_title={movieTitle} {slug} {text} {posterUrl} {weekNumber} {recommender}
 	></MovieOfTheWeekCard>
 </section>

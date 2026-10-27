@@ -10,7 +10,7 @@ export const load: PageLoad = async ({ fetch }) => {
 	const movieOfTheWeek = await getMovieOfTheWeek();
 
 	let movieDetails: TmdbMovieDetails | undefined;
-	if (movieOfTheWeek) {
+	if (movieOfTheWeek?.movie.tmdb_id) {
 		const response = await fetch(`/api/movie/${movieOfTheWeek.movie.tmdb_id}`);
 		if (response.ok) {
 			movieDetails = await response.json();
