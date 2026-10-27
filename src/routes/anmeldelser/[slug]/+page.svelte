@@ -67,7 +67,7 @@
 					</p>
 				{/if}
 				<p class="text-lg font-light">
-					Reggisør{data.movieDetails.directors.length > 1 ? "er" : ""}:
+					Regissør{data.movieDetails.directors.length > 1 ? "er" : ""}:
 					<span class="font-medium">{data.movieDetails.directors.join(", ")}</span>
 				</p>
 				<div class="mt-4 flex justify-evenly">

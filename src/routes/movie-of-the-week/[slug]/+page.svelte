@@ -3,7 +3,6 @@
 	import tmdbLogo from "$lib/images/tmdb-alt-long.svg";
 	import ImdbButton from "$lib/components/ImdbButton.svelte";
 	import LetterboxdButton from "$lib/components/LetterboxdButton.svelte";
-
 	import { getMovieOfTheWeekPosterUrl } from "$lib/movieOfTheWeekPoster";
 
 	let { data } = $props();
@@ -13,13 +12,14 @@
 	);
 	let usesTmdbPoster = $derived(!data.movieOfTheWeek.movie.poster?.asset && !!posterUrl);
 	// TMDB keeps directors as a list; manual entries are a single comma-separated string.
+	// TMDB sometimes lists no director, so fall back to the manual entry then too.
 	let directors = $derived(
-		data.movieDetails?.directors ??
-			data.movieOfTheWeek.movie.directors
-				?.split(",")
-				.map((director) => director.trim())
-				.filter(Boolean) ??
-			[],
+		data.movieDetails?.directors.length
+			? data.movieDetails.directors
+			: (data.movieOfTheWeek.movie.directors
+					?.split(",")
+					.map((director) => director.trim())
+					.filter(Boolean) ?? []),
 	);
 </script>
 
@@ -62,7 +62,7 @@
 			{/if}
 			{#if directors.length > 0}
 				<p class="text-lg font-light">
-					Reggisør{directors.length > 1 ? "er" : ""}:
+					Regissør{directors.length > 1 ? "er" : ""}:
 					<span class="font-medium">{directors.join(", ")}</span>
 				</p>
 			{/if}
