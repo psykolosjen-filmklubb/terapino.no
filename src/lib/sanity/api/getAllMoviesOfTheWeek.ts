@@ -8,6 +8,7 @@ import type { MemberSummary } from "$lib/types/member";
 export type MovieOfTheWeek = {
 	movie: Movie;
 	weekNumber: number;
+	year: number;
 	recommender: MemberSummary;
 	slug: Slug;
 	text?: PortableTextBlock[];
@@ -36,6 +37,7 @@ export async function getAllMoviesOfTheWeek(): Promise<MovieOfTheWeek[]> {
                 poster
               },
               weekNumber,
+			  year,
               recommender->{
                 image,
                 name

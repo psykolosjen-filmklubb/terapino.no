@@ -5,7 +5,7 @@
 	import * as Card from "$lib/components/ui/card";
 	import type { MovieOfTheWeek } from "$lib/sanity/api/getAllMoviesOfTheWeek";
 
-	let { movie, slug, recommender, weekNumber }: MovieOfTheWeek = $props();
+	let { movie, slug, recommender, weekNumber, year }: MovieOfTheWeek = $props();
 </script>
 
 <Card.Root class="squircle max-w-lg gap-4 p-0">
@@ -27,7 +27,7 @@
 			{recommender.name}
 		</span>
 		<span>
-			Uke: {weekNumber}
+			Uke: {weekNumber}, {year}
 		</span>
 	</Card.Footer>
 </Card.Root>
