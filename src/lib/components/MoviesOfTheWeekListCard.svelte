@@ -27,7 +27,7 @@
 			{recommender.name}
 		</span>
 		<span>
-			Uke: {weekNumber}, {year}
+			Uke {weekNumber}, {year}
 		</span>
 	</Card.Footer>
 </Card.Root>
