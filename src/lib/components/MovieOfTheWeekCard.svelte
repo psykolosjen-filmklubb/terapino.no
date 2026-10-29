@@ -33,9 +33,9 @@
 				{movie_title}
 			</h3>
 		</Card.Header>
-		<Card.Content class="mb-4 grid gap-2.5 {posterUrl ? 'grid-cols-2' : 'grid-cols-1'}">
+		<Card.Content class="mb-4">
 			{#if posterUrl}
-				<figure>
+				<figure class="float-left mr-3 mb-2 max-w-1/2">
 					<img src={posterUrl} alt="poster" style:--vt-tag="MOTW-poster-{slug}" />
 				</figure>
 			{/if}
