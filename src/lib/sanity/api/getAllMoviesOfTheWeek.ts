@@ -1,4 +1,4 @@
-import type { Image, ImageAsset, PortableTextBlock, Slug } from "@sanity/types";
+import type { Image, PortableTextBlock, Slug } from "@sanity/types";
 import { sanityClient } from "../client";
 import groq from "groq";
 import { getISOWeekNumber } from "$lib/getCurrentWeek";
@@ -19,7 +19,7 @@ type Movie = {
 	release_year?: number;
 	directors?: string;
 	tmdb_id?: number;
-	poster: ImageAsset;
+	poster?: Image;
 };
 
 type SanityMovieOfTheWeek = Omit<MovieOfTheWeek, "recommender"> & {
