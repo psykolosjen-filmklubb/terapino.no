@@ -1,5 +1,5 @@
 <script lang="ts">
-	import MoviesOfTheWeekListCard from "$lib/components/MoviesOfTheWeekListCard.svelte";
+	import MoviesOfTheWeekListCard from "#lib/components/MoviesOfTheWeekListCard.svelte";
 
 	let { data } = $props();
 </script>

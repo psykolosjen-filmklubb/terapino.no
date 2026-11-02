@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { run } from "svelte/legacy";
 
-	import { dateFormatterMonthYear } from "$lib/dateFormatters";
-	import * as Accordion from "$lib/components/ui/accordion";
-	import { Badge } from "$lib/components/ui/badge";
+	import { dateFormatterMonthYear } from "#lib/dateFormatters.js";
+	import * as Accordion from "#lib/components/ui/accordion/index.js";
+	import { Badge } from "#lib/components/ui/badge/index.js";
 
 	interface Props {
 		memberships: Membership[];

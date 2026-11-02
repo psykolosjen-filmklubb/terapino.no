@@ -1,6 +1,6 @@
-import { getMember } from "$lib/sanity/api/getMember";
-import { getPostersByMember } from "$lib/sanity/api/getPostersByMember";
-import { getReviewsByMember } from "$lib/sanity/api/getReviewsByMember";
+import { getMember } from "#lib/sanity/api/getMember.js";
+import { getPostersByMember } from "#lib/sanity/api/getPostersByMember.js";
+import { getReviewsByMember } from "#lib/sanity/api/getReviewsByMember.js";
 import { error } from "@sveltejs/kit";
 
 export async function load({ params }) {

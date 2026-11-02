@@ -1,6 +1,6 @@
-import { getMovieOfTheWeek } from "$lib/sanity/api/getMovieOfTheWeek";
-import { getNextScreening } from "$lib/sanity/api/getNextScreening";
-import { getReviewExcerpts } from "$lib/sanity/api/getReviewExcerpts";
+import { getMovieOfTheWeek } from "#lib/sanity/api/getMovieOfTheWeek.js";
+import { getNextScreening } from "#lib/sanity/api/getNextScreening.js";
+import { getReviewExcerpts } from "#lib/sanity/api/getReviewExcerpts.js";
 import type { PageLoad } from "./$types";
 import type { TmdbMovieDetails } from "./api/movie/[tmdb_id]/+server";
 

@@ -1,4 +1,4 @@
-import { getArchive } from "$lib/sanity/api/getArchive";
+import { getArchive } from "#lib/sanity/api/getArchive.js";
 
 export const ssr = false;
 

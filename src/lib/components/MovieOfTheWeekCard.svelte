@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import { Button } from "$lib/components/ui/button";
-	import MemberAvatar from "$lib/components/MemberAvatar.svelte";
-	import * as Card from "$lib/components/ui/card";
-	import type { MemberSummary } from "$lib/types/member";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import MemberAvatar from "#lib/components/MemberAvatar.svelte";
+	import * as Card from "#lib/components/ui/card/index.js";
+	import type { MemberSummary } from "#lib/types/member.js";
 	import type { PortableTextBlock } from "@sanity/types";
 	import { PortableText } from "@portabletext/svelte";
 

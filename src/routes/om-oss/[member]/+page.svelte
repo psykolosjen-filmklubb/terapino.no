@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import MembershipsAndVerv from "$lib/components/MembershipsAndVerv.svelte";
-	import PosterGallery from "$lib/components/PosterGallery.svelte";
-	import * as Avatar from "$lib/components/ui/avatar";
-	import { urlFor } from "$lib/sanity/image";
-	import * as Card from "$lib/components/ui/card";
+	import MembershipsAndVerv from "#lib/components/MembershipsAndVerv.svelte";
+	import PosterGallery from "#lib/components/PosterGallery.svelte";
+	import * as Avatar from "#lib/components/ui/avatar/index.js";
+	import { urlFor } from "#lib/sanity/image.js";
+	import * as Card from "#lib/components/ui/card/index.js";
 
 	let { data } = $props();
 

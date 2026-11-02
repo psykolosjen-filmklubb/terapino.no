@@ -1,18 +1,38 @@
 <script>
-	import Header from "$lib/components/Header/Header.svelte";
-	import { Button } from "$lib/components/ui/button";
+	import Header from "#lib/components/Header/Header.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
 	import { siFacebook, siInstagram } from "simple-icons";
 	import { ModeWatcher } from "mode-watcher";
 	import "../app.css";
-	import { injectAnalytics } from "@vercel/analytics/sveltekit";
-	import { dev } from "$app/environment";
+	import { inject, pageview } from "@vercel/analytics";
+	import { browser, dev } from "$app/env";
 	import { onNavigate } from "$app/navigation";
+	import { page } from "$app/state";
 
 	let { data, children } = $props();
 
-	injectAnalytics({ mode: dev ? "development" : "production" });
+	// @vercel/analytics/sveltekit still imports $app/stores, which SvelteKit 3 removed,
+	// so this mirrors what its injectAnalytics() does using $app/state instead.
+	if (browser) {
+		inject(
+			{
+				mode: dev ? "development" : "production",
+				basePath: import.meta.env.VITE_VERCEL_OBSERVABILITY_BASEPATH,
+				disableAutoTrack: true,
+				framework: "sveltekit",
+			},
+			import.meta.env.VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG,
+		);
+	}
+
+	$effect(() => {
+		if (page.route.id) {
+			pageview({ route: page.route.id, path: page.url.pathname });
+		}
+	});
 
 	onNavigate((navigation) => {
+		if (navigation.shallow && navigation.type === "goto") return;
 		if (!document.startViewTransition) return;
 
 		return new Promise((resolve) => {
@@ -26,7 +46,7 @@
 
 <ModeWatcher />
 
-<Header logoAssetLight={data.logos.black.image} logoAssetDark={data.logos.white.image}></Header>
+<Header logoAssetLight={data.logos.black.image} logoAssetDark={data.logos.white.image} />
 
 <main class="mx-auto flex flex-col items-center justify-center lg:max-w-screen-2xl">
 	{@render children?.()}

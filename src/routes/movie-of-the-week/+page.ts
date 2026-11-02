@@ -1,5 +1,5 @@
-import { getAllMoviesOfTheWeek } from "$lib/sanity/api/getAllMoviesOfTheWeek";
-import { getMovieOfTheWeekPosterUrl } from "$lib/movieOfTheWeekPoster";
+import { getAllMoviesOfTheWeek } from "#lib/sanity/api/getAllMoviesOfTheWeek.js";
+import { getMovieOfTheWeekPosterUrl } from "#lib/movieOfTheWeekPoster.js";
 import { error } from "@sveltejs/kit";
 import type { TmdbMovieDetails } from "../api/movie/[tmdb_id]/+server";
 

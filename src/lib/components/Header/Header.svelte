@@ -2,10 +2,10 @@
 	import { resolve } from "$app/paths";
 	import { run } from "svelte/legacy";
 
-	import { page } from "$app/stores";
-	import { urlFor } from "$lib/sanity/image";
-	import NavLinks from "$lib/components/Header/NavLinks.svelte";
-	import { routes, type SiteRoute } from "$lib/routes";
+	import { page } from "$app/state";
+	import { urlFor } from "#lib/sanity/image.js";
+	import NavLinks from "#lib/components/Header/NavLinks.svelte";
+	import { routes, type SiteRoute } from "#lib/routes.js";
 	import type { ImageAsset } from "@sanity/types";
 
 	interface Props {
@@ -21,7 +21,7 @@
 	run(() => {
 		let tempTitle = "Psykolosjen Filmklubb";
 		Object.values(routes).forEach((route) => {
-			if ($page.url.pathname.startsWith(route.route)) {
+			if (page.url.pathname.startsWith(route.route)) {
 				tempTitle = route.title;
 				currentRoute = route.route;
 			}

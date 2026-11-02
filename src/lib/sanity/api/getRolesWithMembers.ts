@@ -1,7 +1,7 @@
 import groq from "groq";
 import { sanityClient } from "../client";
-import { toMemberSummary, type SanityMemberSummary } from "$lib/sanity/memberSummary";
-import type { MemberSummary } from "$lib/types/member";
+import { toMemberSummary, type SanityMemberSummary } from "#lib/sanity/memberSummary.js";
+import type { MemberSummary } from "#lib/types/member.js";
 
 type Member = SanityMemberSummary & {
 	_id?: string;

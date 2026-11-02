@@ -1,5 +1,5 @@
-import { getSettings } from "$lib/sanity/api/getSettings";
-import { getLogos } from "$lib/sanity/api/getLogos";
+import { getSettings } from "#lib/sanity/api/getSettings.js";
+import { getLogos } from "#lib/sanity/api/getLogos.js";
 import { error } from "@sveltejs/kit";
 
 export async function load() {

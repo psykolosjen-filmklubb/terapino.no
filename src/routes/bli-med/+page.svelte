@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 
-	let src = $derived($page.data.settings.recruiting.recruiting_form);
+	let src = $derived(page.data.settings.recruiting.recruiting_form);
 </script>
 
 <iframe

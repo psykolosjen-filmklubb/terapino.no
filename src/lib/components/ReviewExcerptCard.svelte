@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import { Button } from "$lib/components/ui/button";
-	import MemberAvatar from "$lib/components/MemberAvatar.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import MemberAvatar from "#lib/components/MemberAvatar.svelte";
 	import type { ReviewExcerpt } from "./LatestReviewsSection.svelte";
 	import ThumbnailImage from "./ThumbnailImage.svelte";
-	import * as Card from "$lib/components/ui/card";
-	import { dateFormatterShort } from "$lib/dateFormatters";
+	import * as Card from "#lib/components/ui/card/index.js";
+	import { dateFormatterShort } from "#lib/dateFormatters.js";
 
 	let { review_title, slug, thumbnail, thumbnailLqip, excerpt, authors, date }: ReviewExcerpt =
 		$props();

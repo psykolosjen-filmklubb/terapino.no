@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
 	import { page } from "$app/state";
-	import { Button } from "$lib/components/ui/button";
-	import { routes } from "$lib/routes";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import { routes } from "#lib/routes.js";
 	import CountdownLeader from "./CountdownLeader.svelte";
 
 	// Seksjonen brukeren var i, slik at vi kan tilby veien tilbake dit.

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { urlFor } from "$lib/sanity/image";
+	import { urlFor } from "#lib/sanity/image.js";
 	import type { ClassValue } from "svelte/elements";
-	import { cn } from "$lib/utils.js";
+	import { cn } from "#lib/utils.js";
 	import type { ImageAsset } from "@sanity/types";
 
 	interface PosterImageProps {

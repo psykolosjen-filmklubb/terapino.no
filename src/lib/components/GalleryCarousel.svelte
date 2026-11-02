@@ -1,8 +1,8 @@
 <script lang="ts">
 	import "photoswipe/style.css";
 	import { onMount } from "svelte";
-	import type { GalleryItem } from "$lib/sanity/types";
-	import * as Carousel from "$lib/components/ui/carousel";
+	import type { GalleryItem } from "#lib/sanity/types.js";
+	import * as Carousel from "#lib/components/ui/carousel/index.js";
 	import type { CarouselAPI } from "./ui/carousel/context";
 	import { setUpLightboxWithYouTube } from "./Gallery/setUpLightboxWithYouTube";
 	import GalleryItemVideo from "./Gallery/GalleryItemVideo.svelte";

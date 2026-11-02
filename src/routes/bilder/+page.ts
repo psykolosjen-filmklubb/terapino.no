@@ -1,5 +1,5 @@
-import { getEventsMedia } from "$lib/sanity/api/getEventsMedia";
-import { getScreeningMedia } from "$lib/sanity/api/getScreeningMedia";
+import { getEventsMedia } from "#lib/sanity/api/getEventsMedia.js";
+import { getScreeningMedia } from "#lib/sanity/api/getScreeningMedia.js";
 import { error } from "@sveltejs/kit";
 
 export async function load() {

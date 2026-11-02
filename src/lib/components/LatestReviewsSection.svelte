@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import * as Carousel from "$lib/components/ui/carousel";
+	import * as Carousel from "#lib/components/ui/carousel/index.js";
 	import { Button } from "./ui/button";
 	import ReviewExcerptCard from "./ReviewExcerptCard.svelte";
 	import type { ImageAsset, Slug } from "@sanity/types";
-	import type { MemberSummary } from "$lib/types/member";
+	import type { MemberSummary } from "#lib/types/member.js";
 
 	export type ReviewExcerpt = {
 		review_title: string;
@@ -51,7 +51,7 @@
 		<Carousel.Next class="h-12 w-12 *:h-5 *:w-5 lg:h-16 lg:w-16 *:lg:h-6 *:lg:w-6" />
 	</Carousel.Root>
 
-	<Button class="mt-4 mr-2 place-self-end lg:mr-8" href={resolve("/anmeldelser")} variant="link">
-		Se alle anmeldelser
-	</Button>
+	<Button class="mt-4 mr-2 place-self-end lg:mr-8" href={resolve("anmeldelser")} variant="link"
+		>Se alle anmeldelser</Button
+	>
 </section>

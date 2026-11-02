@@ -1,12 +1,12 @@
 <script lang="ts">
 	import MovieDetails from "./MovieDetails.svelte";
 
-	import AuthorList from "$lib/components/AuthorList.svelte";
-	import PosterImage from "$lib/components/PosterImage.svelte";
-	import * as Card from "$lib/components/ui/card";
-	import { dateFormatterLong } from "$lib/dateFormatters.js";
-	import GalleryCarousel from "$lib/components/GalleryCarousel.svelte";
-	import { Button } from "$lib/components/ui/button";
+	import AuthorList from "#lib/components/AuthorList.svelte";
+	import PosterImage from "#lib/components/PosterImage.svelte";
+	import * as Card from "#lib/components/ui/card/index.js";
+	import { dateFormatterLong } from "#lib/dateFormatters.js";
+	import GalleryCarousel from "#lib/components/GalleryCarousel.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
 	import { page } from "$app/state";
 
 	let { data } = $props();

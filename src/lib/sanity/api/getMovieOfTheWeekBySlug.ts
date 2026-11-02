@@ -1,8 +1,8 @@
 import type { Image, PortableTextBlock, Slug } from "@sanity/types";
 import { sanityClient } from "../client";
 import groq from "groq";
-import { toMemberSummary, type SanityMemberSummary } from "$lib/sanity/memberSummary";
-import type { MemberSummary } from "$lib/types/member";
+import { toMemberSummary, type SanityMemberSummary } from "#lib/sanity/memberSummary.js";
+import type { MemberSummary } from "#lib/types/member.js";
 
 type MovieOfTheWeek = {
 	movie: Movie;

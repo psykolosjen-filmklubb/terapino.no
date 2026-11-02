@@ -2,7 +2,7 @@
 	import PhotoSwipeLightbox from "photoswipe/lightbox";
 	import "photoswipe/style.css";
 	import { onMount } from "svelte";
-	import { urlFor } from "$lib/sanity/image";
+	import { urlFor } from "#lib/sanity/image.js";
 	import type { ImageAsset, ImageDimensions } from "@sanity/types";
 
 	type Image = {

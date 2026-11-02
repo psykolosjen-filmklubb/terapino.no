@@ -1,8 +1,8 @@
 import groq from "groq";
 import { sanityClient } from "../client";
 import type { ImageAsset, PortableTextBlock, Slug } from "@sanity/types";
-import { toMemberSummary, type SanityMemberSummary } from "$lib/sanity/memberSummary";
-import type { MemberSummary } from "$lib/types/member";
+import { toMemberSummary, type SanityMemberSummary } from "#lib/sanity/memberSummary.js";
+import type { MemberSummary } from "#lib/types/member.js";
 
 type Review = {
 	review_title: string;

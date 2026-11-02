@@ -1,10 +1,10 @@
 <script lang="ts">
-	import * as Accordion from "$lib/components/ui/accordion";
-	import { dateFormatterShort } from "$lib/dateFormatters.js";
-	import tmdbLogo from "$lib/images/tmdb-alt-long.svg";
-	import ImdbButton from "$lib/components/ImdbButton.svelte";
-	import LetterboxdButton from "$lib/components/LetterboxdButton.svelte";
-	import { formatCountryCode } from "$lib/countries.js";
+	import * as Accordion from "#lib/components/ui/accordion/index.js";
+	import { dateFormatterShort } from "#lib/dateFormatters.js";
+	import tmdbLogo from "#lib/images/tmdb-alt-long.svg";
+	import ImdbButton from "#lib/components/ImdbButton.svelte";
+	import LetterboxdButton from "#lib/components/LetterboxdButton.svelte";
+	import { formatCountryCode } from "#lib/countries.js";
 
 	interface MovieDetailsProps {
 		title: string;

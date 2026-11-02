@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import PosterImage from "$lib/components/PosterImage.svelte";
-	import { Button } from "$lib/components/ui/button";
-	import { dateFormatterLongNoYear } from "$lib/dateFormatters.js";
-	import type { NextScreening } from "$lib/sanity/api/getNextScreening";
+	import PosterImage from "#lib/components/PosterImage.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import { dateFormatterLongNoYear } from "#lib/dateFormatters.js";
+	import type { NextScreening } from "#lib/sanity/api/getNextScreening.js";
 
 	type Props = {
 		nextScreening: NextScreening | null;
@@ -28,9 +28,10 @@
 					Ingen nye visninger planlagt for øyeblikket, men følg med for oppdateringer!
 				</p>
 				<p class="px-4 text-center text-muted-foreground">Vil du se hva vi har vist tidligere?</p>
-				<Button href={resolve("/arkiv")} variant="link" class="w-fit place-self-center font-medium">
-					Visningsarkiv
-				</Button>
+
+				<Button href={resolve("arkiv")} variant="link" class="w-fit place-self-center font-medium"
+					>Visningsarkiv</Button
+				>
 			</div>
 		{/if}
 	</div>

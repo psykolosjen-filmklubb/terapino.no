@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { MemberSummary } from "$lib/types/member";
+	import type { MemberSummary } from "#lib/types/member.js";
 	import MemberTag from "./MemberTag.svelte";
 
 	interface Props {
