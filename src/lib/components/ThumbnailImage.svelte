@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { urlFor } from "$lib/sanity/image";
+	import { urlFor } from "#lib/sanity/image.js";
 	import type { ImageAsset } from "@sanity/types";
 	import type { ClassValue } from "svelte/elements";
 

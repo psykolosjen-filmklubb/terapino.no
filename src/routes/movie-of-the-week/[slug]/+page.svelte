@@ -1,9 +1,9 @@
 <script lang="ts">
-	import AuthorList from "$lib/components/AuthorList.svelte";
-	import tmdbLogo from "$lib/images/tmdb-alt-long.svg";
-	import ImdbButton from "$lib/components/ImdbButton.svelte";
-	import LetterboxdButton from "$lib/components/LetterboxdButton.svelte";
-	import { getMovieOfTheWeekPosterUrl } from "$lib/movieOfTheWeekPoster";
+	import AuthorList from "#lib/components/AuthorList.svelte";
+	import tmdbLogo from "#lib/images/tmdb-alt-long.svg";
+	import ImdbButton from "#lib/components/ImdbButton.svelte";
+	import LetterboxdButton from "#lib/components/LetterboxdButton.svelte";
+	import { getMovieOfTheWeekPosterUrl } from "#lib/movieOfTheWeekPoster.js";
 	import { PortableText } from "@portabletext/svelte";
 
 	let { data } = $props();

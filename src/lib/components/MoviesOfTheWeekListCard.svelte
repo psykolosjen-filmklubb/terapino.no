@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import { Button } from "$lib/components/ui/button";
-	import MemberAvatar from "$lib/components/MemberAvatar.svelte";
-	import * as Card from "$lib/components/ui/card";
-	import type { MovieOfTheWeek } from "$lib/sanity/api/getAllMoviesOfTheWeek";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import MemberAvatar from "#lib/components/MemberAvatar.svelte";
+	import * as Card from "#lib/components/ui/card/index.js";
+	import type { MovieOfTheWeek } from "#lib/sanity/api/getAllMoviesOfTheWeek.js";
 
 	type Props = MovieOfTheWeek & {
 		posterUrl: string | null;

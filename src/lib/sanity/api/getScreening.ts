@@ -2,8 +2,8 @@ import groq from "groq";
 import { sanityClient } from "../client";
 import type { GalleryItem } from "../types";
 import type { ImageAsset, ImageDimensions, Slug } from "@sanity/types";
-import { toMemberSummary, type SanityMemberSummary } from "$lib/sanity/memberSummary";
-import type { MemberSummary } from "$lib/types/member";
+import { toMemberSummary, type SanityMemberSummary } from "#lib/sanity/memberSummary.js";
+import type { MemberSummary } from "#lib/types/member.js";
 
 type Screening = {
 	movies: Movie[];

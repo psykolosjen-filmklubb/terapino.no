@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { PortableText } from "@portabletext/svelte";
-	import HeroImage from "$lib/components/HeroImage.svelte";
-	import AuthorList from "$lib/components/AuthorList.svelte";
-	import { dateFormatterShort } from "$lib/dateFormatters.js";
-	import tmdbLogo from "$lib/images/tmdb-alt-long.svg";
-	import ImdbButton from "$lib/components/ImdbButton.svelte";
-	import LetterboxdButton from "$lib/components/LetterboxdButton.svelte";
+	import HeroImage from "#lib/components/HeroImage.svelte";
+	import AuthorList from "#lib/components/AuthorList.svelte";
+	import { dateFormatterShort } from "#lib/dateFormatters.js";
+	import tmdbLogo from "#lib/images/tmdb-alt-long.svg";
+	import ImdbButton from "#lib/components/ImdbButton.svelte";
+	import LetterboxdButton from "#lib/components/LetterboxdButton.svelte";
 
 	let { data } = $props();
 

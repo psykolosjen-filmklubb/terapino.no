@@ -1,5 +1,5 @@
-import { getOmOss } from "$lib/sanity/api/getOmOss";
-import { getRolesWithMembers } from "$lib/sanity/api/getRolesWithMembers";
+import { getOmOss } from "#lib/sanity/api/getOmOss.js";
+import { getRolesWithMembers } from "#lib/sanity/api/getRolesWithMembers.js";
 import { error } from "@sveltejs/kit";
 
 export async function load() {

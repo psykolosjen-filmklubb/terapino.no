@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
-	import MemberAvatar from "$lib/components/MemberAvatar.svelte";
-	import type { MemberSummary } from "$lib/types/member";
+	import MemberAvatar from "#lib/components/MemberAvatar.svelte";
+	import type { MemberSummary } from "#lib/types/member.js";
 
 	interface Props {
 		member: MemberSummary;

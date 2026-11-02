@@ -1,9 +1,9 @@
 <script lang="ts">
 	import ApplyNowSection from "./ApplyNowSection.svelte";
 	import NextScreeningSection from "../lib/components/NextScreeningSection.svelte";
-	import LatestReviewsSection from "$lib/components/LatestReviewsSection.svelte";
-	import MovieOfTheWeek from "$lib/components/MovieOfTheWeek.svelte";
-	import { getMovieOfTheWeekPosterUrl } from "$lib/movieOfTheWeekPoster";
+	import LatestReviewsSection from "#lib/components/LatestReviewsSection.svelte";
+	import MovieOfTheWeek from "#lib/components/MovieOfTheWeek.svelte";
+	import { getMovieOfTheWeekPosterUrl } from "#lib/movieOfTheWeekPoster.js";
 
 	let { data } = $props();
 </script>

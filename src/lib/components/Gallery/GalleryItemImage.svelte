@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from "../ui/button";
 	import type { ImageAsset, ImageDimensions } from "@sanity/types";
-	import { urlFor } from "$lib/sanity/image";
+	import { urlFor } from "#lib/sanity/image.js";
 	import { fade } from "svelte/transition";
 	import { Fullscreen } from "@lucide/svelte";
 

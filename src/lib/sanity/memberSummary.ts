@@ -1,5 +1,5 @@
 import type { Image } from "@sanity/types";
-import type { MemberSummary } from "$lib/types/member";
+import type { MemberSummary } from "#lib/types/member.js";
 import { urlFor } from "./image";
 
 export type SanityMemberSummary = {

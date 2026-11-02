@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Avatar from "$lib/components/ui/avatar";
-	import { getMemberInitials } from "$lib/getMemberInitials";
-	import type { MemberSummary } from "$lib/types/member";
+	import * as Avatar from "#lib/components/ui/avatar/index.js";
+	import { getMemberInitials } from "#lib/getMemberInitials.js";
+	import type { MemberSummary } from "#lib/types/member.js";
 
 	interface Props {
 		member: MemberSummary;

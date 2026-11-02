@@ -2,9 +2,9 @@
 	import { resolve } from "$app/paths";
 	import { fly } from "svelte/transition";
 	import { Button } from "../ui/button";
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 	import { focus } from "focus-svelte";
-	import { routes } from "$lib/routes";
+	import { routes } from "#lib/routes.js";
 	import ThemeToggle from "../ThemeToggle.svelte";
 	import { Menu, X } from "@lucide/svelte";
 
@@ -22,7 +22,7 @@
 
 	const filteredRoutes = Object.values(routes).filter((route) => {
 		if (route.route === routes.bli_med.route) {
-			return $page.data.settings.recruiting.recruiting_active;
+			return page.data.settings.recruiting.recruiting_active;
 		}
 		return true;
 	});
@@ -61,12 +61,10 @@
 						variant="link"
 						href={resolve(route.route)}
 						onclick={close}
-						class="p-0 text-xl {$page.url.pathname.startsWith(route.route)
+						class="p-0 text-xl {page.url.pathname.startsWith(route.route)
 							? 'font-medium underline'
-							: 'font-light'}"
+							: 'font-light'}">{route.title}</Button
 					>
-						{route.title}
-					</Button>
 				{/each}
 			</nav>
 			<span class="mt-8">
@@ -91,12 +89,12 @@
 				onclick={close}
 				class={[
 					"p-0 text-xl font-light text-primary hover:no-underline",
-					{ "font-medium": $page.url.pathname.startsWith(route.route) },
+					{ "font-medium": page.url.pathname.startsWith(route.route) },
 				]}
 			>
-				<span class={["nav-link-title", { selected: $page.url.pathname.startsWith(route.route) }]}>
-					{route.title}
-				</span>
+				<span class={["nav-link-title", { selected: page.url.pathname.startsWith(route.route) }]}
+					>{route.title}</span
+				>
 			</Button>
 		{/each}
 	</nav>

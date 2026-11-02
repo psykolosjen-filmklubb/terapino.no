@@ -1,7 +1,7 @@
 <script>
-	import HeroImage from "$lib/components/HeroImage.svelte";
-	import MemberTag from "$lib/components/MemberTag.svelte";
-	import { Separator } from "$lib/components/ui/separator";
+	import HeroImage from "#lib/components/HeroImage.svelte";
+	import MemberTag from "#lib/components/MemberTag.svelte";
+	import { Separator } from "#lib/components/ui/separator/index.js";
 	import { PortableText } from "@portabletext/svelte";
 
 	let { data } = $props();

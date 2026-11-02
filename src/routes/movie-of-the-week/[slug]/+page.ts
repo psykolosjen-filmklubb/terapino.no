@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 import type { TmdbMovieDetails } from "../../api/movie/[tmdb_id]/+server.js";
-import { getMovieOfTheWeekBySlug } from "$lib/sanity/api/getMovieOfTheWeekBySlug.js";
+import { getMovieOfTheWeekBySlug } from "#lib/sanity/api/getMovieOfTheWeekBySlug.js";
 
 export async function load({ fetch, params }) {
 	const movieOfTheWeek = await getMovieOfTheWeekBySlug(params.slug);

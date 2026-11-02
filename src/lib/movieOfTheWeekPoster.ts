@@ -1,4 +1,4 @@
-import { urlFor } from "$lib/sanity/image";
+import { urlFor } from "#lib/sanity/image.js";
 import type { Image } from "@sanity/types";
 
 /** An uploaded poster wins over TMDB's, so episodes and other non-TMDB picks can have one too. */

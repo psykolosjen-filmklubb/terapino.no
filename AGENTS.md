@@ -12,7 +12,7 @@
 - This is one SvelteKit application, built by Vite and deployed with `@sveltejs/adapter-vercel`; routes live in `src/routes` and shared code in `src/lib`.
 - Route `load` functions compose the page data. Site settings and logos are loaded for every route by `src/routes/+layout.ts`.
 - `src/lib/sanity/client.ts` reads the production Sanity project directly. Keep Sanity GROQ queries and their application-facing mapping/types in `src/lib/sanity/api` rather than in route components.
-- TMDB credentials must remain server-only: `src/routes/api/movie/[tmdb_id]/+server.ts` reads `TMDB_BEARER` from `$env/static/private`. Client and universal page loads fetch movie metadata through `/api/movie/:tmdb_id`.
+- TMDB credentials must remain server-only: `src/routes/api/movie/[tmdb_id]/+server.ts` reads `TMDB_BEARER` from `$app/env/private` (declared in `src/env.ts`). Client and universal page loads fetch movie metadata through `/api/movie/:tmdb_id`.
 
 ## Conventions
 

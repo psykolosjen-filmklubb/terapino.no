@@ -1,5 +1,4 @@
-import { TMDB_BEARER } from "$env/static/private";
-import { json } from "@sveltejs/kit";
+import { TMDB_BEARER } from "$app/env/private";
 import * as v from "valibot";
 import type { RequestHandler } from "./$types";
 
@@ -69,7 +68,7 @@ export const GET: RequestHandler = async ({ params }) => {
 	const tmdbId = params.tmdb_id;
 
 	if (!isCanonicalPositiveSafeInteger(tmdbId)) {
-		return json({ message: "Invalid movie ID" }, { status: 400 });
+		return Response.json({ message: "Invalid movie ID" }, { status: 400 });
 	}
 
 	let tmdbResponse: Response;
@@ -87,7 +86,7 @@ export const GET: RequestHandler = async ({ params }) => {
 	}
 
 	if (tmdbResponse.status === 404) {
-		return json({ message: "Movie not found" }, { status: 404 });
+		return Response.json({ message: "Movie not found" }, { status: 404 });
 	}
 
 	if (!tmdbResponse.ok) {
@@ -136,7 +135,7 @@ export const GET: RequestHandler = async ({ params }) => {
 		release_date_no: first_release,
 	};
 
-	return json(response);
+	return Response.json(response);
 };
 
 function isCanonicalPositiveSafeInteger(value: string): boolean {
@@ -148,7 +147,7 @@ function isCanonicalPositiveSafeInteger(value: string): boolean {
 }
 
 function upstreamError() {
-	return json({ message: "Movie service is unavailable" }, { status: 502 });
+	return Response.json({ message: "Movie service is unavailable" }, { status: 502 });
 }
 
 export type TmdbMovieDetails = {
