@@ -13,6 +13,10 @@ export const routes = {
 		route: "/arkiv",
 		title: "Visningsarkiv",
 	},
+	ukensFilm: {
+		route: "/movie-of-the-week",
+		title: "Ukens film",
+	},
 	bilder: {
 		route: "/bilder",
 		title: "Bilder",
