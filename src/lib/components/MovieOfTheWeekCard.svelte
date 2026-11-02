@@ -22,7 +22,7 @@
 <Card.Root class="squircle max-w-lg gap-4 p-0">
 	<Button
 		variant="ghost"
-		href={resolve("/movie-of-the-week/[slug]", { slug })}
+		href={resolve("/ukens-film/[slug]", { slug })}
 		class="h-auto flex-col items-baseline p-0"
 	>
 		<Card.Header class="mt-2.5 w-full">

@@ -14,7 +14,7 @@ export const routes = {
 		title: "Visningsarkiv",
 	},
 	ukensFilm: {
-		route: "/movie-of-the-week",
+		route: "/ukens-film",
 		title: "Ukens film",
 	},
 	bilder: {

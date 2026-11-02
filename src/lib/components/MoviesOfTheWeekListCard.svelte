@@ -17,7 +17,7 @@
 		<Card.Header class="gap-0 p-0">
 			<Button
 				variant="ghost"
-				href={resolve("/movie-of-the-week/[slug]", { slug: slug.current })}
+				href={resolve("/ukens-film/[slug]", { slug: slug.current })}
 				class="h-auto flex-col items-baseline p-0"
 			>
 				<img
@@ -33,7 +33,7 @@
 	<Card.Content class="mb-4">
 		<Button
 			variant="link"
-			href={resolve("/movie-of-the-week/[slug]", { slug: slug.current })}
+			href={resolve("/ukens-film/[slug]", { slug: slug.current })}
 			class="mb-2 h-auto scroll-m-20 flex-col items-baseline p-0 text-xl font-bold tracking-tight whitespace-normal lg:text-2xl"
 		>
 			<span class="movie-of-the-week-title" style:--vt-tag="MOTW-title-{slug.current}">
