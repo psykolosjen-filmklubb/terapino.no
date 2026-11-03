@@ -47,40 +47,42 @@
 	</div>
 
 	<div class="flex flex-col gap-8 lg:px-4">
-		{#if data.movieDetails}
-			<div>
-				{#if posterUrl}
-					<img
-						src={posterUrl}
-						alt="Movie Poster"
-						class="mb-2"
-						style:--vt-tag="MOTW-poster-{data.movieOfTheWeek.slug.current}"
-					/>
-				{/if}
+		<div>
+			{#if posterUrl}
+				<img
+					src={posterUrl}
+					alt="Movie Poster"
+					class="mb-2"
+					style:--vt-tag="MOTW-poster-{data.movieOfTheWeek.slug.current}"
+				/>
+			{/if}
+			{#if data.movieDetails}
 				<p class="text-lg font-light">
 					Originaltittel: <span class="font-medium">{data.movieDetails.original_title}</span>
 				</p>
-				{#if directors.length > 0}
-					<p class="text-lg font-light">
-						Regissør{directors.length > 1 ? "er" : ""}:
-						<span class="font-medium">{directors.join(", ")}</span>
-					</p>
-				{/if}
-				{#if data.movieOfTheWeek.movie.release_year}
-					<p class="text-lg font-light">
-						År:
-						<span class="font-medium">
-							{data.movieOfTheWeek.movie.release_year}
-						</span>
-					</p>
-				{/if}
-				{#if data.movieDetails?.imdb_id}
-					<div class="mt-4 flex justify-evenly">
-						<ImdbButton imdbId={data.movieDetails.imdb_id} />
-						<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
-					</div>
-				{/if}
-			</div>
+			{/if}
+			{#if directors.length > 0}
+				<p class="text-lg font-light">
+					Regissør{directors.length > 1 ? "er" : ""}:
+					<span class="font-medium">{directors.join(", ")}</span>
+				</p>
+			{/if}
+			{#if data.movieOfTheWeek.movie.release_year}
+				<p class="text-lg font-light">
+					År:
+					<span class="font-medium">
+						{data.movieOfTheWeek.movie.release_year}
+					</span>
+				</p>
+			{/if}
+			{#if data.movieDetails?.imdb_id}
+				<div class="mt-4 flex justify-evenly">
+					<ImdbButton imdbId={data.movieDetails.imdb_id} />
+					<LetterboxdButton imdbId={data.movieDetails.imdb_id} />
+				</div>
+			{/if}
+		</div>
+		{#if data.movieDetails}
 			<div>
 				<small>Informasjon{usesTmdbPoster ? " og plakat" : ""} hentet fra</small>
 				<a href="https://www.themoviedb.org/">
