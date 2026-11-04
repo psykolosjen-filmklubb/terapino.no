@@ -41,7 +41,7 @@
 
 		{#if data.movieOfTheWeek.recommender}
 			<div class="lg:max-w-80">
-				<AuthorList authors={[data.movieOfTheWeek.recommender]} heading="Anmeldt av:" />
+				<AuthorList authors={[data.movieOfTheWeek.recommender]} heading="Anbefalt av:" />
 			</div>
 		{/if}
 	</div>
